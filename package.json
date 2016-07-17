@@ -4,7 +4,7 @@
   "description": "English words learning platform",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon back/app.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,13 @@
   "bugs": {
     "url": "https://gitlab.com/Saka7/Word-Kombat/issues"
   },
-  "homepage": "https://gitlab.com/Saka7/Word-Kombat#README"
+  "homepage": "https://gitlab.com/Saka7/Word-Kombat#README",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-imagemin": "^3.0.1",
+    "gulp-plumber": "^1.1.0",
+    "gulp-pug": "^3.0.3",
+    "gulp-stylus": "^2.5.0",
+    "gulp-typescript": "^2.13.6"
+  }
 }
