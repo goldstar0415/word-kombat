@@ -15,6 +15,7 @@
     "tests"
   ],
   "dependencies": {
-    "Materialize": "materialize#^0.97.6"
+    "Materialize": "materialize#^0.97.6",
+    "jquery.nicescroll": "^3.6.8"
   }
 }

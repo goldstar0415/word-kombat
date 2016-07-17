@@ -1,0 +1,31 @@
+doctype html
+html(lang="en")
+head
+	meta(charset="UTF-8")
+	title Internal Server Error
+	link(rel="stylesheet", href="styles/error-500.css")
+	link(rel="stylesheet", href="styles/vendor/materialize.min.css")
+body
+	.container
+		.row 
+			#error-img.col.s12.m6
+				.card.hoverable
+					#front
+						.card-image
+							img.responsive-image(src='img/error-500.jpg')
+						.card-content
+							h5#status 500 Internal Server Error
+					#back
+						h5 500 Internal Server Error
+						p It's not you. It's us :(
+
+			.message.col.s12.m6
+				.content
+					h4 Douh! There was a problem serving the requested page
+
+					p We've been notified of the problem and will do our best to make sure it doesn't happen again! <br /> <br /> You can try refreshing the page - the problem may be temporary. Also you can try to back to the home page.
+
+					a.btn.hoverable(href='/') Home
+
+	footer.page-footer
+		#copy-info &copy; 2016 Copyrights All rights reserved. SAKA

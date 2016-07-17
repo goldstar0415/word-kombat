@@ -2,6 +2,7 @@
   "name": "word-kombat",
   "version": "0.0.1",
   "description": "English words learning platform",
+  "private": true,
   "main": "app.js",
   "scripts": {
     "start": "nodemon back/app.js"
@@ -24,5 +25,16 @@
     "gulp-pug": "^3.0.3",
     "gulp-stylus": "^2.5.0",
     "gulp-typescript": "^2.13.6"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "express-session": "^1.14.0",
+    "pug": "^2.0.0-beta3"
+  },
+  "engines": {
+    "node": ">= 6.3.0",
+    "npm": ">= 3.95"
   }
 }

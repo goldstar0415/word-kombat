@@ -1,3 +1,4 @@
+// Imports ====================================================================
 const gulp = require('gulp');
 const plumber = require('gulp-plumber');
 
@@ -6,6 +7,7 @@ const pug = require('gulp-pug');
 const stylus = require('gulp-stylus');
 const imagemin = require('gulp-imagemin');
 
+// Configurations =============================================================
 const scripts = {
   src: 'front/src/chat/*.ts',
   dest: 'front/dist/chat/'
@@ -26,6 +28,21 @@ const images = {
   dest: 'front/dist/images/'
 }
 
+const dependencies = {
+  js: {
+    'jquery': 'jquery/dist/jquery.min.js',
+    'jquery.nicescroll': 'jquery.nicescroll/dist/jquery.nicescroll.min.js',
+    'materialize': 'Materialize/dist/js/materialize.min.js'
+  },
+  css: {
+    'materialize': 'Materialize/dist/css/materialize.min.css'
+  },
+  font: {
+    'roboto': 'Materialize/dist/fonts/**/*'
+  }
+}
+
+// Options ====================================================================
 // const tsProject = typescript.createProject('tsconfig.json');
 
 const pugOptions = {
@@ -40,6 +57,7 @@ const imageminOptions = {
   progressive: true
 };
 
+// Tasks ======================================================================
 gulp.task('typescript', ()=> { 
   return gulp.src(scripts.src)
     .pipe(plumber())
@@ -67,6 +85,28 @@ gulp.task('images', ()=> {
     .pipe(gulp.dest(images.dest));
 });
 
+gulp.task('libs', ()=> {
+
+  for(let item in dependencies.js) {
+    console.log(dependencies.js[item]);
+    gulp.src('./bower_components/'+ dependencies.js[item])
+      .pipe(gulp.dest('./front/dist/scripts/vendor/'));
+  }
+
+  for(let item in dependencies.css) {
+    console.log(dependencies.css[item]);
+    gulp.src('./bower_components/'+ dependencies.css[item])
+      .pipe(gulp.dest('./front/dist/styles/vendor/'));
+  }
+
+  for(let item in dependencies.font) {
+    console.log(dependencies.font[item]);
+    gulp.src('./bower_components/'+ dependencies.font[item])
+      .pipe(gulp.dest('./front/dist/styles/fonts/'));
+  }
+
+});
+
 gulp.task('watch', ()=> {
   gulp.watch(scripts.src, ['typescript']);
   gulp.watch(templates.src, ['pug']);
@@ -74,6 +114,4 @@ gulp.task('watch', ()=> {
   gulp.watch(images.src, ['images']);
 });
 
-gulp.task('default', ['pug', 'stylus', 'typescript', 'images', 'watch'], _=> {
-
-});
+gulp.task('default', ['pug', 'stylus', 'typescript', 'watch'], _=> {});
