@@ -1,0 +1,20 @@
+{
+  "name": "word-kombat",
+  "version": "0.0.1",
+  "description": "English words learning platform",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/Saka7/Word-Kombat.git"
+  },
+  "keywords": [],
+  "author": "Ihor Sakaylyuk",
+  "license": "",
+  "bugs": {
+    "url": "https://gitlab.com/Saka7/Word-Kombat/issues"
+  },
+  "homepage": "https://gitlab.com/Saka7/Word-Kombat#README"
+}
