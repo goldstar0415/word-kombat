@@ -117,7 +117,7 @@ $(document).ready(function() {
       opacity = 1 - Math.abs(offset / 300);
       
       $(".post:nth-child(1)").css({
-        "transform": `translate ${offset}px, ${(-offset * .5)}px)`,
+        "transform": `translate(${offset}px, ${(-offset * .5)}px)`,
         "opacity": opacity
       });
       
