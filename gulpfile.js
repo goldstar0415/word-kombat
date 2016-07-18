@@ -58,6 +58,7 @@ const imageminOptions = {
 };
 
 // Tasks ======================================================================
+// Compiles typescript to javascript
 gulp.task('typescript', ()=> { 
   return gulp.src(scripts.src)
     .pipe(plumber())
@@ -65,6 +66,7 @@ gulp.task('typescript', ()=> {
     .pipe(gulp.dest(scripts.dest))
 });
 
+// Compiles pug to html
 gulp.task('pug', ()=> {
   return gulp.src(templates.src)
     .pipe(plumber())
@@ -72,6 +74,7 @@ gulp.task('pug', ()=> {
     .pipe(gulp.dest(templates.dest))
 });
 
+// Compiles stylus to css
 gulp.task('stylus', ()=> {
   return gulp.src(styles.src)
     .pipe(plumber())
@@ -79,28 +82,33 @@ gulp.task('stylus', ()=> {
     .pipe(gulp.dest(styles.dest))
 });
 
+// Copies and minifies images
 gulp.task('images', ()=> {
   return gulp.src(images.src)
     .pipe(imagemin(imageminOptions))
     .pipe(gulp.dest(images.dest));
 });
 
+// Copies vendor libraries
 gulp.task('libs', ()=> {
 
+  // JavaScript
   for(let item in dependencies.js) {
-    console.log(dependencies.js[item]);
+    console.log(`${item} - ${dependencies.js[item]}`);
     gulp.src('./bower_components/'+ dependencies.js[item])
       .pipe(gulp.dest('./front/dist/scripts/vendor/'));
   }
 
+  // CSS
   for(let item in dependencies.css) {
-    console.log(dependencies.css[item]);
+    console.log(`${item} - ${dependencies.css[item]}`);
     gulp.src('./bower_components/'+ dependencies.css[item])
       .pipe(gulp.dest('./front/dist/styles/vendor/'));
   }
 
+  // Fonts
   for(let item in dependencies.font) {
-    console.log(dependencies.font[item]);
+    console.log(`${item} - ${dependencies.font[item]}`);
     gulp.src('./bower_components/'+ dependencies.font[item])
       .pipe(gulp.dest('./front/dist/styles/fonts/'));
   }
@@ -111,7 +119,6 @@ gulp.task('watch', ()=> {
   gulp.watch(scripts.src, ['typescript']);
   gulp.watch(templates.src, ['pug']);
   gulp.watch(styles.src, ['stylus'])
-  gulp.watch(images.src, ['images']);
 });
 
 gulp.task('default', ['pug', 'stylus', 'typescript', 'watch'], _=> {});
