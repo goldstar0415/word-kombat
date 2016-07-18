@@ -1,3 +1,5 @@
+@require 'nib'
+
 // Images 
 bg-img = '../images/background.png'
 logo-img = '../images/logo.svg'
@@ -185,6 +187,7 @@ section.content
 
     img
       filter: grayscale(0.8)
+      -webkit-filter: grayscale(0.8)
       border-radius: 5px
       height: 190px
       margin-top: 10px
@@ -209,6 +212,7 @@ section.content
 
       img
         filter: none
+        -webkit-filter: none
         transform: scale(1.2)
         transition: all 0.4s ease-in-out
 
