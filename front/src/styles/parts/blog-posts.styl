@@ -1,0 +1,61 @@
+// Blog Posts
+.blog-posts
+  margin-top: 50px
+
+  .post
+    border: 1px solid grey
+    border-radius: 3px
+    padding: 10px 20px
+    background-image: url(posts-bg-img)
+    position: relative
+    color: dark-grey
+    
+    span
+      font-size: 1.6rem
+      color: ghost-grey
+      text-shadow: 1px 1px 2px black
+      border-radius: 10px
+      padding: 0 5px
+      background-color: dark-grey
+
+    img, p
+      border: 1px solid light-grey
+      height: 150px
+    
+    img
+      border-radius: 50%
+      width: 150px
+      border: 2px solid light-grey
+      transition: transform 0.1s ease-out
+      &:hover
+        cursor: pointer
+        transform: scale(1.03)
+        transition: transform 0.1s ease-out
+
+    p
+      font-size: 11pt
+      box-shadow: none
+      border-radius: 3px
+      background-color: rgba(almost-white, 0.8)
+      text-align: justify
+
+    a.btn
+      color: white
+      background-color: dark-grey
+      &:hover
+        color: dark-grey
+        background-color: almost-white
+        font-weight: bold
+        box-shadow: 2px 2px 5px 3px light-grey
+
+  .post:nth-child(1)
+    transform: translate(100px, 20px)
+    opacity: 0
+
+  .post:nth-child(2)
+    z-index: 2
+    opacity: 0
+
+  .post:nth-child(3)
+    transform: translate(-100px, 20px)
+    opacity: 0
