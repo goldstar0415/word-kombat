@@ -5,6 +5,7 @@ const plumber = require('gulp-plumber');
 const typescript = require('gulp-typescript');
 const pug = require('gulp-pug');
 const stylus = require('gulp-stylus');
+const nib = require('nib');
 const imagemin = require('gulp-imagemin');
 
 // Configurations =============================================================
@@ -50,7 +51,8 @@ const pugOptions = {
 };
 
 const stylusOptions = {
-  compress: true
+  compress: false,
+  use: [nib()]
 };
 
 const imageminOptions = {

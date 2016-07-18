@@ -24,7 +24,8 @@
     "gulp-plumber": "^1.1.0",
     "gulp-pug": "^3.0.3",
     "gulp-stylus": "^2.5.0",
-    "gulp-typescript": "^2.13.6"
+    "gulp-typescript": "^2.13.6",
+    "nib": "^1.1.0"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
