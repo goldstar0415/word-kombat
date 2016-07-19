@@ -86,8 +86,16 @@ $(document).ready(function() {
     */
     $('.logo').css({
       transform: `translateY(${(wScroll / 2)}px)`,
-      filter: `blur(${wScroll / 70}px)`,
-      "-webkit-filter": `blur(${wScroll / 70}px)`,
+      filter: `blur(${wScroll / 60}px)`,
+      "-webkit-filter": `blur(${wScroll / 60}px)`,
+    });
+
+    /*
+    * Changes brightness of header
+    */
+    $('header').css({
+      filter: `brightness(${100 - wScroll/9}%)`,
+      "-webkit-filter": `brightness(${100 - wScroll/9}%)`,
     });
 
     /*
