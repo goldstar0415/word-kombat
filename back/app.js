@@ -3,7 +3,7 @@ const path = require('path');
 const express = require('express');
 const app = express();
 
-// const loger = require('morgan');
+const loger = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 
@@ -20,8 +20,9 @@ const home = require('./controllers/home');
 // const signup = require('./controllers/signup');
 // const login = require('./controllers/login');
 // const logout = require('./controllers/logout');
+const error = require('./controllers/error');
 
-//app.use(loger('dev'));
+app.use(loger('dev'));
 
 app.use(bodyParser.json({limit: '10mb'}));
 app.use(bodyParser.urlencoded({ extended: false, limit: '10mb' }));
@@ -44,40 +45,9 @@ app.use('/', home);
 // app.use('/login', login);
 // app.use('/logout', logout);
 
-app.use((req, res, next) => {
-  let err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+app.use(error[0]);
+app.use(error[1]);
 
-if(app.get('env') === 'development') {
-  app.use((err, req, res, next) => {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
-} else {
-    app.use((err, req, res, next) => {
-    res.status(err.status || 500);
-    let errorTemplate = 'error-';
-    if(err.status === 404)
-      errorTemplate += 404;
-    else
-      errorTemplate += 500;
-    res.render(errorTemplate);
-  });
-}
-
-app.use((err, req, res, next) => {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
-});
-
-http.listen(app.get('port'), app.get('ip'), _=> {
+http.listen(app.get('port'), app.get('ip'), () => {
   console.log("Server listening at %s:%d ", app.get('ip'),app.get('port'));
 });
