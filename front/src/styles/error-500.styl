@@ -1,0 +1,54 @@
+@require 'nib'
+
+@import 'parts/error'
+
+#error-img
+  perspective: 750px
+  margin-top: 15%
+
+  #front, #back
+    background-color: light-grey
+    position: absolute
+    top: 0
+    left: 0
+    height: 300px
+    width: 100%
+    backface-visibility: hidden
+
+  #front
+    .responsive-image
+      max-height: 220px
+      min-height: 150px
+    #status
+      text-align: center
+      color: almost-white
+      font-weight: bold
+      text-shadow: black-shadow
+
+  #back
+    transform: rotateX(180deg)
+    transition: all 0.3 ease-in
+    h5
+      border-radius: 3px
+      background-color: almost-white
+      color: darken-grey
+      text-align: center
+      font-weight: bold
+    p
+      color: almost-white
+      text-align: justify
+      padding: 5px 10px
+      background-color: light-grey
+      
+  .card
+    height: 300px
+    margin-top: 0
+    transition: all 0.7s ease-in-out
+    transform-style: preserve-3d
+    cursor: pointer
+    &:active
+      transform: rotateX(180deg)
+      
+@media all and (max-width 600px)
+  #error-img
+    margin-top: 30px

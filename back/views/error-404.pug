@@ -2,12 +2,25 @@ doctype html
 html
 	head
 		title 404 Page Not Found
+		meta(charset="utf-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1")
+		
+		link(rel="shortcut icon" type="image/png" href="images/favicon.png")
 		link(rel="stylesheet", href="styles/error-404.css")
-		link(rel="stylesheet", href="styles/vendor/materialize.css")
+		link(rel="stylesheet", href="styles/vendor/materialize.min.css")
 	body
-		.container
-			.row
-				table.col.s12.m6
+		.box
+
+			.message
+				.content
+					h1.message-head Opps! We couldn't find what you were looking for.
+
+					p The page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exist. Do you want to back to the home page?
+
+					a.btn.btn-large.hoverable(href='/') Home
+
+			.letters
+				table
 					tr
 						td A
 						td B
@@ -80,14 +93,3 @@ html
 						td R
 						td S
 						td T
-
-				.message.col.s12.m6
-					.content
-						h4 Opps! We couldn't find what you were looking for.
-
-						p The page you were looking for could not be found. It may be temporarily unavailable, moved or no longer exist. Do you want to back to the home page?
-
-						a.btn.hoverable(href='/') Home
-
-		footer.page-footer
-			#copy-info &copy; 2016 Copyrights All rights reserved. SAKA
