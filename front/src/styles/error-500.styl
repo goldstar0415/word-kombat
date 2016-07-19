@@ -2,53 +2,80 @@
 
 @import 'parts/error'
 
-#error-img
-  perspective: 750px
-  margin-top: 15%
+.box
+  height: 100%
+  width: 100%
+  display: flex
+  align-items: center;
+  justify-content: center
+  flex-direction: row
+  flex-wrap: wrap
+  
+  .message
+    width: 60%
+    span
+      font-size: 32px
 
-  #front, #back
-    background-color: light-grey
-    position: absolute
-    top: 0
-    left: 0
-    height: 300px
-    width: 100%
-    backface-visibility: hidden
+  .error-img
+    perspective 750px
+    margin: 25px
+    width: 35%
 
-  #front
-    .responsive-image
-      max-height: 220px
-      min-height: 150px
-    #status
-      text-align: center
-      color: almost-white
-      font-weight: bold
-      text-shadow: black-shadow
+    .front, .back
+      background-color light-grey
+    
+    .back
+      position absolute
+      top 0
+      left 0
+      height 300px
+      width 100%
+      backface-visibility hidden
 
-  #back
-    transform: rotateX(180deg)
-    transition: all 0.3 ease-in
-    h5
-      border-radius: 3px
-      background-color: almost-white
-      color: darken-grey
-      text-align: center
-      font-weight: bold
-    p
-      color: almost-white
-      text-align: justify
-      padding: 5px 10px
-      background-color: light-grey
+    .front
+      img
+        max-height 220px
+        min-height 150px
+      .status
+        text-align center
+        color almost-white
+        font-weight bold
+        text-shadow black-shadow
+
+    .back
+      transform rotateX(180deg)
+      transition all 0.3 ease-in
+      span
+        border-radius 3px
+        background-color almost-white
+        color darken-grey
+        text-align center
+        font-weight bold
+      p
+        color almost-white
+        text-align justify
+        padding 5px 10px
+        background-color light-grey
+        
+    .card
+      height 300px
+      margin-top 0
+      transition all 0.7s ease-in-out
+      transform-style preserve-3d
+      cursor pointer
+      &:active
+        transform rotateX(180deg)
       
-  .card
-    height: 300px
-    margin-top: 0
-    transition: all 0.7s ease-in-out
-    transform-style: preserve-3d
-    cursor: pointer
-    &:active
-      transform: rotateX(180deg)
-      
-@media all and (max-width 600px)
-  #error-img
-    margin-top: 30px
+      span
+        font-size: 27px
+        display: inherit
+        text-align: center
+        
+
+@media all and (max-width: 800px)
+  .box
+    .message
+      width: 90%
+    
+    .error-img
+      width: 70%
