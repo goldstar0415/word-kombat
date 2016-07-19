@@ -86,7 +86,8 @@ $(document).ready(function() {
     */
     $('.logo').css({
       transform: `translateY(${(wScroll / 2)}px)`,
-      filter: `blur("${wScroll / 70}px)`
+      filter: `blur(${wScroll / 70}px)`,
+      "-webkit-filter": `blur(${wScroll / 70}px)`,
     });
 
     /*
