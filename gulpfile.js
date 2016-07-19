@@ -3,15 +3,23 @@ const gulp = require('gulp');
 const plumber = require('gulp-plumber');
 
 const typescript = require('gulp-typescript');
+const babel = require('gulp-babel');
 const pug = require('gulp-pug');
 const stylus = require('gulp-stylus');
+
 const nib = require('nib');
 const imagemin = require('gulp-imagemin');
 
 // Configurations =============================================================
 const scripts = {
-  src: 'front/src/chat/*.ts',
-  dest: 'front/dist/chat/'
+  ts: {
+    src: 'front/src/chat/*.ts',
+    dest: 'front/dist/chat/'
+  },
+  js: {
+    src: 'front/src/scripts/*.js',
+    dest: 'front/dist/scripts/'
+  }
 };
 
 const templates = {
@@ -44,14 +52,20 @@ const dependencies = {
 }
 
 // Options ====================================================================
-// const tsProject = typescript.createProject('tsconfig.json');
+// const tsProject = typescript.createProject('front/src/chat/tsconfig.json');
+
+const babelOptions = {
+  presets: ['es2015'],
+  minified: true,
+  comments: false
+};
 
 const pugOptions = {
   pretty: false
 };
 
 const stylusOptions = {
-  compress: false,
+  compress: true,
   use: [nib()]
 };
 
@@ -62,10 +76,18 @@ const imageminOptions = {
 // Tasks ======================================================================
 // Compiles typescript to javascript
 gulp.task('typescript', ()=> { 
-  return gulp.src(scripts.src)
+  return gulp.src(scripts.ts.src)
     .pipe(plumber())
     .pipe(typescript(/*tsProject*/))
-    .pipe(gulp.dest(scripts.dest))
+    .pipe(gulp.dest(scripts.ts.dest))
+});
+
+// Compiles es6 to es5 
+gulp.task('babel', ()=> { 
+  return gulp.src(scripts.js.src)
+    .pipe(plumber())
+    .pipe(babel(babelOptions))
+    .pipe(gulp.dest(scripts.js.dest))
 });
 
 // Compiles pug to html
@@ -89,6 +111,13 @@ gulp.task('images', ()=> {
   return gulp.src(images.src)
     .pipe(imagemin(imageminOptions))
     .pipe(gulp.dest(images.dest));
+});
+
+// Minifies js files
+gulp.task('minifyjs', ()=> {
+  return gulp.src('./front/src/scripts/*.js')
+    .pipe(minify())
+    .pipe(gulp.dest('./front/dist/scripts/'));
 });
 
 // Copies vendor libraries
@@ -118,9 +147,10 @@ gulp.task('libs', ()=> {
 });
 
 gulp.task('watch', ()=> {
-  gulp.watch(scripts.src, ['typescript']);
+  gulp.watch(scripts.ts.src, ['typescript']);
+  gulp.watch(scripts.js.src, ['babel']);
   gulp.watch(templates.src, ['pug']);
   gulp.watch(styles.src, ['stylus'])
 });
 
-gulp.task('default', ['pug', 'stylus', 'typescript', 'watch'], _=> {});
+gulp.task('default', ['typescript', 'babel', 'pug', 'stylus', 'watch'], ()=> {});

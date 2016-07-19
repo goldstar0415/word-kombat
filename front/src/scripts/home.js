@@ -60,8 +60,8 @@ $(document).ready(function() {
   });
 
   // Log out
-  $("#logout").click(function() {
-    $.post("/logout", function() {
+  $("#logout").click(() => {
+    $.post("/logout", () => {
       location.reload();
     });
   });
@@ -88,7 +88,6 @@ $(document).ready(function() {
       transform: `translateY(${(wScroll / 2)}px)`,
       filter: `blur("${wScroll / 70}px)`
     });
-
 
     /*
     * Words pictures
@@ -117,14 +116,14 @@ $(document).ready(function() {
       opacity = 1 - Math.abs(offset / 300);
       
       $(".post:nth-child(1)").css({
-        "transform": `translate(${offset}px, ${(-offset * .5)}px)`,
+        "transform": `translate(${offset}px, ${(-offset * 0.5)}px)`,
         "opacity": opacity
       });
       
       $(".post:nth-child(2)").css({"opacity": opacity});
 
       $(".post:nth-child(3)").css({
-        "transform": `translate(${(Math.abs(offset))}px, ${(-offset * .5)}px)`,
+        "transform": `translate(${(Math.abs(offset))}px, ${(-offset * 0.5)}px)`,
         "opacity": opacity
       });
     }
