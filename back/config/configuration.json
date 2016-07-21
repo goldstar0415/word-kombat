@@ -6,10 +6,11 @@
   },
 
   "database": {
-    "host": "",
-    "port": "",
-    "user": "",
-    "password": "",
-    "name": ""
+    "host": "localhost",
+    "port": "5432",
+    "user": "demo",
+    "password": "demo",
+    "name": "demo",
+    "dialect": "postgres"
   }
 }

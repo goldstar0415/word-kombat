@@ -14,14 +14,14 @@ const session = require('express-session')(config.get('session'));
 
 const http = require('http').Server(app);
 
+const db = require('./models');
+
 const home = require('./controllers/home');
-// const chat = require('./controllers/chat');
+const guessWord = require('./controllers/guess-word-app');
 // const signup = require('./controllers/signup');
 // const login = require('./controllers/login');
 // const logout = require('./controllers/logout');
 const error = require('./controllers/error');
-
-log.debug("SHit happens", {shit: "random staff"});
 
 app.use(httpLogger('dev'));
 
@@ -41,14 +41,20 @@ app.set('ip', config.get('host'));
 app.use(session);
 
 app.use('/', home);
-// app.use('/chat', chat);
+app.use('/guess-word', guessWord);
 // app.use('/signup', signup);
 // app.use('/login', login);  
 // app.use('/logout', logout);
 
-app.use(error[0]);
-app.use(error[1]);
+app.use(error.clientError);
+app.use(error.serverError);
 
-http.listen(app.get('port'), app.get('ip'), () => {
-  log.info("Server listening at %s:%d ", app.get('ip'), app.get('port'));
+db.sync({force: true}).then(() => {
+
+  http.listen(app.get('port'), app.get('ip'), () => {
+    log.info("Server listening at %s:%d ", app.get('ip'), app.get('port'));
+  });
+
 });
+
+

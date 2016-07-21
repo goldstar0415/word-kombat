@@ -1,31 +1,33 @@
 const express = require('express');
+const log = require('../logger');
 
-module.exports = [
-  (req, res, next) => {
+module.exports = {
+  clientError: (req, res, next) => {
     let err = new Error('Not Found');
     err.status = 404;
     next(err);
   },
-  (err, req, res, next) => {
+  serverError: (err, req, res, next) => {
     if(express().get('env') === 'development') {
       res.status(err.status || 500);
       if(!!err && !!err.status){
-      // Should log error
+        log.info(err);
         res.render('error-' + err.status);
       } else {
-      // Should log error
+        log.info("Unhandled Error");
         res.render('error-500');
       }
     } else {
       res.status(err.status || 500);
       if(!!err && !!err.status){
-      // Should log error
+        log.info(err);
         res.render('error-' + err.status);
       } else {
-      // Should log error
+        log.info("Unhandled Error");
         res.render('error-500');
       }
     }
+    next(err);
   }
 
-];
+};
