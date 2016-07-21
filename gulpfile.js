@@ -13,8 +13,8 @@ const imagemin = require('gulp-imagemin');
 // Configurations =============================================================
 const scripts = {
   ts: {
-    src: 'front/src/chat/*.ts',
-    dest: 'front/dist/chat/'
+    src: 'front/src/guess-word-app/**/*.ts',
+    dest: 'front/dist/guess-word-app/'
   },
   js: {
     src: 'front/src/scripts/*.js',
@@ -22,37 +22,36 @@ const scripts = {
   }
 };
 
-const templates = {
-  src: 'front/src/templates/*.pug',
-  dest: 'front/dist/templates/'
+const styles = {
+  src: 'front/src/{styles/*.styl,guess-word-app/**/*.styl}',
+  dest: 'front/dist/'
 };
 
-const styles = {
-  src: 'front/src/styles/*.styl',
-  dest: 'front/dist/styles/'
+const templates = {
+  src: 'front/src/guess-word-app/**/*.pug',
+  dest: 'front/dist/guess-word-app/'
 };
 
 const images = {
-  src: 'front/src/images/**/*',
+  src: 'front/src/images/**/*.{jpg,jpeg,png,svg}',
   dest: 'front/dist/images/'
-}
+};
 
 const dependencies = {
   js: {
     'jquery': 'jquery/dist/jquery.min.js',
-    'jquery.nicescroll': 'jquery.nicescroll/dist/jquery.nicescroll.min.js',
-    'materialize': 'Materialize/dist/js/materialize.min.js'
+    'materialize': 'materialize-css/dist/js/materialize.min.js'
   },
   css: {
-    'materialize': 'Materialize/dist/css/materialize.min.css'
+    'materialize': 'materialize-css/dist/css/materialize.min.css'
   },
   font: {
-    'roboto': 'Materialize/dist/fonts/**/*'
+    'roboto': 'materialize-css/dist/fonts/**/*'
   }
-}
+};
 
 // Options ====================================================================
-// const tsProject = typescript.createProject('front/src/chat/tsconfig.json');
+const tsProject = typescript.createProject('front/src/guess-word-app/tsconfig.json');
 
 const babelOptions = {
   presets: ['es2015'],
@@ -74,83 +73,77 @@ const imageminOptions = {
 };
 
 // Tasks ======================================================================
-// Compiles typescript to javascript
-gulp.task('typescript', ()=> { 
+// Compiles typescript to js
+gulp.task('typescript', _=> { 
   return gulp.src(scripts.ts.src)
     .pipe(plumber())
-    .pipe(typescript(/*tsProject*/))
+    .pipe(typescript(tsProject))
     .pipe(gulp.dest(scripts.ts.dest))
 });
 
 // Compiles es6 to es5 
-gulp.task('babel', ()=> { 
+gulp.task('babel', _=> { 
   return gulp.src(scripts.js.src)
     .pipe(plumber())
     .pipe(babel(babelOptions))
     .pipe(gulp.dest(scripts.js.dest))
 });
 
-// Compiles pug to html
-gulp.task('pug', ()=> {
-  return gulp.src(templates.src)
-    .pipe(plumber())
-    .pipe(pug(pugOptions))
-    .pipe(gulp.dest(templates.dest))
-});
-
 // Compiles stylus to css
-gulp.task('stylus', ()=> {
+gulp.task('stylus', _=> {
   return gulp.src(styles.src)
     .pipe(plumber())
     .pipe(stylus(stylusOptions))
     .pipe(gulp.dest(styles.dest))
 });
 
+// Compiles pug to html
+gulp.task('pug', _=> {
+  return gulp.src(templates.src)
+    .pipe(plumber())
+    .pipe(pug(pugOptions))
+    .pipe(gulp.dest(templates.dest))
+});
+
 // Copies and minifies images
-gulp.task('images', ()=> {
+gulp.task('images', _=> {
   return gulp.src(images.src)
     .pipe(imagemin(imageminOptions))
     .pipe(gulp.dest(images.dest));
 });
 
-// Minifies js files
-gulp.task('minifyjs', ()=> {
-  return gulp.src('./front/src/scripts/*.js')
-    .pipe(minify())
-    .pipe(gulp.dest('./front/dist/scripts/'));
-});
-
 // Copies vendor libraries
-gulp.task('libs', ()=> {
+gulp.task('libs', _=> {
 
   // JavaScript
   for(let item in dependencies.js) {
     console.log(`${item} - ${dependencies.js[item]}`);
-    gulp.src('./bower_components/'+ dependencies.js[item])
+    gulp.src('./node_modules/'+ dependencies.js[item])
       .pipe(gulp.dest('./front/dist/scripts/vendor/'));
   }
 
   // CSS
   for(let item in dependencies.css) {
     console.log(`${item} - ${dependencies.css[item]}`);
-    gulp.src('./bower_components/'+ dependencies.css[item])
+    gulp.src('./node_modules/'+ dependencies.css[item])
       .pipe(gulp.dest('./front/dist/styles/vendor/'));
   }
 
   // Fonts
   for(let item in dependencies.font) {
     console.log(`${item} - ${dependencies.font[item]}`);
-    gulp.src('./bower_components/'+ dependencies.font[item])
+    gulp.src('./node_modules/'+ dependencies.font[item])
       .pipe(gulp.dest('./front/dist/styles/fonts/'));
   }
 
 });
 
-gulp.task('watch', ()=> {
+// Watch
+gulp.task('watch', _=> {
   gulp.watch(scripts.ts.src, ['typescript']);
   gulp.watch(scripts.js.src, ['babel']);
   gulp.watch(templates.src, ['pug']);
   gulp.watch(styles.src, ['stylus'])
 });
 
-gulp.task('default', ['typescript', 'babel', 'pug', 'stylus', 'watch'], ()=> {});
+gulp.task('default', ['typescript', 'babel', 'stylus', 'watch'], _=> {});
