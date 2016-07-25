@@ -1,0 +1,43 @@
+@require 'nib'
+
+@import '../../../../../styles/parts/variables'
+
+.word-card
+   
+  .card
+    background-color: bule-grey-darken-4
+    
+    // Wrod image
+    .card-image
+      height: 30vh
+    // Word translation
+    .card-content
+      height: 15vh
+    // Word hints
+    .card-reveal
+        background-color: bule-grey-darken-4
+
+    // Buttons
+    .card-action
+      height: 15vh
+      display: flex
+      flex-direction: row
+      align-items: center
+      justify-content: center
+      
+      button, span
+        margin: 1px
+        background-color: grey-darken-4
+        
+        i
+          color: grey-lighten-5
+          font-style: none
+          font-size: 1.1rem
+
+        &:hover
+          background-color: grey-lighten-5
+          box-shadow: 0 0 1px 1px grey-lighten-5
+
+          i
+            color: grey-darken-4
+            

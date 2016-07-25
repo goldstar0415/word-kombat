@@ -1,0 +1,36 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    meta(name="description" content="English words learning platform")
+    meta(name="keywords" content="words, english, learning, word, chat, game, interactive")
+    meta(name="author" content="Saka7")
+
+    title Guess Word - Interactive word learning game
+
+    link(rel="shortcut icon" type="image/png" href="images/favicon.png")
+    link(rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons")
+    link(rel="stylesheet" href="styles/preloader.css")
+    link(rel="stylesheet" href="styles/vendor/materialize.min.css")
+        
+    script(src="scripts/vendor/system.src.js")
+    script(src="scripts/vendor/Rx.min.js")
+    script(src="scripts/vendor/angular2/angular2.js")
+    script(src="scripts/vendor/angular2/angular2-polyfills.js")
+    script(src="scripts/vendor/angular2/router.dev.js")
+    script(src="scripts/vendor/angular2/http.dev.js")
+    script(src="guess-word-app/system-config.js")
+        
+    script(src="scripts/vendor/jquery.min.js")
+    script(src="scripts/vendor/materialize.min.js")
+    script.
+        document.write('<base href="' + document.location + '" />');
+        $(document).ready(function(){
+            $('.tooltipped').tooltip({delay: 50});
+            $(".button-collapse").sideNav();
+        });
+
+  body
+    app
+      .preloader LOADING...

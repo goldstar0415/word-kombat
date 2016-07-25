@@ -38,15 +38,31 @@ const images = {
 };
 
 const dependencies = {
-  js: {
-    'jquery': 'jquery/dist/jquery.min.js',
-    'materialize': 'materialize-css/dist/js/materialize.min.js'
+  dest: {
+    js: './front/dist/scripts/vendor/',
+    css: './front/dist/styles/vendor/',
+    font: './front/dist/styles/fonts/'
   },
-  css: {
-    'materialize': 'materialize-css/dist/css/materialize.min.css'
-  },
-  font: {
-    'roboto': 'materialize-css/dist/fonts/**/*'
+  libs: {
+    js: {
+      'jquery': 'node_modules/jquery/dist/jquery.min.js',
+      'materialize': 'node_modules/materialize-css/dist/js/materialize.min.js',
+      'systemjs': 'node_modules/systemjs/dist/system.src.js',
+      'rxjs': 'node_modules/rxjs/bundles/Rx.min.js',
+      'zone.js': 'node_modules/zone.js/dist/zone.min.js',
+      'angular2': [
+        'node_modules/angular2/bundles/angular2-polyfills.js',
+        'node_modules/angular2/bundles/angular2.js',
+        'node_modules/angular2/bundles/router.dev.js',
+        'node_modules/angular2/bundles/http.dev.js'
+      ],
+    },
+    css: {
+      'materialize': 'node_modules/materialize-css/dist/css/materialize.min.css',
+    },
+    font: {
+      'roboto': 'node_modules/materialize-css/dist/fonts/**/*',
+    }
   }
 };
 
@@ -114,28 +130,23 @@ gulp.task('images', _=> {
 
 // Copies vendor libraries
 gulp.task('libs', _=> {
+  Object.keys(dependencies.libs).forEach(deps => {
+    Object.keys(dependencies.libs[deps]).forEach(libs => {
 
-  // JavaScript
-  for(let item in dependencies.js) {
-    console.log(`${item} - ${dependencies.js[item]}`);
-    gulp.src('./node_modules/'+ dependencies.js[item])
-      .pipe(gulp.dest('./front/dist/scripts/vendor/'));
-  }
+      let lib = dependencies.libs[deps][libs];
 
-  // CSS
-  for(let item in dependencies.css) {
-    console.log(`${item} - ${dependencies.css[item]}`);
-    gulp.src('./node_modules/'+ dependencies.css[item])
-      .pipe(gulp.dest('./front/dist/styles/vendor/'));
-  }
+      if(Array.isArray(lib)){
+        lib.forEach(item => {
+          gulp.src(item).pipe(gulp.dest(dependencies.dest[deps] + libs + "/"));
+          console.log(`${item} - ${dependencies.dest[deps]}`);
+        });
+      } else {
+        gulp.src(lib).pipe(gulp.dest(dependencies.dest[deps]));
+        console.log(`${lib} - ${dependencies.dest[deps]}`);
+      }
 
-  // Fonts
-  for(let item in dependencies.font) {
-    console.log(`${item} - ${dependencies.font[item]}`);
-    gulp.src('./node_modules/'+ dependencies.font[item])
-      .pipe(gulp.dest('./front/dist/styles/fonts/'));
-  }
-
+    });
+  });
 });
 
 // Watch

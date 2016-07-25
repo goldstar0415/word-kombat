@@ -1,0 +1,14 @@
+.chat-area.hoverable
+  //- Messages Area
+  ul.collection
+    //- Message 
+    li(*ngFor="let message of messages").collection-item.avatar
+      //- User icond
+      img.circle(src="{{message.user.icon}}" alt="No avatar")
+      //- User name 
+      span.title {{message.user.name}}
+      //- Message
+      p {{message.value}} 
+      //- Points
+      a.secondary-content(href="#!")
+        span +{{message.points}}

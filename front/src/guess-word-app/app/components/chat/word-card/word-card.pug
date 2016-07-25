@@ -1,0 +1,37 @@
+//- Word card
+.word-card
+  .card.hoverable
+
+    //- Word image
+    .card-image.waves-effect.waves-block.waves-light
+      img.activator(src="{{word.image}}")
+
+    .card-content
+      //- Timer
+      .progress
+        .determinate
+
+      //- Word
+      span.card-title.activator.white-text {{word.value}}
+        i.material-icons.right more_vert
+
+    //- Word hint
+    .card-reveal.white-text
+      span.card-title {{word.value}}
+        i.material-icons.right close
+      p {{word.hint}}
+
+    //- Controls
+    .card-action
+      //- Volume on/off
+      button((click)="toggleVolume()").btn-floating.waves-effect.waves-dark
+        i(*ngIf="isVolumeEnabled").material-icons volume_up
+        i(*ngIf="!isVolumeEnabled").material-icons volume_off
+      
+      //- Current word index from word list
+      span.btn-floating.btn-large.waves-effect.waves-dark
+        i {{currentWordIndex}}/30
+
+      //- Replay sound
+      button((click)="repeat()").btn-floating.waves-effect.waves-dark
+        i.material-icons repeat

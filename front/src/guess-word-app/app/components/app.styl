@@ -1,0 +1,101 @@
+@reqire 'nib'
+
+@import '../../../styles/parts/variables'
+
+// Navigation
+nav.nav-wrapper
+  background-color: grey-darken-4
+  
+  // Mobile buttons
+  ul.mobile
+    a.button-collapse
+      font-size: 1rem
+      &:hover
+        background-color: black
+        border-bottom: 3px solid white
+        transition: none
+  
+  // Mobile sidenav
+  ul#menu-mobile, ul#users-mobile
+    background-color: grey-darken-4
+  
+  // Logo
+  a.brand-logo
+    img
+      width: 180px
+      padding-top: 14px
+      margin-right: 20px
+  
+  // Navitaion tabs 
+  ul.navigation-tabs
+    height: 100%
+    
+    li
+      height: 100%
+      
+      a
+        height: 100%
+        &:hover
+          border-bottom: 3px solid white
+          background-color: black
+
+// Main content
+.main
+  display: flex
+  min-height: 90vh
+  flex-direction: column
+
+// Page footer
+footer
+  display: flex
+  flex-direction: row
+  justify-content: flex-start
+  padding: 16px
+  background-color: grey-darken-4
+  color: grey-lighten-5
+  
+  // Information badges
+  span
+    padding: 8px
+    background-color: black
+    color: grey-lighten-4
+    border-radius: 3px
+    margin-right: 4px
+     
+    b
+      background-color: grey-lighten-4
+      color: black
+      padding: 3px
+      border-radius: 2px 
+  
+  // Copyrights Information
+  span.copyrights
+    margin-left: auto
+    background-color: transparent
+    border-radius: none
+    margin-right: none
+
+@media only screen and (max-width : 768px)
+  // Drops page footer's copyrights information
+  footer.page-footer
+    span.copyrights
+      display: none
+  // Drops navigation tabs on the right 
+  ul.navigation-tabs
+    display: none
+
+@media only screen and (max-width : 480px)
+  // Drop brand-logo on the center
+  nav > a.brand-logo
+    display: none
+    
+@media only screen and (min-width : 769px)
+  // Drops mobile buttons
+  ul.mobile
+    display: none
+
+@media only screen and (min-width : 480px)
+  // Drops brand logo on the right
+  ul.mobile
+    a.brand-logo
+      display: none
