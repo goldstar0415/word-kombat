@@ -11,4 +11,8 @@ export class WordLettersComponent {
 
   letters = ['d', 'r', 'a', 'n', 'o', 'm'];
 
+  dropLetter(letter) {
+    this.letters.splice(this.letters.indexOf(letter), 1);
+  }
+
 }

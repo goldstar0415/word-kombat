@@ -49,9 +49,10 @@ app.use('/guess-word', guessWord);
 app.use(error.clientError);
 app.use(error.serverError);
 
-db.sync({force: true}).then(() => {
+// Drop force property in production mode
+db.sync({force: true}).then(_=> {
 
-  http.listen(app.get('port'), app.get('ip'), () => {
+  http.listen(app.get('port'), app.get('ip'), _=> {
     log.info("Server listening at %s:%d ", app.get('ip'), app.get('port'));
   });
 

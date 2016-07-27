@@ -62,6 +62,7 @@ const dependencies = {
     },
     font: {
       'roboto': 'node_modules/materialize-css/dist/fonts/**/*',
+      'material-icons': 'node_modules/materialize-css/dist/font/material-design-icons/**/*'
     }
   }
 };
@@ -76,7 +77,7 @@ const babelOptions = {
 };
 
 const pugOptions = {
-  pretty: false
+  pretty: true
 };
 
 const stylusOptions = {
@@ -157,4 +158,4 @@ gulp.task('watch', _=> {
   gulp.watch(styles.src, ['stylus'])
 });
 
-gulp.task('default', ['typescript', 'babel', 'stylus', 'watch'], _=> {});
+gulp.task('default', ['typescript', 'pug', 'babel', 'stylus', 'watch'], _=> {});

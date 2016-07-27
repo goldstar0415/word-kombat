@@ -44,20 +44,6 @@ const Word = sequelize.define('Word', {
   timestamps: false,
 });
 
-// Translation entity schema
-const Translation = sequelize.define('Translation', {
-    translation: Sequelize.STRING
-}, {
-  timestamps: false,
-});
-
-// Language entity schema
-const Language = sequelize.define('Language', {
-    name: Sequelize.STRING
-}, {
-  timestamps: false,
-});
-
 // Match entity schema
 const Match = sequelize.define('Match', {
     startTime: Sequelize.DATE,
@@ -75,12 +61,6 @@ const MatchScore = sequelize.define('MatchScore', {
 
 // User - Rank One to One mapping
 Rank.hasOne(User);
-
-// Word - Translations One to Many mapping
-Word.hasMany(Translation);
-
-// Language - Translation One to One mapping
-Translation.hasOne(Language);
 
 // Match - MatchScores One to Many mapping
 Match.hasMany(MatchScore);

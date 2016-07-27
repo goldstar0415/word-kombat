@@ -11,7 +11,6 @@ export class WordCardComponent {
 
   // Mock data
   public word = {
-    value: "Random",
     image: 'images/words/words.jpg',
     hint: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, veritatis."
   }
