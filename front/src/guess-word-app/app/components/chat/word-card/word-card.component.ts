@@ -1,4 +1,4 @@
-import { Component } from 'angular2/core';
+import { Component, Input } from 'angular2/core';
 
 const basePath = 'guess-word-app/app/components/chat/word-card/';
 
@@ -9,14 +9,10 @@ const basePath = 'guess-word-app/app/components/chat/word-card/';
 })
 export class WordCardComponent {
 
-  // Mock data
-  public word = {
-    image: 'images/words/words.jpg',
-    hint: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, veritatis."
-  }
-
+  @Input() private image;
+  @Input() private hint;
+  
   public currentWordIndex = 10;
-  // End mock data
 
   public isVolumeEnabled = true;
 

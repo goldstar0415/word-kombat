@@ -22,11 +22,12 @@ const basePath = 'guess-word-app/app/components/chat/';
 })
 export class ChatComponent {
 
+  // Mock data
   private word = {
     id: 1,
     letters: ['d', 'r', 'a', 'n', 'o', 'm'],
-    image: "",
-    hint: ""
+    image: 'images/words/words.jpg',
+    hint: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, veritatis."
   };
 
   private letters: string[];
