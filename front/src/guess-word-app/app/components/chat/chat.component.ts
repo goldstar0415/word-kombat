@@ -22,4 +22,38 @@ const basePath = 'guess-word-app/app/components/chat/';
 })
 export class ChatComponent {
 
+  private word = {
+    id: 1,
+    letters: ['d', 'r', 'a', 'n', 'o', 'm'],
+    image: "",
+    hint: ""
+  };
+
+  private letters: string[];
+  private typedWord: string;
+  private letter: string;
+
+  constructor() {
+    this.letters = this.word.letters.slice();
+    this.typedWord = "";
+    this.letter = "";
+  }
+
+  onLetterClicked(letter: string) {
+    this.typedWord += letter;
+  }
+
+  onWordEntered(word: string) {
+    this.typedWord = word;
+    this.letters = this.word.letters.slice();
+
+    for(let letter of word.toLowerCase().split('')) {
+      let index = this.letters.indexOf(letter);
+      if(index !== -1) {
+        this.letters.splice(index, 1);
+      }
+    }
+
+  }
+
 }

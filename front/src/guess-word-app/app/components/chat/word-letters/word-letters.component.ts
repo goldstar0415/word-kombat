@@ -1,4 +1,4 @@
-import { Component } from 'angular2/core';
+import { Component, Input, Output, EventEmitter } from 'angular2/core';
 
 const basePath = 'guess-word-app/app/components/chat/word-letters/';
 
@@ -9,10 +9,12 @@ const basePath = 'guess-word-app/app/components/chat/word-letters/';
 })
 export class WordLettersComponent {
 
-  letters = ['d', 'r', 'a', 'n', 'o', 'm'];
+  @Input() private letters: string[];
+  @Output() private letterClicked = new EventEmitter<string>();
 
-  dropLetter(letter) {
+  dropLetter(letter: string) {
     this.letters.splice(this.letters.indexOf(letter), 1);
+    this.letterClicked.emit(letter);
   }
 
 }

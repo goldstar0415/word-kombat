@@ -6,5 +6,5 @@
     user-list
   //- Second row
   .word-controls
-    word-letters
-    word-inputs
+    word-letters('[letters]'="letters" '(letterClicked)'="onLetterClicked($event)")
+    word-inputs('[word]'="typedWord" '(wordEntered)'="onWordEntered($event)")
