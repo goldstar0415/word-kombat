@@ -20,7 +20,7 @@
     //- Controls
     .card-action
       //- Volume on/off
-      button((click)="toggleVolume()").btn-floating.waves-effect.waves-dark
+      button.btn-floating.waves-effect.waves-dark((click)="toggleVolume()")
         i(*ngIf="isVolumeEnabled").material-icons volume_up
         i(*ngIf="!isVolumeEnabled").material-icons volume_off
       
@@ -29,5 +29,5 @@
         i {{currentWordIndex}}/30
 
       //- Replay sound
-      button((click)="repeat()").btn-floating.waves-effect.waves-dark
+      button.btn-floating.waves-effect.waves-dark((click)="repeat()")
         i.material-icons repeat

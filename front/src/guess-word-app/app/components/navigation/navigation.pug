@@ -20,12 +20,13 @@ nav.nav-wrapper.hoverable
         i.material-icons list
     //- Home Button
     li
-      a(href="/").waves-effect.waves-light
+      a(href="/" data-position="right").waves-effect.waves-light
         span Home
         i.material-icons home
   
   //- Users Sidenav
   ul#users-mobile.side-nav
+    user-list('[users]'='users')
     
   //- Mobile Navbar 
   ul.mobile
@@ -33,10 +34,10 @@ nav.nav-wrapper.hoverable
     a.brand-logo.right(href="/")
       img(src="images/logo.svg" alt="Logo")
     //- Menu Button
-    a.button-collapse.waves-effect.waves-light(href="#menu-mobile" data-activates="menu-mobile")
+    a.tooltipped.button-collapse.waves-effect.waves-light(href="#menu-mobile" data-activates="menu-mobile" data-position="bottom" data-delay="50" data-tooltip="Menu")
       i.material-icons menu
     //- Users Button
-    a.button-collapse.waves-effect.waves-light(href="#users-mobile" data-activates="users-mobile")
+    a.tooltipped.button-collapse.waves-effect.waves-light(href="#users-mobile" data-activates="users-mobile" data-position="bottom" data-delay="50" data-tooltip="Users")
       i.material-icons account_circle
 
   //- Brand logo
