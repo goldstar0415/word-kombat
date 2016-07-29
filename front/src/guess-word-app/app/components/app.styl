@@ -18,7 +18,23 @@ nav.nav-wrapper
   // Mobile sidenav
   ul#menu-mobile, ul#users-mobile
     background-color: grey-darken-4
-  
+    background-image: url(bg-img)
+
+  // Menu mobile
+  ul#menu-mobile
+    li > a
+      width: 100%
+      &:hover
+        border-left: 3px solid grey-lighten-5
+        background-color: black
+        transition: all 0.1s ease-in-out
+        span
+          font-size: 1.3rem
+      span
+        color: grey-lighten-5
+        font-size: 1.1rem
+        font-weight: bold
+
   // Logo
   a.brand-logo
     img

@@ -3,18 +3,26 @@ nav.nav-wrapper.hoverable
   
   //- Menu Sidenav
   ul#menu-mobile.side-nav
-    //- Account Button
-    li.btn.waves-effect.waves-light
-      span Account
-      i.material-icons account_box
+    //- Chat button
+    li
+      a([routerLink]="['Chat']").waves-effect.waves-light
+        span Chat
+        i.material-icon chat
+    //- Account button
+    li
+      a([routerLink]="['Account']").waves-effect.waves-light
+        span Account
+        i.material-icons account_box
     //- Leaderboards Button
-    li.btn.waves-effect.waves-light
-      span Leaderboards
-      i.material-icons list
+    li
+      a([routerLink]="['Leaderboards']").waves-effect.waves-light
+        span Leaderboards
+        i.material-icons list
     //- Home Button
-    li.btn.waves-effect.waves-light
-      span Home
-      i.material-icon
+    li
+      a(href="/").waves-effect.waves-light
+        span Home
+        i.material-icons home
   
   //- Users Sidenav
   ul#users-mobile.side-nav
@@ -30,7 +38,6 @@ nav.nav-wrapper.hoverable
     //- Users Button
     a.button-collapse.waves-effect.waves-light(href="#users-mobile" data-activates="users-mobile")
       i.material-icons account_circle
-
 
   //- Brand logo
   a.brand-logo.center(href="/")
@@ -51,7 +58,7 @@ nav.nav-wrapper.hoverable
     //- Account tab button
     li.waves-effect.waves-light
       a.tooltipped([routerLink]="['Account']"
-         data-position="bottom" data-delay="50" data-tooltip="Edit accout")
+         data-position="bottom" data-delay="50" data-tooltip="Edit account")
         i.material-icons account_box
     //- Home tab button
     li.waves-effect.waves-light
