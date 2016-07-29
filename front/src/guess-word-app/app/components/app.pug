@@ -1,20 +1,6 @@
 //- Navigation
 nav.nav-wrapper.hoverable
-    
-  //- Mobile Navbar 
-  ul.mobile
-    //- Mobile brand Logo
-    a.brand-logo.right(href="/")
-      img(src="images/logo.svg" alt="Logo")
-    //- Menu Button
-    a.button-collapse.waves-effect.waves-light(href="guess-word" 
-      data-activates="menu-mobile")
-      i.material-icons menu
-    //- Users Button
-    a.button-collapse.waves-effect.waves-light(href="guess-word" 
-      data-activates="users-mobile")
-      i.material-icons account_circle
-
+  
   //- Menu Sidenav
   ul#menu-mobile.side-nav
     //- Account Button
@@ -32,6 +18,19 @@ nav.nav-wrapper.hoverable
   
   //- Users Sidenav
   ul#users-mobile.side-nav
+    
+  //- Mobile Navbar 
+  ul.mobile
+    //- Mobile brand Logo
+    a.brand-logo.right(href="/")
+      img(src="images/logo.svg" alt="Logo")
+    //- Menu Button
+    a.button-collapse.waves-effect.waves-light(href="#menu-mobile" data-activates="menu-mobile")
+      i.material-icons menu
+    //- Users Button
+    a.button-collapse.waves-effect.waves-light(href="#users-mobile" data-activates="users-mobile")
+      i.material-icons account_circle
+
 
   //- Brand logo
   a.brand-logo.center(href="/")
@@ -42,7 +41,7 @@ nav.nav-wrapper.hoverable
     //- Chat tab button
     li.waves-effect.waves-light
       a.tooltipped([routerLink]="['Chat']"
-        data-position="bottom" data-delay="50" data-tooltip="Go to chat")
+        data-position="bottom" data-delay="50" data-tooltip="Go to Chat")
         i.material-icons chat
     //- Leaderboards tab button
     li.waves-effect.waves-light
@@ -66,13 +65,13 @@ nav.nav-wrapper.hoverable
 //- Page footer
 footer.page-footer
   //- Current room
-  span.room-id room: 
+  span.room-id room:
     b 294jfacc
   //- Current match
-  span.current-match match: 
+  span.current-match match:
     b 123812
   //- Amount of active users
-  span.amount-of-users users: 
+  span.amount-of-users users:
     b 8/10
   //- Copyrights
   span.copyrights &copy;Copyrights 2016 

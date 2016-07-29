@@ -3,7 +3,7 @@
   .content
     word-card('[image]'="word.image" '[hint]'="word.hint")
     chat-area
-    user-list
+    user-list('[users]'='users')
   //- Second row
   .word-controls
     word-letters('[letters]'="letters" '(letterClicked)'="onLetterClicked($event)")

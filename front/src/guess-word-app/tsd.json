@@ -7,6 +7,12 @@
   "installed": {
     "systemjs/systemjs.d.ts": {
       "commit": "c6c068935a58aa58087a309740bcf933600140b8"
+    },
+    "es6-promise/es6-promise.d.ts": {
+      "commit": "094dfc6420d3118c9c691764a29b4fbbfc041af6"
+    },
+    "es6-collections/es6-collections.d.ts": {
+      "commit": "094dfc6420d3118c9c691764a29b4fbbfc041af6"
     }
   }
 }

@@ -1,4 +1,6 @@
-import { Component } from 'angular2/core';
+import { Component, Input } from 'angular2/core';
+
+import { User } from '../../../models/user.model';
 
 const basePath = 'guess-word-app/app/components/chat/user-list/';
 
@@ -9,15 +11,6 @@ const basePath = 'guess-word-app/app/components/chat/user-list/';
 })
 export class UserListComponent {
 
-  users = [
-    { name: 'random name1', icon: 'images/users/noIco.png' },
-    { name: 'random name2', icon: 'images/users/noIco.png' },
-    { name: 'random name3', icon: 'images/users/noIco.png' },
-    { name: 'random name4', icon: 'images/users/noIco.png' },
-    { name: 'random name5', icon: 'images/users/noIco.png' },
-    { name: 'random name6', icon: 'images/users/noIco.png' },
-    { name: 'random name7', icon: 'images/users/noIco.png' },
-    { name: 'random name8', icon: 'images/users/noIco.png' }
-  ]
+  @Input() private users: User[];
 
 }

@@ -1,9 +1,11 @@
-import { Component } from 'angular2/core';
+import { Component, OnInit } from 'angular2/core';
 import { ROUTER_DIRECTIVES, RouteConfig } from 'angular2/router';
 
 import { ChatComponent } from './chat/chat.component';
 import { LeaderboardsComponent } from './leaderboards/leaderboards.component';
 import { AccountComponent } from './account/account.component';
+
+declare let $:any;
 
 const basePath = 'guess-word-app/app/components/';
 
@@ -18,6 +20,11 @@ const basePath = 'guess-word-app/app/components/';
   { path: '/leaderboards', name: 'Leaderboards', component: LeaderboardsComponent },
   { path: '/accout', name: 'Account', component: AccountComponent },
 ])
-export class AppComponent {
+export class AppComponent implements OnInit {
+
+  ngOnInit() {
+    $(".button-collapse").sideNav();
+    $('.tooltipped').tooltip({delay: 50});
+  }
 
 }
