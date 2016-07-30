@@ -12,6 +12,3 @@ tmux select-pane -t 0
 subl
 
 tmux -2 attach-session -t dev 
-
-
-

@@ -14,14 +14,14 @@ const session = require('express-session')(config.get('session'));
 
 const http = require('http').Server(app);
 
-const db = require('./models');
+const db = require('./repositories');
 
-const home = require('./controllers/home');
-const guessWord = require('./controllers/guess-word-app');
+const home = require('./controllers/Home.controller');
+const guessWord = require('./controllers/GuessWordApp.controller');
 // const signup = require('./controllers/signup');
 // const login = require('./controllers/login');
 // const logout = require('./controllers/logout');
-const error = require('./controllers/error');
+const error = require('./controllers/Error.controller');
 
 app.use(httpLogger('dev'));
 
@@ -57,5 +57,3 @@ db.sync({force: true}).then(_=> {
   });
 
 });
-
-

@@ -46,6 +46,20 @@ class User {
     this._rankId = rankId;
   }
 
+  equalsByValues(user) {
+    if(user === user)
+      return true;
+    if(user.email === user.email &&
+      user.name === user.name &&
+      user.icon === user.icon &&
+      user.password === user.password &&
+      user.score === user.score) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 }
 
 module.exports = User;

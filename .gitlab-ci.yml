@@ -1,7 +1,14 @@
 image: node:6.3.0
 
-# services:
-#   - postgres:9.2.17
+services:
+  - postgres:9.2.17
 
-mock_job:
-  script: "echo CI WORKS"
+variables:
+  POSTGRES_USER: demo
+  POSTGRES_DB: demo
+  POSTGRES_PASSWORD: demo
+
+all_tests:
+  script:
+    - npm install
+    - node_modules/jasmine-node/bin/jasmine-node back
