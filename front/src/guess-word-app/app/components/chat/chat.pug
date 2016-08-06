@@ -2,9 +2,9 @@
   //- First row
   .content
     word-card('[image]'="word.image" '[hint]'="word.hint")
-    chat-area
-    user-list('[users]'='users')
+    chat-area('[socket]'="socket" '[messages]'="messages")
+    user-list('[users]'="users")
   //- Second row
   .word-controls
     word-letters('[letters]'="letters" '(letterClicked)'="onLetterClicked($event)")
-    word-inputs('[word]'="typedWord" '(wordEntered)'="onWordEntered($event)")
+    word-inputs('[socket]'="socket" '[word]'="typedWord" '(wordEntered)'="onWordEntered($event)")

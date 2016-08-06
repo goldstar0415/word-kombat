@@ -1,61 +1,45 @@
-import { Component } from 'angular2/core';
+import { Component, Input, OnInit, OnDestroy } from 'angular2/core';
+
+import { MessagingService } from '../../../services/messaging.service';
+
+import { Message } from '../../../models/message.model';
+import { User } from '../../../models/user.model';
 
 const basePath = 'guess-word-app/app/components/chat/chat-area/'
 
 @Component({
   selector: 'chat-area',
   templateUrl: basePath + 'chat-area.html',
-  styleUrls: [basePath + 'chat-area.css']
+  styleUrls: [basePath + 'chat-area.css'],
+  providers: [MessagingService]
 })
-export class ChatAreaComponent {
+export class ChatAreaComponent implements OnInit, OnDestroy {
 
-  // Mock data
-  messages = [
-      {
-        user: {
-        name: 'Guest1',
-        icon: 'images/users/noIco.png',
-      },
-      value: "some random message",
-      points: 10
-    },
+  @Input() private socket: any;
 
-    {
-        user: {
-        name: 'Guest2',
-        icon: 'images/users/noIco.png',
-      },
-      value: "another random message",
-      points: 20
-    },
+  private messages: Message[];
+  private message: Message;
+  private connection;
 
-    {
-        user: {
-        name: 'Guest',
-        icon: 'images/users/noIco.png',
-      },
-      value: "some random message",
-      points: 20
-    },
+  private messagingService: MessagingService;
 
-    {
-        user: {
-        name: 'Guest',
-        icon: 'images/users/noIco.png',
-      },
-      value: "some random message",
-      points: 20
-    },
+  constructor(messagingService: MessagingService) {
+    this.messagingService = messagingService;
+  }
 
-     {
-        user: {
-        name: 'Guest',
-        icon: 'images/users/noIco.png',
-      },
-      value: "some random message",
-      points: 20
-    },
+  ngOnInit() {
+    this.messages = [];
     
-  ]
+    console.log(this.socket);
+    
+    this.messagingService.init(this.socket);
+    this.connection = this.messagingService.getMessages().subscribe(message => {
+      this.messages.push(message);
+    });
+  }
+
+  ngOnDestroy() {
+    this.connection.unsubscribe();
+  }
 
 }

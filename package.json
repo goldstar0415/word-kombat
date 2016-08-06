@@ -6,7 +6,7 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon back/app.js",
-		"test": "jasmine-node back/"
+    "test": "jasmine-node back/"
   },
   "repository": {
     "type": "git",
@@ -49,6 +49,8 @@
     "reflect-metadata": "^0.1.2",
     "rxjs": "^5.0.0-beta.6",
     "sequelize": "^3.23.6",
+    "socket.io": "^1.4.8",
+    "socket.io-client": "^1.4.8",
     "systemjs": "^0.19.31",
     "winston": "^2.2.0",
     "zone.js": "^0.6.12"

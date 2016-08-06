@@ -50,6 +50,7 @@ const dependencies = {
       'systemjs': 'node_modules/systemjs/dist/system.src.js',
       'rxjs': 'node_modules/rxjs/bundles/Rx.min.js',
       'zone.js': 'node_modules/zone.js/dist/zone.min.js',
+      'socket.io': 'node_modules/socket.io-client/socket.io.js',
       'angular2': [
         'node_modules/angular2/bundles/angular2-polyfills.js',
         'node_modules/angular2/bundles/angular2.js',

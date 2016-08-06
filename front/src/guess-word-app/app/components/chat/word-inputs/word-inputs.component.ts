@@ -1,17 +1,39 @@
-import { Component, Input, Output, EventEmitter } from 'angular2/core';
+import { Component, Input, Output, EventEmitter, OnInit } from 'angular2/core';
+
+import { MessagingService } from '../../../services/messaging.service';
+
+import { Message } from '../../../models/message.model';
+import { User } from '../../../models/user.model';
 
 const basePath = 'guess-word-app/app/components/chat/word-inputs/';
 
 @Component({
   selector: 'word-inputs',
   templateUrl: basePath + 'word-inputs.html',
-  styleUrls: [basePath + 'word-inputs.css']
+  styleUrls: [basePath + 'word-inputs.css'],
+  providers: [MessagingService]
 })
-export class WordInputsComponent {
+export class WordInputsComponent implements OnInit {
 
   @Input() private word: string;
 
+  @Input() private socket: any;
+
   @Output() private wordEntered = new EventEmitter<string>();
+
+  private message: Message;
+  private messagingService: MessagingService;
+
+  ngOnInit() {
+    this.messagingService.init(this.socket);
+  }
+
+  constructor(messagingService: MessagingService) {
+    this.message = new Message(null,
+      new User(1, "random@email.com", "guest", 200, "images/users/noIco.png", 1), null);
+
+    this.messagingService = messagingService;
+  }
 
   enterLetter(word: string) {
     this.word = word;
@@ -31,8 +53,15 @@ export class WordInputsComponent {
   }
 
   sendMessage() {
+    this.message.text = this.word;
+    this.message.points = 100;
+
     this.word = "";
     this.wordEntered.emit(this.word);
+
+    if(this.message.text !== null && this.message.text !== '') {
+      this.messagingService.sendMessage(this.message.values);
+    }
   }
 
 }

@@ -18,6 +18,16 @@ class User {
   get score() { return this._score; }
   get rankId() { return this._rankId; }
 
+  get values() {
+    return {
+      email: this.email,
+      name: this.name,
+      icon: this.icon,
+      score: this.score,
+      rank: this.rank
+    };
+  }
+
   set id(id) {
     this._id = id;
   }

@@ -26,5 +26,9 @@ export class Word {
   get hint() {
     return this._hint;
   }
+
+  set letters(letters) {
+    this._letters = letters.slice();
+  }
     
 }

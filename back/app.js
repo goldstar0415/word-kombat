@@ -13,6 +13,7 @@ const config = require('./config');
 const session = require('express-session')(config.get('session'));
 
 const http = require('http').Server(app);
+const io = require('./sockets').listen(http);
 
 const db = require('./repositories');
 

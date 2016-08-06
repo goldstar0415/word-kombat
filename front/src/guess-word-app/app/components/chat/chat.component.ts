@@ -1,4 +1,4 @@
-import { Component } from 'angular2/core';
+import { Component, OnInit, OnDestroy } from 'angular2/core';
 
 import { WordCardComponent } from './word-card/word-card.component';
 import { ChatAreaComponent } from './chat-area/chat-area.component';
@@ -6,8 +6,14 @@ import { UserListComponent } from './user-list/user-list.component';
 import { WordLettersComponent } from './word-letters/word-letters.component';
 import { WordInputsComponent } from './word-inputs/word-inputs.component';
 
+import { UsersService } from '../../services/users.service';
+import { WordsService } from '../../services/words.service';
+
 import { Word } from '../../models/word.model';
 import { User } from '../../models/user.model';
+import { Message } from '../../models/message.model';
+
+declare let io:any;
 
 const basePath = 'guess-word-app/app/components/chat/';
 
@@ -21,36 +27,56 @@ const basePath = 'guess-word-app/app/components/chat/';
     UserListComponent,
     WordLettersComponent,
     WordInputsComponent
+  ],
+  providers: [
+    UsersService,
+    WordsService
   ]
 })
-export class ChatComponent {
+export class ChatComponent implements OnInit, OnDestroy {
 
-  private word: Word;
+  private usersService: UsersService;
+  private wordsService: WordsService;
+
   private users: User[];
+  private word: Word;
 
   private letters: string[];
   private typedWord: string;
 
-  constructor() {
-    // Mock data
-    this.word = new Word(1, ['d', 'r', 'a', 'n', 'o', 'm'],
-      'images/words/words.jpg', "Lorem ipsum dolor sit amet elit. Alias, veritatis.");
-
-    this.users = [
-      new User(1, 'random1', 2500, 'images/users/noIco.png', 6),
-      new User(2, 'random2', 2000, 'images/users/noIco.png', 1),
-      new User(3, 'random3', 500, 'images/users/noIco.png', 2),
-      new User(4, 'random4', 2500, 'images/users/noIco.png', 4),
-      new User(5, 'random5', 2200, 'images/users/noIco.png', 3),
-      new User(6, 'random6', 2500, 'images/users/noIco.png', 7),
-      new User(7, 'random7', 1500, 'images/users/noIco.png', 8),
-      new User(8, 'random8', 2500, 'images/users/noIco.png', 1),
-      new User(9, 'random9', 2500, 'images/users/noIco.png', 2),
-      new User(10, 'random10', 2500, 'images/users/noIco.png', 9),
-    ]
-    // End of mock data
+  private socket = io();
+  private wordsConnection;
+  private usersConnection;
+ 
+  ngOnInit() {
     
-    this.letters = this.word.letters;
+    this.wordsService.init(this.socket);
+    this.usersService.init(this.socket);
+
+    this.wordsConnection = this.wordsService.getWord().subscribe(word => {
+      this.word = word;
+      this.letters = word.letters.slice();
+    });
+    
+    this.usersConnection = this.usersService.getUsers().subscribe(users => {
+      console.log(users);
+      this.users = users;
+    });
+
+  }
+
+  ngOnDestroy() {
+    this.wordsConnection.unsubscribe();
+    this.usersConnection.unsubscribe();
+  }
+
+  constructor(usersService: UsersService, wordsService: WordsService) {
+
+    this.usersService = usersService;
+    this.wordsService = wordsService;
+
+    this.word = new Word(null, [], 'images/words/words.jpg', "");
+    this.users = [];
     this.typedWord = "";
   }
 
@@ -60,7 +86,7 @@ export class ChatComponent {
 
   onWordEntered(word: string) {
     this.typedWord = word;
-    this.letters = this.word.letters;
+    this.letters = this.word.letters.slice();
 
     for(let letter of word.toLowerCase().split('')) {
       let index = this.letters.indexOf(letter);
