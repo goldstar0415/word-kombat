@@ -6,7 +6,7 @@ doctype html
     i.material-icons backspace
 
   //- Word input field 
-  input#word.validate(#letters '(keyup)'="enterLetter(letters.value)" '(keyup.enter)'="sendMessage()" value="{{word}}" placeholder="Enter word here" type="text" required)
+  input#word.validate(#letters '(keyup)'="enterLetter(letters.value)" '(keyup.enter)'="sendMessage()" value="{{word}}" placeholder="Enter word here" type="text" required autofocus)
   
   //- Send button
   button.btn-floating.btn-large.hoverable.waves-effect.waves-dark('(click)'="sendMessage()")
