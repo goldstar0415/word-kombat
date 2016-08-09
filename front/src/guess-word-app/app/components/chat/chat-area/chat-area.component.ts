@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, OnDestroy } from 'angular2/core';
+import { 
+  Component,
+  Input,
+  OnInit,
+  OnDestroy,
+  ElementRef,
+  ViewChild
+} from 'angular2/core';
 
 import { MessagingService } from '../../../services/messaging.service';
 
@@ -17,6 +24,8 @@ export class ChatAreaComponent implements OnInit, OnDestroy {
 
   @Input() private socket: any;
 
+  @ViewChild('chat') private chatContainer: ElementRef;
+
   private messages: Message[];
   private message: Message;
   private connection;
@@ -34,12 +43,28 @@ export class ChatAreaComponent implements OnInit, OnDestroy {
     
     this.messagingService.init(this.socket);
     this.connection = this.messagingService.getMessages().subscribe(message => {
+      // Max 500 messages in chat
+      if(this.messages.length >= 500) {
+        this.messages.shift();
+      }
       this.messages.push(message);
+      this.scrollBottom();
     });
+
+    this.scrollBottom();
   }
 
   ngOnDestroy() {
     this.connection.unsubscribe();
   }
+
+ private scrollBottom() {
+   try {
+     const chat = this.chatContainer.nativeElement;
+     chat.scrollTop = chat.scrollHeight;
+   } catch(err) {
+     console.error(err);
+   }
+ }
 
 }

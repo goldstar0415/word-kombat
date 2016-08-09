@@ -26,7 +26,6 @@ export class WordCardComponent implements OnInit {
     }, 334);
   }
 
-
   public repeat() {
     // Some logic should be here...
   }
