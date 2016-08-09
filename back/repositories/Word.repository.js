@@ -2,21 +2,12 @@ const db = require('./index.js');
 
 class WordRepository {
 
-  findById(id) {
-    return db.models.Word.findById(id);
-  }
-
-  getRandomWords(amount) {
-    return db.models.Word.findAll({
-      limit: amount
-    });
-  }
 
   add(word) {
     return db.transaction(t => {
       
       return db.models.Word.create({
-        word: word.word,
+        value: word.value,
         image: word.image,
         hint: word.hint
       }, {transaction: t});
@@ -25,15 +16,27 @@ class WordRepository {
   }
 
   addAll(words) {
-    return db.transaction(t => {
-      let wordsToSave = words.map(word => {
-        return {
-          word: word.word,
-          image: word.image,
-          hint: word.hint
-        }
-      });
-      return db.models.Word.bulkCreate(wordsToSave, {transaction: t});
+   let wordsToSave = words.map(word => {
+     return {
+      value: word.value,
+      image: word.image,
+      hint: word.hint
+     }
+   });
+
+   return db.transaction(t => {
+       return db.models.Word.bulkCreate(wordsToSave, {transaction: t});
+   });
+  }
+
+  findById(id) {
+    return db.models.Word.findById(id);
+  }
+
+  getRandomWords(amount) {
+    return db.models.Word.findAll({
+      order: "RANDOM()",
+      limit: amount
     });
   }
 

@@ -3,31 +3,40 @@ const db = require('./index.js');
 class UserRepository {
   
   add(user) {
+
     return db.transaction(t => {
-    
-      return db.models.User.create({
+      return db.models.Rank.create({
+        name: "" + user.RankId,
+        minScore: 0
+      }).then(rank => {
+        return db.models.User.create({
+         email: user.email,
+         name: user.name,
+         password: user.password,
+         icon: user.icon,
+         score: user.score
+      }, {transaction: t}).then(user => {
+          return rank.setUser(user, {transaction: t});
+        });
+      });
+    });
+
+  }
+
+  addAll(users) {
+
+    let usersToSave = users.map(user => {
+      return {
         email: user.email,
         name: user.name,
         password: user.password,
         icon: user.icon,
         score: user.score
-      }, {transaction: t});
-    
+      }
     });
-  }
 
-  addAll(users) {
     return db.transaction(t => {
-      let usersToSave = users.map(user => {
-        return {
-          email: user.email,
-          name: user.name,
-          password: user.password,
-          icon: user.icon,
-          score: user.score
-        }
-      });
-      return db.models.User.bulkCreate(usersToSave, {transaction: t});
+        return db.models.User.bulkCreate(usersToSave, {transaction: t});
     });
   }
 
@@ -47,8 +56,18 @@ class UserRepository {
 
   findByEmail(email) {
     return db.models.User.findOne({
-      where: { email: email }
+      where: {email: email}
     });
+  }
+
+  findByUsername(username) {
+    return db.models.User.findOne({
+      where: { name: username}
+    });
+  }
+
+  findAll() {
+    return db.models.User.findAll();
   }
 
   truncate() {

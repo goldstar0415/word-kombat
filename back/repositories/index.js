@@ -37,7 +37,7 @@ const Rank = sequelize.define('Rank', {
 
 // Word entity schema
 const Word = sequelize.define('Word', {
-    word: Sequelize.STRING,
+    value: Sequelize.STRING,
     image: Sequelize.STRING,
     hint: Sequelize.TEXT
 }, {

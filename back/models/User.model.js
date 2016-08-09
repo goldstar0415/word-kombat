@@ -18,56 +18,44 @@ class User {
   get score() { return this._score; }
   get rankId() { return this._rankId; }
 
-  get values() {
-    return {
-      email: this.email,
-      name: this.name,
-      icon: this.icon,
-      score: this.score,
-      rank: this.rank
-    };
-  }
-
   set id(id) {
     this._id = id;
   }
 
-  set id(email) {
+  set email(email) {
     this._email = email;
   }
 
-  set id(name) {
+  set name(name) {
     this._name = name;
   }
 
-  set id(password) {
+  set password(password) {
     this._password = password;
   }
 
-  set id(icon) {
+  set icon(icon) {
     this._icon = icon;
   }
 
-  set id(score) {
+  set score(score) {
     this._score = score;
   }
 
-  set id(rankId) {
+  set rankId(rankId) {
     this._rankId = rankId;
   }
 
-  equalsByValues(user) {
-    if(user === user)
-      return true;
-    if(user.email === user.email &&
-      user.name === user.name &&
-      user.icon === user.icon &&
-      user.password === user.password &&
-      user.score === user.score) {
-      return true;
-    } else {
-      return false;
-    }
+  get values() {
+    return {
+      id: this.id,
+      email: this.email,
+      name: this.name,
+      password: this.password,
+      icon: this.icon,
+      score: this.score,
+      RankId: this.rankId
+    };
   }
 
 }
