@@ -58,13 +58,14 @@ export class ChatAreaComponent implements OnInit, OnDestroy {
     this.connection.unsubscribe();
   }
 
- private scrollBottom() {
+
+  private scrollBottom() {
    try {
-     const chat = this.chatContainer.nativeElement;
-     chat.scrollTop = chat.scrollHeight;
-   } catch(err) {
-     console.error(err);
-   }
- }
+      const chat = this.chatContainer.nativeElement;
+      chat.scrollTop = chat.scrollHeight;
+    } catch(err) {
+      console.error(err);
+    }
+  }
 
 }

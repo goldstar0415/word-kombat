@@ -1,7 +1,7 @@
 .box
   //- First row
   .content
-    word-card('[image]'="word.image" '[hint]'="word.hint")
+    word-card('[image]'="word.image" '[hint]'="word.hint" '[currentWordIndex]'="wordCounter")
     chat-area('[socket]'="socket" '[messages]'="messages")
     user-list('[users]'="users")
   //- Second row

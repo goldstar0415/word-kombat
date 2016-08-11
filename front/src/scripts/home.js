@@ -40,7 +40,7 @@ $(document).ready(function() {
     let request, user;
     
     user = {
-      email: $("#signup .email").val(),
+      email: $("#login .email").val(),
       password: $("#login .password").val()
     };
     

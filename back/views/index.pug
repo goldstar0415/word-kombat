@@ -1,7 +1,7 @@
 doctype html
 html(lang="en")
   head
-    title #{user} Word Kombat - English words learning platform
+    title Word Kombat - English words learning platform
     meta(charset="utf-8")
     meta(name="viewport", content="width=device-width, initial-scale=1")
     meta(name="description" content="English words learning platform")
@@ -50,7 +50,7 @@ html(lang="en")
 
         .input-field
           i.material-icons.prefix vpn_key
-          input.password(type="password" required)
+          input.password(type="password" pattern=".{6,}" required)
           label(for="password") Enter your password
         
         .modal-footer

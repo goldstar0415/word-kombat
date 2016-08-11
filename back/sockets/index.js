@@ -1,9 +1,13 @@
 const socketio = require('socket.io');
+const sharedsession = require("express-socket.io-session");
 
 const log = require('../logger');
 
 const WordRepository = require('../repositories/Word.repository');
 const wordRepository = new WordRepository();
+
+const UserRepository = require('../repositories/User.repository');
+const userRepository = new UserRepository();
 
 const Message = require('../models/Message.model');
 const User = require('../models/User.model');
@@ -31,19 +35,34 @@ const getWords = (words, io, amount) => {
   });
 };
 
-module.exports.listen = app => {
+module.exports.listen = (app, session) => {
   const io = socketio.listen(app);
+  io.use(sharedsession(session));
+
   let users = [];
   let words = [];
 
   io.on('connection', socket => {
 
-    let user = new User(1, null, 'guest' + users.length,
-      null, 'images/users/noIco.png', 0, 1);
+    let userId;
 
-    users.push(user);
+    if(!!socket.handshake.session.passport) {
+      userId = socket.handshake.session.passport.user;
+      log.info(userId);
 
-    io.emit('user-connected', users.map(user => user.values));
+      userRepository.findById(userId).then(user => {
+        users.push(user);
+        io.emit('user-connected', users);
+      }).catch(error => {
+        log.warn(error);
+      });
+
+    } else {
+      let user = new User(1, null, 'guest' + users.length,
+        null, 'images/users/noIco.png', 0, 1);
+      users.push(user);
+      io.emit('user-connected', users.map(user => user.values));
+    }
 
     if (words.length > 0) {
       io.emit('word', words[0]);
@@ -52,10 +71,32 @@ module.exports.listen = app => {
     }
 
     socket.on('new-message', message => {
-      io.emit('message', message);
+      console.log("MESSAGE", JSON.stringify(message));
+
+      if(!!socket.handshake.session.passport) {
+        message.user = users.filter(user => user.id === userId)[0];
+      }
+
 
       if (words.length > 0) {
         if (message.text.toLowerCase() === words[0].value.toLowerCase()) {
+          message.points = words[0].value.length;
+
+          if(!!socket.handshake.session.passport) {
+            userRepository.findById(userId).then(user => {
+              user.score += message.points;
+              user.save();
+              
+              for(let u of users) {
+                if(u.id === userId) {
+                  u.score = user.score;
+                }
+              }
+
+              io.emit('user-connected', users);
+            });
+          }
+          
           words.shift();
           if (words.length > 0) {
             io.emit('word', words[0]);
@@ -67,6 +108,8 @@ module.exports.listen = app => {
         getWords(words, io, 10);
       }
       
+      io.emit('message', message);
+
     });
 
     socket.on('disconnect', () => {

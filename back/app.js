@@ -11,9 +11,10 @@ const session = require('express-session')(config.get('session'));
 const http = require('http').Server(app);
 
 const passport = require('passport');
+const passportSocketIo = require('passport.socketio');
 const flash = require('connect-flash');
 
-const io = require('./sockets').listen(http);
+const io = require('./sockets');
 const db = require('./repositories');
 
 const home = require('./controllers/Home.controller');
@@ -26,7 +27,7 @@ const error = require('./controllers/Error.controller');
 app.use(httpLogger('dev'));
 
 app.use(bodyParser.json({limit: '10mb'}));
-app.use(bodyParser.urlencoded({ extended: false, limit: '10mb' }));
+app.use(bodyParser.urlencoded({ extended: false, limit: '5mb' }));
 
 app.use(cookieParser());
 
@@ -44,6 +45,8 @@ app.use(passport.session());
 app.use(flash());
 require('./passport')(passport);
 
+io.listen(http, session);
+
 app.use('/', home);
 app.use('/guess-word', guessWord);
 app.use('/signup', signup(passport));
@@ -54,38 +57,7 @@ app.use(error.clientError);
 app.use(error.serverError);
 
 // Drop force property in production mode
-db.sync({force: true}).then(_=> {
-
-  const Word = require('./models/Word.model');
-  const WordRepository = require('./repositories/Word.repository');
-  const wordRepository = new WordRepository();
-
-  // Drop in production mode
-  const words = [
-    new Word(1, 'cat', 'images/words/cat.jpg', 'Some random hint'),
-    new Word(2, 'bird', 'images/words/bird.jpg', 'Some random hint'),
-    new Word(3, 'many', 'images/words/many.jpg', 'Some random hint'),
-    new Word(4, 'words', 'images/words/words.jpg', 'Some random hint'),
-    new Word(5, 'work', 'images/words/work.jpg', 'Some random hint'),
-    new Word(6, 'add', 'images/words/add.png', 'Some random hint'),
-    new Word(7, 'agree', 'images/words/agree.png', 'Some random hint'),
-    new Word(8, 'approve', 'images/words/approve.png', 'Some random hint'),
-    new Word(9, 'break', 'images/words/break.jpg', 'Some random hint'),
-    new Word(10, 'calculate', 'images/words/calculate.jpg', 'Some random hint'),
-    new Word(11, 'choose', 'images/words/choose.jpg', 'Some random hint'),
-    new Word(12, 'compare', 'images/words/compare.png', 'Some random hint'),
-    new Word(13, 'compete', 'images/words/compete.jpg', 'Some random hint'),
-    new Word(14, 'contain', 'images/words/contain.jpg', 'Some random hint'),
-    new Word(15, 'create', 'images/words/create.jpg', 'Some random hint'),
-    new Word(16, 'deliver', 'images/words/deliver.png', 'Some random hint'),
-    new Word(17, 'different', 'images/words/different.jpg', 'Some random hint'),
-    new Word(18, 'earn', 'images/words/earn.jpg', 'Some random hint'),
-    new Word(19, 'enter', 'images/words/enter.jpg', 'Some random hint'),
-    new Word(20, 'explore', 'images/words/explore.jpg', 'Some random hint')
-  ];
-
-  wordRepository.addAll(words);
-  // END
+db.sync().then(_=> {
 
   http.listen(app.get('port'), app.get('ip'), _=> {
     log.info("Server listening at %s:%d ", app.get('ip'), app.get('port'));

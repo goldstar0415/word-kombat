@@ -30,7 +30,7 @@ export class WordInputsComponent implements OnInit {
 
   constructor(messagingService: MessagingService) {
     this.message = new Message(null,
-      new User(1, "random@email.com", "guest", 200, "images/users/noIco.png", 1), null);
+      new User(1, null, "guest", 0, "images/users/noIco.png", 1), null);
 
     this.messagingService = messagingService;
   }
@@ -54,7 +54,6 @@ export class WordInputsComponent implements OnInit {
 
   sendMessage() {
     this.message.text = this.word;
-    this.message.points = 100;
 
     this.word = "";
     this.wordEntered.emit(this.word);

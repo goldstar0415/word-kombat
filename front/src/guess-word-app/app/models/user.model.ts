@@ -2,8 +2,8 @@ export class User {
   private _id: number;
   private _email: string;
   private _name: string;
-  private _score: number;
   private _icon: string;
+  private _score: number;
   private _rank: number;
 
   constructor(id, email, name, score, icon, rank) {

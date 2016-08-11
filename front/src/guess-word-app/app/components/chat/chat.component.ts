@@ -47,6 +47,8 @@ export class ChatComponent implements OnInit, OnDestroy {
   private socket = io();
   private wordsConnection;
   private usersConnection;
+
+  private wordCounter = 0;
  
   ngOnInit() {
     
@@ -55,6 +57,13 @@ export class ChatComponent implements OnInit, OnDestroy {
 
     this.wordsConnection = this.wordsService.getWord().subscribe(word => {
       this.word = word;
+
+      if(this.wordCounter < 10) {
+        this.wordCounter++;
+      } else {
+        this.wordCounter = 1;
+      }
+
       this.letters = word.letters.slice();
     });
     

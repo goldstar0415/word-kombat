@@ -1,8 +1,6 @@
 const LocalStrategy   = require('passport-local').Strategy;
 const bcrypt   = require('bcrypt-nodejs');
 
-const login = require('./login');
-const signup = require('./signup');
 const UserRepository = require('../repositories/User.repository');
 const User = require('../models/User.model');
 
@@ -47,7 +45,7 @@ module.exports = passport => {
                         req.flash('signupMessage', 'That email is already taken.'));
                 } else {
                     let newUser = new User(1, email, req.body.name,
-                        generateHash(password), null, 0, 1);
+                        generateHash(password), 'images/users/noIco.png', 0, 1);
 
                     userRepository.add(newUser).then(newUser => {
                         console.log("NEW USER: " + newUser);
@@ -70,10 +68,8 @@ module.exports = passport => {
             passReqToCallback : true
         },
         (req, email, password, done) => {
-
             userRepository.findByEmail(email).then(user => {
                 if (!user) {
-                    console.log("TWO");
                     return done(null, false,
                         req.flash('loginMessage', 'No user found.'));
                 }
@@ -83,6 +79,7 @@ module.exports = passport => {
                         req.flash('loginMessage', 'Oops! Wrong password.'));
                 }
 
+                console.log("SUCCESS: " + JSON.stringify(user));
                 return done(null, user);
             }).catch(error => {
                 console.error("ERROR: " + error);
