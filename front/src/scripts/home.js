@@ -20,11 +20,12 @@ $(document).ready(function() {
     let request, user;
     
     user = {
-      name: $("#signup .name").val(),
+      name: $("#signup .username").val(),
+      email: $("#signup .email").val(),
       password: $("#signup .password").val()
     };
 
-    request = $.post("/signup", user, function(res) {
+    request = $.post("/signup", user, res => {
       Materialize.toast("Sign up successfully", 6000, 'rounded');
       $("#signup").closeModal();
       location.reload();
@@ -39,11 +40,12 @@ $(document).ready(function() {
     let request, user;
     
     user = {
-      name: $("#login #name").val(),
-      password: $("#login #password").val()
+      name: $("#login .username").val(),
+      email: $("#signup .email").val(),
+      password: $("#login .password").val()
     };
     
-    request = $.post("/login", user, function() {
+    request = $.post("/login", user, res => {
       Materialize.toast("Login successfully", 6000, 'rounded');
       $("#login").closeModal();
       location.reload();

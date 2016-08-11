@@ -2,10 +2,9 @@ const path = require('path');
 const express = require('express');
 const router = express.Router();
 
-/*router.post('/logout', passport.authenticate('local', {
-    failureFlash: true
-  }), (req, res) => {
-  res.redirect('/' + req.user.username);
-});*/
+router.get('/', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
 
 module.exports = router;

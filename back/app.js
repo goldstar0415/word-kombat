@@ -11,6 +11,7 @@ const session = require('express-session')(config.get('session'));
 const http = require('http').Server(app);
 
 const passport = require('passport');
+const flash = require('connect-flash');
 
 const io = require('./sockets').listen(http);
 const db = require('./repositories');
@@ -40,10 +41,12 @@ app.set('ip', config.get('host'));
 app.use(session);
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
+require('./passport')(passport);
 
 app.use('/', home);
 app.use('/guess-word', guessWord);
-app.use('/signup', signup);
+app.use('/signup', signup(passport));
 app.use('/login', login);
 app.use('/logout', logout);
 
