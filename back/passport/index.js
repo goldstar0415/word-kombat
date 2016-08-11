@@ -12,8 +12,8 @@ const generateHash = password => {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 };
 
-const validPassword = password => {
-    return bcrypt.compareSync(password, this.local.password);
+const validPassword = (password1, password2) => {
+    return bcrypt.compareSync(password1, password2);
 };
 
 module.exports = passport => {
@@ -25,7 +25,7 @@ module.exports = passport => {
     
     passport.deserializeUser((id, done) => {
         userRepository.findById(id).then(user => {
-            console.log("USER: " + user.dataValues);
+            console.log("USER: " + JSON.stringify(user.dataValues));
             done(null, user.dataValues);
         }).catch(error => {
             console.error("ERORR" + error);
@@ -33,7 +33,7 @@ module.exports = passport => {
         });
     });
 
-    // Sign Up Strategy
+    // Sign Up Local Strategy
     passport.use('local-signup', new LocalStrategy({
             usernameField : 'email',
             passwordField : 'password',
@@ -50,6 +50,7 @@ module.exports = passport => {
                         generateHash(password), null, 0, 1);
 
                     userRepository.add(newUser).then(newUser => {
+                        console.log("NEW USER: " + newUser);
                         done(null, newUser);
                     }).catch(error => {
                         console.error("ERROR: " + error);
@@ -61,5 +62,32 @@ module.exports = passport => {
             });
         });
     }));
+
+    // Log In Local Strategy
+    passport.use('local-login', new LocalStrategy({
+            usernameField : 'email',
+            passwordField : 'password',
+            passReqToCallback : true
+        },
+        (req, email, password, done) => {
+
+            userRepository.findByEmail(email).then(user => {
+                if (!user) {
+                    console.log("TWO");
+                    return done(null, false,
+                        req.flash('loginMessage', 'No user found.'));
+                }
+
+                if (!validPassword(password, user.dataValues.password)) {
+                    return done(null, false,
+                        req.flash('loginMessage', 'Oops! Wrong password.'));
+                }
+
+                return done(null, user);
+            }).catch(error => {
+                console.error("ERROR: " + error);
+                done(error);
+            });
+        }));
 
 };

@@ -47,7 +47,7 @@ require('./passport')(passport);
 app.use('/', home);
 app.use('/guess-word', guessWord);
 app.use('/signup', signup(passport));
-app.use('/login', login);
+app.use('/login', login(passport));
 app.use('/logout', logout);
 
 app.use(error.clientError);

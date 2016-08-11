@@ -1,7 +1,7 @@
 doctype html
 html(lang="en")
   head
-    title Word Kombat - English words learning platform
+    title #{user} Word Kombat - English words learning platform
     meta(charset="utf-8")
     meta(name="viewport", content="width=device-width, initial-scale=1")
     meta(name="description" content="English words learning platform")
@@ -20,11 +20,15 @@ html(lang="en")
         li#chat.btn.waves-effect.waves-dark
           a(href="/guess-word") Chat
 
-        li.btn.waves-effect.waves-dark
-          a.modal-trigger(href="#signup") Signup
-        
-        li.btn.waves-effect.waves-dark
-          a.modal-trigger(href="#login") Login
+        if !user
+          li.btn.waves-effect.waves-dark
+            a.modal-trigger(href="#signup") Signup
+          
+          li.btn.waves-effect.waves-dark
+            a.modal-trigger(href="#login") Login
+        else
+          li#logout.btn.waves-effect.waves-dark
+            a(href="") Logout
 
     //- Sign up modal
     #signup.modal
@@ -76,8 +80,8 @@ html(lang="en")
 
         .input-field
           i.material-icons.prefix account_box
-          input.username.validate(type="text" required)
-          label(for="username") Enter your email or username 
+          input.email.validate(type="text" required)
+          label(for="email") Enter your email 
 
         .input-field
           i.material-icons.prefix vpn_key

@@ -40,7 +40,6 @@ $(document).ready(function() {
     let request, user;
     
     user = {
-      name: $("#login .username").val(),
       email: $("#signup .email").val(),
       password: $("#login .password").val()
     };
@@ -63,9 +62,7 @@ $(document).ready(function() {
 
   // Log out
   $("#logout").click(() => {
-    $.post("/logout", () => {
-      location.reload();
-    });
+    $.post("/logout");
   });
 
   // Scrolling actions
