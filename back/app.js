@@ -23,6 +23,7 @@ const signup = require('./controllers/Signup.controller');
 const login = require('./controllers/Login.controller');
 const logout = require('./controllers/Logout.controller');
 const error = require('./controllers/Error.controller');
+const leaderboards = require('./controllers/Leaderboards.controller');
 
 app.use(httpLogger('dev'));
 
@@ -49,6 +50,7 @@ io.listen(http, session);
 
 app.use('/', home);
 app.use('/guess-word', guessWord);
+app.use('/guess-word/leaderboards', leaderboards);
 app.use('/signup', signup(passport));
 app.use('/login', login(passport));
 app.use('/logout', logout);
@@ -56,7 +58,6 @@ app.use('/logout', logout);
 app.use(error.clientError);
 app.use(error.serverError);
 
-// Drop force property in production mode
 db.sync().then(_=> {
 
   http.listen(app.get('port'), app.get('ip'), _=> {

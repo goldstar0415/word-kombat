@@ -1,0 +1,46 @@
+@require 'nib'
+@import '../../../../styles/parts/variables'
+
+table
+  max-width: 80vw 
+  margin: auto
+  max-height: 84vh
+  overflow-y: scroll
+  margin-top: 20px
+  background-color: bule-grey-darken-3
+  color: blue-grey-lighten-5
+  padding: 10px
+  
+  caption
+    font-size: 3rem
+    font-weight: bold
+    text-shadow: 1px 1px 6px black
+  
+  thead
+    background-color: grey-darken-4
+    font-size: 1.3rem
+    tr
+      th
+        border-radius: 0px
+      th[data-field="position"]
+        padding-left: 10px
+  tbody
+    tr
+      padding: 5px
+      font-size: 1.2rem
+      
+      td.position
+        font-weight: bold
+        padding-left: 10px
+      td.icon
+        img
+          width: 48px
+          height: 48px
+    
+      &:hover
+        cursor: pointer
+        background-color: bule-grey-darken-4
+
+::-webkit-scrollbar
+  display: none
+

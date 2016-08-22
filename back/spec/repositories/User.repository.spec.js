@@ -38,7 +38,7 @@ describe("User repository", () => {
 
     userRepository.findById(1).then(user => {
       expect(JSON.stringify(users[0].values))
-        .toBeBe(JSON.stringify(user.dataValues));
+        .toBe(JSON.stringify(user.dataValues));
       done();
     });
 

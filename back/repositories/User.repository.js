@@ -66,8 +66,8 @@ class UserRepository {
     });
   }
 
-  findAll() {
-    return db.models.User.findAll();
+  findAll(options) {
+    return db.models.User.findAll(options);
   }
 
   truncate() {
