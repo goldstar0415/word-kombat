@@ -1,0 +1,50 @@
+@require('nib')
+
+@import('../../../../../styles/parts/variables')
+
+.card
+  max-width: 320px
+  background-color: bule-grey-darken-4
+  color: blue-grey-lighten-5
+  
+  .card-title.activator
+
+    span.username
+      text-transform: uppercase
+      margin-right: 5px
+      font-size: 1.2rem
+      font-weight: bold
+
+    span.score
+      margin-left: 5px
+      color: dark-gold
+    
+    span.rank 
+      margin-left: 5px
+  
+  .card-action
+    display: flex
+    flex-direction: column
+    align-items: center
+    background-color: bule-grey-darken-3
+    button
+      background-color: grey-darken-4
+
+  .card-reveal
+    color: @color
+    background-color: @background-color
+    
+    form
+      .file-field.input-field
+        display: flex
+        flex-direction: column
+        align-items: center
+        button
+          background-color: grey-darken-4
+          span
+            background-color: grey-darken-4
+
+  .card-image
+    img.activator
+      max-width: 320px
+      max-height 320px
