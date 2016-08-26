@@ -1,6 +1,7 @@
 import { Component, OnInit } from 'angular2/core';
 
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { UserInfoConponent } from './user-info/user-info.component';
 import { User } from '../../models/user.model';
 
 const basePath = 'guess-word-app/app/components/account/';
@@ -9,7 +10,7 @@ const basePath = 'guess-word-app/app/components/account/';
   selector: 'account',
   templateUrl: basePath + 'account.html',
   styleUrls: [basePath + 'account.css'],
-  directives: [UserDetailsComponent]
+  directives: [UserDetailsComponent, UserInfoConponent]
 })
 export class AccountComponent implements OnInit {
 

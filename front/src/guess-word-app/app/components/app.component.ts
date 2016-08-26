@@ -25,6 +25,7 @@ const basePath = 'guess-word-app/app/components/';
 export class AppComponent implements OnInit {
 
   ngOnInit() {
+    // Meterialize css initialization
     $(".button-collapse").sideNav();
     $('.tooltipped').tooltip({delay: 50});
   }
