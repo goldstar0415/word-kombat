@@ -1,0 +1,21 @@
+.box
+  table.bordered.striped.centered.hoverable
+    thead
+      tr
+        th(data-field="image") Image
+        th(data-field="word") Word
+        th(data-field="repeated") Times repeated
+      
+    tbody
+      tr(*ngFor="let word of words")
+        td: img(src="{{word.image}}")
+        td {{word.value}}
+        td {{word.timesRepeated}}
+
+  ul.pagination
+    li.waves-effect.waves-light: a: i.material-icons chevron_left
+    li.active.waves-effect.waves-dark: a(href="#") 1
+    li.waves-effect.waves-light: a 2
+    li.waves-effect.waves-light: a 3
+    li.waves-effect.waves-light: a skip 5
+    li.waves-effect.waves-light: a: i.material-icons chevron_right

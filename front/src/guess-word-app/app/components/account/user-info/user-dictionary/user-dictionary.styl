@@ -1,0 +1,35 @@
+@require('nib')
+
+@import('../../../../../../styles/parts/variables')
+
+.box
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  margin: 20px
+
+  table.bordered.striped
+    width: 90%
+    background-color: blue-grey-lighten-4
+    color: grey-darken-4
+    
+    tbody
+      tr > td
+        img
+          max-width: 48px
+          max-height: 48px
+
+  ul.pagination
+    margin-top: 20px
+    li
+      background-color: grey-darken-4
+      a
+        color: blue-grey-lighten-5
+      
+    .active
+      background-color: blue-grey-lighten-4
+      a
+        color: grey-darken-4
+      
+
