@@ -47,6 +47,7 @@ const dependencies = {
     js: {
       'jquery': 'node_modules/jquery/dist/jquery.min.js',
       'materialize': 'node_modules/materialize-css/dist/js/materialize.min.js',
+      'chart': 'node_modules/chart.js/dist/Chart.min.js',
       'systemjs': 'node_modules/systemjs/dist/system.src.js',
       'rxjs': 'node_modules/rxjs/bundles/Rx.min.js',
       'zone.js': 'node_modules/zone.js/dist/zone.min.js',
