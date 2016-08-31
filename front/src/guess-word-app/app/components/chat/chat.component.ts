@@ -68,7 +68,6 @@ export class ChatComponent implements OnInit, OnDestroy {
     });
     
     this.usersConnection = this.usersService.getUsers().subscribe(users => {
-      console.log(users);
       this.users = users;
     });
 

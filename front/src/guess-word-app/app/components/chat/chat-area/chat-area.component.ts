@@ -39,8 +39,6 @@ export class ChatAreaComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.messages = [];
     
-    console.log(this.socket);
-    
     this.messagingService.init(this.socket);
     this.connection = this.messagingService.getMessages().subscribe(message => {
       // Max 500 messages in chat
@@ -58,11 +56,13 @@ export class ChatAreaComponent implements OnInit, OnDestroy {
     this.connection.unsubscribe();
   }
 
-
   private scrollBottom() {
    try {
-      const chat = this.chatContainer.nativeElement;
-      chat.scrollTop = chat.scrollHeight;
+      let chat;
+      if(this.chatContainer) {
+        chat = this.chatContainer.nativeElement;
+        chat.scrollTop = chat.scrollHeight;
+      }
     } catch(err) {
       console.error(err);
     }
