@@ -1,4 +1,25 @@
 $(document).ready(function() {
+
+  // Checking credentials
+  function isCredentialsValid(username, email, password) {
+    let isUsernameValid = false;
+    let isEmailValid = false;
+    let isPasswordValid = false;
+
+    if(username !== '' && /^\w{4,}$/gi.test(username)) {
+      isUsernameValid = true;
+    }
+
+    if(email !== '' && /^\w+@\w+\.\w+$/gi.test(email)) {
+      isEmailValid = true;
+    }
+
+    if(password !== '' && /^\S{6,}$/gi.test(password)) {
+      isPasswordValid = true;
+    }
+
+    return isUsernameValid && isEmailValid && isPasswordValid;
+  }
  
   // Materialize configuration
   Materialize.updateTextFields();
@@ -17,41 +38,51 @@ $(document).ready(function() {
 
   // Sign up 
   $("#signup-btn").click(function() {
-    let request, user;
-    
-    user = {
-      name: $("#signup .username").val(),
-      email: $("#signup .email").val(),
-      password: $("#signup .password").val()
-    };
 
-    request = $.post("/signup", user, res => {
-      Materialize.toast("Sign up successfully", 6000, 'rounded');
-      $("#signup").closeModal();
-      location.reload();
-    });
+    let username = $("#signup .username").val();
+    let email = $("#signup .email").val();
+    let password = $("#signup .password").val();
 
-    request.error(err => Materialize.toast(err.responseText, 2000));
+    if(isCredentialsValid(username, email, password)) {
+
+      let user = {
+        name: username,
+        email: email,
+        password: password
+      };
+
+      let request = $.post("/signup", user, res => {
+        Materialize.toast("Sign up successfully", 6000, 'rounded');
+        $("#signup").closeModal();
+      });
+
+      request.error(err => Materialize.toast(err.responseText, 2000));
+    }
 
   });
 
   // Log in
   $("#login-btn").click(function() {
-    let request, user;
     
-    user = {
-      email: $("#login .email").val(),
-      password: $("#login .password").val()
-    };
-    
-    request = $.post("/login", user, res => {
-      Materialize.toast("Login successfully", 6000, 'rounded');
-      $("#login").closeModal();
-      location.reload();
-    });
-    
-    request.error(err => Materialize.toast(err.responseText, 2000));
+    let email = $("#login .email").val();
+    let password = $("#login .password").val();
+    let username = "random";
 
+    if(isCredentialsValid(username, email, password)) {
+
+      let user = {
+        email: email,
+        password: password
+      };
+      
+      let request = $.post("/login", user, res => {
+        Materialize.toast("Login successfully", 6000, 'rounded');
+        $("#login").closeModal();
+        location.reload();
+      });
+      
+      request.error(err => Materialize.toast(err.responseText, 2000));
+    }
   });
 
   // Sign up and Log in cancel button

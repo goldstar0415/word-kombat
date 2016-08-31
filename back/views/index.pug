@@ -32,7 +32,7 @@ html(lang="en")
 
     //- Sign up modal
     #signup.modal
-      form.modal-content
+      .modal-content
 
         .center
           i.material-icons.medium group_add
@@ -50,7 +50,7 @@ html(lang="en")
 
         .input-field
           i.material-icons.prefix vpn_key
-          input.password(type="password" pattern=".{6,}" required)
+          input.password(type="password" required)
           label(for="password") Enter your password
         
         .modal-footer
@@ -58,7 +58,7 @@ html(lang="en")
             i.material-icons.left cancel
             span.hide-on-small-only Cancel
 
-          button#signup-btn.btn-large.waves-effect.waves-dark(type="submit")
+          button#signup-btn.btn-large.waves-effect.waves-dark
             i.material-icons.left check_circle
             span.hide-on-small-only Sign Up
 
@@ -72,7 +72,7 @@ html(lang="en")
 
     //- Login modal
     #login.modal
-      form.modal-content
+      .modal-content
 
         .center
           i.material-icons.medium account_circle
@@ -80,7 +80,7 @@ html(lang="en")
 
         .input-field
           i.material-icons.prefix account_box
-          input.email.validate(type="text" required)
+          input.email.validate(type="email" required)
           label(for="email") Enter your email 
 
         .input-field
@@ -93,7 +93,7 @@ html(lang="en")
             i.material-icons.left cancel
             span.hide-on-small-only Cancel
 
-          button#login-btn.btn-large.waves-effect.waves-dark(type="submit")
+          button#login-btn.btn-large.waves-effect.waves-dark
             i.material-icons.left check_circle
             span.hide-on-small-only Log In
 
