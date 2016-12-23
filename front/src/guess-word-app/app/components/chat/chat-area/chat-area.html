@@ -1,0 +1,20 @@
+<div class="chat-area hoverable">
+  <ul class="collection" #chat>
+    <li class="collection-item avatar"
+      *ngFor="let message of messages">
+      
+        <img class="circle"
+          src="{{ message.user.icon }}"
+          alt="No avatar" />
+          
+        <span class="title">{{ message.user.name }}</span>
+
+      <p>{{ message.text }}</p>
+
+      <span class="secondary-content">
+        <span>{{ message.points }}</span>
+      </span>
+
+    </li>
+  </ul>
+</div>

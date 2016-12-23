@@ -1,7 +1,7 @@
-import { Injectable } from 'angular2/core';
-import { Http } from 'angular2/http';
+import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 
-import 'rxjs/add/operator/map'
+import 'rxjs/Rx'
 import { Observable } from 'rxjs/Observable';
 
 import { User } from '../models/user.model';
@@ -9,12 +9,8 @@ import { User } from '../models/user.model';
 @Injectable()
 export class LeadersService {
 
-  private http: Http;
-
-  constructor(http: Http) {
-    this.http = http;
+  constructor(private http: Http) {
   }
-
 
   getLeaders(): Observable<User[]> {
     return this.http.get('guess-word/leaderboards')

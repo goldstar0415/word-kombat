@@ -1,4 +1,4 @@
-import { Component, OnInit } from 'angular2/core';
+import { Component, OnInit } from '@angular/core';
 
 import { MatchesService } from '../../../../services/matches.service';
 
@@ -13,10 +13,8 @@ const basePath = 'guess-word-app/app/components/account/user-info/user-matches/'
 export class UserMatchesComponent implements OnInit {
   
   private matches: Array<any>
-  private matchesService: MatchesService;
 
-  constructor(matchesService: MatchesService) {
-    this.matchesService = matchesService;
+  constructor(private matchesService: MatchesService) {
   }
 
   ngOnInit() {

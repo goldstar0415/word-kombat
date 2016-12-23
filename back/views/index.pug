@@ -9,8 +9,8 @@ html(lang="en")
     meta(name="author" content="Saka7")
     
     link(rel="shortcut icon" type="image/png" href="images/favicon.png")
-    link(rel="stylesheet", href="styles/vendor/materialize.min.css")
-    link(rel="stylesheet", href="styles/material-design-icons.css")
+    link(rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons")
+    link(rel="stylesheet" href="vendor/materialize-css/dist/css/materialize.min.css")
     link(rel="stylesheet", href="styles/home.css")
 
   body
@@ -22,10 +22,10 @@ html(lang="en")
 
         if !user
           li.btn.waves-effect.waves-dark
-            a.modal-trigger(href="#signup") Signup
+            a(data-target="signup") Signup
           
           li.btn.waves-effect.waves-dark
-            a.modal-trigger(href="#login") Login
+            a(data-target="login") Login
         else
           li#logout.btn.waves-effect.waves-dark
             a(href="") Logout
@@ -225,6 +225,6 @@ html(lang="en")
       .row.small-footer.s12.hide-on-med-and-up.center
           span &copy; Copyrights 2016 MADE BY SAKA
 
-    script(src="scripts/vendor/jquery.min.js")
-    script(src="scripts/vendor/materialize.min.js")
+    script(src="vendor/jquery/dist/jquery.min.js")
+    script(src="vendor/materialize-css/dist/js/materialize.min.js")
     script(src="scripts/home.js")

@@ -1,4 +1,8 @@
-import { Component, Input, OnInit } from 'angular2/core';
+import {
+  Component,
+  Input,
+  OnInit
+} from '@angular/core';
 
 const basePath = 'guess-word-app/app/components/chat/word-card/';
 

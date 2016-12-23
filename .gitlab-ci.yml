@@ -8,6 +8,13 @@ variables:
   POSTGRES_DB: demo
   POSTGRES_PASSWORD: demo
 
+default_projects_features:
+  issues: true
+  merge_requests: true
+  wiki: true
+  snippets: false
+  builds: false
+
 all_tests:
   script:
     - echo "DONE"

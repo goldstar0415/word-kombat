@@ -1,6 +1,6 @@
-@reqire 'nib'
+@reqire('nib')
 
-@import '../../../../styles/parts/variables'
+@import('../../../../styles/parts/variables')
 
 // Navigation
 nav.nav-wrapper
@@ -10,6 +10,7 @@ nav.nav-wrapper
   ul.mobile
     a.button-collapse
       font-size: 1rem
+      margin: 0
       &:hover
         background-color: black
         border-bottom: 3px solid white
@@ -19,6 +20,10 @@ nav.nav-wrapper
   ul#menu-mobile, ul#users-mobile
     background-color: grey-darken-4
     background-image: url(bg-img)
+    a
+      text-transform: uppercase
+      i
+        color: white
 
   // Menu mobile
   ul#menu-mobile
@@ -43,9 +48,9 @@ nav.nav-wrapper
       margin-right: 20px
   
   // Navitaion tabs 
-  ul.navigation-tabs
+  ul.navigation-tabs.right
     height: 100%
-    
+
     li
       height: 100%
       
@@ -54,6 +59,16 @@ nav.nav-wrapper
         &:hover
           border-bottom: 3px solid white
           background-color: black
+
+.router-link-active
+  border-bottom: 3px solid white
+  background-color: black
+  
+
+.mobile-router-link-active
+  border-left: 3px solid grey-lighten-5
+  background-color: black
+
 
 @media only screen and (max-width : 768px)
   // Drops navigation tabs on the right 

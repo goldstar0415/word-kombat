@@ -1,0 +1,53 @@
+<div class="box">
+  <ul class="collection">
+    <li class="collection-item">Total maches played: <b>5</b></li>
+    <li class="collection-item">Win rate <b>20% (1)</b></li>
+  </ul>
+
+  <table class="bordered striped centered hoverable">
+    <thead>
+      <tr>
+        <th data-field="id">Id </th>
+        <th data-field="start">Start Time</th>
+        <th data-field="end">End Time</th>
+        <th data-field="position">Position</th>
+        <th data-field="users">Total Users</th>
+        <th data-field="words">Total Words</th>
+        <th data-field="score">Total Score</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let match of matches">
+        <td>{{ match.id }}</td>
+        <td>{{ match.startTime }}</td>
+        <td>{{ match.endTime }}</td>
+        <td>{{ match.position }}</td>
+        <td>{{ match.totalUsers }}</td>
+        <td>{{ match.totalWords }}</td>
+        <td>{{ match.totalScore }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ul class="pagination">
+    <li class="waves-effect waves-light">
+        <a><i class="material-icons">chevron_left</i></a>
+    </li>
+    <li class="active waves-effect waves-dark">
+        <a href="#">1</a>
+    </li>
+    <li class="waves-effect waves-light">
+        <a>2</a>
+    </li>
+    <li class="waves-effect waves-light">
+        <a>3</a>
+    </li>
+    <li class="waves-effect waves-light">
+        <a>skip 5</a>
+    </li>
+    <li class="waves-effect waves-light">
+        <a><i class="material-icons">chevron_right</i></a>
+    </li>
+  </ul>
+
+</div>

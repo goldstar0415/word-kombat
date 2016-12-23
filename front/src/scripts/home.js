@@ -21,10 +21,11 @@ $(document).ready(function() {
     return isUsernameValid && isEmailValid && isPasswordValid;
   }
  
+  $('.modal').modal();
+
   // Materialize configuration
   Materialize.updateTextFields();
   $('.tooltipped').tooltip({delay: 50});
-  $('.modal-trigger').leanModal();
 
   // Scroll button
   $('.scroll-button').click(function() {
@@ -43,6 +44,8 @@ $(document).ready(function() {
     let email = $("#signup .email").val();
     let password = $("#signup .password").val();
 
+    $('#signup').modal('open');
+    
     if(isCredentialsValid(username, email, password)) {
 
       let user = {
@@ -68,6 +71,8 @@ $(document).ready(function() {
     let password = $("#login .password").val();
     let username = "random";
 
+    $('#login').modal('open');
+
     if(isCredentialsValid(username, email, password)) {
 
       let user = {
@@ -87,8 +92,8 @@ $(document).ready(function() {
 
   // Sign up and Log in cancel button
   $('.cancel').click(function() {
-    $("#login").closeModal();
-    $("#signup").closeModal();
+    $("#login").modal('close');
+    $("#signup").modal('close');
   });
 
   // Log out

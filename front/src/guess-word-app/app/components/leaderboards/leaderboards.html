@@ -1,0 +1,26 @@
+<table class="bordered highlight hoverable">
+  <caption>Leaderboards Top-100</caption>
+
+  <thead>
+    <tr>
+      <th data-field="position">N </th>
+      <th data-field="icon">Icon</th>
+      <th data-field="name">Name</th>
+      <th data-field="score">Score</th>
+      <th data-field="rank">Rank</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let leader of leaders; let i = index">
+      <td class="position">{{ i + 1 }} </td>
+      <td class="icon">
+        <img src="{{ leader.icon }}" />
+      </td>
+      <td class="name">{{ leader.name }}</td>
+      <td class="score">{{ leader.score }}</td>
+      <td class="rank">{{ leader.RankId }}</td>
+    </tr>
+  </tbody>
+
+</table>

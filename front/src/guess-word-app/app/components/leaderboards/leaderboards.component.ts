@@ -1,4 +1,4 @@
-import { Component, OnInit } from 'angular2/core';
+import { Component, OnInit } from '@angular/core';
 
 import { User } from '../../models/user.model';
 import { LeadersService } from '../../services/leaders.service';
@@ -14,10 +14,8 @@ const basePath = 'guess-word-app/app/components/leaderboards/';
 export class LeaderboardsComponent implements OnInit {
 
   private leaders: User[];
-  private leadersService: LeadersService;
 
-  constructor(leadersService: LeadersService) {
-    this.leadersService = leadersService;
+  constructor(private leadersService: LeadersService) {
   }
 
   ngOnInit() {

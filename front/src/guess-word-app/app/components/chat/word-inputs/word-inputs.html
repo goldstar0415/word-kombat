@@ -1,0 +1,27 @@
+<div class="word-inputs">
+
+  <button
+    class="btn-floating btn-large hoverable waves-effect waves-dark"
+    (click)="deleteLastLetter()">
+      <i class="material-icons">backspace</i>
+  </button>
+
+  <input
+    id="word"
+    class="validate"
+    #letters
+    (keyup)="enterLetter(letters.value)"
+    (keyup.enter)="sendMessage()"
+    value="{{ word }}"
+    placeholder="Enter word here"
+    type="text"
+    required
+    autofocus />
+
+  <button
+    class="btn-floating btn-large hoverable waves-effect waves-dark"
+    (click)="sendMessage()">
+      <i class="material-icons">send</i>
+  </button>
+
+</div>

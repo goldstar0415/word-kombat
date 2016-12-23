@@ -1,0 +1,83 @@
+<div class="card sticky-action hoverable">
+
+  <div class="card-image waves-effect waves-block waves-light">
+    <img class="activator" src="{{ user.icon }}"/>
+  </div>
+
+  <div class="card-content">
+    <div class="card-title activator">
+      <span class="username">{{ user.name }}</span>
+      <span class="score">{{ user.score }}pts</span>
+      <span class="rank">{{ user.RankId }}</span>
+      <i class="material-icons right">more_vert</i>
+    </div>
+  </div>
+
+  <div class="card-action">
+    <div class="input-field">
+      <i class="material-icons prefix">account_circle</i>
+      <input class="validate"
+        id="username"
+        value="{{ user.name }}"
+        type="text"
+        required="required"/>
+      <label class="active" for="username">Username</label>
+    </div>
+
+    <div class="input-field">
+      <i class="material-icons prefix">email</i>
+      <input class="validate"
+        id="email"
+        value="{{ user.email }}"
+        type="email"
+        required="required"/>
+      <label class="active" for="email">Email</label>
+    </div>
+
+    <div class="input-field">
+      <i class="material-icons prefix">vpn_key </i>
+      <input class="validate"
+        id="password"
+        value="{{ user.name }}"
+        type="password"
+        required="required"/>
+      <label class="active" for="password">Password</label>
+    </div>
+
+    <button class="btn-large waves-effect waves-light">
+      <span>Save</span>
+      <i class="material-icons left">save</i>
+    </button>
+  </div>
+
+  <div class="card-reveal">
+    <div class="card-title">Icon
+      <i class="material-icons right">close</i>
+    </div>
+
+    <form>
+      <div class="file-field input-field">
+        
+        <button class="btn-large waves-effect waves-light">
+          <span>File</span>
+          <i class="material-icons left">attach_file</i>
+          <input type="file" />
+        </button>
+
+        <div class="file-path-wrapper">
+          <input class="file-path validate"
+            type="text"
+            placeholder="Choose file to upload"/>
+        </div>
+
+        <p>Note: Accepts only files with size up to 1mb </p>
+
+        <button class="btn-large waves-effect waves-light">
+          <span>Upload</span>
+          <i class="material-icons left">file_upload</i>
+        </button>
+
+      </div>
+    </form>
+  </div>
+</div>

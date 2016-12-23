@@ -1,0 +1,31 @@
+<div class="box">
+
+  <div class="content">
+
+    <word-card
+      [image]="word.image"
+      [hint]="word.hint"
+      [currentWordIndex]="wordCounter">
+    </word-card>
+
+    <chat-area [socket]="socket"></chat-area>
+
+    <user-list [users]="users"></user-list>
+    
+  </div>
+
+  <div class="word-controls">
+
+    <word-letters
+      [letters]="letters"
+      (letterClicked)="onLetterClicked($event)">
+    </word-letters>
+
+    <word-inputs
+      [socket]="socket"
+      [word]="typedWord"
+      (wordEntered)="onWordEntered($event)">
+    </word-inputs>
+
+  </div>
+</div>

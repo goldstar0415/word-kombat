@@ -1,12 +1,12 @@
 // Imports ====================================================================
 const gulp = require('gulp');
 const plumber = require('gulp-plumber');
-
+const runSequence = require('run-sequence');
+const clean = require('gulp-clean');
 const typescript = require('gulp-typescript');
 const babel = require('gulp-babel');
-const pug = require('gulp-pug');
+const htmlmin = require('gulp-htmlmin');
 const stylus = require('gulp-stylus');
-
 const nib = require('nib');
 const imagemin = require('gulp-imagemin');
 
@@ -28,7 +28,7 @@ const styles = {
 };
 
 const templates = {
-  src: 'front/src/guess-word-app/**/*.pug',
+  src: 'front/src/guess-word-app/**/*.html',
   dest: 'front/dist/guess-word-app/'
 };
 
@@ -38,35 +38,31 @@ const images = {
 };
 
 const dependencies = {
-  dest: {
-    js: './front/dist/scripts/vendor/',
-    css: './front/dist/styles/vendor/',
-    font: './front/dist/styles/fonts/'
-  },
-  libs: {
-    js: {
-      'jquery': 'node_modules/jquery/dist/jquery.min.js',
-      'materialize': 'node_modules/materialize-css/dist/js/materialize.min.js',
-      'chart': 'node_modules/chart.js/dist/Chart.min.js',
-      'systemjs': 'node_modules/systemjs/dist/system.src.js',
-      'rxjs': 'node_modules/rxjs/bundles/Rx.min.js',
-      'zone.js': 'node_modules/zone.js/dist/zone.min.js',
-      'socket.io': 'node_modules/socket.io-client/socket.io.js',
-      'angular2': [
-        'node_modules/angular2/bundles/angular2-polyfills.js',
-        'node_modules/angular2/bundles/angular2.js',
-        'node_modules/angular2/bundles/router.dev.js',
-        'node_modules/angular2/bundles/http.dev.js'
-      ],
-    },
-    css: {
-      'materialize': 'node_modules/materialize-css/dist/css/materialize.min.css',
-    },
-    font: {
-      'roboto': 'node_modules/materialize-css/dist/fonts/**/*',
-      'material-icons': 'node_modules/materialize-css/dist/font/material-design-icons/**/*'
-    }
-  }
+  dest: './front/dist/vendor/',
+  libs: [
+    'node_modules/jquery/dist/jquery.min.js',
+    'node_modules/materialize-css/dist/js/materialize.min.js',
+    'node_modules/chart.js/dist/Chart.min.js',
+    'node_modules/systemjs/dist/system.src.js',
+    'node_modules/rxjs/bundles/Rx.min.js',
+    'node_modules/zone.js/dist/zone.min.js',
+    'node_modules/socket.io-client/dist/socket.io.min.js',
+    'node_modules/systemjs/dist/system.src.js',
+    'node_modules/rxjs/**/*',
+    'node_modules/zone.js/dist/zone.min.js',
+    'node_modules/core-js/client/shim.min.js',
+    'node_modules/reflect-metadata/Reflect.js',
+    'node_modules/@angular/common/bundles/**/*',
+    'node_modules/@angular/core/bundles/**/*',
+    'node_modules/@angular/compiler/bundles/**/*',
+    'node_modules/@angular/forms/bundles/**/*',
+    'node_modules/@angular/http/bundles/**/*',
+    'node_modules/@angular/platform-browser/bundles/**/*',
+    'node_modules/@angular/platform-browser-dynamic/bundles/**/*',
+    'node_modules/@angular/router/bundles/**/*',
+    'node_modules/materialize-css/dist/css/materialize.min.css',
+    'node_modules/materialize-css/dist/fonts/**/*'
+  ]
 };
 
 // Options ====================================================================
@@ -78,8 +74,9 @@ const babelOptions = {
   comments: false
 };
 
-const pugOptions = {
-  pretty: true
+const htmlOptions = {
+  collapseWhitespace: true,
+  caseSensitive: true
 };
 
 const stylusOptions = {
@@ -94,10 +91,10 @@ const imageminOptions = {
 // Tasks ======================================================================
 // Compiles typescript to js
 gulp.task('typescript', _=> { 
-  return gulp.src(scripts.ts.src)
+  const tsResult = tsProject.src()
     .pipe(plumber())
-    .pipe(typescript(tsProject))
-    .pipe(gulp.dest(scripts.ts.dest))
+    .pipe(tsProject());
+  return tsResult.js.pipe(gulp.dest(scripts.ts.dest)); 
 });
 
 // Compiles es6 to es5 
@@ -116,11 +113,11 @@ gulp.task('stylus', _=> {
     .pipe(gulp.dest(styles.dest))
 });
 
-// Compiles pug to html
-gulp.task('pug', _=> {
+// Minifies HTML files 
+gulp.task('html', _=> { 
   return gulp.src(templates.src)
     .pipe(plumber())
-    .pipe(pug(pugOptions))
+    .pipe(htmlmin(htmlOptions))
     .pipe(gulp.dest(templates.dest))
 });
 
@@ -131,33 +128,34 @@ gulp.task('images', _=> {
     .pipe(gulp.dest(images.dest));
 });
 
+// Cleans dist folder
+gulp.task('clean', _=> {
+  return gulp.src('./front/dist/', {
+    read: false
+  }).pipe(clean());
+});
+
 // Copies vendor libraries
-gulp.task('libs', _=> {
-  Object.keys(dependencies.libs).forEach(deps => {
-    Object.keys(dependencies.libs[deps]).forEach(libs => {
-
-      let lib = dependencies.libs[deps][libs];
-
-      if(Array.isArray(lib)){
-        lib.forEach(item => {
-          gulp.src(item).pipe(gulp.dest(dependencies.dest[deps] + libs + "/"));
-          console.log(`${item} - ${dependencies.dest[deps]}`);
-        });
-      } else {
-        gulp.src(lib).pipe(gulp.dest(dependencies.dest[deps]));
-        console.log(`${lib} - ${dependencies.dest[deps]}`);
-      }
-
-    });
-  });
+gulp.task('libs', ['clean'], _=> {
+  return gulp.src(dependencies.libs, {
+    base: './node_modules/'
+  }).pipe(gulp.dest(dependencies.dest));
 });
 
 // Watch
 gulp.task('watch', _=> {
   gulp.watch(scripts.ts.src, ['typescript']);
   gulp.watch(scripts.js.src, ['babel']);
-  gulp.watch(templates.src, ['pug']);
+  gulp.watch(templates.src, ['html']);
   gulp.watch(styles.src, ['stylus'])
 });
 
-gulp.task('default', ['typescript', 'pug', 'babel', 'stylus', 'watch'], _=> {});
+gulp.task('build', _=> {
+  runSequence('clean', ['typescript', 'html', 'babel', 'stylus']);
+}); 
+
+gulp.task('make', _=> {
+  runSequence('clean', ['libs', 'images', 'build']);
+});
+
+gulp.task('default', ['typescript', 'html', 'babel', 'stylus', 'watch'], _=> {});

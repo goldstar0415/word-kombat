@@ -1,16 +1,14 @@
-import { Component, OnInit } from 'angular2/core';
+import { Component, OnInit } from '@angular/core';
 
-import { UserDetailsComponent } from './user-details/user-details.component';
-import { UserInfoConponent } from './user-info/user-info.component';
 import { User } from '../../models/user.model';
 
-const basePath = 'guess-word-app/app/components/account/';
+declare let __moduleName: string;
 
 @Component({
+  moduleId: __moduleName,
   selector: 'account',
-  templateUrl: basePath + 'account.html',
-  styleUrls: [basePath + 'account.css'],
-  directives: [UserDetailsComponent, UserInfoConponent]
+  templateUrl: 'account.html',
+  styleUrls: ['account.css'],
 })
 export class AccountComponent implements OnInit {
 

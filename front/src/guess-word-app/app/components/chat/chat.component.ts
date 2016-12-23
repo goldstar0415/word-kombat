@@ -1,10 +1,4 @@
-import { Component, OnInit, OnDestroy } from 'angular2/core';
-
-import { WordCardComponent } from './word-card/word-card.component';
-import { ChatAreaComponent } from './chat-area/chat-area.component';
-import { UserListComponent } from './user-list/user-list.component';
-import { WordLettersComponent } from './word-letters/word-letters.component';
-import { WordInputsComponent } from './word-inputs/word-inputs.component';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { UsersService } from '../../services/users.service';
 import { WordsService } from '../../services/words.service';
@@ -21,17 +15,7 @@ const basePath = 'guess-word-app/app/components/chat/';
   selector: 'chat',
   templateUrl: basePath + 'chat.html',
   styleUrls: [basePath + 'chat.css'],
-  directives: [
-    WordCardComponent,
-    ChatAreaComponent,
-    UserListComponent,
-    WordLettersComponent,
-    WordInputsComponent
-  ],
-  providers: [
-    UsersService,
-    WordsService
-  ]
+  providers: [ UsersService, WordsService ]
 })
 export class ChatComponent implements OnInit, OnDestroy {
 

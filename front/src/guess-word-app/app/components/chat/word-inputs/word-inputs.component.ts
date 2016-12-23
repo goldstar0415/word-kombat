@@ -1,4 +1,10 @@
-import { Component, Input, Output, EventEmitter, OnInit } from 'angular2/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit
+} from '@angular/core';
 
 import { MessagingService } from '../../../services/messaging.service';
 
@@ -16,9 +22,7 @@ const basePath = 'guess-word-app/app/components/chat/word-inputs/';
 export class WordInputsComponent implements OnInit {
 
   @Input() private word: string;
-
   @Input() private socket: any;
-
   @Output() private wordEntered = new EventEmitter<string>();
 
   private message: Message;

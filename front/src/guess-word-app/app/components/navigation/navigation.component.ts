@@ -1,7 +1,4 @@
-import { Component, Input } from 'angular2/core';
-import { ROUTER_DIRECTIVES} from 'angular2/router';
-
-import { UserListComponent } from '../chat/user-list/user-list.component'; 
+import { Component, Input } from '@angular/core';
 
 import { User } from '../../models/user.model';
 
@@ -11,7 +8,6 @@ const basePath = 'guess-word-app/app/components/navigation/';
   selector: 'navigation',
   templateUrl: basePath + 'navigation.html',
   styleUrls: [basePath + 'navigation.css'],
-  directives: [ROUTER_DIRECTIVES, UserListComponent]
 })
 export class NavigationComponent {
 

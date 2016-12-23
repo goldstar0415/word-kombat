@@ -5,7 +5,7 @@ import {
   OnDestroy,
   ElementRef,
   ViewChild
-} from 'angular2/core';
+} from '@angular/core';
 
 import { MessagingService } from '../../../services/messaging.service';
 
@@ -23,17 +23,13 @@ const basePath = 'guess-word-app/app/components/chat/chat-area/'
 export class ChatAreaComponent implements OnInit, OnDestroy {
 
   @Input() private socket: any;
-
   @ViewChild('chat') private chatContainer: ElementRef;
 
   private messages: Message[];
   private message: Message;
   private connection;
 
-  private messagingService: MessagingService;
-
-  constructor(messagingService: MessagingService) {
-    this.messagingService = messagingService;
+  constructor(private messagingService: MessagingService) {
   }
 
   ngOnInit() {

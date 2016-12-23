@@ -1,4 +1,4 @@
-import { Component, OnInit } from 'angular2/core';
+import { Component, OnInit } from '@angular/core';
 
 import { DictionaryService } from '../../../../services/dictionary.service';
 
@@ -13,10 +13,8 @@ const basePath = 'guess-word-app/app/components/account/user-info/user-dictionar
 export class UserDictionaryComponent implements OnInit {
 
   private words: Array<any>;
-  private dictionaryService: DictionaryService;
 
-  constructor(dictionaryService: DictionaryService) {
-    this.dictionaryService = dictionaryService;
+  constructor(private dictionaryService: DictionaryService) {
   }
 
   ngOnInit() {

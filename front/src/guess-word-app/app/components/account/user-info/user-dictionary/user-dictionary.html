@@ -1,0 +1,50 @@
+<div class="box">
+
+  <ul class="collection">
+    <li class="collection-item">
+      Total words learned <b>120</b>
+    </li>
+    <li class="collection-item">
+      Most repeated words <b> Cat </b>
+    </li>
+  </ul>
+
+  <table class="bordered striped centered hoverable">
+    <thead>
+      <tr>
+        <th data-field="image">Image</th>
+        <th data-field="word">Word</th>
+        <th data-field="repeated">Times repeated</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let word of words">
+        <td><img src="{{ word.image }}"/></td>
+        <td>{{ word.value }}</td>
+        <td>{{ word.timesRepeated }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ul class="pagination">
+    <li class="waves-effect waves-light">
+      <a><i class="material-icons">chevron_left</i></a>
+    </li>
+    <li class="active waves-effect waves-dark">
+      <a href="#">1</a>
+    </li>
+    <li class="waves-effect waves-light">
+      <a>2</a>
+    </li>
+    <li class="waves-effect waves-light">
+      <a>3</a>
+    </li>
+    <li class="waves-effect waves-light">
+      <a>skip 5</a>
+    </li>
+    <li class="waves-effect waves-light">
+      <a><i class="material-icons">chevron_right</i></a>
+    </li>
+  </ul>
+
+</div>

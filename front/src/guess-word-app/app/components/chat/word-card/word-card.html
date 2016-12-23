@@ -1,0 +1,45 @@
+<div class="word-card">
+  <div class="card hoverable">
+
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="{{ image }}" />
+    </div>
+
+    <div class="card-content">
+      <div class="progress">
+        <div class="determinate" [style.width]="time + '%'"></div>
+      </div>
+    </div>
+
+    <div class="card-reveal white-text">
+      <span class="card-title">
+        Hint
+        <i class="material-icons right">close</i>
+      </span>
+      <p>{{ hint }}</p>
+    </div>
+
+    <div class="card-action">
+
+      <button class="btn-floating waves-effect waves-dark"
+        (click)="toggleVolume()">
+          <i class="material-icons"
+            *ngIf="isVolumeEnabled">volume_up</i>
+
+          <i class="material-icons"
+            *ngIf="!isVolumeEnabled">volume_off</i>
+      </button>
+
+      <span class="btn-floating btn-large waves-effect waves-dark">
+        <i>{{ currentWordIndex }}/10</i>
+      </span>
+
+      <button class="btn-floating waves-effect waves-dark"
+        (click)="repeat()">
+          <i class="material-icons">repeat</i>
+      </button>
+      
+    </div>
+
+  </div>
+</div>

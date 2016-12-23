@@ -1,9 +1,9 @@
-import { Component, OnInit } from 'angular2/core';
+import { Component, OnInit } from '@angular/core';
 
 const basePath = 'guess-word-app/app/components/account/user-info/user-progress/';
 
-declare let Chart:any;
-declare let $:any;
+declare let Chart: any;
+declare let $: any;
 
 @Component({
   selector: 'user-progress',
@@ -13,10 +13,6 @@ declare let $:any;
 export class UserProgressComponent implements OnInit {
 
   private data: Array<Number>;
-
-  constructor() {
-
-  }
 
   ngOnInit() {
     this.data = [82, 12];

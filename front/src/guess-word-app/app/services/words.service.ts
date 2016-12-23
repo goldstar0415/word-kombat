@@ -1,7 +1,6 @@
-import { Injectable, Inject } from 'angular2/core';
+import { Injectable, Inject } from '@angular/core';
 
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
+import { Observable} from 'rxjs/Rx';
 
 import { Word } from '../models/word.model';
 
@@ -9,8 +8,6 @@ import { Word } from '../models/word.model';
 export class WordsService {
   private socket: any;
   private url: string;
-
-  constructor() {}
 
   init(socket: any) {
     this.socket = socket;
@@ -21,7 +18,7 @@ export class WordsService {
       this.socket.on('word', word => {
         observer.next(word);
       });
-    });     
+    });
     return observable;
   }
 
