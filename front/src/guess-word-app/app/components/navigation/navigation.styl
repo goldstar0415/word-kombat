@@ -17,13 +17,17 @@ nav.nav-wrapper
         transition: none
   
   // Mobile sidenav
-  ul#menu-mobile, ul#users-mobile
+  ul#menu-mobile, #users-mobile
     background-color: grey-darken-4
     background-image: url(bg-img)
     a
       text-transform: uppercase
       i
         color: white
+
+  #users-mobile >>> ul.collection
+    height: 100vh
+    margin: 0
 
   // Menu mobile
   ul#menu-mobile
