@@ -23,7 +23,7 @@ const scripts = {
 };
 
 const styles = {
-  src: 'front/src/{styles/*.styl,guess-word-app/**/*.styl}',
+  src: 'front/src/{styles/**/*.styl,guess-word-app/**/*.styl}',
   dest: 'front/dist/'
 };
 

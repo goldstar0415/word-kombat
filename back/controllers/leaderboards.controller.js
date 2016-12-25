@@ -1,9 +1,7 @@
-const path = require('path');
 const express = require('express');
 const router = express.Router();
 
-const UserRepository = require("../repositories/User.repository");
-const userRepository = new UserRepository();
+const userRepository = new (require("../repositories/User.repository"))();
 
 router.get('/', (req, res, next) => {
   

@@ -1,3 +1,5 @@
+@require('nib')
+
 // Login and Signup modals
 #login, #signup
   max-width: 600px
@@ -18,19 +20,33 @@
   
   label
     width: 90%
-    
+
   .modal-footer
     display: flex
+    flex-wrap: wrap
     justify-content: center
     margin-top: 10px
     margin-bottom: 10px
     background-color: grey-darken-4
     
-    button
+    #login-btn, #signup-btn, .cancel
       margin-right: 6px
+      min-width: 120px
       display: inline-block
       background-color: grey-darken-3
       &:hover
         background-color: white
         color: black
         font-weight: bold
+
+    .social
+      min-width: 120px
+      button.btn-floating
+        margin-right: 4px
+        img
+          filter: grayscale(30%)
+          transition: filter 0.3s ease-in-out
+        &:hover
+          img
+            filter: grayscale(0%)
+            transition: filter 0.3s ease-in-out

@@ -1,26 +1,11 @@
 $(document).ready(function() {
 
-  // Checking credentials
-  function isCredentialsValid(username, email, password) {
-    let isUsernameValid = false;
-    let isEmailValid = false;
-    let isPasswordValid = false;
-
-    if(username !== '' && /^\w{4,}$/gi.test(username)) {
-      isUsernameValid = true;
-    }
-
-    if(email !== '' && /^\w+@\w+\.\w+$/gi.test(email)) {
-      isEmailValid = true;
-    }
-
-    if(password !== '' && /^\S{6,}$/gi.test(password)) {
-      isPasswordValid = true;
-    }
-
-    return isUsernameValid && isEmailValid && isPasswordValid;
+  if(window.sessionStorage.getItem("token") !== null) {
+    $("#logout-trigger").css("display", "inline-block");
+    $("#signup-trigger").css("display", "none");
+    $("#login-trigger").css("display", "none");
   }
- 
+
   $('.modal').modal();
 
   // Materialize configuration
@@ -35,70 +20,6 @@ $(document).ready(function() {
       scrollTop: $(".articles").offset().top
     }, 1500);
 
-  });
-
-  // Sign up 
-  $("#signup-btn").click(function() {
-
-    let username = $("#signup .username").val();
-    let email = $("#signup .email").val();
-    let password = $("#signup .password").val();
-
-    $('#signup').modal('open');
-    
-    if(isCredentialsValid(username, email, password)) {
-
-      let user = {
-        name: username,
-        email: email,
-        password: password
-      };
-
-      let request = $.post("/signup", user, res => {
-        Materialize.toast("Sign up successfully", 6000, 'rounded');
-        $("#signup").closeModal();
-      });
-
-      request.error(err => Materialize.toast(err.responseText, 2000));
-    }
-
-  });
-
-  // Log in
-  $("#login-btn").click(function() {
-    
-    let email = $("#login .email").val();
-    let password = $("#login .password").val();
-    let username = "random";
-
-    $('#login').modal('open');
-
-    if(isCredentialsValid(username, email, password)) {
-
-      let user = {
-        email: email,
-        password: password
-      };
-      
-      let request = $.post("/login", user, res => {
-        Materialize.toast("Login successfully", 6000, 'rounded');
-        $("#login").closeModal();
-        location.reload();
-      });
-      
-      request.error(err => Materialize.toast(err.responseText, 2000));
-    }
-  });
-
-  // Sign up and Log in cancel button
-  $('.cancel').click(function() {
-    $("#login").modal('close');
-    $("#signup").modal('close');
-  });
-
-  // Log out
-  $("#logout").click(() => {
-    $.post("/logout");
   });
 
   // Scrolling actions
@@ -174,4 +95,115 @@ $(document).ready(function() {
 
   });
 
+  // Authorization 
+  // Sign up 
+  $("#signup-btn").click(function() {
+
+    let username = $("#signup .username").val();
+    let email = $("#signup .email").val();
+    let password = $("#signup .password").val();
+    
+    let validationStatus = validateUserDetails(username, email, password);
+
+    if(!validationStatus.message) {
+      let user = {
+        username: username,
+        email: email,
+        password: password
+      };
+
+      $.post("/api/auth/signup", user, res => {
+        Materialize.toast("Sign up successfully", 2500, 'rounded');
+        window.sessionStorage.setItem('token', res.token);
+        window.location.href = "/chat";
+      }).fail(err => {
+        setValidationError(err.responseJSON, "signup");
+      });
+    } else {
+      setValidationError(validationStatus, "signup");
+    }
+
+  });
+
+  // Log in
+  $("#login-btn").click(() => {
+
+    let email = $("#login .email").val();
+    let password = $("#login .password").val();
+
+    let validationStatus = validateUserDetails("none", email, password);
+
+    if(!validationStatus.message) {
+      let user = {
+        email: email,
+        password: password
+      };
+      
+      $.post("/api/auth/login", user, res => {
+        Materialize.toast("Logged in successfully", 2500, 'rounded');
+        window.sessionStorage.setItem('token', res.token);
+        window.location.href = "/chat";
+      }).fail(err => {
+        setValidationError(err.responseJSON, "login");
+      });
+      
+    } else {
+      setValidationError(validationStatus, "login");
+    }
+  });
+
+  // Sign up and Log in cancel button
+  $('.cancel').click(() => {
+    $("#login").modal('close');
+    $("#signup").modal('close');
+  });
+
+  // Log out
+  $("#logout-trigger").click(() => {
+    window.sessionStorage.removeItem('token');
+    $.post("/api/auth/logout");
+  });
+
 });
+
+// Set validation error to appropriate fields
+function setValidationError(error, type) {
+  // TODO
+  Materialize.toast(error.message || "Unknown error", 2500);
+}
+
+// Checking credentials
+function validateUserDetails(username, email, password) {
+
+  if(!email || !(/^\w+@\w+\.\w+$/gi.test(email))) {
+    return {
+      target: "email",
+      message: "Email is invalid"
+    };
+  }
+
+  if(!username || !(/^\w{4,30}$/gi.test(username))) {
+    return {
+      target: "username",
+      message: "Username is invalid"
+    };
+  }
+
+  if(!password || !(/^\S{6,30}$/gi.test(password))) {
+    return {
+      error: true,
+      target: "password",
+      message: "Password is invalid"
+    };
+  }
+
+  return {message: ""};
+
+}
+
+// Retrieves data from JWT
+function getDataFromToken(token) {
+  let base64Url = token.split('.')[1];
+  let base64 = base64Url.replace('-', '+').replace('_', '/');
+  return JSON.parse(window.atob(base64));
+};

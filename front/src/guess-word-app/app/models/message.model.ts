@@ -2,14 +2,11 @@ import { User } from './user.model';
 
 export class Message {
 
-  private _text: string;
-  private _user: User;
-  private _points: number;
-
-  constructor(text: string, user: User, points: number) {
-    this._text = text;
-    this._user = user;
-    this._points = points;
+  constructor(
+    private _text: string,
+    private _user: User,
+    private _points: number) {
+    
   }
 
   get text() {

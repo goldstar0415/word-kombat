@@ -1,19 +1,12 @@
 export class User {
   
-  private _id: number;
-  private _email: string;
-  private _name: string;
-  private _icon: string;
-  private _score: number;
-  private _rank: number;
-
-  constructor(id, email, name, score, icon, rank) {
-    this._id = id;
-    this._email = email;
-    this._name = name;
-    this._score = score;
-    this._icon = icon;
-    this._rank = rank;
+  constructor(
+    private _id=0,
+    private _email="",
+    private _name="",
+    private _score=0,
+    private _icon="",
+    private _rank=0) {
   }
 
   get id() {

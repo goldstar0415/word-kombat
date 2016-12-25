@@ -62,7 +62,7 @@ class UserRepository {
 
   findByUsername(username) {
     return db.models.User.findOne({
-      where: { name: username}
+      where: {name: username}
     });
   }
 

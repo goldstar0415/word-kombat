@@ -10,20 +10,15 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session')(config.get('session'));
 const http = require('http').Server(app);
 
-const passport = require('passport');
-const passportSocketIo = require('passport.socketio');
 const flash = require('connect-flash');
 
 const io = require('./sockets');
 const db = require('./repositories');
 
-const home = require('./controllers/Home.controller');
-const guessWord = require('./controllers/GuessWordApp.controller');
-const signup = require('./controllers/Signup.controller');
-const login = require('./controllers/Login.controller');
-const logout = require('./controllers/Logout.controller');
-const error = require('./controllers/Error.controller');
-const leaderboards = require('./controllers/Leaderboards.controller');
+const indexController = require('./controllers/index.controller');
+const errorController = require('./controllers/error.controller');
+const leaderboardsController = require('./controllers/leaderboards.controller');
+const authController = require('./controllers/auth.controller');
 
 app.use(httpLogger('dev'));
 
@@ -41,22 +36,15 @@ app.set('port', config.get('port'));
 app.set('ip', config.get('host'));
 
 app.use(session);
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(flash());
-require('./passport')(passport);
 
 io.listen(http, session);
 
-app.use('/', home);
-app.use('/guess-word', guessWord);
-app.use('/guess-word/leaderboards', leaderboards);
-app.use('/signup', signup(passport));
-app.use('/login', login(passport));
-app.use('/logout', logout);
+app.use('/', indexController);
+app.use('/guess-word/leaderboards', leaderboardsController);
+app.use('/api/auth', authController);
 
-app.use(error.clientError);
-app.use(error.serverError);
+app.use(errorController.clientError);
+app.use(errorController.serverError);
 
 db.sync().then(_=> {
 

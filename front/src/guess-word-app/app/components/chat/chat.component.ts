@@ -19,9 +19,6 @@ const basePath = 'guess-word-app/app/components/chat/';
 })
 export class ChatComponent implements OnInit, OnDestroy {
 
-  private usersService: UsersService;
-  private wordsService: WordsService;
-
   private users: User[];
   private word: Word;
 
@@ -33,6 +30,15 @@ export class ChatComponent implements OnInit, OnDestroy {
   private usersConnection;
 
   private wordCounter = 0;
+
+  constructor(
+    private usersService: UsersService,
+    private wordsService: WordsService
+  ) {
+    this.word = new Word(null, [], 'images/words/words.jpg', "");
+    this.users = [];
+    this.typedWord = "";
+  }
  
   ngOnInit() {
     
@@ -60,16 +66,6 @@ export class ChatComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.wordsConnection.unsubscribe();
     this.usersConnection.unsubscribe();
-  }
-
-  constructor(usersService: UsersService, wordsService: WordsService) {
-
-    this.usersService = usersService;
-    this.wordsService = wordsService;
-
-    this.word = new Word(null, [], 'images/words/words.jpg', "");
-    this.users = [];
-    this.typedWord = "";
   }
 
   onLetterClicked(letter: string) {
