@@ -37,12 +37,18 @@ export class WordInputsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.usersService.getById(this.authService.getUserId())
-      .subscribe(user => {
-        this.message = new Message(null, user, null);
-      }, error => {
-        console.error(error);
-      });
+    let id = this.authService.getUserId();
+
+    if(!!id) {
+      this.usersService.getById(this.authService.getUserId())
+        .subscribe(user => {
+          this.message = new Message(null, user, null);
+        }, error => {
+          console.error(error);
+        });
+    } else {
+      this.message = new Message(null, new User(), null);
+    }
 
       this.messagingService.init(this.socket);
   }

@@ -7,7 +7,7 @@ import { Word } from '../../models/word.model';
 import { User } from '../../models/user.model';
 import { Message } from '../../models/message.model';
 
-declare let io:any;
+declare let io: any;
 
 const basePath = 'guess-word-app/app/components/chat/';
 
@@ -59,9 +59,10 @@ export class ChatComponent implements OnInit, OnDestroy {
       }
     });
     
-    this.usersConnection = this.usersService.getUsers().subscribe(users => {
-      this.users = users;
-    });
+    this.usersConnection = this.usersService.getUsers()
+      .subscribe(users => {
+        this.users = users;
+      });
 
   }
 

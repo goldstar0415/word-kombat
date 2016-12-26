@@ -7,7 +7,6 @@ export class Word {
     public hint = "No hints provided"
   ) {}
 
-
   toString() {
     return JSON.stringify(this);
   }

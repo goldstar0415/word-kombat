@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { User } from '../../models/user.model';
+import { AuthService } from '../../services/auth.service';
+import { UsersService } from '../../services/users.service';
 
 declare let __moduleName: string;
 
@@ -9,14 +11,26 @@ declare let __moduleName: string;
   selector: 'account',
   templateUrl: 'account.html',
   styleUrls: ['account.css'],
+  providers: [UsersService]
 })
 export class AccountComponent implements OnInit {
 
   private currentUser: User;
 
+  constructor(
+    private authService: AuthService,
+    private usersService: UsersService
+  ) {
+    this.currentUser = new User();
+  }
+  
   ngOnInit() {
-    this.currentUser = new User(1, "random@email.com", "random-name", 200, "images/users/noIco.png", 1);
-    console.log(this.currentUser);
+    this.usersService.getById(this.authService.getUserId())
+      .subscribe(user => {
+        this.currentUser = user;
+      }, error => {
+        console.error(error);
+      });
   }
 
 }

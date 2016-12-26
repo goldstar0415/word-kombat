@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { UsersService } from '../services/users.service';
 
-declare let $:any;
+declare let $: any;
 declare let __moduleName: string;
 
 @Component({

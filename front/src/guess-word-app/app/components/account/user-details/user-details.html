@@ -8,42 +8,64 @@
     <div class="card-title activator">
       <span class="username">{{ user.name }}</span>
       <span class="score">{{ user.score }}pts</span>
-      <span class="rank">{{ user.RankId }}</span>
+      <span class="rank">{{ user.rank }}</span>
     </div>
   </div>
 
   <div class="card-action">
     <div class="input-field">
       <i class="material-icons prefix">account_circle</i>
-      <input class="validate"
+      <input
+        [(ngModel)]="user.name"
+        class="validate"
         id="username"
-        value="{{ user.name }}"
         type="text"
+        pattern="[a-zA-Z0-9]{4,30}"
         required="required"/>
-      <label class="active" for="username">Username</label>
+      <label
+        class="active"
+        for="username"
+        data-error="Invalid username">
+          Username
+      </label>
     </div>
 
     <div class="input-field">
       <i class="material-icons prefix">email</i>
-      <input class="validate"
+      <input
+        [(ngModel)]="user.email"
+        class="validate"
         id="email"
-        value="{{ user.email }}"
         type="email"
         required="required"/>
-      <label class="active" for="email">Email</label>
+      <label
+        class="active"
+        for="email"
+        data-error="Invalid Email">
+          Email
+      </label>
     </div>
 
     <div class="input-field">
       <i class="material-icons prefix">vpn_key </i>
-      <input class="validate"
+      <input
+        [(ngModel)]="user.password"
+        class="validate"
         id="password"
-        value="{{ user.name }}"
         type="password"
+        pattern=".{6,30}"
         required="required"/>
-      <label class="active" for="password">Password</label>
+      <label
+        class="active"
+        for="password"
+        data-error="Invalid password">
+          Password
+      </label>
     </div>
 
-    <button class="btn-large waves-effect waves-light">
+    <button
+      (click)="update()"
+      class="btn-large waves-effect waves-light">
       <span>Save</span>
       <i class="material-icons left">save</i>
     </button>

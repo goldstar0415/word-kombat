@@ -140,7 +140,11 @@ router.get('/:email(.+\@.+\..+)', (req, res) => {
  * @apiError Invalid data.
 */
 router.put('/:id(\\d+)', (req, res) => {
-  userRepository.update(req.params.id, req.body)
+
+  let user = req.body;
+  user.password = passwordHash.generate(user.password);
+
+  userRepository.update(req.params.id, user)
     .then(user => {
       if(!!user) {
         user.password = undefined;

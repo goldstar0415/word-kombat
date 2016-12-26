@@ -27,6 +27,7 @@ export class UsersService extends ReplaySubject<string>  {
     let observable = new Observable(observer => {
       this.socket.on('user-connected', users => {
         observer.next(users);
+        this.next(users);
       });
     });
     return observable;
@@ -39,6 +40,12 @@ export class UsersService extends ReplaySubject<string>  {
       }).catch(this.handleError);
   }
 
+  update(id: number, user: User): Observable<User> | any {
+    return this.http.put(`api/users/${id}`, user)
+      .map(res => {
+        return res.json();
+      }).catch(this.handleError);
+  }
 
   handleError(error: Response | any) {
     let errMsg: string;

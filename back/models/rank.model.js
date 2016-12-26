@@ -6,6 +6,10 @@ class Rank {
     this.minScore = minScore;
   }
 
+  toString() {
+    return JSON.stringify(this);
+  }
+
 }
 
 module.exports = Rank;

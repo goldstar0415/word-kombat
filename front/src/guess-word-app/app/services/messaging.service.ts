@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 
 import { Message } from '../models/message.model';
 
-declare let io:any;
+declare let io: any;
 
 @Injectable()
 export class MessagingService {
