@@ -34,27 +34,29 @@ export class ChatComponent implements OnInit, OnDestroy {
   constructor(
     private usersService: UsersService,
     private wordsService: WordsService
-  ) {
-    this.word = new Word(null, [], 'images/words/words.jpg', "");
-    this.users = [];
-    this.typedWord = "";
-  }
+  ) {}
  
   ngOnInit() {
-    
+    this.word = new Word();
+    this.users = [];
+    this.typedWord = "";
+    this.letters = this.word.letters.slice()
+
     this.wordsService.init(this.socket);
     this.usersService.init(this.socket);
 
     this.wordsConnection = this.wordsService.getWord().subscribe(word => {
-      this.word = word;
+      if(!!word) {
+        this.word = word;
 
-      if(this.wordCounter < 10) {
-        this.wordCounter++;
-      } else {
-        this.wordCounter = 1;
+        if(this.wordCounter < 10) {
+          this.wordCounter++;
+        } else {
+          this.wordCounter = 1;
+        }
+
+        this.letters = word.letters.slice();
       }
-
-      this.letters = word.letters.slice();
     });
     
     this.usersConnection = this.usersService.getUsers().subscribe(users => {

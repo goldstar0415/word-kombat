@@ -3,7 +3,9 @@ const passwordHash = require('password-hash');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 const router = express.Router();
-const userRepository = new (require('../repositories/User.repository'))();
+
+const log = require('../logger');
+const userRepository = new (require('../repositories/user.repository'))();
 
 /**
  * @api {post} /api/auth Login
@@ -43,7 +45,7 @@ router.post('/login', (req, res) => {
         });
       }
     }).catch(error => {
-      console.error(error);
+      log.error(error);
       res.json(error);
     });
 });
@@ -86,7 +88,7 @@ router.post('/signup', (req, res) => {
       });
     }
 
-    userRepository.findByUsername(username).then(user => {
+    userRepository.findByName(username).then(user => {
       if(!!user) {
         res.status(406)
         return res.json({
@@ -110,10 +112,16 @@ router.post('/signup', (req, res) => {
           sendToken(user, "Signed Up successfuly", res);
         })
         .catch(error => {
-          console.error(error);
+          log.error(error);
           return res.json(error);
         });
+    }).catch(error => {
+      log.error(error);
+      return res.json(error);
     });
+  }).catch(error => {
+    log.error(error);
+    return res.json(error);
   });
 });
 

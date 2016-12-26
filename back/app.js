@@ -17,8 +17,9 @@ const db = require('./repositories');
 
 const indexController = require('./controllers/index.controller');
 const errorController = require('./controllers/error.controller');
-const leaderboardsController = require('./controllers/leaderboards.controller');
 const authController = require('./controllers/auth.controller');
+const userController = require('./controllers/user.controller');
+const leaderboardsController = require('./controllers/leaderboards.controller');
 
 app.use(httpLogger('dev'));
 
@@ -40,7 +41,8 @@ app.use(session);
 io.listen(http, session);
 
 app.use('/', indexController);
-app.use('/guess-word/leaderboards', leaderboardsController);
+app.use('/api/users', userController);
+app.use('/api/leaderboards', leaderboardsController);
 app.use('/api/auth', authController);
 
 app.use(errorController.clientError);

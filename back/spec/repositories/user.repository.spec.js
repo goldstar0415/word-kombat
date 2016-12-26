@@ -1,6 +1,6 @@
 const db = require('../../repositories');
-const UserRepository = require('../../repositories/User.repository');
-const User = require('../../models/User.model');
+const userRepository = new (require('../../repositories/user.repository'))();
+const User = require('../../models/user.model');
 
 db.options.logging = false;
 db.config.database = "demo";
@@ -8,7 +8,6 @@ db.config.username = "demo";
 db.config.password = "demo";
 
 describe("User repository", () => {
-  const userRepository = new UserRepository();
   // Dummy data
   const users = [
     new User(1, 'dummy1@email.com', 'dummy-name1', '1111', 'dummy-icon1', 5, 1),

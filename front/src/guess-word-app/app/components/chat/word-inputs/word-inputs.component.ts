@@ -6,18 +6,21 @@ import {
   OnInit
 } from '@angular/core';
 
+import { AuthService } from '../../../services/auth.service';
+import { UsersService } from '../../../services/users.service';
 import { MessagingService } from '../../../services/messaging.service';
 
 import { Message } from '../../../models/message.model';
 import { User } from '../../../models/user.model';
 
-const basePath = 'guess-word-app/app/components/chat/word-inputs/';
+declare let __moduleName: string;
 
 @Component({
+  moduleId: __moduleName,
   selector: 'word-inputs',
-  templateUrl: basePath + 'word-inputs.html',
-  styleUrls: [basePath + 'word-inputs.css'],
-  providers: [MessagingService]
+  templateUrl: 'word-inputs.html',
+  styleUrls: ['word-inputs.css'],
+  providers: [MessagingService, UsersService]
 })
 export class WordInputsComponent implements OnInit {
 
@@ -26,17 +29,22 @@ export class WordInputsComponent implements OnInit {
   @Output() private wordEntered = new EventEmitter<string>();
 
   private message: Message;
-  private messagingService: MessagingService;
+
+  constructor(
+    private messagingService: MessagingService,
+    private authService: AuthService,
+    private usersService: UsersService
+  ) {}
 
   ngOnInit() {
-    this.messagingService.init(this.socket);
-  }
+    this.usersService.getById(this.authService.getUserId())
+      .subscribe(user => {
+        this.message = new Message(null, user, null);
+      }, error => {
+        console.error(error);
+      });
 
-  constructor(messagingService: MessagingService) {
-    this.message = new Message(null,
-      new User(1, null, "guest", 0, "images/users/noIco.png", 1), null);
-
-    this.messagingService = messagingService;
+      this.messagingService.init(this.socket);
   }
 
   enterLetter(word: string) {
@@ -63,7 +71,7 @@ export class WordInputsComponent implements OnInit {
     this.wordEntered.emit(this.word);
 
     if(this.message.text !== null && this.message.text !== '') {
-      this.messagingService.sendMessage(this.message.values);
+      this.messagingService.sendMessage(this.message);
     }
   }
 

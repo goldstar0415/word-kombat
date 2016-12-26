@@ -1,13 +1,13 @@
 class User {
 
-  constructor(id, email, name, password, icon, score, rankId) {
+  constructor(id, email, name, password, icon, score, rank) {
     this._id = id;
     this._email = email;
     this._name = name;
     this._password = password;
     this._icon = icon;
     this._score = score;
-    this._rankId = rankId;
+    this._rank = rank;
   }
 
   get id() { return this._id; }
@@ -16,7 +16,7 @@ class User {
   get password() { return this._password; }
   get icon() { return this._icon; }
   get score() { return this._score; }
-  get rankId() { return this._rankId; }
+  get rank() { return this._rank; }
 
   set id(id) {
     this._id = id;
@@ -42,8 +42,8 @@ class User {
     this._score = score;
   }
 
-  set rankId(rankId) {
-    this._rankId = rankId;
+  set rank(rank) {
+    this._rank = rank;
   }
 
   get values() {
@@ -54,7 +54,7 @@ class User {
       password: this.password,
       icon: this.icon,
       score: this.score,
-      RankId: this.rankId
+      rank: this.rank
     };
   }
 

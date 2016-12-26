@@ -2,25 +2,45 @@ const db = require('./index.js');
 
 class UserRepository {
   
-  add(user) {
+  findById(id) {
+    return db.models.User.findById(id);
+  }
 
+  findByEmail(email) {
+    return db.models.User.findOne({
+      where: {email: email}
+    });
+  }
+
+  findByName(username) {
+    return db.models.User.findOne({
+      where: {name: username}
+    });
+  }
+
+  findAll(options) {
+    return db.models.User.findAll(options);
+  }
+
+  add(user) {
     return db.transaction(t => {
-      return db.models.Rank.create({
-        name: "" + user.RankId,
-        minScore: 0
-      }).then(rank => {
         return db.models.User.create({
          email: user.email,
          name: user.name,
          password: user.password,
          icon: user.icon,
-         score: user.score
-      }, {transaction: t}).then(user => {
-          return rank.setUser(user, {transaction: t});
-        });
-      });
+         score: user.score,
+         rank: 1
+      }, {transaction: t});
     });
+  }
 
+  update(id, newUser) {
+    return db.transaction(t => {
+      return db.models.User.findById(id).then(user => {
+        return user.update(newUser, {transaction: t});
+      });
+    })
   }
 
   addAll(users) {
@@ -42,32 +62,10 @@ class UserRepository {
 
   delete(id) {
     return db.transaction(t => {
-      
-      return db.models.User.findById(1).then(user => {
+      return db.models.User.findById(id).then(user => {
         return user.destroy({transaction: t});
       });
-
     });
-  }
-
-  findById(id) {
-    return db.models.User.findById(id);
-  }
-
-  findByEmail(email) {
-    return db.models.User.findOne({
-      where: {email: email}
-    });
-  }
-
-  findByUsername(username) {
-    return db.models.User.findOne({
-      where: {name: username}
-    });
-  }
-
-  findAll(options) {
-    return db.models.User.findAll(options);
   }
 
   truncate() {

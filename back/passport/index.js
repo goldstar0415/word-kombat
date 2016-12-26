@@ -1,10 +1,8 @@
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt-nodejs');
 
-const UserRepository = require('../repositories/User.repository');
-const User = require('../models/User.model');
-
-const userRepository = new UserRepository();
+const userRepository = new (require('../repositories/user.repository'))();
+const User = require('../models/user.model');
 
 const generateHash = password => {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);

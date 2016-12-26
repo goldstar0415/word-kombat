@@ -3,6 +3,8 @@ const Sequelize = require('sequelize');
 // Database configuration
 const database = require('../config').get('database');
 
+const RankModel = require('../models/rank.model.js');
+
 // Connection settings
 const sequelize = new Sequelize(database.name, 
     database.user, database.password, {
@@ -59,8 +61,8 @@ const MatchScore = sequelize.define('MatchScore', {
     timestamps: false
 });
 
-// User - Rank One to One mapping
-Rank.hasOne(User);
+// User - Rank One to Many mapping
+Rank.hasMany(User, { foreignKey: 'rank' });
 
 // Match - MatchScores One to Many mapping
 Match.hasMany(MatchScore);
@@ -80,5 +82,9 @@ Word.belongsToMany(User, {through: Dictionary});
 const Competitors = sequelize.define('Competitors', {}, {timestamps: false});
 User.belongsToMany(Match, {through: Competitors});
 Match.belongsToMany(User, {through: Competitors});
+
+sequelize.models.Rank.upsert(new RankModel(1, '1', 0));
+sequelize.models.Rank.upsert(new RankModel(2, '2', 200));
+sequelize.models.Rank.upsert(new RankModel(3, '3', 400));
 
 module.exports = sequelize;

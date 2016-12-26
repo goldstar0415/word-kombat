@@ -13,7 +13,7 @@ export class LeadersService {
   }
 
   getLeaders(): Observable<User[]> {
-    return this.http.get('guess-word/leaderboards')
+    return this.http.get('api/leaderboards')
       .map(res => res.json());
   }
 

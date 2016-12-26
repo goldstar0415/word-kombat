@@ -1,6 +1,6 @@
 const db = require('../../repositories');
-const WordRepository = require('../../repositories/Word.repository');
-const Word = require('../../models/Word.model');
+const wordRepository = new (require('../../repositories/word.repository'))();
+const Word = require('../../models/word.model');
 
 db.options.logging = false;
 db.config.database = "demo";
@@ -8,7 +8,6 @@ db.config.username = "demo";
 db.config.password = "demo";
 
 describe("Word repository", () => {
-  const wordRepository = new WordRepository();
   // Dummy data
   const words = [
     new Word(1, 'cat', 'images/words/cat.jpg', 'Some random hint'),

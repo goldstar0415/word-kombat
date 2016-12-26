@@ -3,15 +3,12 @@ const sharedsession = require("express-socket.io-session");
 
 const log = require('../logger');
 
-const WordRepository = require('../repositories/Word.repository');
-const wordRepository = new WordRepository();
+const wordRepository = new (require('../repositories/word.repository'))();
+const userRepository = new (require('../repositories/user.repository'))();
 
-const UserRepository = require('../repositories/User.repository');
-const userRepository = new UserRepository();
-
-const Message = require('../models/Message.model');
-const User = require('../models/User.model');
-const Word = require('../models/Word.model');
+const Message = require('../models/message.model');
+const User = require('../models/user.model');
+const Word = require('../models/word.model');
 
 const shuffle = require('../util/shuffle');
 

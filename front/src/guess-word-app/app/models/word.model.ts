@@ -1,30 +1,15 @@
 export class Word {
 
   constructor(
-    private _id,
-    private _letters = [],
-    private _image = "",
-    private _hint = "") {
-  }
+    public id = 0,
+    public letters = ['d', 'r', 'w', 'o'],
+    public image = "images/words/words.jpg",
+    public hint = "No hints provided"
+  ) {}
 
-  get id() {
-    return this._id;
-  }
 
-  get letters() {
-    return this._letters.slice();
-  }
-
-  get image() {
-    return this._image;
-  }
-  
-  get hint() {
-    return this._hint;
-  }
-
-  set letters(letters) {
-    this._letters = letters.slice();
+  toString() {
+    return JSON.stringify(this);
   }
 
 }

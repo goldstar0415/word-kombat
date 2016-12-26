@@ -1,15 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 
-declare let $:any;
+import { AuthService } from '../services/auth.service';
+import { UsersService } from '../services/users.service';
 
-const basePath = 'guess-word-app/app/components/';
+declare let $:any;
+declare let __moduleName: string;
 
 @Component({
+  moduleId: __moduleName,
   selector: 'app',
-  templateUrl: basePath + 'app.html',
-  styleUrls: [basePath + 'app.css'],
+  templateUrl: 'app.html',
+  styleUrls: ['app.css'],
+  providers: [UsersService, AuthService]
 })
 export class AppComponent implements OnInit {
+
+  constructor() {}
 
   ngOnInit() {
     // Meterialize css initialization
