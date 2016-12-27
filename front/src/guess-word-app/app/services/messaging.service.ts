@@ -2,19 +2,15 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs/Rx';
 
+import { SocketService } from './socket.service'
 import { Message } from '../models/message.model';
-
-declare let io: any;
 
 @Injectable()
 export class MessagingService {
   private socket: any;
-  private url: string;
 
-  constructor() {}
-
-  init(socket: any) {
-    this.socket = socket;
+  constructor(private socketService: SocketService) {
+    this.socket = this.socketService.socket;
   }
 
   sendMessage(message: any) {

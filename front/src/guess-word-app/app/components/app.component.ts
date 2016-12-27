@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../services/auth.service';
 import { UsersService } from '../services/users.service';
+import { SocketService } from '../services/socket.service';
 
 declare let $: any;
 declare let __moduleName: string;
@@ -11,7 +12,7 @@ declare let __moduleName: string;
   selector: 'app',
   templateUrl: 'app.html',
   styleUrls: ['app.css'],
-  providers: [UsersService, AuthService]
+  providers: [ UsersService, AuthService, SocketService ]
 })
 export class AppComponent implements OnInit {
 

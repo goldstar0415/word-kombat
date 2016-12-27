@@ -12,30 +12,28 @@ import { MessagingService } from '../../../services/messaging.service';
 import { Message } from '../../../models/message.model';
 import { User } from '../../../models/user.model';
 
-const basePath = 'guess-word-app/app/components/chat/chat-area/'
+declare let __moduleName: string;
 
 @Component({
+  moduleId: __moduleName,
   selector: 'chat-area',
-  templateUrl: basePath + 'chat-area.html',
-  styleUrls: [basePath + 'chat-area.css'],
+  templateUrl: 'chat-area.html',
+  styleUrls: ['chat-area.css'],
   providers: [MessagingService]
 })
 export class ChatAreaComponent implements OnInit, OnDestroy {
 
-  @Input() private socket: any;
   @ViewChild('chat') private chatContainer: ElementRef;
 
   private messages: Message[];
   private message: Message;
   private connection;
 
-  constructor(private messagingService: MessagingService) {
-  }
+  constructor(private messagingService: MessagingService) {}
 
   ngOnInit() {
     this.messages = [];
     
-    this.messagingService.init(this.socket);
     this.connection = this.messagingService.getMessages().subscribe(message => {
       // Max 500 messages in chat
       if(this.messages.length >= 500) {

@@ -9,8 +9,7 @@ import { User } from '../models/user.model';
 @Injectable()
 export class LeadersService {
 
-  constructor(private http: Http) {
-  }
+  constructor(private http: Http) {}
 
   getLeaders(): Observable<User[]> {
     return this.http.get('api/leaderboards')

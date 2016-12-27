@@ -25,7 +25,6 @@ declare let __moduleName: string;
 export class WordInputsComponent implements OnInit {
 
   @Input() private word: string;
-  @Input() private socket: any;
   @Output() private wordEntered = new EventEmitter<string>();
 
   private message: Message;
@@ -49,8 +48,6 @@ export class WordInputsComponent implements OnInit {
     } else {
       this.message = new Message(null, new User(), null);
     }
-
-      this.messagingService.init(this.socket);
   }
 
   enterLetter(word: string) {

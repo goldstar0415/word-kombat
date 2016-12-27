@@ -9,28 +9,39 @@ import {
 
 import { Observable, ReplaySubject } from 'rxjs/Rx';
 
+import { SocketService } from './socket.service';
 import { User } from '../models/user.model';
 
 @Injectable()
-export class UsersService extends ReplaySubject<string>  {
+export class UsersService extends ReplaySubject<User[]> {
   private socket: any;
+  private users: User[];
 
-  constructor(private http: Http) {
+  constructor(
+    private http: Http,
+    private socketService: SocketService
+  ) {
     super();
-  }
-
-  init(socket: any) {
-    this.socket = socket;
+    this.socket = this.socketService.socket;
+    this.socket.on('user-connected', users => {
+      this.users = users;
+      this.next(users);
+    });
   }
 
   getUsers(): Observable<User[]> {
     let observable = new Observable(observer => {
       this.socket.on('user-connected', users => {
-        observer.next(users);
+        this.users = users;
         this.next(users);
+        observer.next(users);
       });
     });
     return observable;
+  }
+
+  getAllUsers(): User[] {
+    return this.users;
   }
 
   getById(id: number): Observable<User> | any {
@@ -47,7 +58,7 @@ export class UsersService extends ReplaySubject<string>  {
       }).catch(this.handleError);
   }
 
-  handleError(error: Response | any) {
+  private handleError(error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {
       const body = error.json() || '';
