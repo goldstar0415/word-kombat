@@ -116,8 +116,8 @@ $(document).ready(function() {
         Materialize.toast("Sign up successfully", 2500, 'rounded');
         window.sessionStorage.setItem('token', res.token);
         window.location.href = "/chat";
-      }).fail(err => {
-        setValidationError(err.responseJSON, "signup");
+      }).fail(error => {
+        setValidationError(error.responseJSON, "signup");
       });
     } else {
       setValidationError(validationStatus, "signup");
@@ -143,8 +143,8 @@ $(document).ready(function() {
         Materialize.toast("Logged in successfully", 2500, 'rounded');
         window.sessionStorage.setItem('token', res.token);
         window.location.href = "/chat";
-      }).fail(err => {
-        setValidationError(err.responseJSON, "login");
+      }).fail(error => {
+        setValidationError(error.responseJSON, "login");
       });
       
     } else {
@@ -168,8 +168,18 @@ $(document).ready(function() {
 
 // Set validation error to appropriate fields
 function setValidationError(error, type) {
-  // TODO
-  Materialize.toast(error.message || "Unknown error", 2500);
+  if(error.target === 'username') {
+    $("#signup input.username").addClass("invalid");
+    $("#signup label.username").attr("data-error", error.message);
+  } else if(error.target === 'email') {
+    $(`#${type} input.email`).addClass("invalid");
+    $(`#${type} label.email`).attr("data-error", error.message);
+  } else if(error.target === 'password') {
+    $(`#${type} input.password`).addClass("invalid");
+    $(`#${type} label.password`).attr("data-error", error.message);
+  } else {
+    Materialize.toast(error.message || "Unknown error", 2500);
+  }
 }
 
 // Checking credentials
@@ -197,7 +207,7 @@ function validateUserDetails(username, email, password) {
     };
   }
 
-  return {message: ""};
+  return {message: null};
 
 }
 

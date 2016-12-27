@@ -24,22 +24,20 @@ router.post('/login', (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
 
-  checkEmail(email, res);
-  checkPassword(password, res);
+  if(!isEmailValid(email, res)) return;
+  if(!isPasswordValid(password, res)) return;
 
   userRepository.findByEmail(email)
     .then(user => {
       if(!user) {
-        res.status(404);
-        return res.json({
+        return res.status(404).send({
           message: "User with this email not found",
           target: "email"
         });
       } else if(passwordHash.verify(password, user.password)) {
         sendToken(user, "Signed In successfuly", res);
       } else {
-        res.status(403);
-        return res.json({
+        return res.status(403).send({
           message: "Invalid password",
           target: "password"
         });
@@ -74,25 +72,23 @@ router.post('/signup', (req, res) => {
   let username = req.body.username;
   let password = req.body.password;
 
-  checkEmail(email, res);
-  checkUsername(username, res);
-  checkPassword(password, res);
+  if(!isEmailValid(email, res)) return;
+  if(!isUsernameValid(username, res)) return;
+  if(!isPasswordValid(password, res)) return;
 
   userRepository.findByEmail(email).then(user => {
 
     if(!!user) {
-      res.status(406)
-      return res.json({
-        message: "Error: user with this email already exists",
+      return res.status(406).send({
+        message: "User with this email already exists",
         target: "email"
       });
     }
 
     userRepository.findByName(username).then(user => {
       if(!!user) {
-        res.status(406)
-        return res.json({
-          message: "Error: user with this name already exists",
+        return res.status(406).send({
+          message: "User with this name already exists",
           target: "username"
         });
       }
@@ -151,46 +147,49 @@ function sendToken(user, message, res) {
   });
 }
 
-function checkEmail(email, res) {
+function isEmailValid(email, res) {
   const VALID_EMAIL_REGEX = /^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
   let isEmailValid = !!email && !!email.trim() 
     && VALID_EMAIL_REGEX.test(email);
 
   if(!isEmailValid) {
-    res.status(403);
-    return res.json({
+    res.status(403).send({
       message: "Email is invalid",
       target: "email"
     });
+    return false;
   }
+  return true;
 }
 
-function checkUsername(username, res) {
+function isUsernameValid(username, res) {
   const VALID_USERNAME_REGEX = /^\w{4,30}$/;
   let isUsernameValid = !!username && !!username.trim() 
     && VALID_USERNAME_REGEX.test(username);
 
   if(!isUsernameValid) {
-    res.status(403);
-    return res.json({
+    res.status(403).send({
       message: "Username is invalid",
       target: "username"
     });
+    return false;
   }
+  return true;
 }
 
-function checkPassword(password, res) {
+function isPasswordValid(password, res) {
   const VALID_PASSWORD_REGEX = /^\S{6,30}$/;
   let isPasswordValid = !!password && !!password.trim()
     && VALID_PASSWORD_REGEX.test(password);
 
   if(!isPasswordValid) {
-    res.status(403);
-    return res.json({
+    res.status(403).send({
       message: "Password is invalid",
       target: "password"
     });
+    return false;
   }
+  return true;
 }
 
 module.exports = router;
