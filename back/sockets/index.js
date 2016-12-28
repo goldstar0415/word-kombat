@@ -1,5 +1,4 @@
 const socketio = require('socket.io');
-const sharedsession = require("express-socket.io-session");
 
 const log = require('../logger');
 
@@ -34,7 +33,6 @@ const getWords = (words, io, amount) => {
 
 module.exports.listen = (app, session) => {
   const io = socketio.listen(app);
-  io.use(sharedsession(session));
 
   let users = [];
   let words = [];

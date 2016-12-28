@@ -5,10 +5,12 @@ const router = express.Router();
 const log = require('../logger');
 const userRepository = new (require("../repositories/user.repository"))();
 
+const passport = require('../passport/jwt');
+
 /**
  * @api {get} api/users/ Request information about all users
- * @apiName getUsers 
- * @apiGroup Users 
+ * @apiName getUsers
+ * @apiGroup Users
  *
  * @apiSuccess {Integer} id User Id.
  * @apiSuccess {String} type Type of the user.
@@ -139,7 +141,16 @@ router.get('/:email(.+\@.+\..+)', (req, res) => {
  * @apiError UserNotFound The <code>id</code> of the User was not found.
  * @apiError Invalid data.
 */
-router.put('/:id(\\d+)', (req, res) => {
+router.put('/:id(\\d+)',
+    passport.authenticate('jwt', passport.jwtSettings),
+    (req, res) => {
+
+  if(req.params.id != req.user.id) {
+    return res.status(403).json({
+      status: 403,
+      message: "You haven't got owner privileges"
+    });
+  }
 
   let user = req.body;
   user.password = passwordHash.generate(user.password);
@@ -168,7 +179,17 @@ router.put('/:id(\\d+)', (req, res) => {
  * @apiError UserNotFound The <code>id</code> of the User was not found.
  * @apiError NoTokenProvided Only authenticated users can access the data.
 */
-router.delete('/:id(\\d+)', (req, res) => {
+router.delete('/:id(\\d+)',
+    passport.authenticate('jwt', passport.jwtSettings),
+    (req, res) => {
+
+  if(req.params.id != req.user.id) {
+    return res.status(403).json({
+      status: 403,
+      message: "You haven't got owner privileges"
+    });
+  }
+
   userRepository.delete(req.params.id)
     .then(user => {
       res.json(user);

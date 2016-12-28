@@ -1,9 +1,4 @@
 {
-  "session": {
-    "secret": "some_random_secter",
-    "resave": true,
-    "saveUninitialized": true
-  },
   "jwt": {
     "secret": "there-is-no-spoon",
     "expires": "24hours"
