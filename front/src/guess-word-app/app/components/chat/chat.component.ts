@@ -12,7 +12,7 @@ import { Word } from '../../models/word.model';
 import { User } from '../../models/user.model';
 import { Message } from '../../models/message.model';
 
-declare let __moduleName: string;
+declare const __moduleName: string;
 
 @Component({
   moduleId: __moduleName,

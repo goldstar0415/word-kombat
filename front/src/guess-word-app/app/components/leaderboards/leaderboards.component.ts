@@ -3,26 +3,25 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user.model';
 import { LeadersService } from '../../services/leaders.service';
 
-const basePath = 'guess-word-app/app/components/leaderboards/';
+declare const __moduleName: string;
 
 @Component({
+  moduleId: __moduleName,
   selector: 'leaderboards',
-  templateUrl: basePath + 'leaderboards.html',
-  styleUrls: [basePath + 'leaderboards.css'],
+  templateUrl: 'leaderboards.html',
+  styleUrls: ['leaderboards.css'],
   providers: [LeadersService]
 })
 export class LeaderboardsComponent implements OnInit {
 
   private leaders: User[];
 
-  constructor(private leadersService: LeadersService) {
-  }
+  constructor(private leadersService: LeadersService) {}
 
   ngOnInit() {
     this.leaders = [];
     this.leadersService.getLeaders()
       .subscribe(leaders  => {
-        console.log(leaders);
         this.leaders = leaders.sort((prev, next) => next.score - prev.score);
       }, error =>  {
         console.error(error);

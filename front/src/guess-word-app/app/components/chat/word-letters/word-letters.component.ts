@@ -5,12 +5,13 @@ import {
   EventEmitter
 } from '@angular/core';
 
-const basePath = 'guess-word-app/app/components/chat/word-letters/';
+declare const __moduleName: string;
 
 @Component({
+  moduleId: __moduleName,
   selector: 'word-letters',
-  templateUrl: basePath + 'word-letters.html',
-  styleUrls: [basePath + 'word-letters.css']
+  templateUrl: 'word-letters.html',
+  styleUrls: ['word-letters.css']
 })
 export class WordLettersComponent {
 

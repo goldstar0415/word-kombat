@@ -4,12 +4,13 @@ import {
   OnInit
 } from '@angular/core';
 
-const basePath = 'guess-word-app/app/components/chat/word-card/';
+declare const __moduleName: any;
 
 @Component({
+  moduleId: __moduleName,
   selector: 'word-card',
-  templateUrl: basePath + 'word-card.html',
-  styleUrls: [basePath + 'word-card.css']
+  templateUrl: 'word-card.html',
+  styleUrls: ['word-card.css']
 })
 export class WordCardComponent implements OnInit {
 

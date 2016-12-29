@@ -41,7 +41,7 @@ module.exports.listen = (app, session) => {
 
     let userId;
 
-    if(!!socket.handshake.session.passport) {
+/*    if(!!socket.handshake.session.passport) {
       userId = socket.handshake.session.passport.user;
       log.info(userId);
 
@@ -53,11 +53,11 @@ module.exports.listen = (app, session) => {
       });
 
     } else {
-      let user = new User(1, null, 'guest' + users.length,
+*/    let user = new User(1, null, 'guest' + users.length,
         null, 'images/users/noIco.png', 0, 1);
       users.push(user);
       io.emit('user-connected', users.map(user => user.values));
-    }
+    // }
 
     if (words.length > 0) {
       io.emit('word', words[0]);

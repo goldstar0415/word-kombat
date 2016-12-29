@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
-const basePath = 'guess-word-app/app/components/account/user-info/user-progress/';
-
-declare let Chart: any;
-declare let $: any;
+declare const __moduleName: string;
+declare const Chart: any;
+declare const $: any;
 
 @Component({
+  moduleId: __moduleName,
   selector: 'user-progress',
-  templateUrl: basePath + 'user-progress.html',
-  styleUrls: [basePath + 'user-progress.css']
+  templateUrl: 'user-progress.html',
+  styleUrls: ['user-progress.css']
 })
 export class UserProgressComponent implements OnInit {
 

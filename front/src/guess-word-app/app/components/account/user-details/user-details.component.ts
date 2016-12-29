@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 import { UsersService } from '../../../services/users.service';
 import { User } from '../../../models/user.model';
 
-declare let __moduleName: string;
+declare const __moduleName: string;
 
 @Component({
   moduleId: __moduleName,

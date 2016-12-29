@@ -12,7 +12,7 @@ import { MessagingService } from '../../../services/messaging.service';
 import { Message } from '../../../models/message.model';
 import { User } from '../../../models/user.model';
 
-declare let __moduleName: string;
+declare const __moduleName: string;
 
 @Component({
   moduleId: __moduleName,

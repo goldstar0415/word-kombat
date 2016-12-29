@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
-declare let $:any;
-
-const basePath = 'guess-word-app/app/components/account/user-info/';
+declare const __moduleName: string;
+declare const $: any;
 
 @Component({
+  moduleId: __moduleName,
   selector: 'user-info',
-  templateUrl: basePath + 'user-info.html',
-  styleUrls: [basePath + 'user-info.css']
+  templateUrl: 'user-info.html',
+  styleUrls: ['user-info.css']
 })
 export class UserInfoConponent implements OnInit {
 

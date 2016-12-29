@@ -4,8 +4,8 @@ import { AuthService } from '../services/auth.service';
 import { UsersService } from '../services/users.service';
 import { SocketService } from '../services/socket.service';
 
-declare let $: any;
-declare let __moduleName: string;
+declare const $: any;
+declare const __moduleName: string;
 
 @Component({
   moduleId: __moduleName,

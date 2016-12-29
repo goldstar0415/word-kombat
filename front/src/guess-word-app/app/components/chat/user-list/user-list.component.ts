@@ -2,12 +2,13 @@ import { Component, Input } from '@angular/core';
 
 import { User } from '../../../models/user.model';
 
-const basePath = 'guess-word-app/app/components/chat/user-list/';
+declare const __moduleName: string;
 
 @Component({
+  moduleId: __moduleName,
   selector: 'user-list',
-  templateUrl: basePath + 'user-list.html',
-  styleUrls: [basePath + 'user-list.css']
+  templateUrl: 'user-list.html',
+  styleUrls: ['user-list.css']
 })
 export class UserListComponent {
 

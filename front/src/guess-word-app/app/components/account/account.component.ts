@@ -4,7 +4,7 @@ import { User } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
 import { UsersService } from '../../services/users.service';
 
-declare let __moduleName: string;
+declare const __moduleName: string;
 
 @Component({
   moduleId: __moduleName,
