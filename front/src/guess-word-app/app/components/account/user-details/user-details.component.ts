@@ -16,6 +16,7 @@ export class UserDetailsComponent {
   @Input() private user: User;
 
   constructor(private usersService: UsersService) {
+    this.user = new User();
   }
 
   update() {

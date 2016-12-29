@@ -25,12 +25,15 @@ export class AccountComponent implements OnInit {
   }
   
   ngOnInit() {
-    this.usersService.getById(this.authService.getUserId())
-      .subscribe(user => {
-        this.currentUser = user;
-      }, error => {
-        console.error(error);
-      });
+    let id = this.authService.getUserId();
+    if(id) {
+      this.usersService.getById(id)
+        .subscribe(user => {
+          this.currentUser = user;
+        }, error => {
+          console.error(error);
+        });
+    }
   }
 
 }

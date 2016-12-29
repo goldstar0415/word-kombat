@@ -1,5 +1,7 @@
 const socketio = require('socket.io');
+const socketioJwt = require('socketio-jwt');
 
+const config = require('../config');
 const log = require('../logger');
 
 const wordRepository = new (require('../repositories/word.repository'))();
@@ -12,87 +14,95 @@ const Word = require('../models/word.model');
 const shuffle = require('../util/shuffle');
 
 const getWords = (words, io, amount) => {
-  return wordRepository.getRandomWords(amount).then(retraivedWords => {
-
-    words = retraivedWords.map(word => {
-      let letters = shuffle(word.value);
-      return {
-        id: word.id,
-        value: word.value,
-        letters: letters,
-        image: word.image,
-        hint: word.hint
-      };
+  return wordRepository.getRandomWords(amount)
+    .then(retraivedWords => {
+      words = retraivedWords.map(word => {
+        let letters = shuffle(word.value);
+        return {
+          id: word.id,
+          value: word.value,
+          letters: letters,
+          image: word.image,
+          hint: word.hint
+        };
+      });
+      io.emit('word', words[0]);
+      return words;
     });
-
-    io.emit('word', words[0]);
-
-    return words;
-  });
 };
 
-module.exports.listen = (app, session) => {
+module.exports.listen = app => {
   const io = socketio.listen(app);
 
+  let amountOfGuests = 0;
   let users = [];
   let words = [];
 
+  io.use(socketioJwt.authorize({
+    secret: config.get('jwt:secret'),
+    handshake: true,
+    fail: (error, data, accept) => {
+      if (data.request) {
+        accept(null);
+      } else {
+        accept(null, false);
+      }
+    }
+  }));
+
   io.on('connection', socket => {
 
-    let userId;
-
-/*    if(!!socket.handshake.session.passport) {
-      userId = socket.handshake.session.passport.user;
-      log.info(userId);
+    if(!!socket.decoded_token) {
+      let userId = socket.decoded_token.id;
 
       userRepository.findById(userId).then(user => {
         users.push(user);
         io.emit('user-connected', users);
+        socket.handshake.user = user;
       }).catch(error => {
         log.warn(error);
       });
-
     } else {
-*/    let user = new User(1, null, 'guest' + users.length,
-        null, 'images/users/noIco.png', 0, 1);
+      amountOfGuests++;
+      let user = new User(null, null, 'guest' + amountOfGuests,
+        null, 'http://www.robohash.org/' + amountOfGuests, 0, 1);
       users.push(user);
-      io.emit('user-connected', users.map(user => user.values));
-    // }
+      socket.handshake.user = user;
+      io.emit('user-connected', users);
+    }
 
-    if (words.length > 0) {
+/*    if (words.length > 0) {
       io.emit('word', words[0]);
     } else {
       getWords(words, io, 10).then(retraivedWords => words = retraivedWords);
-    }
+    }*/
 
     socket.on('new-message', message => {
-      console.log("MESSAGE", JSON.stringify(message));
-
-      if(!!socket.handshake.session.passport) {
-        message.user = users.filter(user => user.id === userId)[0];
-      }
-
-
+/*
       if (words.length > 0) {
         if (message.text.toLowerCase() === words[0].value.toLowerCase()) {
-          message.points = words[0].value.length;
+          message.points = words[0].value.length;*/
 
-          if(!!socket.handshake.session.passport) {
-            userRepository.findById(userId).then(user => {
-              user.score += message.points;
-              user.save();
-              
-              for(let u of users) {
-                if(u.id === userId) {
-                  u.score = user.score;
-                }
-              }
+          if(!!socket.handshake.user) {
+            message.user = socket.handshake.user;
 
-              io.emit('user-connected', users);
-            });
+            userRepository.findById(message.user.id)
+              .then(user => {
+                user.score += message.points;
+                user.save();
+
+                users.forEach(u => {
+                  if(u.id === user.id) {
+                    u.score = user.score;
+                  }
+                });
+
+                io.emit('user-connected', users);
+              })
+              .catch(error => {});
           }
           
-          words.shift();
+/*          words.shift();
           if (words.length > 0) {
             io.emit('word', words[0]);
           } else {
@@ -102,15 +112,16 @@ module.exports.listen = (app, session) => {
       } else {
         getWords(words, io, 10);
       }
-      
+*/      
       io.emit('message', message);
 
     });
 
     socket.on('disconnect', () => {
-      users = [];
-      io.emit('user-connected', []);
-      log.info('SOCKET DISCONNECT');
+      if(!!socket.handshake.user) {
+        users = users.filter(user => user.name !== socket.handshake.user.name)
+        io.emit('user-connected', users);
+      }
     });
 
   });

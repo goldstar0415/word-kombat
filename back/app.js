@@ -30,7 +30,7 @@ app.set('view engine', 'pug');
 app.set('port', config.get('port'));
 app.set('ip', config.get('host'));
 
-io.listen(http, null);
+io.listen(http);
 
 app.use('/', indexController);
 app.use('/api/users', userController);

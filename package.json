@@ -57,6 +57,7 @@
     "sequelize": "^3.23.6",
     "socket.io": "^1.7.2",
     "socket.io-client": "^1.7.2",
+    "socketio-jwt": "^4.5.0",
     "systemjs": "0.19.40",
     "winston": "^2.2.0",
     "zone.js": "^0.7.4"
