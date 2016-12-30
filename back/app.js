@@ -20,7 +20,7 @@ const userController = require('./controllers/user.controller');
 const leaderboardsController = require('./controllers/leaderboards.controller');
 
 app.use(passport.initialize());
-app.use(httpLogger('dev'));
+// app.use(httpLogger('dev'));
 app.use(bodyParser.json({limit: '5mb'}));
 app.use(bodyParser.urlencoded({ extended: false, limit: '5mb' }));
 app.use(cookieParser());

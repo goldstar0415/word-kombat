@@ -23,7 +23,7 @@ class User {
   }
 
   toString() {
-    return JSON.strigify(this);
+    return JSON.stringify(this);
   }
 
 }

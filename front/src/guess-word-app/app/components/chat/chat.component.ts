@@ -18,8 +18,7 @@ declare const __moduleName: string;
   moduleId: __moduleName,
   selector: 'chat',
   templateUrl: 'chat.html',
-  styleUrls: ['chat.css'],
-  providers: [WordsService]
+  styleUrls: ['chat.css']
 })
 export class ChatComponent implements OnInit, OnDestroy {
 
@@ -37,7 +36,7 @@ export class ChatComponent implements OnInit, OnDestroy {
  
   ngOnInit() {
     this.users = this.usersService.getAllUsers();
-    this.word = new Word();
+    this.word = this.wordsService.getCurrentWord();
     this.typedWord = "";
     this.letters = this.word.letters.slice()
 

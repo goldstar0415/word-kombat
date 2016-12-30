@@ -1,0 +1,10 @@
+INSERT INTO "Words" VALUES(1, 'cat', 'http://hk5h1jrb20jxth2s0b2jfj.wpengine.netdna-cdn.com/wp-content/uploads/2015/07/cat-179842_640.jpg', 'It is an animal');
+INSERT INTO "Words" VALUES(2, 'dog', 'http://dreamreader.net/wp-content/uploads/2016/09/dog-1210559_640.jpg', 'It is an animal');
+INSERT INTO "Words" VALUES(3, 'bird', 'http://www.thisiscolossal.com/wp-content/uploads/2013/04/bird-3.jpg', 'It is an animal');
+INSERT INTO "Words" VALUES(4, 'wolf', 'http://assets.worldwildlife.org/photos/536/images/hero_small/shutterstock_78609682.jpg?1345525199', 'It is an animal');
+INSERT INTO "Words" VALUES(5, 'fox', 'http://www.incrediblesnaps.com/wp-content/uploads/2013/03/cute-fox-photographs-2.jpg', 'It is an animal');
+INSERT INTO "Words" VALUES(6, 'lion', 'http://animalstime.com/wp-content/uploads/2012/04/3.jpg', 'It is an animal');
+INSERT INTO "Words" VALUES(7, 'tiger', 'http://assets.worldwildlife.org/photos/907/images/hero_small/sumatran-tiger-hero_92514619.jpg?1345581518', 'It is an animal');
+INSERT INTO "Words" VALUES(8, 'hen', 'http://www.cambshenrescue.com/sitebuildercontent/sitebuilderpictures/hen2.jpg', 'It is an animal');
+INSERT INTO "Words" VALUES(9, 'cow', 'https://cdn.arstechnica.net/wp-content/uploads/2015/04/1024px-Cow-IMG_2050-640x480.jpg', 'It is an animal');
+INSERT INTO "Words" VALUES(10, 'bull', 'http://img00.deviantart.net/6548/a/large/photography/phototourist/spanish_bull.jpg', 'It is an animal');
