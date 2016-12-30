@@ -6,7 +6,7 @@ import { SocketService } from './socket.service';
 import { Word } from '../models/word.model';
 
 @Injectable()
-export class WordsService extends ReplaySubject<Word> {
+export class WordsService extends ReplaySubject<any> {
   private socket: any;
   private currentWord: Word;
 
@@ -14,9 +14,9 @@ export class WordsService extends ReplaySubject<Word> {
     super();
     this.socket = this.socketService.socket;
 
-    this.socket.on('word', word => {
-      this.currentWord = word;
-      this.next(word);
+    this.socket.on('word', res => {
+      this.currentWord = res.word;
+      this.next(res);
     });
   }
 

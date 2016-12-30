@@ -1,7 +1,6 @@
 import {
   Component,
-  OnInit,
-  OnDestroy
+  OnInit
 } from '@angular/core';
 
 import { UsersService } from '../../services/users.service';
@@ -20,7 +19,7 @@ declare const __moduleName: string;
   templateUrl: 'chat.html',
   styleUrls: ['chat.css']
 })
-export class ChatComponent implements OnInit, OnDestroy {
+export class ChatComponent implements OnInit {
 
   private users: User[];
   private word: Word;
@@ -40,17 +39,11 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.typedWord = "";
     this.letters = this.word.letters.slice()
 
-    this.wordsService.subscribe(word => {
-      if(!!word) {
-        this.word = word;
-
-        if(this.wordCounter < 10) {
-          this.wordCounter++;
-        } else {
-          this.wordCounter = 1;
-        }
-
-        this.letters = word.letters.slice();
+    this.wordsService.subscribe(res => {
+      if(res && res.word && res.index) {
+        this.word = res.word;
+        this.wordCounter = res.index;
+        this.letters = this.word.letters.slice();
       }
     });
     
@@ -58,9 +51,6 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.users = users;
     });
 
-  }
-
-  ngOnDestroy() {
   }
 
   onLetterClicked(letter: string) {

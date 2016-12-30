@@ -54,7 +54,10 @@ module.exports.listen = app => {
     }
 
     if(words.length > 0) {
-      io.emit('word', words[0]);
+      io.emit('word', {
+        word: words[0],
+        index: 11 - words.length
+      });
     } else {
       getWords(io, 10).then(fetchedWords => words = fetchedWords);
     }
@@ -68,7 +71,10 @@ module.exports.listen = app => {
             message.points = calculateScore(words[0]);
             words.shift();
             if (words.length > 0) {
-              io.emit('word', words[0]);
+              io.emit('word', {
+                word: words[0],
+                index: 11 - words.length
+              });
             } else {
               getWords(io, 10).then(fetchedWords => words = fetchedWords);
             }
@@ -124,7 +130,10 @@ function getWords(io, amount) {
           hint: word.hint
         };
       });
-      io.emit('word', words[0]);
+      io.emit('word', {
+        word: words[0],
+        index: 1
+      });
       return words;
     })
     .catch(error => {
