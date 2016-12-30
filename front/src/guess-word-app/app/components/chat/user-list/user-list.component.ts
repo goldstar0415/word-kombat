@@ -11,7 +11,5 @@ declare const __moduleName: string;
   styleUrls: ['user-list.css']
 })
 export class UserListComponent {
-
   @Input() private users: User[];
-
 }

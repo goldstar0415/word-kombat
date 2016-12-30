@@ -1,6 +1,6 @@
-@require 'nib'
+@require('nib')
 
-@import '../../../../../styles/parts/variables'
+@import('../../../../../styles/parts/variables')
 
 .users
     
@@ -12,21 +12,21 @@
     height: 60vh
     background-color: blue-grey-darken-3
     
-    // User details
     li
-      height: 46px
-      color: grey-lighten-5
-      display: inline-block
-      width: 100%
-      border-bottom: 1px solid black
+      align-items: center
       background-color: blue-grey-darken-4
-      padding: 0
+      border-bottom: 1px solid black
+      color: grey-lighten-5
+      display: flex
+      height: 46px
+      justify-content: flex-start
+      padding: 16px
+      width: 100%
       
       &:hover
         background-color: blue-grey
         transform: scale(1.08)
-      
-      // User icon
+  
       img
         width: 36px
         height: 36px
@@ -36,16 +36,10 @@
           transform: scale(1.08)
           cursor: pointer
       
-      // User name
-      span
-        position: relative
-        bottom: 16px
-      
-      // User position
-      a.secondary-content
-        margin-top: 10px
-        margin-right: 12px
-        color: teal
+      .score
+        font-weight: bold
+        margin-left: auto
+        color: orange
 
 // Hide scrollbar but still enable scrolling
 ::-webkit-scrollbar

@@ -80,7 +80,7 @@ module.exports.listen = app => {
         user.score += message.points;
 
         users.forEach(u => {
-          if(u.id === user.id) {
+          if(u.name === user.name) {
             u.score = user.score;
           }
         });
