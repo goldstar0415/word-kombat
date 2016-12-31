@@ -13,13 +13,11 @@ const passport = require('../passport/jwt');
  * @apiGroup Users
  *
  * @apiSuccess {Integer} id User Id.
- * @apiSuccess {String} type Type of the user.
- * @apiSuccess {String} first_name First name of the User.
- * @apiSuccess {String} second_name Second name of the User.
+ * @apiSuccess {String} username name of the User.
  * @apiSuccess {String} email Email of the User.
- * @apiSuccess {String} phone Phone number of the User.
- * @apiSuccess {String} bio User description
- * @apiError NoTokenProvided Only authenticated users can access the data.
+ * @apiSuccess {String} icon User's icon.
+ * @apiSuccess {Number} score User's score.
+ * @apiSuccess {Rank} rank User's rank.
 */
 router.get('/', (req, res) => {
   userRepository.findAll()
@@ -39,15 +37,13 @@ router.get('/', (req, res) => {
  * @apiGroup Users
  *
  * @apiSuccess {Integer} id User Id.
- * @apiSuccess {String} type Type of the user.
- * @apiSuccess {String} first_name First name of the User.
- * @apiSuccess {String} second_name Second name of the User.
+ * @apiSuccess {String} username name of the User.
  * @apiSuccess {String} email Email of the User.
- * @apiSuccess {String} phone Phone number of the User.
- * @apiSuccess {String} bio User description
+ * @apiSuccess {String} icon User's icon.
+ * @apiSuccess {Number} score User's score.
+ * @apiSuccess {Rank} rank User's rank.
  *
  * @apiError UserNotFound   The <code>id</code> of the User was not found.
- * @apiError NoTokenProvided Only authenticated users can access the data.
  *
 */
 router.get('/:id(\\d+)', (req, res) => {
@@ -71,15 +67,13 @@ router.get('/:id(\\d+)', (req, res) => {
  * @apiGroup Users
  *
  * @apiSuccess {Integer} id User Id.
- * @apiSuccess {String} type Type of the user.
- * @apiSuccess {String} first_name First name of the User.
- * @apiSuccess {String} second_name Second name of the User.
+ * @apiSuccess {String} username name of the User.
  * @apiSuccess {String} email Email of the User.
- * @apiSuccess {String} phone Phone number of the User.
- * @apiSuccess {String} bio User description
+ * @apiSuccess {String} icon User's icon.
+ * @apiSuccess {Number} score User's score.
+ * @apiSuccess {Rank} rank User's rank.
  *
  * @apiError UserNotFound The <code>first_name</code> of the User was not found.
- * @apiError NoTokenProvided Only authenticated users can access the data.
  *
 */
 router.get('/:name(\\w+)', (req, res) => {
@@ -103,15 +97,13 @@ router.get('/:name(\\w+)', (req, res) => {
  * @apiGroup Users
  *
  * @apiSuccess {Integer} id User Id.
- * @apiSuccess {String} type Type of the user.
- * @apiSuccess {String} first_name First name of the User.
- * @apiSuccess {String} second_name Second name of the User.
+ * @apiSuccess {String} username name of the User.
  * @apiSuccess {String} email Email of the User.
- * @apiSuccess {String} phone Phone number of the User.
- * @apiSuccess {String} bio User description
+ * @apiSuccess {String} icon User's icon.
+ * @apiSuccess {Number} score User's score.
+ * @apiSuccess {Rank} rank User's rank.
  *
  * @apiError UserNotFound The <code>email</code> of the User was not found.
- * @apiError NoTokenProvided Only authenticated users can access the data.
  *
 */
 router.get('/:email(.+\@.+\..+)', (req, res) => {
@@ -133,8 +125,12 @@ router.get('/:email(.+\@.+\..+)', (req, res) => {
  * @apiName updateUser 
  * @apiGroup Users
  *
- * @apiParam {Integer} id User id.
- * @apiParam {User} user User to update.
+ * @apiSuccess {Integer} id User Id.
+ * @apiSuccess {String} username name of the User.
+ * @apiSuccess {String} email Email of the User.
+ * @apiSuccess {String} icon User's icon.
+ * @apiSuccess {Number} score User's score.
+ * @apiSuccess {Rank} rank User's rank.
  *
  * @apiSuccess {String} message Success message.
  * @apiError NoTokenProvided Only authenticated users can access the data.

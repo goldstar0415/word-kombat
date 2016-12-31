@@ -1,20 +1,31 @@
-@require('nib')
+@reuqire('nib')
 
 @import('../../../../../styles/parts/variables')
 
-ul.collapsible
-  width: 100%
-  color: blue-grey-lighten-5
+div
+  background-color: blue-grey-lighten-5
+  padding: 10px
+  margin: 10px
   
-  li
-    .collapsible-header
-      background-color: blue-grey-darken-4
-      
-    .collapsible-body
-      min-height: 75vh
-      background-color: blue-grey-darken-3
-      overflow: hidden
-      
-      user-dictionary
-        height: 200px
-        overflow-y: scroll
+  h1
+    text-transform: uppercase
+    text-align: center
+    font-size: 1.8rem
+    font-weight: bold
+
+  ul.collection
+    color: grey-darken-4
+    li.collection-item
+      b
+        font-weight: bold
+        font-size: 1.1rem
+        padding: 4px
+        background-color: grey-darken-4
+        color: grey-lighten-5
+        border-radius: 3px
+
+  canvas#progress
+    margin: auto
+    padding: 20px
+    max-height: 500px
+    max-width: 500px

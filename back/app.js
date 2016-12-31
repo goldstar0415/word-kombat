@@ -18,9 +18,10 @@ const errorController = require('./controllers/error.controller');
 const authController = require('./controllers/auth.controller');
 const userController = require('./controllers/user.controller');
 const leaderboardsController = require('./controllers/leaderboards.controller');
+const rankController = require('./controllers/rank.controller');
 
 app.use(passport.initialize());
-// app.use(httpLogger('dev'));
+app.use(httpLogger('dev'));
 app.use(bodyParser.json({limit: '5mb'}));
 app.use(bodyParser.urlencoded({ extended: false, limit: '5mb' }));
 app.use(cookieParser());
@@ -35,6 +36,7 @@ io.listen(http);
 app.use('/', indexController);
 app.use('/api/users', userController);
 app.use('/api/leaderboards', leaderboardsController);
+app.use('/api/ranks', rankController);
 app.use('/api/auth', authController);
 
 app.use(errorController.clientError);

@@ -11,6 +11,7 @@ import { Observable, ReplaySubject } from 'rxjs/Rx';
 
 import { SocketService } from './socket.service';
 import { User } from '../models/user.model';
+import { Rank } from '../models/rank.model';
 
 @Injectable()
 export class UsersService extends ReplaySubject<User[]> {
@@ -54,6 +55,13 @@ export class UsersService extends ReplaySubject<User[]> {
 
   update(id: number, user: User): Observable<User> | any {
     return this.http.put(`api/users/${id}`, user)
+      .map(res => {
+        return res.json();
+      }).catch(this.handleError);
+  }
+
+  getNextRank(score: number): Observable<Rank> | any {
+    return this.http.get(`api/ranks/${score}/next`)
       .map(res => {
         return res.json();
       }).catch(this.handleError);

@@ -1,4 +1,10 @@
 <div class="container">
-  <user-details [user]="currentUser"></user-details>
-  <user-info></user-info>
+  <user-details
+    [user]="currentUser">
+  </user-details>
+  
+  <user-info
+    [user]="currentUser"
+    [rank]="nextRank">
+  </user-info>
 </div>

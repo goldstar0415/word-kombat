@@ -1,33 +1,21 @@
-<ul class="collapsible popout hoverable" data-collapsible="accordion">
+<div class="hoverable">
+  <h1>Progress</h1>
+  
+  <canvas
+    *ngIf="user.name != 'guest'"
+    id="progress">
+  </canvas>
 
-  <li>
-    <div class="collapsible-header active">
-      <i class="material-icons">pie_chart </i>
-      <span>Progress</span>
-    </div>
-    <div class="collapsible-body">
-      <user-progress></user-progress>
-    </div>
-  </li>
+  <ul class="collection">
+    <li class="collection-item">
+      Current rank is: <b>{{ user.rank.name }}</b>
+    </li>
+    <li class="collection-item">
+      Next rank <b>{{ rank.name }}</b> achived by <b>{{ chartData[0] }}% </b>
+    </li>
+    <li class="collection-item">
+      Points to the next rank: <b>{{ rank.minScore - user.score }} pts</b>
+    </li>
+  </ul>
 
-  <li>
-    <div class="collapsible-header">
-      <i class="material-icons">history</i>
-      <span>Recent Matches</span>
-    </div>
-    <div class="collapsible-body">
-      <user-matches></user-matches>
-    </div>
-  </li>
-
-  <li>
-    <div class="collapsible-header">
-      <i class="material-icons">view_list</i>
-      <span>Dictionary </span>
-    </div>
-    <div class="collapsible-body">
-      <user-dictionary></user-dictionary>
-    </div>
-  </li>
-
-</ul>
+</div>

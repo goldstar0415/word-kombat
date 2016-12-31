@@ -1,10 +1,10 @@
 export class Rank {
 
   constructor(
-    private id=0,
-    private name='0',
-    private minScore=0,
-    private image=''
+    public id=0,
+    public name='0',
+    public minScore=0,
+    public image=''
   ) {}
 
   toString() {

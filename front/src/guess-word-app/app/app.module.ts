@@ -16,10 +16,7 @@ import { WordInputsComponent } from './components/chat/word-inputs/word-inputs.c
 import { WordLettersComponent } from './components/chat/word-letters/word-letters.component';
 import { AccountComponent } from './components/account/account.component';
 import { UserDetailsComponent } from './components/account/user-details/user-details.component';
-import { UserInfoConponent } from './components/account/user-info/user-info.component';
-import { UserDictionaryComponent } from './components/account/user-info/user-dictionary/user-dictionary.component';
-import { UserMatchesComponent } from './components/account/user-info/user-matches/user-matches.component';
-import { UserProgressComponent } from './components/account/user-info/user-progress/user-progress.component';
+import { UserInfoComponent } from './components/account/user-info/user-info.component';
 
 @NgModule({
   imports: [
@@ -48,10 +45,7 @@ import { UserProgressComponent } from './components/account/user-info/user-progr
     WordInputsComponent,
     WordLettersComponent,
     UserDetailsComponent,
-    UserInfoConponent,
-    UserDictionaryComponent,
-    UserMatchesComponent,
-    UserProgressComponent
+    UserInfoComponent
   ],
   providers: [
   ],

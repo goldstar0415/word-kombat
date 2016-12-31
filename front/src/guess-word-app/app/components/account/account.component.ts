@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { User } from '../../models/user.model';
+import { Rank } from '../../models/rank.model';
 import { AuthService } from '../../services/auth.service';
 import { UsersService } from '../../services/users.service';
 
@@ -16,12 +17,14 @@ declare const __moduleName: string;
 export class AccountComponent implements OnInit {
 
   private currentUser: User;
+  private nextRank: Rank;
 
   constructor(
     private authService: AuthService,
     private usersService: UsersService
   ) {
     this.currentUser = new User();
+    this.nextRank = new Rank();
   }
   
   ngOnInit() {
@@ -30,6 +33,12 @@ export class AccountComponent implements OnInit {
       this.usersService.getById(id)
         .subscribe(user => {
           this.currentUser = user;
+          this.usersService.getNextRank(this.currentUser.score)
+            .subscribe(rank => {
+              this.nextRank = rank;
+            }, error => {
+              console.error(error);
+            })
         }, error => {
           console.error(error);
         });
