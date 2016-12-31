@@ -8,7 +8,9 @@
     <div class="card-title activator">
       <span class="username">{{ user.name }}</span>
       <span class="score">{{ user.score }}pts</span>
-      <span class="rank">{{ user.rank }}</span>
+      <span class="rank">
+        <img src="{{ user.rank.image }}" alt="{{ user.rank.name }}" />
+      </span>
     </div>
   </div>
 

@@ -53,7 +53,7 @@ router.get('/', (req, res) => {
 router.get('/:id(\\d+)', (req, res) => {
   userRepository.findById(req.params.id)
    .then(user => {
-      if(!!user) {
+      if(user) {
         user.password = undefined;
       }
       res.json(user);

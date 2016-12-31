@@ -1,3 +1,5 @@
+import { Rank } from './rank.model';
+
 export class User {
   
   constructor(
@@ -6,7 +8,7 @@ export class User {
     public name="guest",
     public score=0,
     public icon="images/users/noIco.png",
-    public rank=0
+    public rank=new Rank()
   ) {}
 
   toString() {

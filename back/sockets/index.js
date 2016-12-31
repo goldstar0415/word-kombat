@@ -97,7 +97,7 @@ module.exports.listen = app => {
         io.emit('message', message);
 
         if(user.id) {
-          user.save();
+          userRepository.update(user.id, user);
         }
       }
 

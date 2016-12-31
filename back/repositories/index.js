@@ -1,4 +1,3 @@
-// ORM tool
 const Sequelize = require('sequelize');
 // Database configuration
 const database = require('../config').get('database');
@@ -32,7 +31,8 @@ const User = sequelize.define('User', {
 // Rank entity schema
 const Rank = sequelize.define('Rank', {
     name: Sequelize.STRING,
-    minScore: Sequelize.INTEGER
+    minScore: Sequelize.INTEGER,
+    image: Sequelize.STRING
 }, {
   timestamps: false,
 });
@@ -62,7 +62,14 @@ const MatchScore = sequelize.define('MatchScore', {
 });
 
 // User - Rank One to Many mapping
-Rank.hasMany(User, { foreignKey: 'rank' });
+Rank.hasOne(User, {
+    foreignKey: 'rank_id',
+    as: 'rank'
+});
+User.belongsTo(Rank, {
+    foreignKey: 'rank_id',
+    as: 'rank'
+});
 
 // Match - MatchScores One to Many mapping
 Match.hasMany(MatchScore);
@@ -83,8 +90,11 @@ const Competitors = sequelize.define('Competitors', {}, {timestamps: false});
 User.belongsToMany(Match, {through: Competitors});
 Match.belongsToMany(User, {through: Competitors});
 
-sequelize.models.Rank.upsert(new RankModel(1, '1', 0));
-sequelize.models.Rank.upsert(new RankModel(2, '2', 200));
-sequelize.models.Rank.upsert(new RankModel(3, '3', 400));
+sequelize.models.Rank.upsert(new RankModel(1, '1', 0, 'images/ranks/1.png'));
+sequelize.models.Rank.upsert(new RankModel(2, '2', 100, 'images/ranks/2.png'));
+sequelize.models.Rank.upsert(new RankModel(3, '3', 500, 'images/ranks/3.png'));
+sequelize.models.Rank.upsert(new RankModel(4, '4', 2000, 'images/ranks/4.png'));
+sequelize.models.Rank.upsert(new RankModel(5, '5', 10000, 'images/ranks/5.png'));
+sequelize.models.Rank.upsert(new RankModel(6, '6', 50000, 'images/ranks/6.png'));
 
 module.exports = sequelize;

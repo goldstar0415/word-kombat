@@ -3,23 +3,31 @@ const db = require('./index.js');
 class UserRepository {
   
   findById(id) {
-    return db.models.User.findById(id);
+    return db.models.User.findById(id, {
+      include: [{model: db.models.Rank, as: "rank"}]
+    });
   }
 
   findByEmail(email) {
     return db.models.User.findOne({
       where: {email: email}
+    }, {
+      include: [{model: db.models.Rank, as: "rank"}]
     });
   }
 
   findByName(username) {
     return db.models.User.findOne({
       where: {name: username}
+    }, {
+      include: [{model: db.models.Rank, as: "rank"}]
     });
   }
 
-  findAll(options) {
-    return db.models.User.findAll(options);
+  findAll() {
+    return db.models.User.findAll({
+      include: [{model: db.models.Rank, as: "rank"}]
+    });
   }
 
   add(user) {
@@ -30,17 +38,23 @@ class UserRepository {
          password: user.password,
          icon: user.icon,
          score: user.score,
-         rank: 1
+         rank_id: 1
       }, {transaction: t});
     });
   }
 
   update(id, newUser) {
-    return db.transaction(t => {
-      return db.models.User.findById(id).then(user => {
-        return user.update(newUser, {transaction: t});
-      });
-    })
+    return db.models.Rank.findAll({order: '"minScore" DESC'}).then(ranks => {
+
+      for(let i in ranks) {
+        if(newUser.score >= ranks[i].minScore) {
+          newUser.rank_id = ranks[i].id;
+          break;
+        }
+      }
+
+      return newUser.save();
+    });
   }
 
   addAll(users) {
