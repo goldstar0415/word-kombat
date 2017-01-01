@@ -5,6 +5,7 @@ import {
 } from '@angular/core';
 
 import { UsersService } from '../../services/users.service';
+import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user.model';
 
 declare const __moduleName: string;
@@ -19,7 +20,10 @@ export class NavigationComponent implements OnInit {
 
   private users: User[];
 
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.users = this.usersService.getAllUsers();

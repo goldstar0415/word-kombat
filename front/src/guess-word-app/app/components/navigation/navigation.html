@@ -93,7 +93,7 @@
       </a>
     </li>
 
-    <li class="waves-effect waves-light">
+    <li *ngIf="authService.isAuthorized()" class="waves-effect waves-light">
       <a class="tooltipped"
         [routerLink]="['account']"
         routerLinkActive="router-link-active"
