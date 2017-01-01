@@ -7,7 +7,7 @@ export class User {
     public email="",
     public name="guest",
     public score=0,
-    public icon="images/users/noIco.png",
+    public icon="",
     public rank=new Rank()
   ) {}
 
