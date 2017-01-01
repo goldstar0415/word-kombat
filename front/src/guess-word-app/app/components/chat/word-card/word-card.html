@@ -2,7 +2,7 @@
   <div class="card hoverable">
 
     <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator" src="{{ image }}" />
+      <img class="activator" src="{{ word.image }}" alt="No Image"/>
     </div>
 
     <div class="card-content">
@@ -16,27 +16,21 @@
         Hint
         <i class="material-icons right">close</i>
       </span>
-      <p>{{ hint }}</p>
+      <p>{{ word.hint }}</p>
     </div>
 
     <div class="card-action">
 
-      <button class="btn-floating waves-effect waves-dark"
-        (click)="toggleVolume()">
-          <i class="material-icons"
-            *ngIf="isVolumeEnabled">volume_up</i>
-
-          <i class="material-icons"
-            *ngIf="!isVolumeEnabled">volume_off</i>
-      </button>
-
-      <span class="btn-floating btn-large waves-effect waves-dark">
-        <i>{{ currentWordIndex }}/10</i>
+      <span class="btn-floating waves-effect waves-dark">
+        <b>{{word.letters.length}}</b>
       </span>
 
-      <button class="btn-floating waves-effect waves-dark"
-        (click)="repeat()">
-          <i class="material-icons">repeat</i>
+      <span class="btn-floating btn-large waves-effect waves-dark">
+        <b>{{ currentWordIndex }}/10</b>
+      </span>
+
+      <button class="activator btn-floating waves-effect waves-dark">
+          <i class="material-icons">help</i>
       </button>
       
     </div>

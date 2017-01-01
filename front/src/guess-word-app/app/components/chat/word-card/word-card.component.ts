@@ -4,6 +4,8 @@ import {
   OnInit
 } from '@angular/core';
 
+import { Word } from "../../../models/word.model";
+
 declare const __moduleName: any;
 
 @Component({
@@ -14,11 +16,9 @@ declare const __moduleName: any;
 })
 export class WordCardComponent implements OnInit {
 
-  @Input() private image;
-  @Input() private hint;
+  @Input() private word: Word;
   @Input() private currentWordIndex;
 
-  private isVolumeEnabled = true;
   private time = 0;
 
   ngOnInit() {
@@ -29,14 +29,6 @@ export class WordCardComponent implements OnInit {
         this.time = 1;
       }
     }, 334);
-  }
-
-  public repeat() {
-    // Some logic should be here...
-  }
-
-  public toggleVolume() {
-    this.isVolumeEnabled = !this.isVolumeEnabled;
   }
 
 }

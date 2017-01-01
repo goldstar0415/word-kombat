@@ -1,6 +1,6 @@
-@require 'nib'
+@require('nib')
 
-@import '../../../../../styles/parts/variables'
+@import('../../../../../styles/parts/variables')
 
 .word-card
    
@@ -26,12 +26,18 @@
       flex-direction: row
       align-items: center
       justify-content: center
+
+      span
+        text-align: center
+        font-weight: bold
+        &:hover
+          cursor: auto
       
       button, span
         margin: 1px
         background-color: grey-darken-4
         
-        i
+        i, b
           color: grey-lighten-5
           font-style: none
           font-size: 1.1rem
@@ -40,6 +46,6 @@
           background-color: grey-lighten-5
           box-shadow: 0 0 1px 1px grey-lighten-5
 
-          i
+          i, b
             color: grey-darken-4
             
