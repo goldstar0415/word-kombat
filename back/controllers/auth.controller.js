@@ -6,6 +6,7 @@ const router = express.Router();
 
 const log = require('../logger');
 const userRepository = new (require('../repositories/user.repository'))();
+const UserDetailsValidator = require('../util/user-details.validator');
 
 /**
  * @api {post} /api/auth Login
@@ -24,8 +25,16 @@ router.post('/login', (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
 
-  if(!isEmailValid(email, res)) return;
-  if(!isPasswordValid(password, res)) return;
+  let emailValidationResult = UserDetailsValidator.validateEmail(email);
+  let passwordValidationResult = UserDetailsValidator.validatePassword(password);
+
+  if(emailValidationResult) {
+    res.status(400).send(emailValidationResult);
+  }
+
+  if(passwordValidationResult) {
+    res.status(400).send(passwordValidationResult);
+  }
 
   userRepository.findByEmail(email)
     .then(user => {
@@ -72,14 +81,26 @@ router.post('/signup', (req, res) => {
   let username = req.body.username;
   let password = req.body.password;
 
-  if(!isEmailValid(email, res)) return;
-  if(!isUsernameValid(username, res)) return;
-  if(!isPasswordValid(password, res)) return;
+  let usernameValidationResult = UserDetailsValidator.validateUsername(username);
+  let emailValidationResult = UserDetailsValidator.validateEmail(email);
+  let passwordValidationResult = UserDetailsValidator.validatePassword(password);
+
+  if(usernameValidationResult) {
+    res.status(400).send(usernameValidationResult);
+  }
+
+  if(emailValidationResult) {
+    res.status(400).send(emailValidationResult);
+  }
+
+  if(passwordValidationResult) {
+    res.status(400).send(passwordValidationResult);
+  }
 
   userRepository.findByEmail(email).then(user => {
 
     if(!!user) {
-      return res.status(406).send({
+      return res.status(409).send({
         message: "User with this email already exists",
         target: "email"
       });
@@ -87,11 +108,12 @@ router.post('/signup', (req, res) => {
 
     userRepository.findByName(username).then(user => {
       if(!!user) {
-        return res.status(406).send({
+        return res.status(409).send({
           message: "User with this name already exists",
           target: "username"
         });
       }
+
       let newUser = {
         email: email,
         name: username,
@@ -145,51 +167,6 @@ function sendToken(user, message, res) {
     "message": message,
     "token": token
   });
-}
-
-function isEmailValid(email, res) {
-  const VALID_EMAIL_REGEX = /^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
-  let isEmailValid = !!email && !!email.trim() 
-    && VALID_EMAIL_REGEX.test(email);
-
-  if(!isEmailValid) {
-    res.status(403).send({
-      message: "Email is invalid",
-      target: "email"
-    });
-    return false;
-  }
-  return true;
-}
-
-function isUsernameValid(username, res) {
-  const VALID_USERNAME_REGEX = /^\w{4,30}$/;
-  let isUsernameValid = !!username && !!username.trim() 
-    && VALID_USERNAME_REGEX.test(username);
-
-  if(!isUsernameValid) {
-    res.status(403).send({
-      message: "Username is invalid",
-      target: "username"
-    });
-    return false;
-  }
-  return true;
-}
-
-function isPasswordValid(password, res) {
-  const VALID_PASSWORD_REGEX = /^\S{6,30}$/;
-  let isPasswordValid = !!password && !!password.trim()
-    && VALID_PASSWORD_REGEX.test(password);
-
-  if(!isPasswordValid) {
-    res.status(403).send({
-      message: "Password is invalid",
-      target: "password"
-    });
-    return false;
-  }
-  return true;
 }
 
 module.exports = router;

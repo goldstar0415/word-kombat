@@ -4,6 +4,7 @@ const router = express.Router();
 
 const log = require('../logger');
 const userRepository = new (require("../repositories/user.repository"))();
+const UserDetailsValidator = require('../util/user-details.validator');
 
 const passport = require('../passport/jwt');
 
@@ -149,11 +150,17 @@ router.put('/:id(\\d+)',
   }
 
   let user = req.body;
+
+  let validationStatus = UserDetailsValidator.validateUserDetails(user);
+  if(validationStatus) {
+    return res.status(400).json({error: validationStatus});
+  }
+
   user.password = passwordHash.generate(user.password);
 
   userRepository.update(req.params.id, user)
     .then(user => {
-      if(!!user) {
+      if(user) {
         user.password = undefined;
       }
       res.json(user);
@@ -165,7 +172,7 @@ router.put('/:id(\\d+)',
 });
 
 /**
- * @api {delete} api/users/:id Delete user with id 
+ * @api {delete} api/users/:id Delete user by id
  * @apiName deleteUser 
  * @apiGroup Users
  *

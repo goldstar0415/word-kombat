@@ -17,6 +17,11 @@
       font-size: 1.2rem
       font-weight: bold
       margin-right: auto
+      width: 120px
+      max-width: 120px
+      max-height: 64px
+      overflow: hidden
+      text-overflow: ellipsis
 
     .score
       margin-right: 6px
@@ -33,6 +38,7 @@
     background-color: blue-grey-darken-3
     margin: 0
     button
+      margin-top: 8px
       background-color: grey-darken-4
 
   .card-reveal
@@ -45,11 +51,16 @@
       align-items: center
       button
         background-color: grey-darken-4
-        span
-          background-color: grey-darken-4
-
+        
   .card-image
     img.activator
       width: 320px
       height 320px
-      
+
+label
+    &:after
+      transition-property: all
+      font-size: 0.8rem
+      transform: none
+    &:not(.active):after
+      transform: translateY(-140%)

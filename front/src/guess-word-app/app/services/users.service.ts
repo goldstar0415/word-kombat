@@ -54,7 +54,7 @@ export class UsersService extends ReplaySubject<User[]> {
   }
 
   update(id: number, user: User): Observable<User> | any {
-    return this.http.put(`api/users/${id}`, user)
+    return this.http.put(`api/users/${id}`, user, this.generateOptions())
       .map(res => {
         return res.json();
       }).catch(this.handleError);
@@ -65,6 +65,15 @@ export class UsersService extends ReplaySubject<User[]> {
       .map(res => {
         return res.json();
       }).catch(this.handleError);
+  }
+
+  private generateOptions() {
+    let token = window.sessionStorage.getItem('token');
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': token
+    });
+    return new RequestOptions({ headers: headers });
   }
 
   private handleError(error: Response | any) {

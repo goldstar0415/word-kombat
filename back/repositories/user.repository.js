@@ -1,4 +1,5 @@
 const db = require('./index.js');
+const log = require('../logger');
 
 class UserRepository {
   
@@ -53,7 +54,18 @@ class UserRepository {
         }
       }
 
-      return newUser.save();
+      try {
+        return newUser.save();
+      } catch(error) {
+        return db.models.User.findById(id)
+          .then(user => {
+            return user.update(newUser);
+          })
+          .catch(error => {
+            log.error(error);
+          });
+      }
+
     });
   }
 

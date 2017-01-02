@@ -19,7 +19,7 @@
       <i class="material-icons prefix">account_circle</i>
       <input
         [(ngModel)]="user.name"
-        class="validate"
+        [ngClass]="getUsernameInputStyles()"
         id="username"
         type="text"
         pattern="[a-zA-Z0-9]{4,30}"
@@ -27,7 +27,7 @@
       <label
         class="active"
         for="username"
-        data-error="Invalid username">
+        [attr.data-error]="userNameError">
           Username
       </label>
     </div>
@@ -36,23 +36,23 @@
       <i class="material-icons prefix">email</i>
       <input
         [(ngModel)]="user.email"
-        class="validate"
+        [ngClass]="getEmailInputStyles()"
         id="email"
         type="email"
         required="required"/>
       <label
         class="active"
         for="email"
-        data-error="Invalid Email">
+        [attr.data-error]="emailError">
           Email
       </label>
     </div>
 
     <div class="input-field">
-      <i class="material-icons prefix">vpn_key </i>
+      <i class="material-icons prefix">vpn_key</i>
       <input
         [(ngModel)]="user.password"
-        class="validate"
+        [ngClass]="getPasswordInputStyles()"
         id="password"
         type="password"
         pattern=".{6,30}"
@@ -60,14 +60,14 @@
       <label
         class="active"
         for="password"
-        data-error="Invalid password">
+        [attr.data-error]="passwordError">
           Password
       </label>
     </div>
 
     <button
       (click)="update()"
-      class="btn-large waves-effect waves-light">
+      [ngClass]="getButtonStyles()">
       <span>Save</span>
       <i class="material-icons left">save</i>
     </button>
