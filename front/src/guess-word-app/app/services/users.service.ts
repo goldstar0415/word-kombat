@@ -67,6 +67,14 @@ export class UsersService extends ReplaySubject<User[]> {
       }).catch(this.handleError);
   }
 
+  uploadImage(userId: number, image: string) {
+    let body = {image: image};
+    return this.http.patch(`api/users/${userId}/image`, body, this.generateOptions())
+      .map(res => {
+        return res.json();
+      }).catch(this.handleError);
+  }
+
   private generateOptions() {
     let token = window.sessionStorage.getItem('token');
     let headers = new Headers({

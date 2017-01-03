@@ -4,6 +4,7 @@
 
 // Navigation
 nav.nav-wrapper
+  height: 64px
   background-color: grey-darken-4
   
   // Mobile buttons
@@ -11,6 +12,7 @@ nav.nav-wrapper
     a.button-collapse
       font-size: 1rem
       margin: 0
+      height: 64px
       &:hover
         background-color: black
         border-bottom: 3px solid white
@@ -73,7 +75,6 @@ nav.nav-wrapper
   border-left: 3px solid grey-lighten-5
   background-color: black
 
-
 @media only screen and (max-width : 768px)
   // Drops navigation tabs on the right 
   ul.navigation-tabs
@@ -84,7 +85,7 @@ nav.nav-wrapper
   nav > a.brand-logo
     display: none
     
-@media only screen and (min-width : 769px)
+@media only screen and (min-width : 768px)
   // Drops mobile buttons
   ul.mobile
     display: none

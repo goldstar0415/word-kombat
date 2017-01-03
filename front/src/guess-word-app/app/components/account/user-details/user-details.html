@@ -1,7 +1,7 @@
 <div class="card sticky-action hoverable">
 
   <div class="card-image waves-effect waves-block waves-light">
-    <img class="activator" src="{{ user.icon }}"/>
+    <img class="activator" [attr.src]="user.icon"/>
   </div>
 
   <div class="card-content">
@@ -67,7 +67,7 @@
 
     <button
       (click)="update()"
-      [ngClass]="getButtonStyles()">
+      [ngClass]="getUpdateButtonStyles()">
       <span>Save</span>
       <i class="material-icons left">save</i>
     </button>
@@ -75,7 +75,7 @@
 
   <div class="card-reveal">
     <div class="card-title">Icon
-      <i class="material-icons right">close</i>
+      <i #close class="material-icons right">close</i>
     </div>
 
     <form>
@@ -84,20 +84,29 @@
         <button class="btn-large waves-effect waves-light">
           <span>File</span>
           <i class="material-icons left">attach_file</i>
-          <input type="file" />
+          <input
+            (change)="fileChange($event)"
+            type="file"
+            data-max-size="2048"
+            placeholder="Upload file"
+            required="required"
+            accept=".png,.jpg,.jpeg,.bmp"/>
         </button>
 
         <div class="file-path-wrapper">
-          <input class="file-path validate"
+          <input 
+            class="file-path validate"
             type="text"
             placeholder="Choose file to upload"/>
         </div>
 
         <p>Note: Accepts only files with size up to 1mb </p>
 
-        <button class="btn-large waves-effect waves-light">
-          <span>Upload</span>
-          <i class="material-icons left">file_upload</i>
+        <button 
+          [ngClass]="getUploadButtonStyles()"
+          (click)="upload()">
+            <span>Upload</span>
+            <i class="material-icons left">file_upload</i>
         </button>
 
       </div>

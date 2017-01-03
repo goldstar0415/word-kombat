@@ -10,5 +10,12 @@
     "password": "demo",
     "name": "demo",
     "dialect": "postgres"
+  },
+  "cloudinary": {
+    "cloud_name": "mediastorage",
+    "api_key": "451269451923675",
+    "api_secret": "HTQZYYZXl3WENiOk6GWcC5dDd2c",
+    "user_icons_folder": "word-kombat/users/",
+    "word_images_folder": "word-kombat/words/"
   }
 }

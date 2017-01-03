@@ -1,4 +1,9 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  Input,
+  ViewChild,
+  ElementRef
+} from '@angular/core';
 
 import { UsersService } from '../../../services/users.service';
 import { User } from '../../../models/user.model';
@@ -14,18 +19,44 @@ declare const __moduleName: string;
 })
 export class UserDetailsComponent {
   @Input() private user;
+  @ViewChild('close') close: ElementRef;
 
   private userNameError: string;
   private emailError: string;
   private passwordError: string;
+  private file: File;
 
   constructor(private usersService: UsersService) {
     this.user = new User();
+    this.file = null;
   }
 
   update() {
     this.usersService.update(this.user.id, this.user)
       .subscribe(user => this.user.password = "", this.setErrorMessage);
+  }
+
+  upload() {
+    if(this.file) {
+      this.usersService.uploadImage(this.user.id, this.user.icon)
+        .subscribe(res => {
+          this.close.nativeElement.click();
+        }, error => {
+          console.error(error);
+        })
+    }
+  }
+
+  fileChange(event) {
+    let fileList = event.target.files;
+    if(fileList.length > 0) {
+      this.file = fileList[0];
+      let reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.user.icon = e.target.result;
+      };
+      reader.readAsDataURL(fileList[0]);
+    }
   }
 
   validateUserDetails() {
@@ -103,6 +134,19 @@ export class UserDetailsComponent {
     return !this.validateUserDetails();
   }
 
+  isFileValid(): boolean {
+    return !!this.file;
+  }
+
+  getUploadButtonStyles() {
+    return {
+      "disabled": !this.isFileValid(),
+      "btn-large": true,
+      "waves-effect": true,
+      "waves-light": true
+    }
+  }
+
   getUsernameInputStyles() {
     return {
       "valid": !this.validateUsername(),
@@ -127,7 +171,7 @@ export class UserDetailsComponent {
     }
   }
 
-  getButtonStyles() {
+  getUpdateButtonStyles() {
     return {
       "disabled": !this.isUserDetailsValid(),
       "btn-large": true,
