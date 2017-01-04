@@ -3,11 +3,11 @@ const wordRepository = new (require('../../repositories/word.repository'))();
 const Word = require('../../models/word.model');
 
 db.options.logging = false;
-db.config.database = "demo";
-db.config.username = "demo";
-db.config.password = "demo";
+db.config.database = "test";
+db.config.username = "test";
+db.config.password = "test";
 
-describe("Word repository", () => {
+xdescribe("Word repository", () => {
   // Dummy data
   const words = [
     new Word(1, 'cat', 'images/words/cat.jpg', 'Some random hint'),

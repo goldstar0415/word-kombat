@@ -24,5 +24,5 @@ Platform for english words learning
 - `npm test` - to run tests
 
 # License
-JFX-store is released under the [BSD-3 License](https://opensource.org/licenses/BSD-3-Clause).
+Word-Kombat is released under the [BSD-3 License](https://opensource.org/licenses/BSD-3-Clause).
 
