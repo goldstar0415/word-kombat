@@ -8,30 +8,34 @@ import { Word } from '../models/word.model';
 @Injectable()
 export class WordsService extends ReplaySubject<any> {
   private socket: any;
-  private currentWord: Word;
 
   constructor(private socketService: SocketService) {
     super();
     this.socket = this.socketService.socket;
 
     this.socket.on('word', res => {
-      this.currentWord = res.word;
+      window.localStorage.setItem("currentWord", JSON.stringify(res.word));
+      window.localStorage.setItem("currentWordIndex", res.index);
       this.next(res);
     });
   }
 
   getCurrentWord() {
-    return this.currentWord || new Word();
+    let word = window.localStorage.getItem("currentWord");
+    if(word) {
+      return JSON.parse(word);
+    } else {
+      return new Word();
+    }
   }
 
-  // @Deprecated
-  getWord(): Observable<Word> {
-    let observable = new Observable(observer => {
-      this.socket.on('word', word => {
-        observer.next(word);
-      });
-    });
-    return observable;
+  getCurrentWordIndex() {
+    let index = window.localStorage.getItem("currentWordIndex");
+    if(index) {
+      return +index;
+    } else {
+      return 0;
+    }
   }
 
 }

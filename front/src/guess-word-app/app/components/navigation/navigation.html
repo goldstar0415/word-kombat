@@ -10,7 +10,7 @@
       </a>
     </li>
 
-    <li>
+    <li *ngIf="authService.isAuthorized()">
       <a class="waves-effect waves-light"
         [routerLink]="['account']"
         routerLinkActive="mobile-router-link-active">

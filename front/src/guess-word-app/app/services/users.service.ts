@@ -30,18 +30,6 @@ export class UsersService extends ReplaySubject<User[]> {
     });
   }
 
-  //@Depreceted
-  getUsers(): Observable<User[]> {
-    let observable = new Observable(observer => {
-      this.socket.on('user-connected', users => {
-        this.users = users.sort((user1, user2) => user2.score - user1.score);
-        this.next(users);
-        observer.next(users);
-      });
-    });
-    return observable;
-  }
-
   getAllUsers(): User[] {
     return this.users;
   }

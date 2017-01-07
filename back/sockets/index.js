@@ -108,6 +108,10 @@ module.exports.listen = app => {
         users = users.filter(user => user.name !== socket.handshake.user.name)
         io.emit('user-connected', users);
       }
+      if(users.length <= 0) {
+        words = [];
+        amountOfGuests = 0;
+      }
     });
 
   });

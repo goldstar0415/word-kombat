@@ -158,8 +158,8 @@ INSERT INTO "Words" VALUES(38, 'game',
   'http://res.cloudinary.com/mediastorage/image/upload/word-kombat/words/game.png',
   'Something that people do for fun');
 
-INSERT INTO "Words" VALUES(39, 'memeber',
-  'http://res.cloudinary.com/mediastorage/image/upload/word-kombat/words/memeber.jpg',
+INSERT INTO "Words" VALUES(39, 'member',
+  'http://res.cloudinary.com/mediastorage/image/upload/word-kombat/words/member.jpg',
   'A person who belongs to a group of people');
 
 INSERT INTO "Words" VALUES(40, 'car',
@@ -220,7 +220,7 @@ INSERT INTO "Words" VALUES(53, 'relax',
 
 INSERT INTO "Words" VALUES(54, 'solve',
   'http://res.cloudinary.com/mediastorage/image/upload/word-kombat/words/solve.jpg',
-  'To find a explanation or answer for something');
+  'To find an explanation or answer for something');
 
 INSERT INTO "Words" VALUES(55, 'words',
   'http://res.cloudinary.com/mediastorage/image/upload/word-kombat/words/words.jpg',

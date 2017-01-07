@@ -5,7 +5,6 @@ import {
 
 import { UsersService } from '../../services/users.service';
 import { WordsService } from '../../services/words.service';
-import { SocketService } from '../../services/socket.service';
 
 import { Word } from '../../models/word.model';
 import { User } from '../../models/user.model';
@@ -29,13 +28,13 @@ export class ChatComponent implements OnInit {
 
   constructor(
     private usersService: UsersService,
-    private wordsService: WordsService,
-    private socketService: SocketService
+    private wordsService: WordsService
   ) {}
  
   ngOnInit() {
     this.users = this.usersService.getAllUsers();
     this.word = this.wordsService.getCurrentWord();
+    this.wordCounter = this.wordsService.getCurrentWordIndex();
     this.typedWord = "";
     this.letters = this.word.letters.slice()
 

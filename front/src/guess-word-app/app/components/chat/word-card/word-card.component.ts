@@ -1,7 +1,6 @@
 import {
   Component,
-  Input,
-  OnInit
+  Input
 } from '@angular/core';
 
 import { Word } from "../../../models/word.model";
@@ -14,21 +13,11 @@ declare const __moduleName: any;
   templateUrl: 'word-card.html',
   styleUrls: ['word-card.css']
 })
-export class WordCardComponent implements OnInit {
+export class WordCardComponent {
 
   @Input() private word: Word;
-  @Input() private currentWordIndex;
+  @Input() private currentWordIndex: number;
 
-  private time = 0;
-
-  ngOnInit() {
-    let interval = setInterval(() => {
-      if(this.time < 100) {
-        this.time++;
-      } else {
-        this.time = 1;
-      }
-    }, 334);
-  }
+  private amountOfWords = 10;
 
 }

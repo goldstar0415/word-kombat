@@ -7,7 +7,10 @@
 
     <div class="card-content">
       <div class="progress">
-        <div class="determinate" [style.width]="time + '%'"></div>
+        <div
+          class="determinate"
+          [style.width]="currentWordIndex / amountOfWords * 100 + '%'">
+        </div>
       </div>
     </div>
 
@@ -26,7 +29,7 @@
       </span>
 
       <span class="btn-floating btn-large waves-effect waves-dark">
-        <b>{{ currentWordIndex }}/10</b>
+        <b>{{ currentWordIndex + '/' + amountOfWords }}</b>
       </span>
 
       <button class="activator btn-floating waves-effect waves-dark">
