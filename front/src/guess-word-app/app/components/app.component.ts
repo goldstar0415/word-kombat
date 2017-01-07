@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthService } from '../services/auth.service';
-import { UsersService } from '../services/users.service';
-import { SocketService } from '../services/socket.service';
-import { WordsService } from '../services/words.service';
-
 declare const $: any;
 declare const __moduleName: string;
 
@@ -12,17 +7,9 @@ declare const __moduleName: string;
   moduleId: __moduleName,
   selector: 'app',
   templateUrl: 'app.html',
-  styleUrls: ['app.css'],
-  providers: [
-    UsersService,
-    AuthService,
-    SocketService,
-    WordsService
-  ]
+  styleUrls: ['app.css']
 })
 export class AppComponent implements OnInit {
-
-  constructor() {}
 
   ngOnInit() {
     // Meterialize css initialization

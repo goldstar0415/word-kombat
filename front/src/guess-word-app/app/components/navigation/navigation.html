@@ -10,21 +10,21 @@
       </a>
     </li>
 
-    <li *ngIf="authService.isAuthorized()">
-      <a class="waves-effect waves-light"
-        [routerLink]="['account']"
-        routerLinkActive="mobile-router-link-active">
-          <span>Account</span>
-          <i class="material-icons">account_box</i>
-      </a>
-    </li>
-
     <li>
       <a class="waves-effect waves-light"
         [routerLink]="['leaderboards']"
         routerLinkActive="mobile-router-link-active">
           <span>Leaderboards</span>
           <i class="material-icons">list</i>
+      </a>
+    </li>
+
+    <li *ngIf="authService.isAuthorized()">
+      <a class="waves-effect waves-light"
+        [routerLink]="['account']"
+        routerLinkActive="mobile-router-link-active">
+          <span>Account</span>
+          <i class="material-icons">account_box</i>
       </a>
     </li>
 

@@ -1,8 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
+import { SocketService } from './services/socket.service';
+import { UsersService } from './services/users.service';
+import { AuthService } from './services/auth.service';
+import { WordsService } from './services/words.service';
 
 import { AppComponent } from './components/app.component';
 import { LeaderboardsComponent } from './components/leaderboards/leaderboards.component';
@@ -21,8 +26,8 @@ import { UserInfoComponent } from './components/account/user-info/user-info.comp
 @NgModule({
   imports: [
     BrowserModule,
-    FormsModule,
     HttpModule,
+    FormsModule,
     RouterModule.forRoot([
       { path: 'leaderboards', component: LeaderboardsComponent },
       { path: 'account', component: AccountComponent },
@@ -33,21 +38,25 @@ import { UserInfoComponent } from './components/account/user-info/user-info.comp
     ])
   ],
   declarations: [
-    AppComponent,
-    LeaderboardsComponent,
-    AccountComponent,
-    PageFooterComponent,
-    NavigationComponent,
-    ChatComponent,
     ChatAreaComponent,
-    UserListComponent,
     WordCardComponent,
     WordInputsComponent,
     WordLettersComponent,
+    UserListComponent,
     UserDetailsComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    NavigationComponent,
+    PageFooterComponent,
+    AccountComponent,
+    LeaderboardsComponent,
+    ChatComponent,
+    AppComponent
   ],
   providers: [
+    SocketService,
+    UsersService,
+    AuthService,
+    WordsService
   ],
   bootstrap: [ AppComponent ]
 })
