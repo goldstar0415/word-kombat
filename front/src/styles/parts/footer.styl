@@ -1,3 +1,5 @@
+@require('nib')
+
 // Page footer
 footer
   background-color: black
@@ -6,6 +8,10 @@ footer
   position: fixed
   bottom: 0
   width: 100%
+
+  .small-footer
+    display: none
+    text-align: center
   
   .social-links li
     display: inline-block
@@ -41,21 +47,22 @@ footer
       height: 48px
       transition: all 0.3s ease-in-out
       filter: grayscale(0.3)
-      -webkit-filter: grayscale(0.3)
       &:hover
         transform: scale(1.2)
         transition: transform 0.3s ease-in-out
         filter: none
-        -webkit-filter: none
 
-@media all and (max-width 865px)
+@media all and (max-width: 865px)
   footer
     padding: 10px 20px 0 20px
 
-@media all and (max-width 630px)
+@media all and (max-width: 600px)
   footer
     padding: 10px
     a, p, strong
       font-size: 12px
+    .big-footer
+      display: none
     .small-footer
+      display: block
       margin-bottom: 0

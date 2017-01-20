@@ -2,7 +2,6 @@ const db = require('./index.js');
 
 class WordRepository {
 
-
   add(word) {
     return db.transaction(t => {
       

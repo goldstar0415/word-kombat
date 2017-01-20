@@ -113,7 +113,7 @@ html(lang="en")
         
           h1 <b>Learn</b> all commonly used <b>word</b> in <b>simple</b> and <b>fun</b> way
           hr
-          p
+          p.z-depth-3
             |How many words do you need to know in English? This is a very common question and it varies depending on your goal.
             |Studies have shown - a person with a vocabulary size of <b>3000 passive</b> word-families and <b>2000 active</b> word-families can speak a language fluently.
             |Our application contains <b>3000</b> commonly used English words which helps you become <b>fluent  speaker</b>.
@@ -121,36 +121,16 @@ html(lang="en")
           hr
 
           .pics
-            .row.img-row
-              figure.hoverable.col.s6.m4
-                img(src="images/words/people.png")
-                figcaption  People
-
-              figure.hoverable.col.s6.m4
-                img(src="images/words/different.jpg")
-                figcaption  Different
-
-              figure.hoverable.col.s6.m4
-                img(src="images/words/many.jpg")
-                figcaption  Many
-
-              figure.hoverable.col.s6.m4
-                img(src="images/words/time.jpg")
-                figcaption  Time
-
-              figure.hoverable.col.s6.m4
-                img(src="images/words/water.jpg")
-                figcaption  Water
-
-              figure.hoverable.col.s6.m4
-                img(src="images/words/work.jpg")
-                figcaption  Work
+            each word in words
+              figure.hoverable.waves-effect
+                img(src=word.image)
+                figcaption #{word.value}
         
         article
         
           h1 <b>No</b> more <b>boring</b> memorization
           hr
-          p
+          p.z-depth-3
             |Your brain always searching, scanning, waiting for something unusual. It was built that way, and it helps you stay alive. So what does your brain do with all the routine, ordinary, normal things you encounter? It doesn’t bother saving the boring things; they never make it past the “this is obviously not important” filter. If you really want to learn, and you want to learn more quickly and more deeply, pay attention to how you pay attention. Think about how you think. Learn how you learn
           
           hr
@@ -167,7 +147,7 @@ html(lang="en")
         
           h1 <b>Chat</b> and <b>Compete</b> with friends
           hr
-          p
+          p.z-depth-3
             | The study of words arranged in a fun chat game.
             | So, learning new words will be as fun and easy as chatting with friends or playing browser games.
             | And a spirit of competition will make you better remember the words to prove that you are the best player
@@ -176,27 +156,27 @@ html(lang="en")
 
           .blog-posts.row
             .post.col.s12.m4
-              span  User 1 lvl 5
-              img(class="hoverable" src="images/posts/man.png")
-              p I could even imagine that leaning word might be so simple and fun...
-              a.btn(href="#") Read More
+              div User 1 Rank 5
+              img.hoverable(src="images/posts/man.png")
+              p.z-depth-2 I could even imagine that leaning word might be so simple and fun...
+              button.btn.waves-effect.hoverable Read More
 
             .post.col.s12.m4
-              span  User 2 lvl 6
-              img(class="hoverable" src="images/posts/man-2.jpg")
-              p In one session of play I learn more words than in a day of work with the dictionary...
-              a.btn(href="#") Read More
+              div User 2 Rank 3
+              img.hoverable(src="images/posts/man-2.jpg")
+              p.z-depth-2 In one session of play I learn more words than in a day of work with the dictionary...
+              button.btn.waves-effect.hoverable Read More
 
             .post.col.s12.m4
-              span  User 3 lvl 4
-              img(class="hoverable" src="images/posts/girl.png")
-              p  It's awesome.
-              a.btn(href="#") Read More
+              div User 3 Rank 4
+              img.hoverable(src="images/posts/girl.png")
+              p.z-depth-2 It's awesome.
+              button.btn.waves-effect.hoverable Read More
               
     footer
-      .row.big-footer.hide-on-small-and-down
+      .row.big-footer
         .col.s6
-          strong &copy; Copyrights 2016 MADE BY SAKA
+          strong &copy; Copyrights 2017 MADE BY SAKA
           hr
           strong FOLLOW ME ON:
           ul.social-links
@@ -219,8 +199,8 @@ html(lang="en")
             .col.s4
               input.btn(type="submit")
 
-      .row.small-footer.s12.hide-on-med-and-up.center
-          span &copy; Copyrights 2016 MADE BY SAKA
+      .row.small-footer
+          span &copy; Copyrights 2017 MADE BY SAKA
 
     script(src="vendor/jquery/dist/jquery.min.js")
     script(src="vendor/materialize-css/dist/js/materialize.min.js")
