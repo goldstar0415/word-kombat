@@ -6,7 +6,7 @@ nconf.argv().env().file({
   file: path.join(__dirname, "configuration.json")
 });
 
-nconf.set('port', process.env.OPENSHIFT_NODEJS_PORT || 8080);
-nconf.set('host', process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1")
+nconf.set('port', process.env.NODE_PORT || 8080);
+nconf.set('host', process.env.NODE_IP || "127.0.0.1")
 
 module.exports = nconf;
