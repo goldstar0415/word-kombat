@@ -11,7 +11,7 @@ class UserDetailsValidator {
   }
 
   static validateEmail(email) {
-    const VALID_EMAIL_REGEX = /^[+a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+    const VALID_EMAIL_REGEX = /^\w{1}[+\w._-]+\w{1}@[\w.-]+\.[a-zA-Z]{2,}$/i;
     let isEmailValid = !!email && !!email.trim() && VALID_EMAIL_REGEX.test(email);
 
     if(!isEmailValid) {
@@ -19,8 +19,6 @@ class UserDetailsValidator {
         target: "email",
         message: "Email is invalid"
       };
-    } else {
-      return null;
     }
   }
 
