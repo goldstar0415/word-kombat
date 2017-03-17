@@ -1,4 +1,6 @@
 module.exports = word => {
+  if(!word) return [];
+  
   let letters = word.split('');
   let currentIndex = letters.length;
   let temporaryValue;
