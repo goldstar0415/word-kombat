@@ -49,3 +49,5 @@ db.sync().then(_=> {
   });
 
 });
+
+module.exports = app;

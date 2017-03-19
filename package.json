@@ -6,7 +6,7 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon back/app.js",
-    "test": "jasmine-node back/",
+    "test": "cd back && jasmine && cd -",
     "make": "gulp make",
     "clean": "gulp clean",
     "dev": "gulp"
@@ -76,10 +76,11 @@
     "gulp-plumber": "^1.1.0",
     "gulp-stylus": "^2.5.0",
     "gulp-typescript": "^3.0.1",
-    "jasmine-node": "^1.14.5",
+    "jasmine": "^2.5.3",
     "nib": "^1.1.0",
     "run-sequence": "^1.2.2",
     "stylus": "^0.54.5",
+    "supertest": "^3.0.0",
     "typescript": "^2.0.3"
   },
   "engines": {

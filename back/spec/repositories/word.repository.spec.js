@@ -1,4 +1,4 @@
-const db = require('../../repositories');
+/*const db = require('../../repositories');
 const wordRepository = new (require('../../repositories/word.repository'))();
 const Word = require('../../models/word.model');
 
@@ -142,3 +142,4 @@ xdescribe("Word repository", () => {
   });
 
 });
+*/

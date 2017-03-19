@@ -5,7 +5,7 @@ const database = require('../config').get('database');
 const RankModel = require('../models/rank.model.js');
 
 // Connection settings
-const sequelize = new Sequelize(database.name, 
+const sequelize = new Sequelize(database.name,
     database.user, database.password, {
     host: database.host,
     dialect: database.dialect,

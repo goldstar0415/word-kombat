@@ -1,4 +1,4 @@
-const db = require('../../repositories');
+/*const db = require('../../repositories');
 const userRepository = new (require('../../repositories/user.repository'))();
 const User = require('../../models/user.model');
 
@@ -154,3 +154,4 @@ xdescribe("User repository", () => {
   });
 
 });
+*/
