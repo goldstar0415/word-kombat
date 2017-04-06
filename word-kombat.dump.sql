@@ -149,12 +149,12 @@ SELECT pg_catalog.setval('"MatchScores_id_seq"', 1, false);
 SELECT pg_catalog.setval('"Matches_id_seq"', 1, false);
 
 COPY "Ranks" (id, name, "minScore", image) FROM stdin;
-1	1	0	images/ranks/1.png
-2	2	100	images/ranks/2.png
-3	3	500	images/ranks/3.png
-4	4	2000	images/ranks/4.png
-5	5	10000	images/ranks/5.png
-6	6	50000	images/ranks/6.png
+1	1	0	assets/images/ranks/1.png
+2	2	100	assets/images/ranks/2.png
+3	3	500	assets/images/ranks/3.png
+4	4	2000	assets/images/ranks/4.png
+5	5	10000	assets/images/ranks/5.png
+6	6	50000	assets/images/ranks/6.png
 \.
 
 

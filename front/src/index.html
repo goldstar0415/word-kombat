@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#212121" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="description" content="English words learning platform" />
+    <meta name="keywords" content="words, english, learning, word, chat, game" />
+    <meta name="author" content="Saka7" />
+    <title>Word-Kombat - Interactive words learning platform</title>
+    <link rel="shortcut icon" type="image/png" href="assets/images/favicon.png" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <link rel="manifest" href="assets/manifest.json" />
+    <link rel="stylesheet" href="assets/styles/loader.css" />
+    <base href="/" />
+
+  </head>
+  <body>
+    <wk-root>
+      <div class="preloader">LOADING...</div>
+    </wk-root>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+          console.log('Service Worker registered');
+        }).catch(function(err) {
+          console.log('Service Worker registration failed: ', err);
+        });
+      }
+    </script>
+  </body>
+</html>

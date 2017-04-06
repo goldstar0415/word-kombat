@@ -90,11 +90,11 @@ const Competitors = sequelize.define('Competitors', {}, {timestamps: false});
 User.belongsToMany(Match, {through: Competitors});
 Match.belongsToMany(User, {through: Competitors});
 
-sequelize.models.Rank.upsert(new RankModel(1, '1', 0, 'images/ranks/1.png'));
-sequelize.models.Rank.upsert(new RankModel(2, '2', 100, 'images/ranks/2.png'));
-sequelize.models.Rank.upsert(new RankModel(3, '3', 500, 'images/ranks/3.png'));
-sequelize.models.Rank.upsert(new RankModel(4, '4', 2000, 'images/ranks/4.png'));
-sequelize.models.Rank.upsert(new RankModel(5, '5', 10000, 'images/ranks/5.png'));
-sequelize.models.Rank.upsert(new RankModel(6, '6', 50000, 'images/ranks/6.png'));
+sequelize.models.Rank.upsert(new RankModel(1, '1', 0, 'assets/images/ranks/1.png'));
+sequelize.models.Rank.upsert(new RankModel(2, '2', 100, 'assets/images/ranks/2.png'));
+sequelize.models.Rank.upsert(new RankModel(3, '3', 500, 'assets/images/ranks/3.png'));
+sequelize.models.Rank.upsert(new RankModel(4, '4', 2000, 'assets/images/ranks/4.png'));
+sequelize.models.Rank.upsert(new RankModel(5, '5', 10000, 'assets/images/ranks/5.png'));
+sequelize.models.Rank.upsert(new RankModel(6, '6', 50000, 'assets/images/ranks/6.png'));
 
 module.exports = sequelize;

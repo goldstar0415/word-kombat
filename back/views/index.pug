@@ -9,11 +9,10 @@ html(lang="en")
     meta(name="description", content="English words learning platform")
     meta(name="keywords", content="words, english, learning, word, chat, game, interactive")
     meta(name="author", content="Saka7")
-    
-    link(rel="shortcut icon", type="image/png", href="images/favicon.png")
+    link(rel="shortcut icon", type="image/png", href="assets/images/favicon.png")
     link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
-    link(rel="stylesheet", href="vendor/materialize-css/dist/css/materialize.min.css")
-    link(rel="stylesheet", href="styles/home.css")
+    link(rel="stylesheet", href="styles.bundle.css")
+    link(rel="stylesheet", href="assets/styles/home.css")
 
   body
     
@@ -65,10 +64,10 @@ html(lang="en")
 
           .social
             button.btn-floating.btn-large.waves-effect.waves-dark.tooltipped(data-position="bottom" data-delay="50" data-tooltip="Sign up with google+")
-              img(src="images/icons/google-plus-standart.png")
+              img(src="assets/images/social-icons/google-plus-standart.png")
 
             button.btn-floating.btn-large.waves-effect.waves-dark.tooltipped(data-position="bottom" data-delay="50" data-tooltip="Sign up with facebook")
-              img(src="images/icons/facebook-standart.png")
+              img(src="assets/images/social-icons/facebook-standart.png")
 
     //- Login modal
     #login.modal
@@ -99,10 +98,10 @@ html(lang="en")
 
           .social
             button.btn-floating.btn-large.waves-effect.waves-dark.tooltipped(data-position="bottom" data-delay="50" data-tooltip="Log in with google+")
-              img(src="images/icons/google-plus-standart.png")
+              img(src="assets/images/social-icons/google-plus-standart.png")
 
             button.btn-floating.btn-large.waves-effect.waves-dark.tooltipped(data-position="bottom" data-delay="50" data-tooltip="Log in with facebook")
-              img(src="images/icons/facebook-standart.png")
+              img(src="assets/images/social-icons/facebook-standart.png")
 
     main.content
       header.box
@@ -158,19 +157,19 @@ html(lang="en")
           .blog-posts.row
             .post.col.s12.m4
               div User 1 Rank 5
-              img.hoverable(src="images/posts/man.png")
+              img.hoverable(src="assets/images/posts/man.png")
               p.z-depth-2 I couldn't even imagine that leaning words might be so simple and fun...
               button.btn.waves-effect.hoverable Read More
 
             .post.col.s12.m4
               div User 2 Rank 3
-              img.hoverable(src="images/posts/man-2.jpg")
+              img.hoverable(src="assets/images/posts/man-2.jpg")
               p.z-depth-2 In one hour of play I learn more words than in a day of work with the dictionary...
               button.btn.waves-effect.hoverable Read More
 
             .post.col.s12.m4
               div User 3 Rank 4
-              img.hoverable(src="images/posts/girl.png")
+              img.hoverable(src="assets/images/posts/girl.png")
               p.z-depth-2 It's simply awesome. Outstanding experience!
               button.btn.waves-effect.hoverable Read More
               
@@ -182,13 +181,13 @@ html(lang="en")
           strong FOLLOW ME ON:
           ul.social-links
             li: a(href="#")
-              img(src="images/icons/facebook-icon.png")
+              img(src="assets/images/social-icons/facebook-icon.png")
 
             li: a(href="https://github.com/Saka7")
-              img(src="images/icons/github-icon.png")
+              img(src="assets/images/social-icons/github-icon.png")
 
             li: a(href="http://codepen.io/saka7/")
-              img(src="images/icons/codepen-icon.png")
+              img(src="assets/images/social-icons/codepen-icon.png")
 
         .col.s6
           strong CONTACT ME
@@ -201,8 +200,9 @@ html(lang="en")
               input.btn(type="submit")
 
       .row.small-footer
-          span &copy; Copyrights 2017 MADE BY SAKA
+        span &copy; Copyrights 2017 MADE BY SAKA
 
-    script(src="vendor/jquery/dist/jquery.min.js")
-    script(src="vendor/materialize-css/dist/js/materialize.min.js")
-    script(src="scripts/home.js")
+    script(src="inline.bundle.js")
+    script(src="polyfills.bundle.js")
+    script(src="scripts.bundle.js")
+    script(src="assets/scripts/home.js")

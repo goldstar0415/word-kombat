@@ -7,11 +7,9 @@ const wordsRepository = new (require("../repositories/word.repository"))();
 router.get('/', (req, res) => {
   wordsRepository.getRandomWords(6)
     .then(words => {
-      let data = {
+      res.render("index", {
         "words": words.map(word => word.dataValues)
-      };
-
-      res.render("index", data);
+      });
     })
     .catch(error => {
       log.error(error);
@@ -20,8 +18,7 @@ router.get('/', (req, res) => {
 });
 
 router.get(['/chat', '/account', '/leaderboards'], (req, res) => {
-  const mainFilePath = path.join(__dirname, '..', '..', 'front', 'dist',
-    'guess-word-app', 'main.html');
+  const mainFilePath = path.join(__dirname, '..', '..', 'front', 'dist', 'index.html');
   res.sendFile(path.join(mainFilePath));
 });
 

@@ -1,0 +1,57 @@
+@import '../../../../variables';
+
+.users {
+
+  height: 100%;
+
+  ul.collection {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    border: none;
+    border-radius: 5px;
+    height: 100%;
+    background-color: $blue-grey-darken-3;
+    margin: 0;
+    padding: 8px;
+
+    li {
+      align-items: center;
+      background-color: $blue-grey-darken-4;
+      border-bottom: 1px solid black;
+      color: $grey-lighten-5;
+      display: flex;
+      height: 46px;
+      justify-content: flex-start;
+      padding: 16px;
+      width: 100%;
+      
+      &:hover {
+        background-color: $blue-grey;
+        transform: scale(1.08);
+      }
+  
+      img {
+        width: 36px;
+        height: 36px;
+        margin: 5px 5px 5px 16px;
+        
+        &:hover {
+          transform: scale(1.08);
+          cursor: pointer;
+        }
+      }
+      
+      .score {
+        font-weight: bold;
+        margin-left: auto;
+        color: orange;
+      }
+    }
+  }
+}
+
+// Hide scrollbar but still enable scrolling
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}

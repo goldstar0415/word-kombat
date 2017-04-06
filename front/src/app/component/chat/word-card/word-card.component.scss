@@ -1,0 +1,63 @@
+@import '../../../../variables';
+
+.word-card {
+   
+  .card {
+    background-color: $blue-grey-darken-4;
+    
+    // Wrod image
+    .card-image {
+      height: 40vh;
+    }
+
+    // Word hints
+    .card-reveal {
+      background-color: $blue-grey-darken-4;
+    }
+
+    // Timer
+    .card-content {
+      padding: 0;
+      margin: 0;
+      height: 4vh;
+    }
+
+    // Buttons
+    .card-action {
+      height: 15vh;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+
+      span {
+        text-align: center;
+        font-weight: bold;
+        &:hover {
+          cursor: auto;
+        }
+      }
+      
+      button, span {
+        margin: 1px;
+        background-color: $grey-darken-4;
+        
+        i, b {
+          color: $grey-lighten-5;
+          font-style: none;
+          font-size: 1.1rem;
+        }
+
+        &:hover {
+          background-color: $grey-lighten-5;
+          box-shadow: 0 0 1px 1px $grey-lighten-5;
+
+          i, b {
+            color: $grey-darken-4;
+          }
+        }
+
+      }
+    }
+  }
+}

@@ -1,0 +1,118 @@
+<nav class="nav-wrapper hoverable">
+
+  <ul class="side-nav" id="menu-mobile">
+    <li>
+      <a class="waves-effect waves-light"
+        [routerLink]="['chat']"
+        routerLinkActive="mobile-router-link-active">
+          <span>Chat</span>
+          <i class="material-icons">chat</i>
+      </a>
+    </li>
+
+    <li>
+      <a class="waves-effect waves-light"
+        [routerLink]="['leaderboards']"
+        routerLinkActive="mobile-router-link-active">
+          <span>Leaderboards</span>
+          <i class="material-icons">list</i>
+      </a>
+    </li>
+
+    <li *ngIf="isAuthorized()">
+      <a class="waves-effect waves-light"
+        [routerLink]="['account']"
+        routerLinkActive="mobile-router-link-active">
+          <span>Account</span>
+          <i class="material-icons">account_box</i>
+      </a>
+    </li>
+
+    <li>
+      <a class="waves-effect waves-light" href="/" data-position="right">
+        <span>Home</span>
+        <i class="material-icons">home</i>
+      </a>
+    </li>
+  </ul>
+
+  <div class="side-nav" id="users-mobile">
+    <wk-user-list [users]="users"></wk-user-list>
+  </div>
+
+  <ul class="mobile">
+
+    <a class="brand-logo right" href="/">
+      <img src="assets/images/logo.svg" alt="Logo" />
+    </a>
+
+    <a class="tooltipped button-collapse waves-effect waves-light"
+      href="#menu-mobile"
+      data-activates="menu-mobile"
+      data-position="bottom"
+      data-delay="50"
+      data-tooltip="Menu">
+        <i class="material-icons">menu</i>
+    </a>
+
+    <a class="tooltipped button-collapse waves-effect waves-light"
+      href="#users-mobile"
+      data-activates="users-mobile"
+      data-position="bottom"
+      data-delay="50"
+      data-tooltip="Users">
+        <i class="material-icons">account_circle</i>
+    </a>
+
+  </ul>
+
+  <a class="brand-logo center" href="/">
+    <img src="assets/images/logo.svg" alt="Logo" />
+  </a>
+
+  <ul class="navigation-tabs right">
+    <li class="waves-effect waves-light">
+      <a class="tooltipped"
+        [routerLink]="['chat']"
+        routerLinkActive="router-link-active"
+        data-position="bottom"
+        data-delay="50"
+        data-tooltip="Go to Chat">
+          <i class="material-icons">chat</i>
+      </a>
+    </li>
+
+    <li class="waves-effect waves-light">
+      <a class="tooltipped"
+        [routerLink]="['leaderboards']"
+        routerLinkActive="router-link-active"
+        data-position="bottom"
+        data-delay="50"
+        data-tooltip="See leaderboards">
+          <i class="material-icons">list</i>
+      </a>
+    </li>
+
+    <li *ngIf="isAuthorized()" class="waves-effect waves-light">
+      <a class="tooltipped"
+        [routerLink]="['account']"
+        routerLinkActive="router-link-active"
+        data-position="bottom"
+        data-delay="50"
+        data-tooltip="Edit account">
+          <i class="material-icons">account_box</i>
+      </a>
+    </li>
+
+    <li class="waves-effect waves-light">
+      <a class="tooltipped"
+        href="/"
+        data-position="bottom"
+        data-delay="50"
+        data-tooltip="Back to home page">
+          <i class="material-icons">home</i>
+      </a>
+    </li>
+  </ul>
+  
+</nav>

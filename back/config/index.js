@@ -7,6 +7,6 @@ nconf.argv().env().file({
 });
 
 nconf.set('port', process.env.NODE_PORT || 8080);
-nconf.set('host', process.env.NODE_IP || "127.0.0.1")
+nconf.set('host', process.env.NODE_IP || "0.0.0.0")
 
 module.exports = nconf;
