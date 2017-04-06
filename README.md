@@ -10,18 +10,14 @@ Platform for english words learning
 
 1. Clone repository `git clone https://gitlab.com/Saka7/Word-Kombat.git`
 2. Navigate to the project parent folder `cd Word-Kombat`
-3. Install tools `npm install -g gulp typescript stylus babel`
-4. Install dependencies `npm install`
+3. Install front-end dependencies `npm install --prefix front`
+4. Install back-end dependencies `npm install --prefix back`
 5. Configure database connection properties in `back/config/configuration.json`
 6. Configure `cloudinary` api key and secret in `back/config/configuration.json`
-7. Build the project `npm run make`
-8. And, finally, start it `npm start`
+7. Build front-end `npm run build:prod --prefix front`
+8. And, finally, start it `npm start --prefix back`
 
 > By default project will be running on port 8080
-
-## Useful commands
-- `npm run dev` - to start gulp for development
-- `npm test` - to run tests
 
 # License
 Word-Kombat is released under the [BSD-3 License](https://opensource.org/licenses/BSD-3-Clause).
