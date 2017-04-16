@@ -1,11 +1,11 @@
 <div class="container">
   
   <div class="image-box">
-    <img src="assets/images/logo.png" alt="" />
+    <img [src]="getWinner().icon" [alt]="getWinner().name" />
   </div>
   
   <p class="title">
-    Match is over
+    Match is over - [{{ getWinner().name }}] wins!
   </p>
   
   <table class="match-scores hoverable centered striped responsive-table">
@@ -13,29 +13,35 @@
       <tr>
           <th>Position</th>
           <th>User</th>
+          <th>Name</th>
+          <th>Rank</th>
           <th>Score</th>
           <th>Words</th>
       </tr>
     </thead>
 
     <tbody>
-      <tr *ngFor="let score of scores; let position = index">
-        <td>{{ position }}</td>
-        <td>{{ score.user }}</td>
-        <td>{{ score.points }}</td>
-        <td>{{ score.words }}</td>
+      <tr *ngFor="let score of getScores(); let position = index">
+        <td class="position">{{ position + 1 }}</td>
+        <td class="user-icon">
+          <img [src]="score.user.icon" alt="" class="hoverable" />
+        </td>
+        <td class="user-name">{{ score.user.name }}</td>
+        <td class="user-rank">
+          <img [src]="score.user.rank.image" alt="" />
+        </td>
+        <td class="points">{{ score.points }}</td>
+        <td class="words">{{ score.words }}</td>
       </tr>
     </tbody>
   </table>
   
   <form class="end-match-choices">
-
-    <button routerLink="/account" class="btn-large waves-effect waves-light">
+    <button routerLink="/account" class="btn-large waves-effect waves-light hoverable">
       <span>Account</span>
       <i class="material-icons left">account_circle</i>
     </button>
-
-    <button routerLink="/chat" class="btn-large waves-effect waves-light">
+    <button routerLink="/chat" class="btn-large waves-effect waves-light hoverable">
       <span>Play Again</span>
       <i class="material-icons left">autorenew</i>
     </button>
