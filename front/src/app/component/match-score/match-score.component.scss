@@ -1,0 +1,61 @@
+@import '../../../variables';
+
+.image-box {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-top: 16px;
+  img {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+p.title {
+  text-transform: uppercase;
+  color: $grey-lighten-5;
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 16px;
+}
+
+table.match-scores {
+  color: $grey-darken-4;
+  background-color: $grey-lighten-2;
+  font-size: 1.2rem;
+
+  thead th {
+    background-color: $grey-darken-4;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 0;
+  }
+  
+}
+
+
+form.end-match-choices {
+  margin: 32px;
+  display: flex;
+  flex-direction: row;
+  align-items: space-around;
+  justify-content: center;
+
+  button {
+    margin: 4px;
+    width: 200px;
+    color: $grey-lighten-5;
+    background-color: $grey-darken-4;
+
+    @media all and (max-width: 480px) {
+      width: 75px;
+
+      span {
+        display: none;
+      }
+    }
+  }
+}

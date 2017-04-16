@@ -23,6 +23,7 @@ import { UserService } from './service/user/user.service';
 import { AuthService } from './service/auth/auth.service';
 import { WordService } from './service/word/word.service';
 import { MessageService } from './service/message/message.service';
+import { MatchScoreComponent } from './component/match-score/match-score.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { MessageService } from './service/message/message.service';
     ChatAreaComponent,
     WordCardComponent,
     WordInputsComponent,
-    WordLettersComponent
+    WordLettersComponent,
+    MatchScoreComponent
   ],
   imports: [
     BrowserModule,
@@ -48,9 +50,10 @@ import { MessageService } from './service/message/message.service';
       { path: 'chat', component: ChatComponent },
       { path: 'leaderboards', component: LeaderboardsComponent },
       { path: 'account', component: AccountComponent },
+      { path: 'score', component: MatchScoreComponent },
+      { path: '', redirectTo: 'chat', pathMatch: 'full' },
       { path: '*', redirectTo: 'chat', pathMatch: 'full' },
-      { path: '**/*', redirectTo: 'chat', pathMatch: 'full' },
-      { path: '', redirectTo: 'chat', pathMatch: 'full' }
+      { path: '**/*', redirectTo: 'chat', pathMatch: 'full' }
     ])
   ],
   providers: [

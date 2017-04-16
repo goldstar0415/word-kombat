@@ -1,0 +1,44 @@
+<div class="container">
+  
+  <div class="image-box">
+    <img src="assets/images/logo.png" alt="" />
+  </div>
+  
+  <p class="title">
+    Match is over
+  </p>
+  
+  <table class="match-scores hoverable centered striped responsive-table">
+    <thead>
+      <tr>
+          <th>Position</th>
+          <th>User</th>
+          <th>Score</th>
+          <th>Words</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let score of scores; let position = index">
+        <td>{{ position }}</td>
+        <td>{{ score.user }}</td>
+        <td>{{ score.points }}</td>
+        <td>{{ score.words }}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <form class="end-match-choices">
+
+    <button routerLink="/account" class="btn-large waves-effect waves-light">
+      <span>Account</span>
+      <i class="material-icons left">account_circle</i>
+    </button>
+
+    <button routerLink="/chat" class="btn-large waves-effect waves-light">
+      <span>Play Again</span>
+      <i class="material-icons left">autorenew</i>
+    </button>
+  </form>
+
+</div>
