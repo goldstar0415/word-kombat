@@ -14,12 +14,9 @@ describe('UserInfoComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserInfoComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
   });
+  
 });

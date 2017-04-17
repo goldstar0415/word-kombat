@@ -14,12 +14,9 @@ describe('WordCardComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WordCardComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
   });
+  
 });

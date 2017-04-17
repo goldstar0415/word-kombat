@@ -14,12 +14,9 @@ describe('WordInputsComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WordInputsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
   });
+  
 });

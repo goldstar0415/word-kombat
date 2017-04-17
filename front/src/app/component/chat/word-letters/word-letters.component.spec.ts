@@ -14,12 +14,9 @@ describe('WordLettersComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WordLettersComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
   });
+  
 });

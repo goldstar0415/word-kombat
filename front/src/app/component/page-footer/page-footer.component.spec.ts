@@ -14,12 +14,9 @@ describe('PageFooterComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PageFooterComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
   });
+  
 });
