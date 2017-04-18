@@ -11,7 +11,7 @@ import { Score } from '../../model/score.model';
 })
 export class MatchScoreComponent implements OnInit {
 
-  scores: Array<Score>; 
+  scores: Array<Score>;
 
   constructor() { }
 
