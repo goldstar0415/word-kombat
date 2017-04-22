@@ -3,7 +3,7 @@
 
   <thead>
     <tr>
-      <th data-field="position">N </th>
+      <th data-field="position">N</th>
       <th data-field="icon">Icon</th>
       <th data-field="name">Name</th>
       <th data-field="score">Score</th>
@@ -13,14 +13,14 @@
 
   <tbody>
     <tr *ngFor="let leader of leaders; let i = index">
-      <td class="position">{{ i + 1 }} </td>
+      <td class="position">{{ i + 1 }}</td>
       <td class="icon">
         <img src="{{ leader.icon }}" />
       </td>
       <td class="name">{{ leader.name }}</td>
       <td class="score">{{ leader.score }}</td>
       <td class="rank">
-        <img src="{{ leader.rank.image }}" alt="{{leader.rank.name}}" />
+        <img src="{{ leader.rank.image }}" alt="{{ leader.rank.name }}" />
       </td>
     </tr>
   </tbody>
