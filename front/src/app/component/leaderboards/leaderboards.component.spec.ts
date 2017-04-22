@@ -18,9 +18,9 @@ import { Rank } from '../../model/rank.model';
 
 describe('LeaderboardsComponent', () => {
   let leaderboardsComponent: LeaderboardsComponent;
-  let leaderboardsComponentFixture: ComponentFixture<LeaderboardsComponent>;
+  let leaderboardsFixture: ComponentFixture<LeaderboardsComponent>;
   let leaderboardsService: LeaderboardsService;
-  let spy;
+  let leaderboardsServiceSpy;
 
   const TEST_LEADERS = [
     new User(),
@@ -50,31 +50,31 @@ describe('LeaderboardsComponent', () => {
   }));
 
   beforeEach(() => {
-    leaderboardsComponentFixture = TestBed.createComponent(LeaderboardsComponent);
-    leaderboardsComponent = leaderboardsComponentFixture.componentInstance;
+    leaderboardsFixture = TestBed.createComponent(LeaderboardsComponent);
+    leaderboardsComponent = leaderboardsFixture.componentInstance;
 
-    leaderboardsService = leaderboardsComponentFixture
+    leaderboardsService = leaderboardsFixture
       .debugElement.injector.get(LeaderboardsService);
 
-    spy = spyOn(leaderboardsService, 'getAll')
+    leaderboardsServiceSpy = spyOn(leaderboardsService, 'getAll')
       .and.returnValue(Observable.from([TEST_LEADERS]));
 
   });
 
   it('should create component', async(() => {
-    const component = leaderboardsComponentFixture.debugElement.componentInstance;
+    const component = leaderboardsFixture.debugElement.componentInstance;
     expect(component).toBeTruthy();
   }));
 
   it('should call leaderboardsService.getAll() method', () => {
-    leaderboardsComponentFixture.whenStable().then(() => {
-      expect(spy.getAll).toHaveBeenCalled();
+    leaderboardsFixture.whenStable().then(() => {
+      expect(leaderboardsServiceSpy.getAll).toHaveBeenCalled();
     });
   });
 
   it('should call leaderboardsService.getAll() method only once', () => {
-    leaderboardsComponentFixture.whenStable().then(() => {
-      expect(spy.getAll.callCount).toEqual(1);
+    leaderboardsFixture.whenStable().then(() => {
+      expect(leaderboardsServiceSpy.getAll.callCount).toEqual(1);
     });
   });
 
@@ -90,8 +90,8 @@ describe('LeaderboardsComponent', () => {
 
     beforeEach(() => {
       leaderboardsComponent.leaders = mockLeaders;
-      leaderboardsComponentFixture.autoDetectChanges();
-      rows = leaderboardsComponentFixture.debugElement.queryAll(By.css('tbody > tr'));
+      leaderboardsFixture.autoDetectChanges();
+      rows = leaderboardsFixture.debugElement.queryAll(By.css('tbody > tr'));
     })
 
     it('should not render null or undefined row nodes', async(() => {

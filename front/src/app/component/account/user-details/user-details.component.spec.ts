@@ -14,8 +14,7 @@ describe('UserDetailsComponent', () => {
   let userDetailsComponent: UserDetailsComponent;
   let userDetailsFixture: ComponentFixture<UserDetailsComponent>;
   let userService: UserService;
-  let userServiceUpdateSpy;
-  let userServiceUploadImageSpy;
+  let userServiceSpy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -44,10 +43,10 @@ describe('UserDetailsComponent', () => {
 
     userService = userDetailsFixture.debugElement.injector.get(UserService);
 
-    userServiceUpdateSpy = spyOn(userService, 'update')
+    userServiceSpy = spyOn(userService, 'update')
       .and.returnValue(Observable.from([new User()]));
 
-    userServiceUpdateSpy = spyOn(userService, 'uploadImage');
+    userServiceSpy = spyOn(userService, 'uploadImage');
   });
 
   it('should create component', async(() => {
@@ -58,28 +57,28 @@ describe('UserDetailsComponent', () => {
   it('should call userService.update method', () => {
     userDetailsComponent.update();
     userDetailsFixture.whenStable().then(() => {
-      expect(userServiceUpdateSpy.update).toHaveBeenCalled();
+      expect(userServiceSpy.update).toHaveBeenCalled();
     });
   });
 
   it('should call userService.update method only once', () => {
     userDetailsComponent.update();
     userDetailsFixture.whenStable().then(() => {
-      expect(userServiceUpdateSpy.update.callsCount).toEqual(1);
+      expect(userServiceSpy.update.callsCount).toEqual(1);
     });
   });
 
   it('should call userService.upload method', () => {
     userDetailsComponent.upload();
     userDetailsFixture.whenStable().then(() => {
-      expect(userServiceUploadImageSpy.update).toHaveBeenCalled();
+      expect(userServiceSpy.update).toHaveBeenCalled();
     });
   });
 
   it('should call userService.upload method only once', () => {
     userDetailsComponent.upload();
     userDetailsFixture.whenStable().then(() => {
-      expect(userServiceUploadImageSpy.update.callsCount).toEqual(1);
+      expect(userServiceSpy.update.callsCount).toEqual(1);
     });
   });
   
