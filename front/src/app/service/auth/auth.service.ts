@@ -15,17 +15,17 @@ export class AuthService extends ReplaySubject<string> {
   
   constructor(private userService: UserService) {
     super();
-    if(!!sessionStorage.getItem('token')) {
-      this.token = sessionStorage.getItem('token');
-      let claims = this.getTokenClaims(this.token);
-      this.userId = claims.id;
-      this.username = claims.name;
+    let token = this.getTokenFromStorage();
+    if(token) {
+      let userData = this.parseToken(token);
+      this.userId = userData.id;
+      this.username = userData.name;
       this.next(this.username);
     }
   }
 
   public isAuthorized(): boolean {
-    return !!this.userId || !!this.username || !!this.token;
+    return Boolean(this.token);
   }
 
   public getUsername(): string {
@@ -38,6 +38,19 @@ export class AuthService extends ReplaySubject<string> {
 
   public getToken(): string {
     return this.token;
+  }
+
+  private getTokenFromStorage(): string {
+    return window.sessionStorage.getItem('token');
+  }
+
+  private parseToken(token: string): { id: number, name: string } {
+    this.token = token;
+    let claims = this.getTokenClaims(this.token);
+    return {
+      id: claims.id,
+      name: claims.name
+    };
   }
 
   private getTokenClaims(token: string) {
