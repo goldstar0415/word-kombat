@@ -61,10 +61,10 @@ describe('LeaderboardsComponent', () => {
 
   });
 
-  it('should create component', () => {
+  it('should create component', async(() => {
     const component = leaderboardsComponentFixture.debugElement.componentInstance;
     expect(component).toBeTruthy();
-  });
+  }));
 
   it('should call leaderboardsService.getAll() method', () => {
     leaderboardsComponentFixture.whenStable().then(() => {
@@ -94,25 +94,25 @@ describe('LeaderboardsComponent', () => {
       rows = leaderboardsComponentFixture.debugElement.queryAll(By.css('tbody > tr'));
     })
 
-    it('should not render null or undefined row nodes', () => {
+    it('should not render null or undefined row nodes', async(() => {
       expect(rows).toBeDefined();
       expect(rows).not.toBeNull();
-    });
+    }));
 
-    it('should render appropriate number of records', () => {
+    it('should render appropriate number of records', async(() => {
       expect(rows.length).toBe(mockLeaders.length);
-    });
+    }));
 
-    it('should render positions in appropriate records', () => {
+    it('should render positions in appropriate records', async(() => {
       rows.forEach((row, index) => {
         const position = row.query(By.css("td.position"));
         expect(position).toBeDefined();
         expect(position).not.toBeNull();
         expect(position.nativeElement.textContent).toEqual(String(index + 1));
       });
-    });
+    }));
 
-    it('should render icons in appropriate records', () => {
+    it('should render icons in appropriate records', async(() => {
       rows.forEach((row, index) => {
         const icon = row.query(By.css("td.icon > img"));
         expect(icon).toBeDefined();
@@ -120,27 +120,27 @@ describe('LeaderboardsComponent', () => {
         expect(icon.nativeElement).toBeDefined();
         expect(icon.nativeElement.src).toContain(mockLeaders[index].icon);
       });
-    });
+    }));
 
-    it('should render names in appropriate records', () => {
+    it('should render names in appropriate records', async(() => {
       rows.forEach((row, index) => {
         const name = row.query(By.css("td.name"));
         expect(name).toBeDefined();
         expect(name).not.toBeNull();
         expect(name.nativeElement.textContent).toEqual(mockLeaders[index].name);
       });
-    });
+    }));
 
-    it('should render scores in appropriate records', () => {
+    it('should render scores in appropriate records', async(() => {
       rows.forEach((row, index) => {
         const score = row.query(By.css("td.score"));
         expect(score).toBeDefined();
         expect(score).not.toBeNull();
         expect(score.nativeElement.textContent).toEqual(String(mockLeaders[index].score));
       });
-    });
+    }));
 
-    it('should render ranks in appropriate records', () => {
+    it('should render ranks in appropriate records', async(() => {
       rows.forEach((row, index) => {
         const rank = row.query(By.css("td.rank > img"));
         expect(rank).toBeDefined();
@@ -148,7 +148,7 @@ describe('LeaderboardsComponent', () => {
         expect(rank.nativeElement).toBeDefined();
         expect(rank.nativeElement.src).toContain(mockLeaders[index].rank.image);
       });
-    });
+    }));
 
   });
 
