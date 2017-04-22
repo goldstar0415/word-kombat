@@ -14,7 +14,7 @@ import { User } from '../../model/user.model';
 import { Rank } from '../../model/rank.model';
 
 @Injectable()
-export class UserService extends ReplaySubject<User[]> {
+export class UserService extends ReplaySubject<Array<User>> {
   private socket: any;
   private users: Array<User>;
 
