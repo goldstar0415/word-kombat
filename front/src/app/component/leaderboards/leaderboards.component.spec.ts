@@ -10,7 +10,6 @@ import { Http, BaseRequestOptions } from '@angular/http';
 import { By } from '@angular/platform-browser';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
 
 import { LeaderboardsService } from '../../service/leaderboards/leaderboards.service';
 import { LeaderboardsComponent } from './leaderboards.component';
