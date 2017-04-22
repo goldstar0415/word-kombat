@@ -11,7 +11,7 @@ export class LeaderboardsService {
 
   constructor(private http: Http) {}
 
-  getAll(): Observable<User[]> {
+  getAll(): Observable<Array<User>> {
     return this.http.get('api/leaderboards')
       .map(res => res.json());
   }
