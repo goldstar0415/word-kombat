@@ -4,7 +4,6 @@ import { User } from '../../model/user.model';
 import { UserService } from '../../service/user/user.service';
 import { AuthService } from '../../service/auth/auth.service';
 
-
 @Component({
   selector: 'wk-navigation',
   templateUrl: './navigation.component.html',
