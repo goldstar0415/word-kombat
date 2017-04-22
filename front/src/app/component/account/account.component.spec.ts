@@ -20,12 +20,11 @@ import { AccountComponent } from './account.component';
 
 describe('AccountComponent', () => {
   let accountComponent: AccountComponent;
-  let accountComponentFixture: ComponentFixture<AccountComponent>;
+  let accountFixture: ComponentFixture<AccountComponent>;
   let authService: AuthService;
   let userService: UserService;
   let authServiceSpy;
-  let userServiceGetByIdSpy;
-  let userServiceGetNextRankSpy;
+  let userServiceSpy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -52,25 +51,67 @@ describe('AccountComponent', () => {
   }));
 
   beforeEach(() => {
-    accountComponentFixture = TestBed.createComponent(AccountComponent);
-    accountComponent = accountComponentFixture.componentInstance;
+    accountFixture = TestBed.createComponent(AccountComponent);
+    accountComponent = accountFixture.componentInstance;
 
-    authService = accountComponentFixture.debugElement.injector.get(AuthService);
+    authService = accountFixture.debugElement.injector.get(AuthService);
 
     authServiceSpy = spyOn(authService, 'getUserId').and.returnValue(1);
 
-    userService = accountComponentFixture.debugElement.injector.get(UserService);
+    userService = accountFixture.debugElement.injector.get(UserService);
 
-    userServiceGetByIdSpy = spyOn(userService, 'getById')
+    userServiceSpy = spyOn(userService, 'getById')
       .and.returnValue(Observable.from([new User()]));
 
-    userServiceGetNextRankSpy = spyOn(userService, 'getNextRank')
+    userServiceSpy = spyOn(userService, 'getNextRank')
       .and.returnValue(Observable.from([new Rank()]));
   });
 
   it('should create the component', async(() => {
-    const component = accountComponentFixture.debugElement.componentInstance;
+    const component = accountFixture.debugElement.componentInstance;
     expect(component).toBeTruthy();
   }));
+
+  it('should call AuthService.getUserId method', () => {
+    accountComponent.ngOnInit();
+    accountFixture.whenStable().then(() => {
+      expect(authServiceSpy.getUserId).toHaveBeenCalled();
+    });
+  });
+
+  it('should call AuthService.getUserId method only once', () => {
+    accountComponent.ngOnInit();
+    accountFixture.whenStable().then(() => {
+      expect(authServiceSpy.getUserId.callsCount).toEqual(1);
+    });
+  });
+
+  it('should call UserService.getById method', () => {
+    accountComponent.ngOnInit();
+    accountFixture.whenStable().then(() => {
+      expect(userServiceSpy.getById).toHaveBeenCalled();
+    });
+  });
+
+  it('should call UserService.getById method only once', () => {
+    accountComponent.ngOnInit();
+    accountFixture.whenStable().then(() => {
+      expect(userServiceSpy.getById.callsCount).toEqual(1);
+    });
+  });
+
+  it('should call UserService.getNextRank method', () => {
+    accountComponent.ngOnInit();
+    accountFixture.whenStable().then(() => {
+      expect(userServiceSpy.getNextRank).toHaveBeenCalled();
+    });
+  });
+
+  it('should call UserService.getNextRank method only once', () => {
+    accountComponent.ngOnInit();
+    accountFixture.whenStable().then(() => {
+      expect(userServiceSpy.getNextRank.callsCount).toEqual(1);
+    });
+  });
 
 });
