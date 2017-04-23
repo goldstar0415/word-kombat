@@ -7,8 +7,7 @@
   "scripts": {
     "start": "nodemon app.js",
     "test": "jasmine",
-    "make": "gulp make",
-    "dev": "gulp"
+    "loc": "cloc ./ --exclude-dir=node_modules"
   },
   "repository": {
     "type": "git",

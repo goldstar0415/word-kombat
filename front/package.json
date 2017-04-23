@@ -12,7 +12,8 @@
     "build": "ng build --output-hashing none",
     "build:prod": "ng build --prod --aot --output-hashing none",
     "build:prod-sw": "npm run build:prod && npm run precache",
-    "precache": "sw-precache --root=dist --config=sw-precache.config.js"
+    "precache": "sw-precache --root=dist --config=sw-precache.config.js",
+    "loc": "cloc ./ --exclude-dir=dist,node_modules"
   },
   "private": true,
   "dependencies": {
@@ -40,6 +41,7 @@
     "@types/jquery": "^2.0.41",
     "@types/node": "~6.0.60",
     "@types/socket.io-client": "^1.4.29",
+    "cloc": "^2.2.0",
     "codelyzer": "~2.0.0",
     "jasmine-core": "~2.5.2",
     "jasmine-spec-reporter": "~3.2.0",
