@@ -20,7 +20,7 @@ nav.nav-wrapper {
   }
   
   // Mobile sidenav
-  ul#menu-mobile, #users-mobile {
+  ul#menu-mobile, #activities-mobile {
     background-color: $grey-darken-4;
     background-image: url($bg-img);
     a {
@@ -31,13 +31,24 @@ nav.nav-wrapper {
     }
   }
 
-  #users-mobile >>> ul.collection {
-    height: 100vh;
+  #activities-mobile {
     margin: 0;
+    padding: 0;
+    wk-user-list /deep/ .users {
+      overflow-y: auto;
+      max-height: 65vh;
+    }
+    wk-chat-area /deep/ .chat-area {
+      overflow-y: auto;
+      max-height: 35vh;
+      color: black;
+      ul.collection {
+        margin: 0;
+      }
+    }
   }
 
-  // Menu mobile
-  ul#menu-mobile {
+  #menu-mobile {
     .user-info {
       .user-image {
         img {
