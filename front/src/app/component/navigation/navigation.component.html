@@ -1,6 +1,23 @@
 <nav class="nav-wrapper hoverable">
 
   <ul class="side-nav" id="menu-mobile">
+
+    <div class="user-info" *ngIf="isAuthorized()" [routerLink]="['account']">
+      <li>
+        <div class="userView">
+          <div class="user-image">
+            <img class="circle" [src]="user?.icon" />
+          </div>
+          <div class="username">
+            <span class="white-text name">{{ user?.name }}</span>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="divider grey darken-4"></div>
+      </li>
+    </div>
+
     <li>
       <a class="waves-effect waves-light"
         [routerLink]="['chat']"

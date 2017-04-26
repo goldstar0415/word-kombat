@@ -12,17 +12,26 @@ import { AuthService } from '../../service/auth/auth.service';
 export class NavigationComponent implements OnInit {
 
   users: Array<User>;
+  user: User;
 
   constructor(
     private userService: UserService,
     private authService: AuthService
-  ) {}
+  ) {
+    this.user = new User();
+  }
 
   ngOnInit() {
     this.users = this.userService.getAll();
     this.userService.subscribe(users => {
       this.users = users;
     });
+    let userId = this.authService.getUserId();
+    if(userId) {
+      this.userService.getById(userId).subscribe(user => {
+        this.user = user;
+      });
+    }
   }
 
   isAuthorized() {
