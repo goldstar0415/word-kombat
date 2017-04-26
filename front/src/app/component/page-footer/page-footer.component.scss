@@ -8,7 +8,9 @@ footer.page-footer {
   .copyrights {
     width: 100%;
     text-align: center;
-    b {
+    a {
+      text-transform: none;
+      font-weight: bold;
       padding: 3px;
       border-radius: 3px;
       background-color: black;
