@@ -3,3 +3,7 @@ node_modules/
 front/dist
 front/src/guess-word-app/typings
 back/logger/logs
+**/etc
+**/coverage
+**/*.log
+
