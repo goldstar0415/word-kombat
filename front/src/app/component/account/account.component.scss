@@ -1,21 +1,23 @@
 .container {
+  min-height: 100vh;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 16px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  
+
   wk-user-details {
-    width: 320px;
-    margin-right: 10px;
+    min-width: 320px;
+    margin: 0 8px;
   }
 
   wk-user-info {
+    margin: 0 8px;
     width: 65%;
     min-width: 320px;
-    @media all and (max-width: 960px) {
-      width: 90%;
+    @media all and (max-width: 980px) {
+      width: 100%;
     }
   }
 }
