@@ -17,13 +17,16 @@ import { ChatAreaComponent } from './component/chat/chat-area/chat-area.componen
 import { WordCardComponent } from './component/chat/word-card/word-card.component';
 import { WordInputsComponent } from './component/chat/word-inputs/word-inputs.component';
 import { WordLettersComponent } from './component/chat/word-letters/word-letters.component';
+import { MatchScoreComponent } from './component/match-score/match-score.component';
+import { SigninComponent } from './component/signin/signin.component';
+import { SignupComponent } from './component/signup/signup.component';
 
 import { SocketService } from './service/socket/socket.service';
 import { UserService } from './service/user/user.service';
 import { AuthService } from './service/auth/auth.service';
 import { WordService } from './service/word/word.service';
 import { MessageService } from './service/message/message.service';
-import { MatchScoreComponent } from './component/match-score/match-score.component';
+import { AuthGuard } from './guard/auth/auth.guard';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,9 @@ import { MatchScoreComponent } from './component/match-score/match-score.compone
     WordCardComponent,
     WordInputsComponent,
     WordLettersComponent,
-    MatchScoreComponent
+    MatchScoreComponent,
+    SigninComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -49,8 +54,14 @@ import { MatchScoreComponent } from './component/match-score/match-score.compone
     RouterModule.forRoot([
       { path: 'chat', component: ChatComponent },
       { path: 'leaderboards', component: LeaderboardsComponent },
-      { path: 'account', component: AccountComponent },
+      {
+        path: 'account',
+        component: AccountComponent,
+        canActivate: [ AuthGuard ]
+      },
       { path: 'score', component: MatchScoreComponent },
+      { path: 'signin', component: SigninComponent },
+      { path: 'signup', component: SignupComponent },
       { path: '', redirectTo: 'chat', pathMatch: 'full' },
       { path: '*', redirectTo: 'chat', pathMatch: 'full' },
       { path: '**/*', redirectTo: 'chat', pathMatch: 'full' }
@@ -61,7 +72,8 @@ import { MatchScoreComponent } from './component/match-score/match-score.compone
     UserService,
     AuthService,
     WordService,
-    MessageService
+    MessageService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })

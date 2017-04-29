@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Http, RequestOptions } from '@angular/http';
 
 import { Observable, ReplaySubject } from 'rxjs/Rx';
 import 'rxjs/add/operator/map'
 
+import { SignInRequest } from '../../model/signin-request.model';
+import { SignUpRequest } from '../../model/signup-request.model';
 import { User } from '../../model/user.model';
 import { UserService } from '../../service/user/user.service';
 
@@ -13,7 +16,10 @@ export class AuthService extends ReplaySubject<string> {
   private username: string;
   private userId: number;
   
-  constructor(private userService: UserService) {
+  constructor(
+    private http: Http,
+    private userService: UserService
+  ) {
     super();
     let token = this.getTokenFromStorage();
     if(token) {
@@ -22,6 +28,33 @@ export class AuthService extends ReplaySubject<string> {
       this.username = userData.name;
       this.next(this.username);
     }
+  }
+
+  public signIn(signInRequest: SignInRequest) {
+    return this.http.post("/api/auth/login", signInRequest.toString())
+        .map(res => {
+          this.saveToken(res);
+          this.saveUserDetails(JSON.parse(sessionStorage.getItem('user')));
+        }).catch(error => {
+          throw Error(error.json() && error.json().message);
+        });
+  }
+
+  public signUp(signUpRequest: SignUpRequest) {
+    return this.http.post("/api/auth/signup", signUpRequest.toString())
+        .map(res => {
+          this.saveToken(res);
+          this.saveUserDetails(JSON.parse(sessionStorage.getItem('user')));
+        }).catch(error => {
+          throw Error(error.json() && error.json().message);
+        });
+  }
+
+  public logout() {
+    this.token = null;
+    this.username = null;
+    this.userId = null;
+    sessionStorage.removeItem('token');
   }
 
   public isAuthorized(): boolean {
@@ -38,6 +71,25 @@ export class AuthService extends ReplaySubject<string> {
 
   public getToken(): string {
     return this.token;
+  }
+
+  private saveToken(res) {
+    let response = res.json() && res.json().token;
+    if (Boolean(response)) {
+      let token = response;
+      let claims = this.getTokenClaims(token);
+      claims.token = token;
+      sessionStorage.setItem('token', JSON.stringify(claims));
+    } else {
+      console.error(res.json());
+      throw Error(res.json());
+    }
+  }
+
+  private saveUserDetails(user) {
+    this.token = user.token || '';
+    this.username = user.name || '';
+    this.userId = user.id || 0;
   }
 
   private getTokenFromStorage(): string {

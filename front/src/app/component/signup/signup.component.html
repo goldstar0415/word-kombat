@@ -1,0 +1,60 @@
+<form>
+
+  <div class="title">
+    <i class="material-icons medium">group_add</i>
+    <span>SIGN UP</span>
+  </div>
+
+  <div class="input-field">
+    <i class="material-icons prefix">email</i>
+    <input
+      class="email validate"
+      type="email"
+      required="required"/>
+    <label
+      class="email"
+      for="email"
+      data-error="Email is invalid">
+        Your email
+    </label>
+  </div>
+
+  <div class="input-field">
+    <i class="material-icons prefix">account_box</i>
+    <input
+      class="username validate"
+      type="text"
+      required="required"/>
+    <label
+      class="username"
+      for="username"
+      data-error="Username is invalid">
+        Your username
+    </label>
+  </div>
+
+  <div class="input-field">
+    <i class="material-icons prefix">vpn_key</i>
+    <input
+      class="password validate"
+      type="password"
+      pattern=".{6,30}"
+      required="required"/>
+    <label
+      class="password"
+      for="password"
+      data-error="Password is invalid">
+        Your password
+    </label>
+  </div>
+
+  <div class="signup-suggestion">
+    Already have an account? <a [routerLink]="['/signin']">Sign In</a>
+  </div>
+
+  <button class="login btn-large waves-effect waves-light hoverable">
+    <i class="material-icons left">check_circle</i>
+    <span>Sign Up</span>
+  </button>
+
+</form>
