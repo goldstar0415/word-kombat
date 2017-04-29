@@ -1,7 +1,7 @@
 <div class="card sticky-action hoverable">
 
   <div class="card-image waves-effect waves-block waves-light">
-    <img class="activator" [attr.src]="user.icon"/>
+    <img class="activator" [src]="user.icon"/>
   </div>
 
   <div class="card-content">
@@ -9,25 +9,28 @@
       <span class="username">{{ user.name }}</span>
       <span class="score">{{ user.score }}pts</span>
       <span class="rank">
-        <img src="{{ user.rank.image }}" alt="{{ user.rank.name }}" />
+        <img [src]="user.rank.image" [alt]="user.rank.name" />
       </span>
     </div>
   </div>
 
-  <div class="card-action">
+  <form class="card-action" #userDetailsForm="ngForm" (ngSubmit)="onUserDetailsSubmit()">
     <div class="input-field">
       <i class="material-icons prefix">account_circle</i>
       <input
-        [(ngModel)]="user.name"
-        [ngClass]="getUsernameInputStyles()"
+        class="validate"
         id="username"
         type="text"
         pattern="[a-zA-Z0-9]{4,30}"
-        required="required"/>
+        required="required"
+        name="username"
+        #usernameInput="ngModel"
+        [ngClass]="usernameValidity()"
+        [(ngModel)]="user.name" />
       <label
         class="active"
         for="username"
-        [attr.data-error]="userNameError">
+        [attr.data-error]="usernameErrorMessage">
           Username
       </label>
     </div>
@@ -35,15 +38,19 @@
     <div class="input-field">
       <i class="material-icons prefix">email</i>
       <input
-        [(ngModel)]="user.email"
-        [ngClass]="getEmailInputStyles()"
         id="email"
+        class="validate"
         type="email"
-        required="required"/>
+        required="required"
+        pattern="^\S+@\S+$"
+        name="email"
+        #emailInput="ngModel"
+        [ngClass]="emailValidity()"
+        [(ngModel)]="user.email" />
       <label
         class="active"
         for="email"
-        [attr.data-error]="emailError">
+        [attr.data-error]="emailErrorMessage">
           Email
       </label>
     </div>
@@ -51,41 +58,46 @@
     <div class="input-field">
       <i class="material-icons prefix">vpn_key</i>
       <input
-        [(ngModel)]="user.password"
-        [ngClass]="getPasswordInputStyles()"
         id="password"
+        class="validate"
         type="password"
         pattern=".{6,30}"
-        required="required"/>
+        required="required"
+        name="password"
+        [ngClass]="passwordValidity()"
+        #passwordInput="ngModel"
+        [(ngModel)]="user.password" />
       <label
         class="active"
         for="password"
-        [attr.data-error]="passwordError">
+        [attr.data-error]="passwordErrorMessage">
           Password
       </label>
     </div>
 
     <button
-      (click)="update()"
-      [ngClass]="getUpdateButtonStyles()">
-      <span>Save</span>
+      class="btn-large waves-effect waves-light"
+      type="submit"
+      (click)="onUserDetailsSubmit()"
+      [disabled]="!userDetailsForm.form.valid">
+      <span>{{ submitButtonText }}</span>
       <i class="material-icons left">save</i>
     </button>
-  </div>
+  </form>
 
   <div class="card-reveal">
     <div class="card-title">Icon
       <i #close class="material-icons right">close</i>
     </div>
 
-    <form>
+    <form #imageUploadForm (ngSubmit)="onImageUploadSubmit()">
       <div class="file-field input-field">
         
         <button class="btn-large waves-effect waves-light">
           <span>File</span>
           <i class="material-icons left">attach_file</i>
           <input
-            (change)="fileChange($event)"
+            (change)="onFileChange($event)"
             type="file"
             data-max-size="2048"
             placeholder="Upload file"
@@ -102,9 +114,11 @@
 
         <p>Note: Accepts only files with size up to 1mb </p>
 
-        <button 
-          [ngClass]="getUploadButtonStyles()"
-          (click)="upload()">
+        <button
+          class="btn-large waves-effect waves-light"
+          type="submit"
+          [disabled]="!this.isFileValid()"
+          (click)="onImageUploadSubmit()">
             <span>Upload</span>
             <i class="material-icons left">file_upload</i>
         </button>

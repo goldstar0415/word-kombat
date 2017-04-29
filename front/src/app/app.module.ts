@@ -60,7 +60,7 @@ import { AuthGuard } from './guard/auth/auth.guard';
       {
         path: 'account',
         component: AccountComponent,
-        canActivate: [ AuthGuard ]
+        // canActivate: [ AuthGuard ]
       },
       { path: '', redirectTo: 'chat', pathMatch: 'full' },
       { path: '*', redirectTo: 'chat', pathMatch: 'full' },
