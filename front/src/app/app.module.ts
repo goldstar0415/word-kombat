@@ -54,14 +54,14 @@ import { AuthGuard } from './guard/auth/auth.guard';
     RouterModule.forRoot([
       { path: 'chat', component: ChatComponent },
       { path: 'leaderboards', component: LeaderboardsComponent },
+      { path: 'score', component: MatchScoreComponent },
+      { path: 'signin', component: SigninComponent },
+      { path: 'signup', component: SignupComponent },
       {
         path: 'account',
         component: AccountComponent,
         canActivate: [ AuthGuard ]
       },
-      { path: 'score', component: MatchScoreComponent },
-      { path: 'signin', component: SigninComponent },
-      { path: 'signup', component: SignupComponent },
       { path: '', redirectTo: 'chat', pathMatch: 'full' },
       { path: '*', redirectTo: 'chat', pathMatch: 'full' },
       { path: '**/*', redirectTo: 'chat', pathMatch: 'full' }

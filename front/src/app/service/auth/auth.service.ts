@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions } from '@angular/http';
+import { Http, RequestOptions, Headers } from '@angular/http';
 
 import { Observable, ReplaySubject } from 'rxjs/Rx';
 import 'rxjs/add/operator/map'
@@ -31,22 +31,22 @@ export class AuthService extends ReplaySubject<string> {
   }
 
   public signIn(signInRequest: SignInRequest) {
-    return this.http.post("/api/auth/login", signInRequest.toString())
+    return this.http.post("/api/auth/login", signInRequest.toString(), this.getRequestOptions())
         .map(res => {
           this.saveToken(res);
-          this.saveUserDetails(JSON.parse(sessionStorage.getItem('user')));
+          this.saveUserDetails(JSON.parse(window.sessionStorage.getItem('token')));
         }).catch(error => {
-          throw Error(error.json() && error.json().message);
+          throw error.json();
         });
   }
 
   public signUp(signUpRequest: SignUpRequest) {
-    return this.http.post("/api/auth/signup", signUpRequest.toString())
+    return this.http.post("/api/auth/signup", signUpRequest.toString(), this.getRequestOptions())
         .map(res => {
           this.saveToken(res);
-          this.saveUserDetails(JSON.parse(sessionStorage.getItem('user')));
+          this.saveUserDetails(JSON.parse(window.sessionStorage.getItem('token')));
         }).catch(error => {
-          throw Error(error.json() && error.json().message);
+          throw error.json();
         });
   }
 
@@ -54,7 +54,7 @@ export class AuthService extends ReplaySubject<string> {
     this.token = null;
     this.username = null;
     this.userId = null;
-    sessionStorage.removeItem('token');
+    window.sessionStorage.removeItem('token');
   }
 
   public isAuthorized(): boolean {
@@ -109,6 +109,14 @@ export class AuthService extends ReplaySubject<string> {
     let base64Url = token.split('.')[1];
     let base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64));
+  }
+
+  private getRequestOptions(): RequestOptions {
+    return new RequestOptions({
+      headers: new Headers({
+        "Content-Type": 'application/json'
+      })
+    });
   }
 
 }

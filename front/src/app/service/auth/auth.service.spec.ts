@@ -34,7 +34,7 @@ describe('AuthService', () => {
   });
 
   beforeEach(() => {
-    store = {token: token};
+    store = {};
 
     spyOn(sessionStorage, 'getItem').and.callFake(key => {
       return store[key];
@@ -42,6 +42,7 @@ describe('AuthService', () => {
   });
 
   it('should return token if exists', inject([AuthService], (authService: AuthService) => {
+    store = {token: token};
     const retrievedToken = authService.getToken();
     expect(retrievedToken).toBeDefined();
     expect(retrievedToken).not.toBeNull();
@@ -50,12 +51,12 @@ describe('AuthService', () => {
 
   it('should return undefined if token does not exists',
       inject([AuthService], (authService: AuthService) => {
-    store = {};
     const retrievedToken = authService.getToken();
     expect(retrievedToken).toBeUndefined();
   }));
 
   it('should return userId if exists', inject([AuthService], (authService: AuthService) => {
+    store = {token: token};
     const userId = authService.getUserId();
     expect(userId).toBeDefined();
     expect(userId).not.toBeNull();
@@ -64,12 +65,12 @@ describe('AuthService', () => {
 
   it('should return undefined if userId does not exists',
       inject([AuthService], (authService: AuthService) => {
-    store = {};
     const userId = authService.getUserId();
     expect(userId).toBeUndefined();
   }));
 
   it('should return username if exists', inject([AuthService], (authService: AuthService) => {
+    store = {token: token};
     const username = authService.getUsername();
     expect(username).toBeDefined();
     expect(username).not.toBeNull();
@@ -78,7 +79,6 @@ describe('AuthService', () => {
 
   it('should return undefined if username does not exists',
       inject([AuthService], (authService: AuthService) => {
-    store = {};
     const username = authService.getUsername();
     expect(username).toBeUndefined();
   }));
@@ -86,12 +86,12 @@ describe('AuthService', () => {
   describe('isAuthorized method', () => {
 
     it('should true token exists', inject([AuthService], (authService: AuthService) => {
+      store = {token: token};
       const isAuthorized = authService.isAuthorized();
       expect(isAuthorized).toBeTruthy();
     }));
 
     it('should false token does not exists', inject([AuthService], (authService: AuthService) => {
-      store = {};
       const isAuthorized = authService.isAuthorized();
       expect(isAuthorized).toBeFalsy();
     }));
