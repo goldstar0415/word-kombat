@@ -17,9 +17,15 @@ router.get('/', (req, res) => {
     })
 });
 
-router.get(['/chat', '/account', '/leaderboards'], (req, res) => {
-  const mainFilePath = path.join(__dirname, '..', '..', 'front', 'dist', 'index.html');
-  res.sendFile(path.join(mainFilePath));
+router.get([
+  '/chat',
+  '/account',
+  '/leaderboards',
+  '/signin',
+  '/signup',
+  '/score'], (req, res) => {
+    const mainFilePath = path.join(__dirname, '..', '..', 'front', 'dist', 'index.html');
+    res.sendFile(path.join(mainFilePath));
 });
 
 module.exports = router;
