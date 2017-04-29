@@ -1,4 +1,4 @@
-<form>
+<form #signUpForm="ngForm" (ngSubmit)="onSubmit()">
 
   <div class="title">
     <i class="material-icons medium">group_add</i>
@@ -10,11 +10,16 @@
     <input
       class="email validate"
       type="email"
-      required="required"/>
+      pattern="^\S+@\S+$"
+      name="email"
+      required="required"
+      #emailInput="ngModel"
+      [ngClass]="emailValidity"
+      [(ngModel)]="signUpRequest.email" />
     <label
       class="email"
       for="email"
-      data-error="Email is invalid">
+      [attr.data-error]="emailErrorMessage">
         Your email
     </label>
   </div>
@@ -24,11 +29,16 @@
     <input
       class="username validate"
       type="text"
-      required="required"/>
+      pattern="(\w|_|-|\.){4,20}"
+      name="username"
+      required="required"
+      #usernameInput="ngModel"
+      [ngClass]="usernameValidity"
+      [(ngModel)]="signUpRequest.username" />
     <label
       class="username"
       for="username"
-      data-error="Username is invalid">
+      [attr.data-error]="usernameErrorMessage">
         Your username
     </label>
   </div>
@@ -39,11 +49,15 @@
       class="password validate"
       type="password"
       pattern=".{6,30}"
-      required="required"/>
+      required="required"
+      name="password"
+      #passwordInput="ngModel"
+      [ngClass]="passwordValidity"
+      [(ngModel)]="signUpRequest.password" />
     <label
       class="password"
       for="password"
-      data-error="Password is invalid">
+      [attr.data-error]="passwordErrorMessage">
         Your password
     </label>
   </div>
@@ -52,7 +66,10 @@
     Already have an account? <a [routerLink]="['/signin']">Sign In</a>
   </div>
 
-  <button class="login btn-large waves-effect waves-light hoverable">
+  <button
+    [disabled]="!signUpForm.form.valid"
+    type="submit"
+    class="signup btn-large waves-effect waves-light hoverable">
     <i class="material-icons left">check_circle</i>
     <span>Sign Up</span>
   </button>
