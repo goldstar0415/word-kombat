@@ -35,7 +35,7 @@ export class WordInputsComponent implements OnInit {
     let id = this.authService.getUserId();
 
     if(id) {
-      this.userService.getById(this.authService.getUserId())
+      this.userService.getById(id)
         .subscribe(user => {
           this.message = new Message(null, user, null);
         }, error => {

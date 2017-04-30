@@ -1,11 +1,11 @@
 {
-  "name": "word-kombat",
+  "name": "Word-Kombat",
   "short_name": "word-kombat",
-  "description": "Interactive words learning",
   "theme_color": "#212121",
   "background_color": "#212121",
   "display": "standalone",
-  "Scope": "/",
+  "description": "Interactive Words Learning App",
+  "scope": "/",
   "start_url": "/",
   "icons": [
     {

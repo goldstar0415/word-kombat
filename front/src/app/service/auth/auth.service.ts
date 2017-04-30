@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Http, RequestOptions, Headers } from '@angular/http';
+
+import {
+  Http,
+  RequestOptions,
+  Headers,
+  Response
+} from '@angular/http';
 
 import { Observable, ReplaySubject } from 'rxjs/Rx';
 import 'rxjs/add/operator/map'
@@ -32,20 +38,16 @@ export class AuthService extends ReplaySubject<string> {
 
   public signIn(signInRequest: SignInRequest) {
     return this.http.post("/api/auth/login", signInRequest.toString(), this.getRequestOptions())
-        .map(res => {
-          this.saveToken(res);
-          this.saveUserDetails(JSON.parse(window.sessionStorage.getItem('token')));
-        }).catch(error => {
+        .map(this.processResponse)
+        .catch(error => {
           throw error.json();
         });
   }
 
   public signUp(signUpRequest: SignUpRequest) {
     return this.http.post("/api/auth/signup", signUpRequest.toString(), this.getRequestOptions())
-        .map(res => {
-          this.saveToken(res);
-          this.saveUserDetails(JSON.parse(window.sessionStorage.getItem('token')));
-        }).catch(error => {
+        .map(this.processResponse)
+        .catch(error => {
           throw error.json();
         });
   }
@@ -71,6 +73,18 @@ export class AuthService extends ReplaySubject<string> {
 
   public getToken(): string {
     return this.token;
+  }
+
+  private processResponse(res: Response) {
+    this.saveToken(res);
+    this.saveUserDetails(JSON.parse(window.sessionStorage.getItem('token')));
+    this.next(this.username);
+    this.userService.getById(this.userId)
+      .subscribe(user => {
+        this.userService.setUsers([user]);
+      }, error => {
+        throw error.json();
+      });
   }
 
   private saveToken(res) {

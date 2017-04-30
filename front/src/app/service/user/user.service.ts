@@ -32,6 +32,10 @@ export class UserService extends ReplaySubject<Array<User>> {
     });
   }
 
+  setUsers(users: Array<User>) {
+    this.next(users);
+  }
+
   getAll(): Array<User> {
     return this.users;
   }
