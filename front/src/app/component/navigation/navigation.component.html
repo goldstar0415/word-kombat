@@ -36,11 +36,11 @@
       </a>
     </li>
 
-    <li *ngIf="isAuthorized()">
+    <li>
       <a class="waves-effect waves-light"
         [routerLink]="['account']"
         routerLinkActive="mobile-router-link-active">
-          <span>Account</span>
+          <span>{{ isAuthorized() ? 'Edit account' : 'Authorize' }}</span>
           <i class="material-icons">account_box</i>
       </a>
     </li>
@@ -105,13 +105,13 @@
       </a>
     </li>
 
-    <li *ngIf="isAuthorized()" class="waves-effect waves-light">
+    <li class="waves-effect waves-light">
       <a class="tooltipped"
         [routerLink]="['account']"
         routerLinkActive="router-link-active"
         data-position="bottom"
         data-delay="50"
-        data-tooltip="Edit account">
+        [attr.data-tooltip]=" isAuthorized() ? 'Edit account' : 'Authorize' ">
           <i class="material-icons">account_box</i>
       </a>
     </li>

@@ -38,4 +38,6 @@ export class NavigationComponent implements OnInit {
     return this.authService.isAuthorized();
   }
 
+  
+
 }
