@@ -1,17 +1,19 @@
 <div class="card sticky-action hoverable">
 
-  <div class="card-image waves-effect waves-block waves-light">
-    <img class="activator" [src]="user.icon"/>
-  </div>
+  <div class="user-data">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" [src]="user.icon"/>
+    </div>
 
-  <div class="card-content">
-    <div class="card-title activator">
-      <span class="username">{{ user.name }}</span>
-      <span class="score">{{ user.score }}</span>
-      <i class="score material-icons">stars</i>
-      <span class="rank">
-        <img [src]="user.rank.image" [alt]="user.rank.name" />
-      </span>
+    <div class="card-content">
+      <div class="card-title activator">
+        <span class="username">{{ user.name }}</span>
+        <span class="score">{{ user.score }}</span>
+        <i class="score material-icons">stars</i>
+        <span class="rank">
+          <img [src]="user.rank.image" [alt]="user.rank.name" />
+        </span>
+      </div>
     </div>
   </div>
 
@@ -42,8 +44,8 @@
         id="email"
         class="validate"
         type="email"
-        required="required"
         pattern="^\S+@\S+$"
+        required="required"
         name="email"
         #emailInput="ngModel"
         [ngClass]="emailValidity()"

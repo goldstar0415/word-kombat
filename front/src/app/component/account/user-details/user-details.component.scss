@@ -3,40 +3,51 @@
 .card {
   background-color: $blue-grey-darken-4;
   color: $blue-grey-lighten-5;
-  
-  .card-title.activator {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: column;
 
-    .username, .score {
-      height: 48px;
-      line-height: 48px;
+  .user-data {
+    .card-image {
+      padding: 4px;
+      img.activator {
+        width: 320px;
+        height: 320px;
+      }
     }
+    .card-title.activator {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
 
-    .username {
-      text-transform: uppercase;
-      margin-right: 5px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      margin-right: auto;
-      width: 120px;
-      max-width: 120px;
-      max-height: 64px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+      .username, .score {
+        height: 48px;
+        line-height: 48px;
+      }
 
-    .score {
-      margin-right: 6px;
-      color: $dark-gold;
-    }
+      .username {
+        text-transform: uppercase;
+        margin-right: 5px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-right: auto;
+        width: 120px;
+        max-width: 120px;
+        max-height: 64px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
 
-    .rank img {
-      width: 48px;
-      height: 48px;
+      .score {
+        margin-right: 6px;
+        color: $dark-gold;
+      }
+
+      .rank img {
+        width: 48px;
+        height: 48px;
+      }
     }
-  }
+  } 
   
   form.card-action {
     display: flex;
@@ -44,6 +55,16 @@
     align-items: center;
     background-color: $blue-grey-darken-3;
     margin: 0;
+    label {
+      &:after {
+        transition-property: all;
+        font-size: 0.8rem;
+        transform: none;
+      }
+      &:not(.active):after {
+        transform: translateY(-140%);
+      }
+    }
     button {
       margin-top: 8px;
       background-color: $grey-darken-4;
@@ -64,21 +85,25 @@
     }
   }
 
-  .card-image {
-    img.activator {
-      width: 320px;
-      height: 320px;
+  @media all and (max-width: 980px) and (min-width: 560px) {
+    flex-direction: row;
+    .user-data {
+      width: 248px;
+      .card-image {
+        img.activator {
+          width: 240px;
+          height: 240px;
+        }
+      }
     }
-  }
-}
-
-label {
-    &:after {
-      transition-property: all;
-      font-size: 0.8rem;
-      transform: none;
-    &:not(.active):after {
-      transform: translateY(-140%);
+    form.card-action {
+      width: 50vw;
+      .input-field {
+        width: 90%;
+      }
+    }
+    .card-reveal {
+      width: 248px;
     }
   }
 }
