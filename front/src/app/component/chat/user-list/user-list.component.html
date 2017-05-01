@@ -3,7 +3,8 @@
     <li class="collection-item waves-effect" *ngFor="let user of users">
         <img class="circle hoverable" [src]="user.icon" [alt]="user.name" />
         <span class="username">{{ user.name }}</span>
-        <span class="score">{{ user.score }} p</span>
+        <span class="score">{{ user.score }}</span>
+        <i class="score material-icons">stars</i>
     </li>
   </ul>
 </div>

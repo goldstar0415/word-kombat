@@ -22,7 +22,7 @@
       display: flex;
       height: 46px;
       justify-content: flex-start;
-      padding: 16px;
+      padding: 8px;
       width: 100%;
       
       &:hover {
@@ -40,11 +40,21 @@
           cursor: pointer;
         }
       }
+
+      .username {
+        max-width: 10vw;
+      }
       
       .score {
+        height: 24px;
+        line-height: 24px;
         font-weight: bold;
         margin-left: auto;
         color: orange;
+      }
+      i.score {
+        font-size: 1rem;
+        margin-left: 2px;
       }
     }
   }

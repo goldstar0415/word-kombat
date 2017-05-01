@@ -19,26 +19,18 @@
       flex-basis: 0;
       margin: 5px;
     }
-    
     wk-word-card {
       flex-grow: 0.75;
     }
-    
     wk-chat-area {
       flex-grow: 1.5;
     }
-      
     wk-user-list {
       margin-top: 12px;
       height: 60vh;
       flex-grow: 0.75;
-    }
-      
-    wk-chat-area > .chat-area > ul.collection {
-      height: 400px;
-    }
-    
-    wk-user-list > .users > ul.collection {
+    } 
+    wk-chat-area > .chat-area, .users > ul.collection {
       height: 400px;
     }
 
@@ -46,11 +38,9 @@
       wk-user-list {
         display: none;
       }
-      
       wk-word-card {
         flex-grow: 1;
       }
-      
       wk-chat-area {
         flex-grow: 1;
       }
@@ -59,12 +49,10 @@
     @media only screen and (max-width : 480px) {
       wk-chat-area {
         display: none;
-      }
-        
+      } 
       wk-word-card {
         flex-grow: 1;
       }
-
     }
   }
 }
