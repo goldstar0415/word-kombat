@@ -9,6 +9,11 @@
     flex-direction: row;
     align-items: flex-start;
 
+    .username, .score {
+      height: 48px;
+      line-height: 48px;
+    }
+
     .username {
       text-transform: uppercase;
       margin-right: 5px;
