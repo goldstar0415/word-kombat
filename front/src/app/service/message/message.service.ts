@@ -22,7 +22,7 @@ export class MessageService {
   }
 
   sendMessage(message: any) {
-    this.socket.emit('new-message', message);
+    this.socket.emit('message', message);
   }
 
   getMessages(): Observable<Message> {

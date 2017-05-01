@@ -34,8 +34,8 @@ module.exports.listen = app => {
 
   io.on('connection', socket => {
 
-    if(!!socket.decoded_token) {
-      let userId = socket.decoded_token.id;
+    if(Boolean(socket["decoded_token"])) {
+      let userId = socket["decoded_token"].id;
 
       userRepository.findById(userId).then(user => {
         users.push(user);
@@ -62,7 +62,7 @@ module.exports.listen = app => {
       getWords(io, 10).then(fetchedWords => words = fetchedWords);
     }
 
-    socket.on('new-message', message => {
+    socket.on('message', message => {
       let user = socket.handshake.user;
 
       if(user) {
@@ -104,7 +104,7 @@ module.exports.listen = app => {
     });
 
     socket.on('disconnect', () => {
-      if(!!socket.handshake.user) {
+      if(Boolean(socket.handshake.user)) {
         users = users.filter(user => user.name !== socket.handshake.user.name)
         io.emit('user-connected', users);
       }
