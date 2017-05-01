@@ -6,7 +6,6 @@
   table {
     margin: 24px auto;
     padding: 10px;
-    overflow-y: scroll;
     background-color: $blue-grey-darken-3;
     color: $blue-grey-lighten-5;
     
@@ -52,10 +51,6 @@
         }
       }
     }
-  }
-
-  ::-webkit-scrollbar {
-    display: none;
   }
 }
 

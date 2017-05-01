@@ -14,4 +14,8 @@ export class WordCardComponent {
 
   amountOfWords = 10;
 
+  getProgress(): string {
+    return (this.currentWordIndex / this.amountOfWords * 100) + '%'
+  }
+
 }

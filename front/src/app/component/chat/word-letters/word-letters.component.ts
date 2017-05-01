@@ -12,10 +12,10 @@ import {
 })
 export class WordLettersComponent {
 
-  @Input() letters: string[];
+  @Input() letters: Array<string>;
   @Output() private letterClicked = new EventEmitter<string>();
 
-  dropLetter(letter: string) {
+  onLetterPressed(letter: string) {
     this.letters.splice(this.letters.indexOf(letter), 1);
     this.letterClicked.emit(letter);
   }

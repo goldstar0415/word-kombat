@@ -1,7 +1,7 @@
 <div class="word-letters hoverable">
   <button
     class="btn-large waves-effect"
-    (click)="dropLetter(letter)"
+    (click)="onLetterPressed(letter)"
     *ngFor="let letter of letters">
       {{ letter }}
   </button>

@@ -46,12 +46,12 @@ export class WordInputsComponent implements OnInit {
     }
   }
 
-  enterLetter(word: string) {
+  onLetterPressed(word: string) {
     this.word = word;
     this.wordEntered.emit(this.word);
   }
 
-  deleteLastLetter() {
+  onLastLetterDrop() {
     const len = this.word.length;
 
     if(len === 1) {
@@ -63,7 +63,7 @@ export class WordInputsComponent implements OnInit {
     this.wordEntered.emit(this.word);
   }
 
-  sendMessage() {
+  onMessageSent() {
     this.message.text = this.word;
 
     this.word = "";

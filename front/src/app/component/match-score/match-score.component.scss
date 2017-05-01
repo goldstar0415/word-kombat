@@ -79,12 +79,10 @@ table.match-scores {
         height: 48px;
       }
     }
-
   }
-
 }
 
-form.end-match-choices {
+.end-match-choices {
   margin: 32px;
   display: flex;
   flex-direction: row;
@@ -95,7 +93,7 @@ form.end-match-choices {
     margin: 4px;
     width: 200px;
     color: $grey-lighten-5;
-    background-color: $grey-darken-4;
+    background-color: $blue-grey-darken-3;
 
     @media all and (max-width: 480px) {
       width: 75px;

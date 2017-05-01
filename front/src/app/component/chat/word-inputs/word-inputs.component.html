@@ -2,7 +2,7 @@
 
   <button
     class="btn-floating btn-large hoverable waves-effect waves-dark"
-    (click)="deleteLastLetter()">
+    (click)="onLastLetterDrop()">
       <i class="material-icons">backspace</i>
   </button>
 
@@ -10,17 +10,17 @@
     id="word"
     class="validate"
     #letters
-    (keyup)="enterLetter(letters.value)"
-    (keyup.enter)="sendMessage()"
-    value="{{ word }}"
+    (keyup)="onLetterPressed(letters.value)"
+    (keyup.enter)="onMessageSent()"
+    [value]="word"
     placeholder="Enter word here"
     type="text"
-    required
-    autofocus />
+    required="true"
+    autofocus="true" />
 
   <button
     class="btn-floating btn-large hoverable waves-effect waves-dark"
-    (click)="sendMessage()">
+    (click)="onMessageSent()">
       <i class="material-icons">send</i>
   </button>
 

@@ -2,14 +2,12 @@
   <div class="card hoverable">
 
     <div class="card-image waves-effect waves-block waves-light">
-      <img class="activator" src="{{ word.image }}" alt="No Image"/>
+      <img class="activator" [src]="word.image" alt="No Image"/>
     </div>
 
     <div class="card-content">
       <div class="progress">
-        <div
-          class="determinate"
-          [style.width]="currentWordIndex / amountOfWords * 100 + '%'">
+        <div class="determinate"[style.width]="getProgress()" >
         </div>
       </div>
     </div>
@@ -25,7 +23,7 @@
     <div class="card-action">
 
       <span class="btn-floating waves-effect waves-dark">
-        <b>{{word.letters.length}}</b>
+        <b>{{ word.letters.length }}</b>
       </span>
 
       <span class="btn-floating btn-large waves-effect waves-dark">
