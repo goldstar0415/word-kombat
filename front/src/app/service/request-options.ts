@@ -6,11 +6,12 @@ export function createRequestOptions(withToken:boolean=false,
   let headers = new Headers();
   headers.append("Content-Type", 'application/json');
   headers.append("Access-Control-Allow-Origin", "*");
-  headers.append("Access-Control-Allow-Headers", "Origin, Content-Type");
+  headers.append("Access-Control-Allow-Headers", "Origin, Authorization, Content-Type");
 
   if(withToken) {
-    const token = window.sessionStorage.getItem('token');
-    if(token) {
+    let user = JSON.parse(window.sessionStorage.getItem('user'));
+    if(user) {
+      const token = user.token;
       headers.append('Authorization', token);
     }
   }

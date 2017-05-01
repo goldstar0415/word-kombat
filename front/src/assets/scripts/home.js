@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  if(window.sessionStorage.getItem("token") !== null) {
+  if(window.sessionStorage.getItem("user") !== null) {
     $("#logout-trigger").css("display", "inline-block");
     $("#signup-trigger").css("display", "none");
     $("#login-trigger").css("display", "none");
