@@ -7,6 +7,8 @@ import {
   ViewChild
 } from '@angular/core';
 
+import { Subscription } from 'rxjs/Rx';
+
 import { Message } from '../../../model/message.model';
 import { MessageService } from '../../../service/message/message.service';
 
@@ -21,27 +23,28 @@ export class ChatAreaComponent implements OnInit, OnDestroy {
 
   messages: Array<Message>;
   private message: Message;
-  private connection;
+  private messagesSubscription: Subscription;
 
   constructor(private messageService: MessageService) {}
 
   ngOnInit() {
     this.messages = [];
     
-    this.connection = this.messageService.getMessages().subscribe(message => {
-      // Max 500 messages in chat
-      if(this.messages.length >= 500) {
-        this.messages.shift();
-      }
-      this.messages.push(message);
-      this.scrollBottom();
-    });
+    this.messagesSubscription = this.messageService.getMessages()
+      .subscribe(message => {
+        // Max 500 messages in chat
+        if(this.messages.length >= 500) {
+          this.messages.shift();
+        }
+        this.messages.push(message);
+        this.scrollBottom();
+      });
 
     this.scrollBottom();
   }
 
   ngOnDestroy() {
-    this.connection.unsubscribe();
+    this.messagesSubscription.unsubscribe();
   }
 
   private scrollBottom() {

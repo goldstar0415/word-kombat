@@ -1,23 +1,35 @@
 import { Injectable } from '@angular/core';
 
-import { Observable,  ReplaySubject } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
 
 import { SocketService } from '../socket/socket.service';
 import { Word } from '../../model/word.model';
 
 @Injectable()
-export class WordService extends ReplaySubject<any> {
+export class WordService {
   private socket: any;
 
   constructor(private socketService: SocketService) {
-    super();
-    this.socket = this.socketService.socket;
+    this.setSocket();
+  }
 
-    this.socket.on('word', res => {
-      window.localStorage.setItem("currentWord", JSON.stringify(res.word));
-      window.localStorage.setItem("currentWordIndex", res.index);
-      this.next(res);
+  setSocket(socket?) {
+    if(socket) {
+      this.socket = socket;
+    } else {
+      this.socket = this.socketService.socket;
+    }
+  }
+
+  getWords(): Observable<{word: Word, index: number}> {
+    let observable = new Observable(observer => {
+      this.socket.on('word', res => {
+        window.localStorage.setItem("currentWord", JSON.stringify(res.word));
+        window.localStorage.setItem("currentWordIndex", res.index);
+        observer.next(res);
+      });
     });
+    return observable;
   }
 
   getCurrentWord() {

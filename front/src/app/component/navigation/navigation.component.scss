@@ -80,6 +80,7 @@ nav.nav-wrapper {
 
     li > a {
       width: 100%;
+      margin: 0;
       &:hover {
         border-left: 3px solid $grey-lighten-5;
         background-color: black;
@@ -92,6 +93,19 @@ nav.nav-wrapper {
         color: $grey-lighten-5;
         font-size: 1.1rem;
         font-weight: bold;
+      }
+    }
+
+    .dropdown-content {
+      background-color: $grey-darken-4;
+      a {
+        width: 100%;
+        margin: 0;
+        height: 50px;
+        color: $grey-darken-4;
+        &:hover {
+          color: $grey-lighten-5;
+        }
       }
     }
   }

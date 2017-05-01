@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+
+import { Subscription } from 'rxjs/Rx';
 
 import { UserService } from '../../service/user/user.service';
 import { WordService } from '../../service/word/word.service';
-
 import { User } from '../../model/user.model';
 import { Word } from '../../model/word.model';
 import { Message } from '../../model/message.model';
@@ -12,13 +13,16 @@ import { Message } from '../../model/message.model';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnDestroy {
 
   users: Array<User>;
   word: Word;
   letters: Array<string>;
   typedWord: string;
   wordCounter = 0;
+
+  private wordsSubscription: Subscription;
+  private usersSubscription: Subscription;
 
   constructor(
     private userService: UserService,
@@ -32,18 +36,25 @@ export class ChatComponent implements OnInit {
     this.typedWord = "";
     this.letters = this.word.letters.slice()
 
-    this.wordService.subscribe(res => {
-      if(res && res.word && res.index) {
-        this.word = res.word;
-        this.wordCounter = res.index;
-        this.letters = this.word.letters.slice();
-      }
-    });
+    this.wordsSubscription = this.wordService.getWords()
+      .subscribe(res => {
+        if(res && res.word && res.index) {
+          this.word = res.word;
+          this.wordCounter = res.index;
+          this.letters = this.word.letters.slice();
+        }
+      });
     
-    this.userService.subscribe(users => {
-      this.users = users;
-    });
+    this.usersSubscription = this.userService
+      .subscribe(users => {
+        this.users = users;
+      });
 
+  }
+
+  ngOnDestroy() {
+    this.wordsSubscription.unsubscribe();
+    this.usersSubscription.unsubscribe();
   }
 
   onLetterClicked(letter: string) {

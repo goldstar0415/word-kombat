@@ -20,6 +20,8 @@ const userController = require('./controllers/user.controller');
 const leaderboardsController = require('./controllers/leaderboards.controller');
 const rankController = require('./controllers/rank.controller');
 
+const corsFilter = require('./filters/cors.filter');
+
 app.use(passport.initialize());
 app.use(httpLogger('dev'));
 app.use(bodyParser.json({limit: '5mb'}));
@@ -30,6 +32,7 @@ app.set('view engine', 'pug');
 app.set('port', config.get('port'));
 app.set('ip', config.get('host'));
 
+app.use(corsFilter);
 io.listen(http);
 
 app.use('/', indexController);

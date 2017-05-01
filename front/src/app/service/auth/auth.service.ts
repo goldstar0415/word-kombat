@@ -8,23 +8,34 @@ import {
 } from '@angular/http';
 
 import { Observable, ReplaySubject } from 'rxjs/Rx';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
 
+import { handleError } from '../error-handler';
+import { createRequestOptions } from '../request-options';
+import { environment } from '../../../environments/environment';
 import { SignInRequest } from '../../model/signin-request.model';
 import { SignUpRequest } from '../../model/signup-request.model';
 import { User } from '../../model/user.model';
-import { UserService } from '../../service/user/user.service';
+import { UserService } from '../user/user.service';
+import { MessageService } from '../message/message.service';
+import { WordService } from '../word/word.service';
+import { SocketService } from '../socket/socket.service';
 
 @Injectable()
-export class AuthService extends ReplaySubject<string> {
+export class AuthService extends ReplaySubject<number> {
 
   private token: string;
   private username: string;
   private userId: number;
-  
+  private readonly SIGNIN_URL = environment.apiUrl + "api/auth/login";
+  private readonly SIGNUP_URL = environment.apiUrl + "api/auth/signup";
+
   constructor(
     private http: Http,
-    private userService: UserService
+    private userService: UserService,
+    private messageService: MessageService,
+    private wordService: WordService,
+    private socketService: SocketService
   ) {
     super();
     let token = this.getTokenFromStorage();
@@ -32,31 +43,35 @@ export class AuthService extends ReplaySubject<string> {
       let userData = this.parseToken(token);
       this.userId = userData.id;
       this.username = userData.name;
-      this.next(this.username);
+      this.next(this.userId);
     }
   }
 
   public signIn(signInRequest: SignInRequest) {
-    return this.http.post("/api/auth/login", signInRequest.toString(), this.getRequestOptions())
-        .map(this.processResponse)
-        .catch(error => {
-          throw error.json();
-        });
+    return this.http
+        .post(this.SIGNIN_URL, signInRequest.toString(), createRequestOptions())
+        .map(res => this.processResponse(res))
+        .catch(handleError);
   }
 
   public signUp(signUpRequest: SignUpRequest) {
-    return this.http.post("/api/auth/signup", signUpRequest.toString(), this.getRequestOptions())
-        .map(this.processResponse)
-        .catch(error => {
-          throw error.json();
-        });
+    return this.http
+        .post(this.SIGNUP_URL, signUpRequest.toString(), createRequestOptions())
+        .map(res => this.processResponse(res))
+        .catch(handleError);
   }
 
-  public logout() {
+  public signOut() {
     this.token = null;
     this.username = null;
     this.userId = null;
-    window.sessionStorage.removeItem('token');
+    window.sessionStorage.removeItem('user');
+    this.socketService.connect()
+      .then(socket => {
+        this.userService.setSocket(socket);
+        this.messageService.setSocket(socket);
+        this.wordService.setSocket(socket);
+      });
   }
 
   public isAuthorized(): boolean {
@@ -75,39 +90,41 @@ export class AuthService extends ReplaySubject<string> {
     return this.token;
   }
 
-  private processResponse(res: Response) {
+  private processResponse(res: Response): void {
     this.saveToken(res);
-    this.saveUserDetails(JSON.parse(window.sessionStorage.getItem('token')));
-    this.next(this.username);
+    this.saveUserDetails(JSON.parse(window.sessionStorage.getItem('user')));
     this.userService.getById(this.userId)
       .subscribe(user => {
         this.userService.setUsers([user]);
-      }, error => {
-        throw error.json();
-      });
+        this.socketService.connect(this.token)
+          .then(socket => {
+            this.next(this.userId);
+            this.userService.setSocket(socket);
+            this.messageService.setSocket(socket);
+            this.wordService.setSocket(socket);
+          });
+      }, handleError);
   }
 
-  private saveToken(res) {
-    let response = res.json() && res.json().token;
-    if (Boolean(response)) {
-      let token = response;
+  private saveToken(res: Response): void {
+    let token = res.json() && res.json().token;
+    if(Boolean(token)) {
       let claims = this.getTokenClaims(token);
       claims.token = token;
-      sessionStorage.setItem('token', JSON.stringify(claims));
+      window.sessionStorage.setItem('user', JSON.stringify(claims));
     } else {
-      console.error(res.json());
       throw Error(res.json());
     }
   }
 
-  private saveUserDetails(user) {
+  private saveUserDetails(user): void {
     this.token = user.token || '';
     this.username = user.name || '';
     this.userId = user.id || 0;
   }
 
   private getTokenFromStorage(): string {
-    return window.sessionStorage.getItem('token');
+    return window.sessionStorage.getItem('user');
   }
 
   private parseToken(token: string): { id: number, name: string } {
@@ -123,14 +140,6 @@ export class AuthService extends ReplaySubject<string> {
     let base64Url = token.split('.')[1];
     let base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64));
-  }
-
-  private getRequestOptions(): RequestOptions {
-    return new RequestOptions({
-      headers: new Headers({
-        "Content-Type": 'application/json'
-      })
-    });
   }
 
 }

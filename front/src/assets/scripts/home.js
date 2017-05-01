@@ -37,26 +37,20 @@ $(document).ready(function() {
     else
       $('.scroll-button').css("visibility", "visible");
 
-    /*
-    * Changes opacity of logo in header
-    */
+    // Changes opacity of logo in header
     $('.logo').css({
       transform: `translateY(${(wScroll / 2)}px)`,
       filter: `blur(${wScroll / 60}px)`,
       "-webkit-filter": `blur(${wScroll / 60}px)`,
     });
 
-    /*
-    * Changes brightness of header
-    */
+    // Changes brightness of header
     $('header').css({
       filter: `brightness(${100 - wScroll/9}%)`,
       "-webkit-filter": `brightness(${100 - wScroll/9}%)`,
     });
 
-    /*
-    * Words pictures
-    */
+    //  Words pictures
     if(wScroll > ($('.pics').offset().top - $(window).height() / 1.25)) {
       $('.pics figure').each(function(i) {
         setTimeout(function() {
@@ -65,17 +59,13 @@ $(document).ready(function() {
       });
     }
 
-    /*
-    * Periscope
-    */
+    // Periscope
     if (wScroll > ($('.periscope').offset().top - $(window).height())) {
       opacity = (wScroll - $('.periscope').offset().top + 400) / (wScroll / 8);
       $(".periscope > .content").css({"opacity": opacity});
     }
 
-    /*
-    * Blog posts 
-    */
+    // Blog posts
     if (wScroll > ($('.blog-posts').offset().top - $(window).height())) {
       offset = Math.min(0, wScroll - $('.blog-posts').offset().top + $(window).height() - 350);
       opacity = 1 - Math.abs(offset / 300);
@@ -114,7 +104,9 @@ $(document).ready(function() {
 
       $.post("/api/auth/signup", user, res => {
         Materialize.toast("Sign up successfully", 2500, 'rounded');
-        window.sessionStorage.setItem('token', res.token);
+        let userData = getDataFromToken(res.token);
+        userData.token = res.token;
+        window.sessionStorage.setItem('user', JSON.stringify(userData));
         window.location.href = "/chat";
       }).fail(error => {
         setValidationError(error.responseJSON, "signup");
@@ -141,7 +133,9 @@ $(document).ready(function() {
       
       $.post("/api/auth/login", user, res => {
         Materialize.toast("Logged in successfully", 2500, 'rounded');
-        window.sessionStorage.setItem('token', res.token);
+        let userData = getDataFromToken(res.token);
+        userData.token = res.token;
+        window.sessionStorage.setItem('user', JSON.stringify(userData));
         window.location.href = "/chat";
       }).fail(error => {
         setValidationError(error.responseJSON, "login");
@@ -160,7 +154,7 @@ $(document).ready(function() {
 
   // Log out
   $("#logout-trigger").click(() => {
-    window.sessionStorage.removeItem('token');
+    window.sessionStorage.removeItem('user');
     $.post("/api/auth/logout");
   });
 

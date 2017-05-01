@@ -23,21 +23,26 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit() {
     this.users = this.userService.getAll();
+    
     this.userService.subscribe(users => {
       this.users = users;
     });
-    let userId = this.authService.getUserId();
-    if(userId) {
-      this.userService.getById(userId).subscribe(user => {
-        this.user = user;
-      });
-    }
+
+    this.authService.subscribe(userId => {
+      if(userId) {
+        this.userService.getById(userId).subscribe(user => {
+          this.user = user;
+        });
+      }
+    });
   }
 
   isAuthorized() {
     return this.authService.isAuthorized();
   }
 
-  
+  onSignOut() {
+    this.authService.signOut();
+  }
 
 }

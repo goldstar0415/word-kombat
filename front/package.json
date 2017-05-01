@@ -1,22 +1,23 @@
 {
   "name": "word-kombat",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "license": "BSD3",
+  "private": true,
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "start:prod": "ng serve --host 0.0.0.0 --prod --aot",
+    "start:prod-sw": "npm run precache && ng serve --host 0.0.0.0 --prod --aot",
     "test": "ng test",
     "test:cov": "ng test --code-coverage",
-    "e2e": "ng e2e",
+    "test:e2e": "ng e2e",
     "lint": "ng lint",
     "build": "ng build --output-hashing none",
     "build:prod": "ng build --prod --aot --output-hashing none",
     "build:prod-sw": "npm run build:prod && npm run precache",
     "precache": "sw-precache --root=dist --config=sw-precache.config.js",
-    "loc": "cloc ./ --exclude-dir=dist,node_modules"
+    "loc": "cloc ./ --exclude-dir=dist,node_modules,coverage"
   },
-  "private": true,
   "dependencies": {
     "@angular/common": ">=4.0.0 <5.0.0",
     "@angular/compiler": ">=4.0.0 <5.0.0",

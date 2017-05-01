@@ -10,7 +10,15 @@ export class MessageService {
   private socket: any;
 
   constructor(private socketService: SocketService) {
-    this.socket = this.socketService.socket;
+    this.setSocket();
+  }
+
+  setSocket(socket?) {
+    if(socket) {
+      this.socket = socket;
+    } else {
+      this.socket = this.socketService.socket;
+    }
   }
 
   sendMessage(message: any) {
@@ -19,8 +27,8 @@ export class MessageService {
 
   getMessages(): Observable<Message> {
     let observable = new Observable(observer => {
-      this.socket.on('message', (data) => {
-        observer.next(data);
+      this.socket.on('message', message => {
+        observer.next(message);
       });
     });
     return observable;

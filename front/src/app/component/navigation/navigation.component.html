@@ -1,5 +1,22 @@
 <nav class="nav-wrapper hoverable">
+  
+  <!-- Dropdown menu -->
+  <ul id='exit' class='dropdown-content'>
+    <li>
+      <a href="/" class="waves-effect waves-light">
+        <i class="material-icons">home</i>
+        <span>Home</span>
+      </a>
+    </li>
+    <li>
+      <a (click)="onSignOut()" class="waves-effect waves-light">
+        <i class="material-icons">power_settings_new</i>
+        <span>Sign Out</span>
+      </a>
+    </li>
+  </ul>
 
+  <!-- Mobile Menu -->
   <ul class="side-nav" id="menu-mobile">
 
     <div class="user-info" *ngIf="isAuthorized()" [routerLink]="['account']">
@@ -40,17 +57,27 @@
       <a class="waves-effect waves-light"
         [routerLink]="['account']"
         routerLinkActive="mobile-router-link-active">
-          <span>{{ isAuthorized() ? 'Edit account' : 'Authorize' }}</span>
+          <span>{{ isAuthorized() ? 'Account' : 'Authorize' }}</span>
           <i class="material-icons">account_box</i>
       </a>
     </li>
 
-    <li>
-      <a class="waves-effect waves-light" href="/" data-position="right">
+    <li *ngIf="!isAuthorized()">
+      <a class="waves-effect waves-light" href="/" >
         <span>Home</span>
         <i class="material-icons">home</i>
       </a>
     </li>
+
+    <li *ngIf="isAuthorized()">
+      <a class='dropdown-button waves-effect waves-light'
+        data-position="right"
+        data-activates='exit'>
+          <i class="material-icons">home</i>
+          <span>Exit</span>
+      </a>
+    </li>
+
   </ul>
 
   <div class="side-nav" id="activities-mobile">
