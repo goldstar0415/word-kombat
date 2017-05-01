@@ -1,6 +1,7 @@
 @import '../../../../variables';
 
 .chat-area {
+  width: 100%;
   
   ul.collection {
     overflow-x: hidden;
@@ -12,15 +13,25 @@
      
     li {
       background-color: $blue-grey-lighten-5;
-      
+      overflow: hidden;
+
       span {
         font-weight: bold;
       }
       
+      p {
+        max-width: 100%;
+        max-height: 960px;
+        word-wrap: break-word;
+        text-overflow: ellipsis;
+      }
+
       // Points
-      a.secondary-content {
-        span {
-          color: teal;
+      .secondary-content {
+        .score {
+          color: orange;
+          font-size: 1.2rem;
+          text-shadow: 0 1px 0 $grey-darken-4;
         }
       }
     }

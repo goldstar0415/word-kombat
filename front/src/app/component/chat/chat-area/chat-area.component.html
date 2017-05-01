@@ -10,8 +10,8 @@
 
       <p>{{ message.text }}</p>
 
-      <span class="secondary-content">
-        <span>{{ message.points }}</span>
+      <span *ngIf="message.points" class="secondary-content">
+        <span class="score">+{{ message.points }}</span>
       </span>
 
     </li>
