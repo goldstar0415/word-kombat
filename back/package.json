@@ -4,22 +4,28 @@
   "description": "English words learning platform",
   "private": true,
   "main": "app.js",
-  "scripts": {
-    "start": "nodemon app.js",
-    "test": "jasmine",
-    "loc": "cloc ./ --exclude-dir=node_modules"
-  },
+  "homepage": "https://gitlab.com/Saka7/Word-Kombat#README",
   "repository": {
     "type": "git",
     "url": "git+https://gitlab.com/Saka7/Word-Kombat.git"
   },
-  "keywords": [],
+  "keywords": ["words", "interactive learning", "real-time"],
   "author": "Ihor Sakaylyuk",
   "license": "BSD-3 License",
   "bugs": {
     "url": "https://gitlab.com/Saka7/Word-Kombat/issues"
   },
-  "homepage": "https://gitlab.com/Saka7/Word-Kombat#README",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "jasmine",
+    "build:linux": "pkg -c package.json -t node7-linux --output ../builds/word-kombat-lin app.js ",
+    "build:mac": "pkg -c package.json -t node7-macos --output ../builds/word-kombat-mac app.js",
+    "build:win": "pkg -c package.json -t node7-win --output ../builds/word-kombat-win.exe app.js",
+    "loc": "cloc ./ --exclude-dir=node_modules"
+  },
+  "pkg": {
+    "assets": "{views/**/*,../front/dist/**/*}"
+  },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",

@@ -1,4 +1,5 @@
 node_modules/
+builds/
 
 front/dist
 front/src/guess-word-app/typings
