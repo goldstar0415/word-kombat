@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { MockBackend } from '@angular/http/testing';
 import { Http, BaseRequestOptions } from '@angular/http';
+import { FormsModule } from '@angular/forms';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -18,6 +19,9 @@ describe('UserDetailsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        FormsModule
+      ],
       providers: [
         MockBackend,
         BaseRequestOptions,
@@ -55,28 +59,28 @@ describe('UserDetailsComponent', () => {
   }));
 
   it('should call userService.update method', () => {
-    userDetailsComponent.update();
+    userDetailsComponent.onUserDetailsSubmit();
     userDetailsFixture.whenStable().then(() => {
       expect(userServiceSpy.update).toHaveBeenCalled();
     });
   });
 
   it('should call userService.update method only once', () => {
-    userDetailsComponent.update();
+    userDetailsComponent.onUserDetailsSubmit();
     userDetailsFixture.whenStable().then(() => {
       expect(userServiceSpy.update.callsCount).toEqual(1);
     });
   });
 
   it('should call userService.upload method', () => {
-    userDetailsComponent.upload();
+    userDetailsComponent.onImageUploadSubmit();
     userDetailsFixture.whenStable().then(() => {
       expect(userServiceSpy.update).toHaveBeenCalled();
     });
   });
 
   it('should call userService.upload method only once', () => {
-    userDetailsComponent.upload();
+    userDetailsComponent.onImageUploadSubmit();
     userDetailsFixture.whenStable().then(() => {
       expect(userServiceSpy.update.callsCount).toEqual(1);
     });

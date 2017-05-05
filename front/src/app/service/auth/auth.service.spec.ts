@@ -5,14 +5,20 @@ import { Observable } from 'rxjs/Observable';
 
 import { SocketService } from '../socket/socket.service';
 import { UserService } from '../user/user.service';
+import { MessageService } from '../message/message.service';
+import { WordService } from '../word/word.service';
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
   let store = {};
 
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9." 
-    + "eyJpZCI6IjEiLCJuYW1lIjoidXNlciJ9." // {"id": "1", "name": "user"}
-    + "PUHflJtYA6kdUev8BwbC_a1GBi3SCCWxQstZQGBYY7g";
+  const user = JSON.stringify({
+    id: 1,
+    name: "user",
+    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+      + ".eyJpZCI6IjEiLCJuYW1lIjoidXNlciJ9"
+      + ".PUHflJtYA6kdUev8BwbC_a1GBi3SCCWxQstZQGBYY7g"
+  });
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -27,6 +33,8 @@ describe('AuthService', () => {
           deps: [MockBackend, BaseRequestOptions]
         },
         { provide: SocketService, useValue: {socket: {on: new Function()}} },
+        { provide: MessageService, useValue: {setSocket: new Function()} },
+        { provide: WordService, useValue: {setSocket: new Function()} },
         UserService,
         AuthService
       ]
@@ -41,12 +49,14 @@ describe('AuthService', () => {
     });
   });
 
-  it('should return token if exists', inject([AuthService], (authService: AuthService) => {
-    store = {token: token};
+  it('should return token if exists',
+      inject([AuthService], (authService: AuthService) => {
+    store = { user: user };
+    authService.refresh();
     const retrievedToken = authService.getToken();
     expect(retrievedToken).toBeDefined();
     expect(retrievedToken).not.toBeNull();
-    expect(retrievedToken).toEqual(token);
+    expect(retrievedToken).toEqual(JSON.parse(user).token);
   }));
 
   it('should return undefined if token does not exists',
@@ -55,8 +65,10 @@ describe('AuthService', () => {
     expect(retrievedToken).toBeUndefined();
   }));
 
-  it('should return userId if exists', inject([AuthService], (authService: AuthService) => {
-    store = {token: token};
+  it('should return userId if exists',
+      inject([AuthService], (authService: AuthService) => {
+    store = { user: user };
+    authService.refresh();
     const userId = authService.getUserId();
     expect(userId).toBeDefined();
     expect(userId).not.toBeNull();
@@ -69,8 +81,10 @@ describe('AuthService', () => {
     expect(userId).toBeUndefined();
   }));
 
-  it('should return username if exists', inject([AuthService], (authService: AuthService) => {
-    store = {token: token};
+  it('should return username if exists',
+      inject([AuthService], (authService: AuthService) => {
+    store = { user: user };
+    authService.refresh();
     const username = authService.getUsername();
     expect(username).toBeDefined();
     expect(username).not.toBeNull();
@@ -85,13 +99,16 @@ describe('AuthService', () => {
 
   describe('isAuthorized method', () => {
 
-    it('should true token exists', inject([AuthService], (authService: AuthService) => {
-      store = {token: token};
+    it('should true token exists',
+        inject([AuthService], (authService: AuthService) => {
+      store = { user: user };
+      authService.refresh();
       const isAuthorized = authService.isAuthorized();
       expect(isAuthorized).toBeTruthy();
     }));
 
-    it('should false token does not exists', inject([AuthService], (authService: AuthService) => {
+    it('should false token does not exists',
+        inject([AuthService], (authService: AuthService) => {
       const isAuthorized = authService.isAuthorized();
       expect(isAuthorized).toBeFalsy();
     }));

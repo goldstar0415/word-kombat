@@ -16,6 +16,8 @@ import { Rank } from '../../model/rank.model';
 import { AuthService } from '../../service/auth/auth.service';
 import { UserService } from '../../service/user/user.service';
 import { SocketService } from '../../service/socket/socket.service';
+import { MessageService } from '../../service/message/message.service';
+import { WordService } from '../../service/word/word.service';
 import { AccountComponent } from './account.component';
 
 describe('AccountComponent', () => {
@@ -40,6 +42,8 @@ describe('AccountComponent', () => {
         },
         { provide: ComponentFixtureAutoDetect, useValue: true },
         { provide: SocketService, useValue: {socket: {on: new Function()}} },
+        { provide: MessageService, useValue: {setSocket: new Function()} },
+        { provide: WordService, useValue: {setSocket: new Function()} },
         UserService,
         AuthService
       ],

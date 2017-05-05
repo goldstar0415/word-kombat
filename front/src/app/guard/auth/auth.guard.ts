@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { CanActivate,
+import {
+  CanActivate,
   Router,
   ActivatedRouteSnapshot,
   RouterStateSnapshot

@@ -38,11 +38,16 @@ export class AuthService extends ReplaySubject<number> {
     private socketService: SocketService
   ) {
     super();
-    let token = this.getTokenFromStorage();
-    if(token) {
-      let userData = this.parseToken(token);
-      this.userId = userData.id;
-      this.username = userData.name;
+    this.refresh();
+  }
+
+  public refresh() {
+    let userData = this.getUserDataFromStorage();
+    if(userData) {
+      let parsedUserData = this.parseUserData(userData);
+      this.token = parsedUserData.token;
+      this.userId = +parsedUserData.id;
+      this.username = parsedUserData.name;
       this.next(this.userId);
     }
   }
@@ -123,17 +128,20 @@ export class AuthService extends ReplaySubject<number> {
     this.userId = user.id || 0;
   }
 
-  private getTokenFromStorage(): string {
+  private getUserDataFromStorage(): string {
     return window.sessionStorage.getItem('user');
   }
 
-  private parseToken(token: string): { id: number, name: string } {
-    this.token = token;
-    let claims = this.getTokenClaims(this.token);
-    return {
-      id: claims.id,
-      name: claims.name
-    };
+  private parseUserData(userData: string): { token: string,  id: number, name: string } {
+    let userDataObject = JSON.parse(userData);
+    if(userData) {
+      let claims = this.getTokenClaims(userData);
+      return {
+        token: userDataObject.token || '',
+        id: claims.id,
+        name: claims.name
+      };
+    }
   }
 
   private getTokenClaims(token: string) {

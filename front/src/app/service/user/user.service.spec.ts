@@ -25,6 +25,8 @@ describe('UserService', () => {
     });
   });
 
-  xit('should return all users', inject([UserService], (userService: UserService) => {
+  it('should return all users', inject([UserService], (userService: UserService) => {
+    // TODO
   }));
+
 });

@@ -68,7 +68,8 @@ describe('ChatComponent', () => {
     wordServiceSpy = spyOn(wordService, 'getCurrentWordIndex')
       .and.returnValue(1);
 
-    wordServiceSpy = spyOn(wordService, 'subscribe');
+    wordServiceSpy = spyOn(wordService, 'getWords')
+      .and.returnValue(Observable.from([[new Word(), new Word(), new Word()]]));
   });
 
   it('should create component', async(() => {
@@ -132,17 +133,17 @@ describe('ChatComponent', () => {
     });
   });
 
-  it('should call WordService.subscribe method', () => {
+  it('should call WordService.getWords method', () => {
     chatComponent.ngOnInit();
     chatFixture.whenStable().then(() => {
-      expect(wordServiceSpy.subscribe).toHaveBeenCalled();
+      expect(wordServiceSpy.getWords).toHaveBeenCalled();
     });
   });
 
-  it('should call WordService.subscribe method only once', () => {
+  it('should call WordService.getWords method only once', () => {
     chatComponent.ngOnInit();
     chatFixture.whenStable().then(() => {
-      expect(wordServiceSpy.subscribe.callsCount).toEqual(1);
+      expect(wordServiceSpy.getWords.callsCount).toEqual(1);
     });
   });
 
