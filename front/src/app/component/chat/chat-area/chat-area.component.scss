@@ -29,6 +29,9 @@
       // Points
       .secondary-content {
         .score {
+          padding: 4px 5px;
+          border-radius: 50%;
+          background-color: $blue-grey;
           color: orange;
           font-size: 1.2rem;
           text-shadow: 0 1px 0 $grey-darken-4;

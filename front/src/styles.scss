@@ -5,7 +5,7 @@
 }
 
 
-// Fixing bug with shadow glitch in latest chrome version
+// Fixing bug with shadow glitch in chrome version 58.0.3029.110
 // should be removed soon... I hope )
 .hoverable:hover {
   transition: box-shadow .25s;
