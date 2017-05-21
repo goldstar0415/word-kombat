@@ -1,21 +1,5 @@
 <nav class="nav-wrapper hoverable">
   
-  <!-- Dropdown menu large-->
-  <ul id='exit' class='dropdown-content'>
-    <li>
-      <a href="/" class="waves-effect waves-light">
-        <i class="material-icons">home</i>
-        <span>Home</span>
-      </a>
-    </li>
-    <li>
-      <a (click)="onSignOut()" class="waves-effect waves-light">
-        <i class="material-icons">power_settings_new</i>
-        <span>Sign Out</span>
-      </a>
-    </li>
-  </ul>
-
   <!-- Mobile Menu -->
   <ul class="side-nav" id="menu-mobile">
 
@@ -62,19 +46,17 @@
       </a>
     </li>
 
-    <li *ngIf="!isAuthorized()">
-      <a class="waves-effect waves-light" href="/" >
-        <span>Home</span>
-        <i class="material-icons">home</i>
+    <li *ngIf="isAuthorized()" (click)="onSignOut()">
+      <a class="waves-effect waves-light" [routerLink]="['account']" >
+        <span>Sign Out</span>
+        <i class="material-icons">arrow_upward</i>
       </a>
     </li>
 
-    <li *ngIf="isAuthorized()">
-      <a class='dropdown-button waves-effect waves-light'
-        data-position="right"
-        data-activates='exit'>
-          <i class="material-icons">home</i>
-          <span>Exit</span>
+    <li>
+      <a class="waves-effect waves-light" href="/" >
+        <span>Home</span>
+        <i class="material-icons">home</i>
       </a>
     </li>
 
@@ -123,17 +105,6 @@
 
     <li class="waves-effect waves-light">
       <a class="tooltipped"
-        [routerLink]="['leaderboards']"
-        routerLinkActive="router-link-active"
-        data-position="bottom"
-        data-delay="50"
-        data-tooltip="See leaderboards">
-          <i class="material-icons">list</i>
-      </a>
-    </li>
-
-    <li class="waves-effect waves-light">
-      <a class="tooltipped"
         [routerLink]="['account']"
         routerLinkActive="router-link-active"
         data-position="bottom"
@@ -145,6 +116,30 @@
 
     <li class="waves-effect waves-light">
       <a class="tooltipped"
+        [routerLink]="['leaderboards']"
+        routerLinkActive="router-link-active"
+        data-position="bottom"
+        data-delay="50"
+        data-tooltip="See leaderboards">
+          <i class="material-icons">list</i>
+      </a>
+    </li>
+
+    <li
+      *ngIf="isAuthorized()"
+      (click)="onSignOut()"
+      class="waves-effect waves-light">
+        <a class="tooltipped"
+          [routerLink]="['account']"
+          data-position="bottom"
+          data-delay="50"
+          data-tooltip="Sign Out">
+            <i class="material-icons">arrow_upward</i>
+        </a>
+    </li>
+
+    <li class="waves-effect waves-light">
+      <a class="tooltipped"
         href="/"
         data-position="bottom"
         data-delay="50"
@@ -152,6 +147,7 @@
           <i class="material-icons">home</i>
       </a>
     </li>
+
   </ul>
   
 </nav>
