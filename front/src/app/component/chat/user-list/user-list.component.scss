@@ -59,9 +59,3 @@
     }
   }
 }
-
-// Hide scrollbar but still enable scrolling
-::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
-}
