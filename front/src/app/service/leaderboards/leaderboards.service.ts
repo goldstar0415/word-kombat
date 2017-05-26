@@ -34,9 +34,10 @@ export class LeaderboardsService {
   private getFromStorage(): Observable<Array<User> | any> {
     let leaderboards = window.localStorage.getItem('leaderboards');
     if(leaderboards) {
-      leaderboards = JSON.parse(leaderboards);
+      return Observable.from([JSON.parse(leaderboards)]);
+    } else {
+      return Observable.from([[]]);
     }
-    return Observable.from([leaderboards]);
   }
 
 }

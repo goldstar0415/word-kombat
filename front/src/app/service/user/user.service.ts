@@ -52,13 +52,6 @@ export class UserService extends ReplaySubject<Array<User>> {
     return this.users;
   }
 
-  getById(id: number): Observable<User | any> {
-    return this.http
-      .get(`${environment.apiUrl}api/users/${id}`, createRequestOptions())
-      .map(res => res.json())
-      .catch(handleError);
-  }
-
   update(id: number, user: User): Observable<User | any> {
     return this.http
       .put(`${environment.apiUrl}api/users/${id}`, user, createRequestOptions(true))
@@ -66,19 +59,66 @@ export class UserService extends ReplaySubject<Array<User>> {
       .catch(handleError);
   }
 
-  getNextRank(score: number): Observable<Rank | any> {
+  uploadImage(userId: number, image: string): Observable<any> {
+    let body = {image: image};
     return this.http
-      .get(`${environment.apiUrl}api/ranks/${score}/next`, createRequestOptions())
+      .patch(
+        `${environment.apiUrl}api/users/${userId}/image`,
+         body,
+         createRequestOptions(true)
+      )
       .map(res => res.json())
       .catch(handleError);
   }
 
-  uploadImage(userId: number, image: string): Observable<any> {
-    let body = {image: image};
+  getById(id: number): Observable<User | any> {
+    if(window.navigator.onLine) {
+      return this.getUserByIdFromService(id);
+    } else {
+      return this.getUserByIdFromStorage(id);
+    }
+  }
+
+  private getUserByIdFromService(id: number): Observable<User | any> {
     return this.http
-      .patch(`${environment.apiUrl}api/users/${userId}/image`, body, createRequestOptions(true))
+      .get(`${environment.apiUrl}api/users/${id}`, createRequestOptions())
       .map(res => res.json())
+      .do(res => window.localStorage.setItem("user:" + id, JSON.stringify(res)))
       .catch(handleError);
+  }
+
+  private getUserByIdFromStorage(id: number): Observable<User | any> {
+    let user = window.localStorage.getItem("user:" + id);
+    if(user) {
+      return Observable.from([JSON.parse(user)]);
+    } else {
+      return Observable.from([new User()]);
+    }
+  }
+
+  getNextRank(score: number): Observable<Rank | any > {
+    if(window.navigator.onLine) {
+      return this.getNextRankFromService(score);
+    } else {
+      return this.getNextRankFromStorage();
+    }
+  }
+
+  private getNextRankFromService(score: number): Observable<Rank | any> {
+    return this.http
+      .get(`${environment.apiUrl}api/ranks/${score}/next`, createRequestOptions())
+      .map(res => res.json())
+      .do(res => window.localStorage.setItem("rank", JSON.stringify(res)))
+      .catch(handleError);
+  }
+
+  private getNextRankFromStorage() {
+    let nextRank = window.localStorage.getItem('rank');
+    if(nextRank) {
+      return Observable.from([JSON.parse(nextRank)]);
+    } else {
+      return Observable.from([new Rank()]);
+    }
   }
 
 }
