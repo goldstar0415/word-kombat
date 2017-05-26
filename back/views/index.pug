@@ -19,14 +19,17 @@ html(lang="en")
     
     nav
       ul.nav-wrapper.right
-        li#chat.btn.waves-effect.waves-dark
-          a(href="/chat") Play
+        li#chat.guest.btn.waves-effect.waves-dark
+          a(href="/chat") Try It
+
+        li#learn-more.btn.waves-effect.waves-dark
+          a(href="/learn-more") About
 
         li#signup-trigger.btn.waves-effect.waves-dark
-          a(data-target="signup") Signup
+          a(data-target="signup") SignUp
         
-        li#login-trigger.btn.waves-effect.waves-dark
-          a(data-target="login") Login
+        li#signin-trigger.btn.waves-effect.waves-dark
+          a(data-target="signin") SignIn
 
         li#logout-trigger.btn.waves-effect.waves-dark
           a(href="") Logout
@@ -70,13 +73,13 @@ html(lang="en")
             button.btn-floating.btn-large.waves-effect.waves-dark.tooltipped(data-position="bottom" data-delay="50" data-tooltip="Sign up with facebook")
               img(src="assets/images/social-icons/facebook-standart.png")
 
-    //- Login modal
-    #login.modal
+    //- signin modal
+    #signin.modal
       form(onsubmit="return false").modal-content
 
         .center
           i.material-icons.medium account_circle
-          span LOG IN
+          span SIGN IN
 
         .input-field
           i.material-icons.prefix account_box
@@ -93,9 +96,9 @@ html(lang="en")
             i.material-icons.left cancel
             span Cancel
 
-          button#login-btn.btn-large.waves-effect.waves-dark
+          button#signin-btn.btn-large.waves-effect.waves-dark
             i.material-icons.left check_circle
-            span Log In
+            span Sign In
 
           .social
             button.btn-floating.btn-large.waves-effect.waves-dark.tooltipped(data-position="bottom" data-delay="50" data-tooltip="Log in with google+")

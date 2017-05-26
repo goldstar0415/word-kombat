@@ -7,13 +7,13 @@ body {
     font-family: "Roboto", "Helvetica", sans-serif;
     background-color: #000
 }
-#login {
+#signin {
     max-height: 62%
 }
 #signup {
     max-height: 76%
 }
-#login,
+#signin,
 #signup {
     max-width: 600px;
     background-color: #212121;
@@ -22,7 +22,7 @@ body {
     -webkit-box-shadow: 0 0 10px 1px #fff;
     box-shadow: 0 0 10px 1px #fff;
 }
-#login .center,
+#signin .center,
 #signup .center {
     display: -webkit-box;
     display: -moz-box;
@@ -44,19 +44,19 @@ body {
     align-items: center;
     font-size: 2rem;
 }
-#login .center i,
+#signin .center i,
 #signup .center i {
     margin-right: 6px
 }
-#login img,
+#signin img,
 #signup img {
     max-width: 100%
 }
-#login label,
+#signin label,
 #signup label {
     width: 90%
 }
-#login .modal-footer,
+#signin .modal-footer,
 #signup .modal-footer {
     display: -webkit-box;
     display: -moz-box;
@@ -80,36 +80,36 @@ body {
     margin-bottom: 10px;
     background-color: #212121;
 }
-#login .modal-footer #login-btn,
-#signup .modal-footer #login-btn,
-#login .modal-footer #signup-btn,
+#signin .modal-footer #signin-btn,
+#signup .modal-footer #signin-btn,
+#signin .modal-footer #signup-btn,
 #signup .modal-footer #signup-btn,
-#login .modal-footer .cancel,
+#signin .modal-footer .cancel,
 #signup .modal-footer .cancel {
     margin-right: 6px;
     min-width: 120px;
     display: inline-block;
     background-color: #424242;
 }
-#login .modal-footer #login-btn:hover,
-#signup .modal-footer #login-btn:hover,
-#login .modal-footer #signup-btn:hover,
+#signin .modal-footer #signin-btn:hover,
+#signup .modal-footer #signin-btn:hover,
+#signin .modal-footer #signup-btn:hover,
 #signup .modal-footer #signup-btn:hover,
-#login .modal-footer .cancel:hover,
+#signin .modal-footer .cancel:hover,
 #signup .modal-footer .cancel:hover {
     background-color: #fff;
     color: #000;
     font-weight: bold
 }
-#login .modal-footer .social,
+#signin .modal-footer .social,
 #signup .modal-footer .social {
     min-width: 120px;
 }
-#login .modal-footer .social button.btn-floating,
+#signin .modal-footer .social button.btn-floating,
 #signup .modal-footer .social button.btn-floating {
     margin-right: 4px;
 }
-#login .modal-footer .social button.btn-floating img,
+#signin .modal-footer .social button.btn-floating img,
 #signup .modal-footer .social button.btn-floating img {
     filter: grayscale(30%);
     -webkit-transition: filter 0.3s ease-in-out;
@@ -118,7 +118,7 @@ body {
     -ms-transition: filter 0.3s ease-in-out;
     transition: filter 0.3s ease-in-out
 }
-#login .modal-footer .social button.btn-floating:hover img,
+#signin .modal-footer .social button.btn-floating:hover img,
 #signup .modal-footer .social button.btn-floating:hover img {
     filter: grayscale(0%);
     -webkit-transition: filter 0.3s ease-in-out;

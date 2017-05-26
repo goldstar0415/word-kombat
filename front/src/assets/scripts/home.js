@@ -1,9 +1,9 @@
 $(document).ready(function() {
 
   if(window.sessionStorage.getItem("user") !== null) {
-    $("#logout-trigger").css("display", "inline-block");
     $("#signup-trigger").css("display", "none");
-    $("#login-trigger").css("display", "none");
+    $("#signin-trigger").css("display", "none");
+    $("#logout-trigger").css("display", "inline-block");
   }
 
   $('.modal').modal();
@@ -118,10 +118,10 @@ $(document).ready(function() {
   });
 
   // Log in
-  $("#login-btn").click(() => {
+  $("#signin-btn").click(() => {
 
-    let email = $("#login .email").val();
-    let password = $("#login .password").val();
+    let email = $("#signin .email").val();
+    let password = $("#signin .password").val();
 
     let validationStatus = validateUserDetails("none", email, password);
 
@@ -131,24 +131,24 @@ $(document).ready(function() {
         password: password
       };
       
-      $.post("/api/auth/login", user, res => {
+      $.post("/api/auth/signin", user, res => {
         Materialize.toast("Logged in successfully", 2500, 'rounded');
         let userData = getDataFromToken(res.token);
         userData.token = res.token;
         window.sessionStorage.setItem('user', JSON.stringify(userData));
         window.location.href = "/chat";
       }).fail(error => {
-        setValidationError(error.responseJSON, "login");
+        setValidationError(error.responseJSON, "signin");
       });
       
     } else {
-      setValidationError(validationStatus, "login");
+      setValidationError(validationStatus, "signin");
     }
   });
 
   // Sign up and Log in cancel button
   $('.cancel').click(() => {
-    $("#login").modal('close');
+    $("#signin").modal('close');
     $("#signup").modal('close');
   });
 

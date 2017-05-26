@@ -9,8 +9,8 @@ const userRepository = new (require('../repositories/user.repository'))();
 const UserDetailsValidator = require('../util/user-details.validator');
 
 /**
- * @api {post} /api/auth Login
- * @apiName login 
+ * @api {post} /api/auth SignIn
+ * @apiName signin 
  * @apiGroup Auth 
  *
  * @apiParam {String} email User email.
@@ -21,7 +21,7 @@ const UserDetailsValidator = require('../util/user-details.validator');
  * @apiError InvalidPassword Password is invalid.
  * @apiError UserNotFound User with this email not found.
 */
-router.post('/login', (req, res) => {
+router.post('/signin', (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
 
