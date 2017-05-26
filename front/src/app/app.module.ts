@@ -26,6 +26,7 @@ import { UserService } from './service/user/user.service';
 import { AuthService } from './service/auth/auth.service';
 import { WordService } from './service/word/word.service';
 import { MessageService } from './service/message/message.service';
+import { NetworkHealthService } from './service/network-health/network-health.service';
 import { AuthGuard } from './guard/auth/auth.guard';
 
 @NgModule({
@@ -68,6 +69,7 @@ import { AuthGuard } from './guard/auth/auth.guard';
     ])
   ],
   providers: [
+    NetworkHealthService,
     SocketService,
     UserService,
     AuthService,
