@@ -27,7 +27,7 @@ router.get('/', (req, res) => {
 
 /**
  * @api {get} api/ranks/:score/next Request information about next rank by score
- * @apiName getRanks 
+ * @apiName getNextRank
  * @apiGroup Ranks
  *
  * @apiSuccess {Integer} id Rank Id.

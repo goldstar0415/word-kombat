@@ -21,6 +21,8 @@
     "build:linux": "pkg -c package.json -t node7-linux --output ../builds/word-kombat-lin app.js ",
     "build:mac": "pkg -c package.json -t node7-macos --output ../builds/word-kombat-mac app.js",
     "build:win": "pkg -c package.json -t node7-win --output ../builds/word-kombat-win.exe app.js",
+    "build:prod": "npm run doc && npm run build:linux",
+    "doc": "apidoc -i ./controllers -o ../front/dist/apidocs",
     "loc": "cloc ./ --exclude-dir=node_modules"
   },
   "pkg": {
@@ -55,17 +57,9 @@
     "@types/hammerjs": "^2.0.33",
     "@types/jasmine": "^2.2.34",
     "babel-preset-es2015": "^6.9.0",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^6.1.2",
-    "gulp-clean": "^0.3.2",
-    "gulp-htmlmin": "^3.0.0",
-    "gulp-imagemin": "^3.1.0",
-    "gulp-plumber": "^1.1.0",
-    "gulp-stylus": "^2.5.0",
-    "gulp-typescript": "^3.0.1",
     "jasmine": "^2.5.3",
-    "run-sequence": "^1.2.2",
     "supertest": "^3.0.0",
+    "apidoc": "^0.17.5"
   },
   "engines": {
     "node": ">= 6.3.0",
