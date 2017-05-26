@@ -17,9 +17,26 @@ export class LeaderboardsService {
   constructor(private http: Http) {}
 
   getAll(): Observable<Array<User> | any> {
+    if(window.navigator.onLine) {
+      return this.getFromService();
+    } else {
+      return this.getFromStorage();
+    }
+  }
+
+  private getFromService(): Observable<Array<User> | any> {
     return this.http.get(this.LEADERBOARDS_URL, createRequestOptions())
       .map(res => res.json())
+      .do(res => window.localStorage.setItem("leaderboards", JSON.stringify(res)))
       .catch(handleError);
+  }
+
+  private getFromStorage(): Observable<Array<User> | any> {
+    let leaderboards = window.localStorage.getItem('leaderboards');
+    if(leaderboards) {
+      leaderboards = JSON.parse(leaderboards);
+    }
+    return Observable.from([leaderboards]);
   }
 
 }

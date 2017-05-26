@@ -11,9 +11,10 @@ module.exports = {
     'dist/assets/images/*.jpg',
     'dist/assets/images/*.jpeg',
     'dist/assets/images/*.svg',
+    'dist/assets/images/**/*.png',
+    'dist/assets/images/**/*.jpg',
     'dist/assets/*.css',
     'dist/assets/styles/*.css',
     'dist/assets/*.json'
-    // 'dist/assets/images/**/*.png'
   ]
 };

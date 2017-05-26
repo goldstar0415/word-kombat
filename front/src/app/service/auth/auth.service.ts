@@ -27,7 +27,7 @@ export class AuthService extends ReplaySubject<number> {
   private token: string;
   private username: string;
   private userId: number;
-  private readonly SIGNIN_URL = environment.apiUrl + "api/auth/login";
+  private readonly SIGNIN_URL = environment.apiUrl + "api/auth/signin";
   private readonly SIGNUP_URL = environment.apiUrl + "api/auth/signup";
 
   constructor(
