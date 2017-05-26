@@ -160,6 +160,9 @@ nav .btn:hover {
 nav #logout-trigger {
     display: none
 }
+nav i.material-icons {
+    display: none;
+}
 header.box {
     background-attachment: fixed;
     background-image: url("/assets/images/header.jpg");
@@ -690,6 +693,24 @@ footer ul.social-links li img:hover {
     footer .small-footer {
         display: block;
         margin-bottom: 0
+    }
+
+    nav span {
+        display: none;
+    }
+
+    nav i.material-icons {
+        display: inline-block;
+        height: 36px;
+        line-height: 36px;
+    }
+
+    nav ul li.btn {
+        max-width: 48px;
+    }
+
+    nav ul li a {
+        padding: 0;
     }
 }
 .toast {

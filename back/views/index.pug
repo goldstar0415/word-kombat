@@ -20,22 +20,34 @@ html(lang="en")
     nav
       ul.nav-wrapper.right
         li#chat.guest.btn.waves-effect.waves-dark
-          a(href="/chat") Try It
+          a(href="/chat")
+            i.material-icons.small chat
+            span Try It
 
         li#learn-more.btn.waves-effect.waves-dark
-          a(href="/about") About
+          a(href="/about")
+            i.material-icons.small info
+            span About
 
         li#learn-more.btn.waves-effect.waves-dark
-          a(href="/apidocs") API doc
+          a(href="/apidocs")
+            i.material-icons.small subject
+            span API doc
 
         li#signup-trigger.btn.waves-effect.waves-dark
-          a(data-target="signup") SignUp
+          a(data-target="signup")
+            i.material-icons.small group_add
+            span SignUp
         
         li#signin-trigger.btn.waves-effect.waves-dark
-          a(data-target="signin") SignIn
+          a(data-target="signin")
+            i.material-icons.small account_circle
+            span SignIn
 
         li#logout-trigger.btn.waves-effect.waves-dark
-          a(href="") Logout
+          a(href="")
+            i.material-icons.small arrow_upward
+            span Logout
 
     //- Sign up modal
     #signup.modal
