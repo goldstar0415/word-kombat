@@ -24,4 +24,14 @@
     </wk-word-inputs>
 
   </div>
+
+  <div *ngIf="!isOnline" class="offline-warning">
+    <p>
+      <span>Unable to connect to the Internet</span>
+      <br />
+      <i class="material-icons large">signal_wifi_off</i>
+      <br />
+      <span class="small">Check your network connection</span>
+    </p>
+  </div>
 </div>

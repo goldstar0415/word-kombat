@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs/Rx';
 
 import { UserService } from '../../service/user/user.service';
 import { WordService } from '../../service/word/word.service';
+import { NetworkHealthService } from '../../service/network-health/network-health.service';
 import { User } from '../../model/user.model';
 import { Word } from '../../model/word.model';
 import { Message } from '../../model/message.model';
@@ -20,11 +21,13 @@ export class ChatComponent implements OnInit, OnDestroy {
   letters: Array<string>;
   typedWord: string;
   wordCounter = 0;
+  isOnline = true;
 
   private wordsSubscription: Subscription;
   private usersSubscription: Subscription;
 
   constructor(
+    private networkHealthService: NetworkHealthService,
     private userService: UserService,
     private wordService: WordService
   ) {}
@@ -34,7 +37,11 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.word = this.wordService.getCurrentWord();
     this.wordCounter = this.wordService.getCurrentWordIndex();
     this.typedWord = "";
-    this.letters = this.word.letters.slice()
+    this.letters = this.word.letters.slice();
+
+    this.networkHealthService.isOnline.subscribe(isOnline => {
+      this.isOnline = isOnline;
+    });
 
     this.wordsSubscription = this.wordService.getWords()
       .subscribe(res => {
