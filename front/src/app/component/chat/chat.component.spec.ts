@@ -13,6 +13,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { Word } from '../../model/word.model';
 import { User } from '../../model/user.model';
+import { NetworkHealthService } from '../../service/network-health/network-health.service';
 import { SocketService } from '../../service/socket/socket.service';
 import { UserService } from '../../service/user/user.service';
 import { WordService } from '../../service/word/word.service';
@@ -37,6 +38,10 @@ describe('ChatComponent', () => {
             return new Http(backendInstance, defaultOptions);
           },
           deps: [MockBackend, BaseRequestOptions]
+        },
+        {
+          provide: NetworkHealthService,
+          useValue: { isOnline: Observable.from([true]) }
         },
         { provide: ComponentFixtureAutoDetect, useValue: true },
         { provide: SocketService, useValue: {socket: {on: new Function()}} },

@@ -1,6 +1,7 @@
 import {
   Component,
   OnInit,
+  OnChanges,
   Input,
   SimpleChange
 } from '@angular/core';
@@ -16,7 +17,7 @@ import { Rank } from '../../../model/rank.model';
   templateUrl: './user-info.component.html',
   styleUrls: ['./user-info.component.scss']
 })
-export class UserInfoComponent implements OnInit {
+export class UserInfoComponent implements OnInit, OnChanges {
 
   @Input() user: User;
   @Input() rank: Rank;

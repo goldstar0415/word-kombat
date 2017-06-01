@@ -3,6 +3,9 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
+import { Observable } from 'rxjs/Observable';
+
+import { NetworkHealthService } from '../service/network-health/network-health.service';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
@@ -13,6 +16,12 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         AppComponent
+      ],
+      providers: [
+        {
+          provide: NetworkHealthService,
+          useValue: { isOnline: Observable.from([true]) }
+        }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents().then(() => {
