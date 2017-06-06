@@ -1,8 +1,14 @@
 # Start database service
 sudo service postgresql start
 
+# Install front-end dependencies
+npm install --prefix front
+
 # Build client app
 npm run build:prod-sw --prefix front
+
+# Install back-end dependencies
+npm install --prefix back
 
 # Build server app
 npm run build:prod --prefix back
