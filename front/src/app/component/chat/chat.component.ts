@@ -10,6 +10,7 @@ import { NetworkHealthService } from '../../service/network-health/network-healt
 import { User } from '../../model/user.model';
 import { Word } from '../../model/word.model';
 import { Message } from '../../model/message.model';
+import { Score } from '../../model/score.model';
 
 @Component({
   selector: 'wk-chat',
@@ -18,7 +19,7 @@ import { Message } from '../../model/message.model';
 })
 export class ChatComponent implements OnInit, OnDestroy {
 
-  users: Array<User>;
+  scores: Array<Score>;
   word: Word;
   letters: Array<string>;
   typedWord: string;
@@ -26,8 +27,8 @@ export class ChatComponent implements OnInit, OnDestroy {
   isOnline = true;
 
   private wordsSubscription: Subscription;
-  private usersSubscription: Subscription;
   private matchSubscription: Subscription;
+  private scoreSubscription: Subscription;
 
   constructor(
     private router: Router,
@@ -38,7 +39,6 @@ export class ChatComponent implements OnInit, OnDestroy {
   ) {}
   
   ngOnInit() {
-    this.users = this.userService.getAll();
     this.word = this.wordService.getCurrentWord();
     this.wordCounter = this.wordService.getCurrentWordIndex();
     this.typedWord = "";
@@ -56,10 +56,12 @@ export class ChatComponent implements OnInit, OnDestroy {
           this.letters = this.word.letters.slice();
         }
       });
-    
-    this.usersSubscription = this.userService
-      .subscribe(users => {
-        this.users = users;
+
+    this.scores = this.matchService.getAllScores();
+
+    this.scoreSubscription = this.matchService.getScores()
+      .subscribe(scores => {
+        this.scores = scores;
       });
 
     this.matchSubscription = this.matchService.isMatchOver()
@@ -70,8 +72,8 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.wordsSubscription.unsubscribe();
-    this.usersSubscription.unsubscribe();
     this.matchSubscription.unsubscribe();
+    this.scoreSubscription.unsubscribe();
   }
 
   onLetterClicked(letter: string) {

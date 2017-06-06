@@ -6,7 +6,7 @@ import {
   SimpleChange
 } from '@angular/core';
 
-import { User } from '../../../model/user.model';
+import { Score } from '../../../model/score.model';
 
 @Component({
   selector: 'wk-user-list',
@@ -15,12 +15,12 @@ import { User } from '../../../model/user.model';
 })
 export class UserListComponent {
   
-  @Input() users: Array<User>;
+  @Input() scores: Array<Score>;
 
   ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-    if(this.users) {
-      this.users = this.users.sort((user1, user2) => {
-        return user2.score - user1.score;
+    if(this.scores) {
+      this.scores = this.scores.sort((score1, score2) => {
+        return score2.points - score1.points;
       });
     }
   }

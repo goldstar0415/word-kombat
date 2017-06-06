@@ -44,6 +44,7 @@ module.exports.listen = app => {
         users.push(user);
         scores.push({user: user, points: 0, words: 0});
         io.emit('user-connected', users);
+        io.emit('scores', scores);
         socket.handshake.user = user;
       }).catch(error => {
         log.warn(error);
@@ -55,6 +56,7 @@ module.exports.listen = app => {
       scores.push({user: user, points: 0, words: 0});
       socket.handshake.user = user;
       io.emit('user-connected', users);
+      io.emit('scores', scores);
     }
 
     if(words.length > 0) {
@@ -89,6 +91,10 @@ module.exports.listen = app => {
               });
             } else {
               io.emit('end-of-match', scores);
+              scores.forEach(score => {
+                score.words = 0;
+                score.points = 0;
+              });
               getWords(io, amountOfWordsInMatch).then(fetchedWords => {
                 words = fetchedWords;
               });
@@ -111,6 +117,7 @@ module.exports.listen = app => {
         message.user = user;
 
         io.emit('user-connected', users);
+        io.emit('scores', scores);
         io.emit('message', message);
 
         if(user.id) {
@@ -125,6 +132,7 @@ module.exports.listen = app => {
         users = users.filter(user => user.name !== socket.handshake.user.name);
         scores = scores.filter(score => score.user.name !== socket.handshake.user.name);
         io.emit('user-connected', users);
+        io.emit('scores', scores);
       }
       if(users.length <= 0) {
         words = [];

@@ -9,6 +9,7 @@ export class MatchService {
 
   private socket: any;
   private winners: Array<Score>;
+  private scores: Array<Score>;
 
   constructor(private socketService: SocketService) {
     this.winners = [new Score()];
@@ -31,6 +32,22 @@ export class MatchService {
       });
     });
     return observable;
+  }
+
+  getScores(): Observable<Array<Score>> {
+    let observable = new Observable(observer => {
+      this.socket.on('scores', scores => {
+        this.scores = scores.sort((score1, score2) => {
+          return score2.score - score1.score;
+        });
+        observer.next(this.scores);
+      });
+    });
+    return observable;
+  }
+
+  getAllScores(): Array<Score> {
+    return this.scores;
   }
 
   getWinners(): Array<Score> {

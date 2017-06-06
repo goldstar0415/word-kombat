@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Score } from '../../model/score.model';
 import { User } from '../../model/user.model';
 import { UserService } from '../../service/user/user.service';
 import { AuthService } from '../../service/auth/auth.service';
+import { MatchService } from '../../service/match/match.service';
 
 @Component({
   selector: 'wk-navigation',
@@ -11,22 +13,24 @@ import { AuthService } from '../../service/auth/auth.service';
 })
 export class NavigationComponent implements OnInit {
 
-  users: Array<User>;
+  scores: Array<Score>;
   user: User;
 
   constructor(
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private matchService: MatchService
   ) {
     this.user = new User();
   }
 
   ngOnInit() {
-    this.users = this.userService.getAll();
+    this.scores = this.matchService.getAllScores();
     
-    this.userService.subscribe(users => {
-      this.users = users;
-    });
+    this.matchService.getScores()
+      .subscribe(scores => {
+        this.scores = scores;
+      });
 
     this.authService.subscribe(userId => {
       if(userId) {
