@@ -30,7 +30,7 @@ export class UserService extends ReplaySubject<Array<User>> {
     this.setSocket();
     this.socket.on('user-connected', users => {
       this.users = users.sort((user1, user2) => {
-        user2.score - user1.score;
+        return user2.score - user1.score;
       });
       this.next(users);
     });
