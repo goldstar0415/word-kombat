@@ -1,9 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs/Rx';
 
 import { UserService } from '../../service/user/user.service';
 import { WordService } from '../../service/word/word.service';
+import { MatchService } from '../../service/match/match.service';
 import { NetworkHealthService } from '../../service/network-health/network-health.service';
 import { User } from '../../model/user.model';
 import { Word } from '../../model/word.model';
@@ -25,11 +27,14 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   private wordsSubscription: Subscription;
   private usersSubscription: Subscription;
+  private matchSubscription: Subscription;
 
   constructor(
+    private router: Router,
     private networkHealthService: NetworkHealthService,
     private userService: UserService,
-    private wordService: WordService
+    private wordService: WordService,
+    private matchService: MatchService
   ) {}
   
   ngOnInit() {
@@ -57,11 +62,16 @@ export class ChatComponent implements OnInit, OnDestroy {
         this.users = users;
       });
 
+    this.matchSubscription = this.matchService.isMatchOver()
+      .subscribe(res => {
+        this.router.navigate(['score']);
+      });
   }
 
   ngOnDestroy() {
     this.wordsSubscription.unsubscribe();
     this.usersSubscription.unsubscribe();
+    this.matchSubscription.unsubscribe();
   }
 
   onLetterClicked(letter: string) {

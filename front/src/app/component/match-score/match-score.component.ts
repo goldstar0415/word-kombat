@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Rank } from '../../model/rank.model';
 import { User } from '../../model/user.model';
 import { Score } from '../../model/score.model';
+import { MatchService } from '../../service/match/match.service';
 
 @Component({
   selector: 'wk-match-score',
@@ -13,10 +14,10 @@ export class MatchScoreComponent implements OnInit {
 
   scores: Array<Score>;
 
-  constructor() { }
+  constructor(private matchService: MatchService) {}
 
   ngOnInit() {
-    this.scores = this.generateScores(10);
+    this.scores = this.matchService.getWinners();
   }
 
   getScores(): Array<Score> {
@@ -27,7 +28,8 @@ export class MatchScoreComponent implements OnInit {
     return this.getScores()[0].user;
   }
 
-  private generateScores(amount: number): Array<Score> {
+  /** @Deprecated */
+  private generateDummyScores(amount: number): Array<Score> {
     let scores = [];
 
     for(let i = 0; i < amount; i++) {

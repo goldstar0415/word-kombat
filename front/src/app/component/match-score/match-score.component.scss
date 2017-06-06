@@ -1,5 +1,10 @@
 @import '../../../variables';
 
+.image-box, .title, .match-scores, .end-match-choices {
+  animation-name: grow;
+  animation-duration: 0.6s;
+}
+
 .image-box {
   display: flex;
   width: 100%;
@@ -103,4 +108,13 @@ table.match-scores {
       }
     }
   }
+}
+
+@keyframes grow {
+    from {
+      transform: scale(0.3);
+    }
+    to {
+      transform: scale(1);
+    }
 }

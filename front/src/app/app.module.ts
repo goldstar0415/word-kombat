@@ -26,6 +26,7 @@ import { UserService } from './service/user/user.service';
 import { AuthService } from './service/auth/auth.service';
 import { WordService } from './service/word/word.service';
 import { MessageService } from './service/message/message.service';
+import { MatchService } from './service/match/match.service';
 import { NetworkHealthService } from './service/network-health/network-health.service';
 import { AuthGuard } from './guard/auth/auth.guard';
 
@@ -75,6 +76,7 @@ import { AuthGuard } from './guard/auth/auth.guard';
     AuthService,
     WordService,
     MessageService,
+    MatchService,
     AuthGuard
   ],
   bootstrap: [AppComponent]

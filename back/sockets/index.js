@@ -10,15 +10,18 @@ const userRepository = new (require('../repositories/user.repository'))();
 const Message = require('../models/message.model');
 const User = require('../models/user.model');
 const Word = require('../models/word.model');
+const Rank = require('../models/rank.model');
 
 const shuffle = require('../util/shuffle');
 
 module.exports.listen = app => {
   const io = socketio.listen(app);
 
+  const amountOfWordsInMatch = 3;
   let amountOfGuests = 0;
   let users = [];
   let words = [];
+  let scores = [];
 
   io.use(socketioJwt.authorize({
     secret: config.get('jwt:secret'),
@@ -39,6 +42,7 @@ module.exports.listen = app => {
 
       userRepository.findById(userId).then(user => {
         users.push(user);
+        scores.push({user: user, points: 0, words: 0});
         io.emit('user-connected', users);
         socket.handshake.user = user;
       }).catch(error => {
@@ -46,9 +50,9 @@ module.exports.listen = app => {
       });
     } else {
       amountOfGuests++;
-      let user = new User(null, null, 'guest' + amountOfGuests,
-        null, 'http://www.robohash.org/' + amountOfGuests, 0, 1);
+      let user = createGuest(amountOfGuests);
       users.push(user);
+      scores.push({user: user, points: 0, words: 0});
       socket.handshake.user = user;
       io.emit('user-connected', users);
     }
@@ -56,10 +60,12 @@ module.exports.listen = app => {
     if(words.length > 0) {
       io.emit('word', {
         word: words[0],
-        index: 11 - words.length
+        index: amountOfWordsInMatch + 1 - words.length
       });
     } else {
-      getWords(io, 10).then(fetchedWords => words = fetchedWords);
+      getWords(io, amountOfWordsInMatch).then(fetchedWords => {
+        words = fetchedWords
+      });
     }
 
     socket.on('message', message => {
@@ -70,17 +76,28 @@ module.exports.listen = app => {
           if (message.text.toLowerCase() === words[0].value.toLowerCase()) {
             message.points = calculateScore(words[0]);
             words.shift();
+            scores.forEach(score => {
+              if(score.user.name === user.name) {
+                score.points += message.points;
+                score.words++;
+              }
+            });
             if (words.length > 0) {
               io.emit('word', {
                 word: words[0],
-                index: 11 - words.length
+                index: amountOfWordsInMatch + 1 - words.length
               });
             } else {
-              getWords(io, 10).then(fetchedWords => words = fetchedWords);
+              io.emit('end-of-match', scores);
+              getWords(io, amountOfWordsInMatch).then(fetchedWords => {
+                words = fetchedWords;
+              });
             }
           }
         } else {
-          getWords(io, 10).then(fetchedWords => words = fetchedWords);
+          getWords(io, amountOfWordsInMatch).then(fetchedWords => {
+            words = fetchedWords;
+          });
         }
 
         user.score += message.points;
@@ -105,7 +122,8 @@ module.exports.listen = app => {
 
     socket.on('disconnect', () => {
       if(Boolean(socket.handshake.user)) {
-        users = users.filter(user => user.name !== socket.handshake.user.name)
+        users = users.filter(user => user.name !== socket.handshake.user.name);
+        scores = scores.filter(score => score.user.name !== socket.handshake.user.name);
         io.emit('user-connected', users);
       }
       if(users.length <= 0) {
@@ -115,6 +133,13 @@ module.exports.listen = app => {
     });
 
   });
+}
+
+function createGuest(index) {
+  return new User(
+    null, null, 'guest' + index,
+    null, 'http://www.robohash.org/' + index, 0,
+    new Rank(1, 1, 0, 'assets/images/ranks/1.png'));
 }
 
 function calculateScore(word) {
