@@ -1,110 +1,113 @@
 @import '../../../variables';
 
-.image-box, .title, .match-scores, .end-match-choices {
-  animation-name: grow;
-  animation-duration: 0.6s;
-}
-
-.image-box {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  margin-top: 16px;
-  img {
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
-    border: 4px solid $grey-lighten-2;
-    box-shadow: 0 0 4px 4px $grey-darken-4;
+.container {
+  min-height: 100vh;
+  .image-box, .title, .match-scores, .end-match-choices {
+    animation-name: grow;
+    animation-duration: 0.6s;
   }
-}
 
-p.title {
-  text-transform: uppercase;
-  color: $grey-lighten-5;
-  font-size: 2.5rem;
-  font-weight: bold;
-  text-align: center;
-  text-shadow: 4px 4px 2px $grey-darken-4;
-  margin: 16px;
-}
+  .image-box {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+    img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 4px solid $grey-lighten-2;
+      box-shadow: 0 0 4px 4px $grey-darken-4;
+    }
+  }
 
-table.match-scores {
-  color: $grey-darken-4;
-  background-color: $grey-lighten-2;
-  font-size: 1.2rem;
-
-  thead {
-    background-color: $grey-darken-4;
-    color: white;
-    font-weight: bold;
+  p.title {
     text-transform: uppercase;
-
-    th {
-      border-radius: 0;
-      height: 65px;
-    }
-
-    tr {
-      padding: 0;
-      td {
-        padding: 8px;
-      }
-    }
-  }
-  
-  tbody {
-
-    tr:nth-child(-n+3) {
-      font-weight: bold;
-      color: $grey-lighten-5;
-      text-shadow: 2px 2px 2px $grey-darken-4;
-    }
-
-    tr:nth-child(1) {
-      background-color: $blue-grey-darken-4 ;
-    }
-
-    tr:nth-child(2) {
-      background-color: $blue-grey-darken-3;
-    }
-
-    tr:nth-child(3) {
-      background-color: $blue-grey;
-    }
-
-    tr {
-      td.user-icon img {
-        cursor: pointer;
-        border-radius: 50%;
-      }
-      td.user-rank img, td.user-icon img {
-        width: 48px;
-        height: 48px;
-      }
-    }
-  }
-}
-
-.end-match-choices {
-  margin: 32px;
-  display: flex;
-  flex-direction: row;
-  align-items: space-around;
-  justify-content: center;
-
-  button {
-    margin: 4px;
-    width: 200px;
     color: $grey-lighten-5;
-    background-color: $blue-grey-darken-3;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 4px 4px 2px $grey-darken-4;
+    margin: 16px;
+  }
 
-    @media all and (max-width: 480px) {
-      width: 75px;
+  table.match-scores {
+    color: $grey-darken-4;
+    background-color: $grey-lighten-2;
+    font-size: 1.2rem;
 
-      span {
-        display: none;
+    thead {
+      background-color: $grey-darken-4;
+      color: white;
+      font-weight: bold;
+      text-transform: uppercase;
+
+      th {
+        border-radius: 0;
+        height: 65px;
+      }
+
+      tr {
+        padding: 0;
+        td {
+          padding: 8px;
+        }
+      }
+    }
+    
+    tbody {
+
+      tr:nth-child(-n+3) {
+        font-weight: bold;
+        color: $grey-lighten-5;
+        text-shadow: 2px 2px 2px $grey-darken-4;
+      }
+
+      tr:nth-child(1) {
+        background-color: $blue-grey-darken-4 ;
+      }
+
+      tr:nth-child(2) {
+        background-color: $blue-grey-darken-3;
+      }
+
+      tr:nth-child(3) {
+        background-color: $blue-grey;
+      }
+
+      tr {
+        td.user-icon img {
+          cursor: pointer;
+          border-radius: 50%;
+        }
+        td.user-rank img, td.user-icon img {
+          width: 48px;
+          height: 48px;
+        }
+      }
+    }
+  }
+
+  .end-match-choices {
+    margin: 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: space-around;
+    justify-content: center;
+
+    button {
+      margin: 4px;
+      width: 200px;
+      color: $grey-lighten-5;
+      background-color: $blue-grey-darken-3;
+
+      @media all and (max-width: 480px) {
+        width: 75px;
+
+        span {
+          display: none;
+        }
       }
     }
   }
