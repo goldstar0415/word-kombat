@@ -14,10 +14,10 @@ const Rank = require('../models/rank.model');
 
 const shuffle = require('../util/shuffle');
 
+
 module.exports.listen = app => {
   const io = socketio.listen(app);
-
-  const amountOfWordsInMatch = 3;
+  const amountOfWordsInMatch = 10;
   let amountOfGuests = 0;
   let users = [];
   let words = [];
@@ -129,8 +129,12 @@ module.exports.listen = app => {
 
     socket.on('disconnect', () => {
       if(Boolean(socket.handshake.user)) {
-        users = users.filter(user => user.name !== socket.handshake.user.name);
-        scores = scores.filter(score => score.user.name !== socket.handshake.user.name);
+        users = users.filter(user => {
+          return user.name !== socket.handshake.user.name;
+        });
+        scores = scores.filter(score => {
+          return score.user.name !== socket.handshake.user.name;
+        });
         io.emit('user-connected', users);
         io.emit('scores', scores);
       }
