@@ -12,22 +12,24 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 import { User } from '../../model/user.model';
+import { Score } from '../../model/score.model';
 import { SocketService } from '../../service/socket/socket.service';
 import { UserService } from '../../service/user/user.service';
 import { AuthService } from '../../service/auth/auth.service';
 import { MessageService } from '../../service/message/message.service';
 import { WordService } from '../../service/word/word.service';
+import { MatchService } from '../../service/match/match.service';
 import { NavigationComponent } from './navigation.component';
 
 describe('NavigationComponent', () => {
   let navigationComponent: NavigationComponent;
   let navigationFixture: ComponentFixture<NavigationComponent>;
-  let userService: UserService;
+  let matchService: MatchService;
   let authService: AuthService;
-  let userServiceSpy;
+  let matchServiceSpy;
   let authServiceSpy;
 
-  const MOCK_USERS = [ new User(), new User(), new User() ];
+  const MOCK_SCORES = [ new Score(), new Score(), new Score() ];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -45,7 +47,8 @@ describe('NavigationComponent', () => {
         { provide: SocketService, useValue: {socket: {on: new Function()}} },
         { provide: WordService, useValue: {setSocket: new Function()} },
         { provide: MessageService, useValue: {setSocket: new Function()} },
-        UserService,
+        { provide: UserService, useValue: {setSocket: new Function()} },
+        MatchService,
         AuthService
       ],
       declarations: [ NavigationComponent ],
@@ -59,11 +62,11 @@ describe('NavigationComponent', () => {
     navigationComponent = navigationFixture.componentInstance;
 
     authService = navigationFixture.debugElement.injector.get(AuthService);
-    userService = navigationFixture.debugElement.injector.get(UserService);
+    matchService = navigationFixture.debugElement.injector.get(MatchService);
 
     authServiceSpy = spyOn(authService, 'isAuthorized').and.returnValue(true);
-    userServiceSpy = spyOn(userService, 'getAll').and.returnValue(MOCK_USERS);
-    userServiceSpy = spyOn(userService, 'subscribe').and.returnValue(Observable.from([MOCK_USERS]));
+    matchServiceSpy = spyOn(matchService, 'getAllScores').and.returnValue(MOCK_SCORES);
+    matchServiceSpy = spyOn(matchService, 'getScores').and.returnValue(Observable.from([MOCK_SCORES]));
   });
 
   it('should create component', async(() => {
@@ -71,31 +74,31 @@ describe('NavigationComponent', () => {
     expect(component).toBeTruthy();
   }));
   
-  it('should call UserService.getAll method', () => {
+  it('should call MatchService.getAllScores method', () => {
     navigationComponent.ngOnInit();
     navigationFixture.whenStable().then(() => {
-      expect(userServiceSpy.getAll).toHaveBeenCalled();
+      expect(matchServiceSpy.getAllScores).toHaveBeenCalled();
     });
   });
 
-  it('should call UserService.getAll method only once', () => {
+  it('should call MatchService.getAllScores method only once', () => {
     navigationComponent.ngOnInit();
     navigationFixture.whenStable().then(() => {
-      expect(userServiceSpy.getAll.callsCount).toEqual(1);
+      expect(matchServiceSpy.getAllScores.callsCount).toEqual(1);
     });
   });
 
-  it('should call UserService.subscribe method', () => {
+  it('should call MatchService.getScores method', () => {
     navigationComponent.ngOnInit();
     navigationFixture.whenStable().then(() => {
-      expect(userServiceSpy.subscribe).toHaveBeenCalled();
+      expect(matchServiceSpy.getScores).toHaveBeenCalled();
     });
   });
 
-  it('should call UserService.subscribe method only once', () => {
+  it('should call MatchService.getScores method only once', () => {
     navigationComponent.ngOnInit();
     navigationFixture.whenStable().then(() => {
-      expect(userServiceSpy.subscribe.callsCount).toEqual(1);
+      expect(matchServiceSpy.getScores.callsCount).toEqual(1);
     });
   });
 

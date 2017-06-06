@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs/Rx';
 
-import { UserService } from '../../service/user/user.service';
 import { WordService } from '../../service/word/word.service';
 import { MatchService } from '../../service/match/match.service';
 import { NetworkHealthService } from '../../service/network-health/network-health.service';
@@ -33,7 +32,6 @@ export class ChatComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private networkHealthService: NetworkHealthService,
-    private userService: UserService,
     private wordService: WordService,
     private matchService: MatchService
   ) {}
