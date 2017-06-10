@@ -3,9 +3,9 @@ import { User } from './user.model';
 export class Message {
 
   constructor(
-    public text: string,
-    public user: User,
-    public points: number
+    public text: string="",
+    public user: User=new User(),
+    public points: number=0
   ) {}
 
   toString() {

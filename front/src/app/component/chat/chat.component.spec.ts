@@ -10,7 +10,6 @@ import { By } from '@angular/platform-browser';
 import { MockBackend } from '@angular/http/testing';
 import { Http, BaseRequestOptions } from '@angular/http';
 
-
 import { Observable } from 'rxjs/Observable';
 
 import { Word } from '../../model/word.model';
