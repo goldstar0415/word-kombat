@@ -28,26 +28,4 @@ export class MatchScoreComponent implements OnInit {
     return this.getScores()[0].user;
   }
 
-  /** @Deprecated */
-  private generateDummyScores(amount: number): Array<Score> {
-    let scores = [];
-
-    for(let i = 0; i < amount; i++) {
-      scores.push(new Score(
-        new User(
-          0,
-          "",
-          "USER" + i,
-          i * 10,
-          "https://robohash.org/" + i,
-          new Rank(0, '0', 0, "/assets/images/ranks/1.png")
-        ),
-        Math.round(Math.random() * 10) + 1,
-        Math.round(Math.random() * 10) + 1)
-      );
-    }
-
-    return scores;
-  }
-
 }

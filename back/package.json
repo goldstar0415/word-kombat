@@ -1,8 +1,7 @@
 {
   "name": "word-kombat",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "English words learning platform",
-  "private": true,
   "main": "app.js",
   "homepage": "https://gitlab.com/Saka7/Word-Kombat#README",
   "repository": {
