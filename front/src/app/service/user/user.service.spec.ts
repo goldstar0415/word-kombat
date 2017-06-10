@@ -7,6 +7,9 @@ import { SocketService } from '../socket/socket.service';
 import { UserService } from './user.service';
 
 describe('UserService', () => {
+  let storage;
+  let userServiceSpy;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -25,8 +28,42 @@ describe('UserService', () => {
     });
   });
 
+  beforeEach(() => {
+    storage = {};
+
+    spyOn(localStorage, 'getItem').and.callFake(key => {
+      return storage[key];
+    });
+  });
+
   it('should return all users', inject([UserService], (userService: UserService) => {
     // TODO
+  }));
+
+  it('should return userId from localStorage',
+    inject([UserService], (userService: UserService) => {
+    
+    spyOn(navigator, 'onLine').and.returnValue(false);
+
+    storage = {user: { id : 1 }};
+
+    userService.getById(1).subscribe(id => {
+      expect(id).toEqual(storage.user.id);
+    });
+
+  }));
+
+  it('should return rank from localStorage',
+    inject([UserService], (userService: UserService) => {
+    
+    spyOn(navigator, 'onLine').and.returnValue(false);
+
+    storage = {rank: 1 };
+
+    userService.getNextRank(500).subscribe(rank => {
+      expect(rank).toEqual(storage.rank);
+    });
+
   }));
 
 });
