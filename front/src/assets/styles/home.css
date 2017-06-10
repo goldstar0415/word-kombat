@@ -101,32 +101,6 @@ body {
     color: #000;
     font-weight: bold
 }
-#signin .modal-footer .social,
-#signup .modal-footer .social {
-    min-width: 120px;
-}
-#signin .modal-footer .social button.btn-floating,
-#signup .modal-footer .social button.btn-floating {
-    margin-right: 4px;
-}
-#signin .modal-footer .social button.btn-floating img,
-#signup .modal-footer .social button.btn-floating img {
-    filter: grayscale(30%);
-    -webkit-transition: filter 0.3s ease-in-out;
-    -moz-transition: filter 0.3s ease-in-out;
-    -o-transition: filter 0.3s ease-in-out;
-    -ms-transition: filter 0.3s ease-in-out;
-    transition: filter 0.3s ease-in-out
-}
-#signin .modal-footer .social button.btn-floating:hover img,
-#signup .modal-footer .social button.btn-floating:hover img {
-    filter: grayscale(0%);
-    -webkit-transition: filter 0.3s ease-in-out;
-    -moz-transition: filter 0.3s ease-in-out;
-    -o-transition: filter 0.3s ease-in-out;
-    -ms-transition: filter 0.3s ease-in-out;
-    transition: filter 0.3s ease-in-out
-}
 nav {
     position: fixed;
     z-index: 3;
@@ -712,10 +686,4 @@ footer ul.social-links li img:hover {
     nav ul li a {
         padding: 0;
     }
-}
-.toast {
-    text-align: center;
-    position: fixed;
-    left: 50%;
-    margin-left: -100px
 }

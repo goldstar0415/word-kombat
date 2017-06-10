@@ -103,7 +103,6 @@ $(document).ready(function() {
       };
 
       $.post("/api/auth/signup", user, res => {
-        Materialize.toast("Sign up successfully", 2500, 'rounded');
         let userData = getDataFromToken(res.token);
         userData.token = res.token;
         window.sessionStorage.setItem('user', JSON.stringify(userData));
@@ -132,7 +131,6 @@ $(document).ready(function() {
       };
       
       $.post("/api/auth/signin", user, res => {
-        Materialize.toast("Logged in successfully", 2500, 'rounded');
         let userData = getDataFromToken(res.token);
         userData.token = res.token;
         window.sessionStorage.setItem('user', JSON.stringify(userData));

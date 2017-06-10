@@ -7,8 +7,8 @@ describe('word-kombat App', () => {
     page = new WordKombatPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should contain application logo', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('wk works!');
+    expect(page.getApplicationLogo()).toBeDefined();
   });
 });
