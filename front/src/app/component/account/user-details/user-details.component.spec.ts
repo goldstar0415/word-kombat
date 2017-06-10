@@ -75,15 +75,25 @@ describe('UserDetailsComponent', () => {
   it('should call userService.upload method', () => {
     userDetailsComponent.onImageUploadSubmit();
     userDetailsFixture.whenStable().then(() => {
-      expect(userServiceSpy.update).toHaveBeenCalled();
+      expect(userServiceSpy.uploadImage).toHaveBeenCalled();
     });
   });
 
   it('should call userService.upload method only once', () => {
     userDetailsComponent.onImageUploadSubmit();
     userDetailsFixture.whenStable().then(() => {
-      expect(userServiceSpy.update.callsCount).toEqual(1);
+      expect(userServiceSpy.uploadImage.callsCount).toEqual(1);
     });
+  });
+
+  it('should return false if file is invalid', () => {
+    userDetailsComponent.file = null;
+    expect(userDetailsComponent.isFileValid()).toBeFalsy();
+  });
+
+  it('should return true if file is valid', () => {
+    userDetailsComponent.file = new File([""], "filename");
+    expect(userDetailsComponent.isFileValid()).toBeTruthy();
   });
   
 });
