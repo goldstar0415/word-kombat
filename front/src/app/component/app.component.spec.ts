@@ -11,6 +11,8 @@ import { AppComponent } from './app.component';
 describe('AppComponent', () => {
   let appComponent: AppComponent;
   let appFixture: ComponentFixture<AppComponent>;
+  let networkHealthService: NetworkHealthService;
+  let networkHealthServiceSpy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -18,15 +20,16 @@ describe('AppComponent', () => {
         AppComponent
       ],
       providers: [
-        {
-          provide: NetworkHealthService,
-          useValue: { isOnline: Observable.from([true]) }
-        }
+        NetworkHealthService
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents().then(() => {
       appFixture = TestBed.createComponent(AppComponent);
       appComponent = appFixture.componentInstance;
+      networkHealthService = appFixture.debugElement.injector.get(NetworkHealthService);
+
+      networkHealthServiceSpy = spyOn(networkHealthService, 'isOnline')
+        .and.returnValue(Observable.from([true]));
     });
   }));
 
@@ -49,5 +52,12 @@ describe('AppComponent', () => {
     const wkPageFooter = appFixture.debugElement.query(By.css('wk-page-footer'));
     expect(wkPageFooter).toBeTruthy();
   }));
+
+  it('should call NetworkHealthService.isOnline method', () => {
+    appComponent.ngOnInit();
+    appFixture.whenStable().then(() => {
+      expect(networkHealthService.isOnline).toHaveBeenCalled();
+    });
+  });
 
 });
