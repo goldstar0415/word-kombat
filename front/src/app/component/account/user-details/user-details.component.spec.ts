@@ -95,5 +95,8 @@ describe('UserDetailsComponent', () => {
     userDetailsComponent.file = new File([""], "filename");
     expect(userDetailsComponent.isFileValid()).toBeTruthy();
   });
+
+  it('should return false if username is invalid', () => {
+  });
   
 });
