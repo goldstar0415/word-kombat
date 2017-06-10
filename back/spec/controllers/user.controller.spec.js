@@ -10,7 +10,7 @@ describe("User Controller", () => {
 
   describe("GET api/users", () => {
 
-    it("Should have HTTP status 200", done => {
+    it("should have HTTP status 200", done => {
       request(app)
         .get('/api/users')
         .expect(200)
@@ -20,7 +20,7 @@ describe("User Controller", () => {
         });
     });
 
-    it("Should return json", done => {
+    it("should return json", done => {
       request(app)
         .get('/api/users')
         .expect('Content-Type', /json/)

@@ -1,20 +1,21 @@
 import { browser, element, by } from 'protractor';
 
 export class WordKombatPage {
-  navigateTo() {
-    return browser.get('/');
+
+  navigateToChat() {
+    element(by.css('wk-navigation > nav > ul.navigation-tabs.right > li:nth-child(1) > a')).click();
   }
 
-  getParagraphText() {
-    return element(by.css('wk-root h1')).getText();
+  navigateToAccount() {
+    element(by.css('wk-navigation > nav > ul.navigation-tabs.right > li:nth-child(2) > a')).click();
   }
 
-  getApplicationLogo() {
-    return element(by.css('wk-root .brand-logo > img')).getAttribute('src');
+  navigateToLeaderboards() {
+    element(by.css('wk-navigation > nav > ul.navigation-tabs.right > li:nth-child(3) > a')).click();
   }
 
-  getFooterText() {
-    return element(by.css('wk-root .page-footer > .copyrights')).getText();
+  getAppLogo() {
+    return element(by.css('body > wk-root > wk-navigation > nav > a > img'));
   }
 
 }

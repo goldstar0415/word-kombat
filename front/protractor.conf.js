@@ -1,10 +1,9 @@
-// Protractor configuration file, see link for more information
-// https://github.com/angular/protractor/blob/master/lib/config.ts
-
 const { SpecReporter } = require('jasmine-spec-reporter');
 
 exports.config = {
-  allScriptsTimeout: 11000,
+  allScriptsTimeout: 120000,
+  getPageTimeout: 120000,
+  useAllAngular2AppRoots: true,
   specs: [
     './e2e/**/*.e2e-spec.ts'
   ],
@@ -16,7 +15,7 @@ exports.config = {
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,
-    defaultTimeoutInterval: 30000,
+    defaultTimeoutInterval: 120000,
     print: function() {}
   },
   beforeLaunch: function() {

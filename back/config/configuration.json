@@ -4,7 +4,6 @@
     "expires": "24hours"
   },
   "database": {
-    "host": "localhost",
     "port": "5432",
     "user": "word_master",
     "password": "temp",
