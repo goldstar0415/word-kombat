@@ -12,7 +12,7 @@ Platform for English words learning
 
 1. Clone repository `git clone https://gitlab.com/Saka7/Word-Kombat.git`
 2. Navigate to the project parent folder `cd Word-Kombat`
-3. Configure database connection properties in `back/config/configuration.json`
+3. Create configuration properties `back/config/configuration.json` (you can use sample) and configure database connection properties
 4. Configure `cloudinary` api key and secret in `back/config/configuration.json`
 5. To build project run `./build_and_run` script
 6. You can run project using `npm start --prefix back` or using executable `build/word-kombat`
@@ -23,7 +23,7 @@ Platform for English words learning
 2. Just kidding ...
 3. Install front-end dependencies `npm install --prefix front`
 4. Install back-end dependencies `npm install --prefix back`
-5. Configure database connection properties in `back/config/configuration.json`
+5. Create configuration properties `back/config/configuration.json` (you can use sample) and configure database connection properties
 6. Configure `cloudinary` api key and secret in `back/config/configuration.json`
 7. Build front-end `npm run build:prod-sw --prefix front`
 8. Build documentation `npm run doc --prefix back`

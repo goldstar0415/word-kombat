@@ -1,0 +1,20 @@
+{
+  "jwt": {
+    "secret": "jwt-secret",
+    "expires": "24hours"
+  },
+  "database": {
+    "port": "5432",
+    "user": "word_master",
+    "password": "temp",
+    "name": "word-kombat",
+    "dialect": "postgres"
+  },
+  "cloudinary": {
+    "cloud_name": "mediastorage",
+    "api_key": "api-key",
+    "api_secret": "api-secret",
+    "user_icons_folder": "word-kombat/users/",
+    "word_images_folder": "word-kombat/words/"
+  }
+}
