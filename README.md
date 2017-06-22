@@ -1,8 +1,9 @@
-![word-kombat](https://gitlab.com/Saka7/Word-Kombat/raw/master/front/src/assets/images/icons/icon-128x128.png)
+![word-kombat](https://github.com/Saka7/word-kombat/blob/master/front/src/assets/images/icons/icon-152x152.png)
 
 # Word Kombat
 
-Platform for English words learning
+Platform for English words learning.
+> Because learning never was so fun!
 
 # Build and Run
 
@@ -31,6 +32,39 @@ Platform for English words learning
 10. And, finally, start it `npm start --prefix back` or `/builds/word-kombat-win.exe`
 
 > By default project will be running on port 8080
+
+# Main features
+- words learning is based on an **association with images**
+- and organized in **interactive chat-based competition**
+- also, users can **track their progress** and achieve **ranks**
+
+# UI samples
+
+## Sign Up
+![signup](https://github.com/Saka7/word-kombat/blob/master/screenshots/signup.png)
+
+## Chat
+![chat](https://github.com/Saka7/word-kombat/blob/master/screenshots/chat.png)
+
+## Match End
+![match-end](https://github.com/Saka7/word-kombat/blob/master/screenshots/match-end.png)
+
+## Account
+![account](https://github.com/Saka7/word-kombat/blob/master/screenshots/account.png)
+
+## Leaderboards
+![leaderboards](https://github.com/Saka7/word-kombat/blob/master/screenshots/leaderboards.png)
+
+## On Mobile Screens
+![mobile](https://github.com/Saka7/word-kombat/blob/master/screenshots/mobile.png)
+
+## Chat Offline
+![chat-offline](https://github.com/Saka7/word-kombat/blob/master/screenshots/chat-offline.png)
+
+## Account Offline
+![account-offline](https://github.com/Saka7/word-kombat/blob/master/screenshots/account-offline.png)
+
+
 
 # License
 Word-Kombat is released under the [BSD-3 License](https://opensource.org/licenses/BSD-3-Clause).
