@@ -29,7 +29,8 @@ export class SigninComponent {
   onSubmit() {
     this.authService.signIn(this.signInRequest)
       .subscribe(res => {
-        this.router.navigate(['/account']);
+        this.router.navigate(['/chat']);
+        location.reload();
       }, error => {
         this.setValidationError(error);
       });

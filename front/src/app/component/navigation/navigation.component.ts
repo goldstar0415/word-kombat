@@ -47,6 +47,7 @@ export class NavigationComponent implements OnInit {
 
   onSignOut() {
     this.authService.signOut();
+    location.reload();
   }
 
 }
