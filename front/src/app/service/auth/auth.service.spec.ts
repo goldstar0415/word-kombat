@@ -5,8 +5,6 @@ import { Observable } from 'rxjs/Observable';
 
 import { SocketService } from '../socket/socket.service';
 import { UserService } from '../user/user.service';
-import { MessageService } from '../message/message.service';
-import { WordService } from '../word/word.service';
 import { AuthService } from './auth.service';
 
 describe('AuthService', () => {
@@ -33,8 +31,6 @@ describe('AuthService', () => {
           deps: [MockBackend, BaseRequestOptions]
         },
         { provide: SocketService, useValue: {socket: {on: new Function()}} },
-        { provide: MessageService, useValue: {setSocket: new Function()} },
-        { provide: WordService, useValue: {setSocket: new Function()} },
         UserService,
         AuthService
       ]

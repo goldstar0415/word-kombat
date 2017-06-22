@@ -14,7 +14,6 @@ import { Observable } from 'rxjs/Observable';
 
 import { User } from '../../../model/user.model';
 import { SocketService } from '../../../service/socket/socket.service';
-import { WordService } from '../../../service/word/word.service';
 import { UserService } from '../../../service/user/user.service';
 import { AuthService } from '../../../service/auth/auth.service';
 import { MessageService } from '../../../service/message/message.service';
@@ -44,7 +43,6 @@ describe('WordInputsComponent', () => {
         },
         { provide: ComponentFixtureAutoDetect, useValue: true },
         { provide: SocketService, useValue: {socket: {on: new Function()}} },
-        { provide: WordService, useValue: {setSocket: new Function()} },
         AuthService,
         UserService,
         MessageService
