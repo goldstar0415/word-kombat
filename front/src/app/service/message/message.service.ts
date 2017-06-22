@@ -7,13 +7,13 @@ import { Message } from '../../model/message.model';
 
 @Injectable()
 export class MessageService {
-  private socket: any;
+  private socket: SocketIOClient.Socket;
 
   constructor(private socketService: SocketService) {
     this.setSocket();
   }
 
-  setSocket(socket?) {
+  setSocket(socket?: SocketIOClient.Socket) {
     if(socket) {
       this.socket = socket;
     } else {

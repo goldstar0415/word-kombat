@@ -10,16 +10,13 @@ import {
 import { Observable, ReplaySubject } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
-import { handleError } from '../error-handler';
-import { createRequestOptions } from '../request-options';
+import { handleError } from '../../util/error-handler';
+import { createRequestOptions } from '../../util/request-options';
 import { environment } from '../../../environments/environment';
 import { SignInRequest } from '../../model/signin-request.model';
 import { SignUpRequest } from '../../model/signup-request.model';
 import { User } from '../../model/user.model';
 import { UserService } from '../user/user.service';
-import { MessageService } from '../message/message.service';
-import { WordService } from '../word/word.service';
-import { SocketService } from '../socket/socket.service';
 
 @Injectable()
 export class AuthService extends ReplaySubject<number> {
@@ -32,10 +29,7 @@ export class AuthService extends ReplaySubject<number> {
 
   constructor(
     private http: Http,
-    private userService: UserService,
-    private messageService: MessageService,
-    private wordService: WordService,
-    private socketService: SocketService
+    private userService: UserService
   ) {
     super();
     this.refresh();
@@ -71,12 +65,6 @@ export class AuthService extends ReplaySubject<number> {
     this.username = null;
     this.userId = null;
     window.sessionStorage.removeItem('user');
-    this.socketService.connect()
-      .then(socket => {
-        this.userService.setSocket(socket);
-        this.messageService.setSocket(socket);
-        this.wordService.setSocket(socket);
-      });
   }
 
   public isAuthorized(): boolean {
@@ -101,13 +89,6 @@ export class AuthService extends ReplaySubject<number> {
     this.userService.getById(this.userId)
       .subscribe(user => {
         this.userService.setUsers([user]);
-        this.socketService.connect(this.token)
-          .then(socket => {
-            this.next(this.userId);
-            this.userService.setSocket(socket);
-            this.messageService.setSocket(socket);
-            this.wordService.setSocket(socket);
-          });
       }, handleError);
   }
 

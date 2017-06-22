@@ -4,8 +4,8 @@ import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map'
 
-import { handleError } from '../error-handler';
-import { createRequestOptions } from '../request-options';
+import { handleError } from '../../util/error-handler';
+import { createRequestOptions } from '../../util/request-options';
 import { environment } from '../../../environments/environment';
 import { User } from '../../model/user.model';
 

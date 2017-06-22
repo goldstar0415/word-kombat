@@ -7,13 +7,13 @@ import { Word } from '../../model/word.model';
 
 @Injectable()
 export class WordService {
-  private socket: any;
+  private socket: SocketIOClient.Socket;
 
   constructor(private socketService: SocketService) {
     this.setSocket();
   }
 
-  setSocket(socket?) {
+  setSocket(socket?: SocketIOClient.Socket) {
     if(socket) {
       this.socket = socket;
     } else {

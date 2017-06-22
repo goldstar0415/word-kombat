@@ -9,8 +9,8 @@ import {
 
 import { Observable, ReplaySubject } from 'rxjs/Rx';
 
-import { handleError } from '../error-handler';
-import { createRequestOptions } from '../request-options';
+import { handleError } from '../../util/error-handler';
+import { createRequestOptions } from '../../util/request-options';
 import { environment } from '../../../environments/environment';
 import { SocketService } from '../socket/socket.service';
 import { User } from '../../model/user.model';
@@ -19,7 +19,7 @@ import { Rank } from '../../model/rank.model';
 @Injectable()
 export class UserService extends ReplaySubject<Array<User>> {
 
-  private socket: any;
+  private socket: SocketIOClient.Socket;
   private users: Array<User>;
 
   constructor(
@@ -36,7 +36,7 @@ export class UserService extends ReplaySubject<Array<User>> {
     });
   }
 
-  setSocket(socket?) {
+  setSocket(socket?: SocketIOClient.Socket) {
     if(socket) {
       this.socket = socket;
     } else {
@@ -79,6 +79,14 @@ export class UserService extends ReplaySubject<Array<User>> {
     }
   }
 
+  getNextRank(score: number): Observable<Rank | any > {
+    if(window.navigator.onLine) {
+      return this.getNextRankFromService(score);
+    } else {
+      return this.getNextRankFromStorage();
+    }
+  }
+
   private getUserByIdFromService(id: number): Observable<User | any> {
     return this.http
       .get(`${environment.apiUrl}api/users/${id}`, createRequestOptions())
@@ -93,14 +101,6 @@ export class UserService extends ReplaySubject<Array<User>> {
       return Observable.from([JSON.parse(user)]);
     } else {
       return Observable.from([new User()]);
-    }
-  }
-
-  getNextRank(score: number): Observable<Rank | any > {
-    if(window.navigator.onLine) {
-      return this.getNextRankFromService(score);
-    } else {
-      return this.getNextRankFromStorage();
     }
   }
 

@@ -7,7 +7,7 @@ import { Score } from '../../model/score.model';
 @Injectable()
 export class MatchService {
 
-  private socket: any;
+  private socket: SocketIOClient.Socket;
   private winners: Array<Score>;
   private scores: Array<Score>;
 
@@ -16,7 +16,7 @@ export class MatchService {
     this.setSocket();
   }
 
-  setSocket(socket?) {
+  setSocket(socket?: SocketIOClient.Socket) {
     if(socket) {
       this.socket = socket;
     } else {
