@@ -7,15 +7,6 @@ class Word {
     this.hint = hint;
   }
 
-  get values() {
-    return {
-      id: this.id,
-      value: this.value,
-      image: this.image,
-      hint: this.hint
-    };
-  }
-
   toString() {
     return JSON.stringify(this);
   }

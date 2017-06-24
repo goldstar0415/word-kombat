@@ -10,18 +10,6 @@ class User {
     this.rank = rank;
   }
 
-  get values() {
-    return {
-      id: this.id,
-      email: this.email,
-      name: this.name,
-      password: this.password,
-      icon: this.icon,
-      score: this.score,
-      rank: this.rank
-    };
-  }
-
   toString() {
     return JSON.stringify(this);
   }
