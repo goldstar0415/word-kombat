@@ -25,10 +25,9 @@ class UserRepository {
     });
   }
 
-  findAll() {
-    return db.models.User.findAll({
-      include: [{model: db.models.Rank, as: "rank"}]
-    });
+  findAll(params={}) {
+    params["include"] = [{model: db.models.Rank, as: "rank"}];
+    return db.models.User.findAll(params);
   }
 
   add(user) {
@@ -92,22 +91,6 @@ class UserRepository {
         return user.destroy({transaction: t});
       });
     });
-  }
-
-  truncate() {
-    return db.transaction(t => {
-      return db.models.User.truncate({
-        cascade: true
-      }, {transaction: t});
-    });
-  }
-
-  drop() {
-    return db.transaction(t => {
-      return db.models.User.drop({
-        cascade: true
-      });
-    })
   }
 
 }

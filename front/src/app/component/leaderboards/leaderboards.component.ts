@@ -19,7 +19,7 @@ export class LeaderboardsComponent implements OnInit {
     this.leaders = [];
     this.leaderboardsService.getAll()
       .subscribe(leaders => {
-        this.leaders = leaders.sort((prev, next) => next.score - prev.score);
+        this.leaders = leaders;
       }, error => {
         console.error(error);
       });

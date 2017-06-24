@@ -49,22 +49,6 @@ class WordRepository {
     });
   }
 
-  truncate() {
-    return db.transaction(t => {
-      return db.models.Word.truncate({
-        cascade: true
-      }, {transaction: t});
-    });
-  }
-
-  drop() {
-    return db.transaction(t => {
-      return db.models.Word.drop({
-        cascade: true
-      });
-    })
-  }
-
 }
 
 module.exports = WordRepository;
