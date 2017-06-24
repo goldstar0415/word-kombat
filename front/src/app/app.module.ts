@@ -4,6 +4,8 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
+import { NgNetworkStatusModule } from 'ng-network-status';
+
 import { AppComponent } from './component/app.component';
 import { NavigationComponent } from './component/navigation/navigation.component';
 import { PageFooterComponent } from './component/page-footer/page-footer.component';
@@ -27,7 +29,6 @@ import { AuthService } from './service/auth/auth.service';
 import { WordService } from './service/word/word.service';
 import { MessageService } from './service/message/message.service';
 import { MatchService } from './service/match/match.service';
-import { NetworkHealthService } from './service/network-health/network-health.service';
 import { AuthGuard } from './guard/auth/auth.guard';
 
 @NgModule({
@@ -53,6 +54,7 @@ import { AuthGuard } from './guard/auth/auth.guard';
     BrowserModule,
     FormsModule,
     HttpModule,
+    NgNetworkStatusModule,
     RouterModule.forRoot([
       { path: 'chat', component: ChatComponent },
       { path: 'leaderboards', component: LeaderboardsComponent },
@@ -70,7 +72,6 @@ import { AuthGuard } from './guard/auth/auth.guard';
     ])
   ],
   providers: [
-    NetworkHealthService,
     SocketService,
     UserService,
     AuthService,

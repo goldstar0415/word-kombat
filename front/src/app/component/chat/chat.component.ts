@@ -2,10 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs/Rx';
+import { NetworkStatusService } from 'ng-network-status';
 
 import { WordService } from '../../service/word/word.service';
 import { MatchService } from '../../service/match/match.service';
-import { NetworkHealthService } from '../../service/network-health/network-health.service';
 import { User } from '../../model/user.model';
 import { Word } from '../../model/word.model';
 import { Message } from '../../model/message.model';
@@ -14,7 +14,8 @@ import { Score } from '../../model/score.model';
 @Component({
   selector: 'wk-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.scss']
+  styleUrls: ['./chat.component.scss'],
+  providers: [ NetworkStatusService ]
 })
 export class ChatComponent implements OnInit, OnDestroy {
 
@@ -31,7 +32,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private networkHealthService: NetworkHealthService,
+    private networkStatusService: NetworkStatusService,
     private wordService: WordService,
     private matchService: MatchService
   ) {}
@@ -42,7 +43,8 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.typedWord = "";
     this.letters = this.word.letters.slice();
 
-    this.networkHealthService.isOnline.subscribe(isOnline => {
+    this.networkStatusService.healthCheck();
+    this.networkStatusService.isOnline.subscribe(isOnline => {
       this.isOnline = isOnline;
     });
 
