@@ -1,9 +1,11 @@
-![word-kombat](https://github.com/Saka7/word-kombat/blob/master/front/src/assets/images/icons/icon-152x152.png)
-
 # Word Kombat
+
+![word-kombat](https://github.com/Saka7/word-kombat/blob/master/front/src/assets/images/icons/icon-152x152.png)
 
 Platform for English words learning.
 > Because learning never was so fun!
+
+------
 
 # Build and Run
 
@@ -41,28 +43,28 @@ Platform for English words learning.
 # UI samples
 
 ## Sign Up
-![signup](https://github.com/Saka7/word-kombat/blob/master/screenshots/signup.png)
+![signup](http://i.imgur.com/RXqEbhA.png)
 
 ## Chat
-![chat](https://github.com/Saka7/word-kombat/blob/master/screenshots/chat.png)
+![chat](http://i.imgur.com/1In3reU.png)
 
 ## Match End
-![match-end](https://github.com/Saka7/word-kombat/blob/master/screenshots/match-end.png)
+![match-end](http://i.imgur.com/ZXVKzLJ.png)
 
 ## Account
-![account](https://github.com/Saka7/word-kombat/blob/master/screenshots/account.png)
+![account](http://i.imgur.com/mwh3qaQ.png)
 
 ## Leaderboards
-![leaderboards](https://github.com/Saka7/word-kombat/blob/master/screenshots/leaderboards.png)
+![leaderboards](http://i.imgur.com/ygrpOK9.png)
 
 ## On Mobile Screens
-![mobile](https://github.com/Saka7/word-kombat/blob/master/screenshots/mobile.png)
+![mobile](http://i.imgur.com/LOA20zM.png)
 
 ## Chat Offline
-![chat-offline](https://github.com/Saka7/word-kombat/blob/master/screenshots/chat-offline.png)
+![chat-offline](http://i.imgur.com/w5XILSw.png)
 
 ## Account Offline
-![account-offline](https://github.com/Saka7/word-kombat/blob/master/screenshots/account-offline.png)
+![account-offline](http://i.imgur.com/bDDYqAS.png)
 
 
 
