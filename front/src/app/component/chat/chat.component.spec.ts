@@ -15,7 +15,7 @@ import { Observable } from 'rxjs/Observable';
 import { Word } from '../../model/word.model';
 import { User } from '../../model/user.model';
 import { Score } from '../../model/score.model';
-import { NetworkHealthService } from '../../service/network-health/network-health.service';
+import { NetworkStatusService } from 'ng-network-status';
 import { SocketService } from '../../service/socket/socket.service';
 import { WordService } from '../../service/word/word.service';
 import { MatchService } from '../../service/match/match.service';
@@ -43,7 +43,7 @@ describe('ChatComponent', () => {
           deps: [MockBackend, BaseRequestOptions]
         },
         {
-          provide: NetworkHealthService,
+          provide: NetworkStatusService,
           useValue: { isOnline: Observable.from([true]) }
         },
         { provide: ComponentFixtureAutoDetect, useValue: true },

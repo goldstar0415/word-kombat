@@ -4,15 +4,13 @@ import { By } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
+import { NetworkStatusService } from 'ng-network-status';
 
-import { NetworkHealthService } from '../service/network-health/network-health.service';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   let appComponent: AppComponent;
   let appFixture: ComponentFixture<AppComponent>;
-  let networkHealthService: NetworkHealthService;
-  let networkHealthServiceSpy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -20,16 +18,15 @@ describe('AppComponent', () => {
         AppComponent
       ],
       providers: [
-        NetworkHealthService
+        {
+          provide: NetworkStatusService,
+          useValue: { isOnline: Observable.from([true]) }
+        }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents().then(() => {
       appFixture = TestBed.createComponent(AppComponent);
       appComponent = appFixture.componentInstance;
-      networkHealthService = appFixture.debugElement.injector.get(NetworkHealthService);
-
-      networkHealthServiceSpy = spyOn(networkHealthService, 'isOnline')
-        .and.returnValue(Observable.from([true]));
     });
   }));
 
@@ -52,12 +49,5 @@ describe('AppComponent', () => {
     const wkPageFooter = appFixture.debugElement.query(By.css('wk-page-footer'));
     expect(wkPageFooter).toBeTruthy();
   }));
-
-  it('should call NetworkHealthService.isOnline method', () => {
-    appComponent.ngOnInit();
-    appFixture.whenStable().then(() => {
-      expect(networkHealthService.isOnline).toHaveBeenCalled();
-    });
-  });
 
 });

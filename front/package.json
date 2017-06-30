@@ -8,6 +8,7 @@
     "start:prod": "ng serve --host 0.0.0.0 --prod --aot",
     "start:prod-sw": "npm run precache && ng serve --host 0.0.0.0 --prod --aot",
     "test": "ng test",
+    "test:ci": "karma start ./karma.conf.js --single-run",
     "test:cov": "ng test --code-coverage",
     "test:e2e": "ng e2e",
     "lint": "ng lint",

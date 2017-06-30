@@ -1,4 +1,3 @@
-const request = require('supertest');
 const express = require('express');
 
 const app = express();
@@ -6,7 +5,7 @@ const userController = require('../../controllers/user.controller');
 
 app.use('/api/users', userController);
 
-describe("User Controller", () => {
+xdescribe("User Controller", () => {
 
   describe("GET api/users", () => {
 
