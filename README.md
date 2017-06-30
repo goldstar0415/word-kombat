@@ -1,4 +1,5 @@
 # Word Kombat
+![build-status](https://api.travis-ci.org/Saka7/word-kombat.svg?branch=master)
 
 ![word-kombat](https://github.com/Saka7/word-kombat/blob/master/front/src/assets/images/icons/icon-152x152.png)
 
