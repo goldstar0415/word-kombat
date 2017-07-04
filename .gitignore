@@ -2,10 +2,9 @@ node_modules/
 builds/
 
 front/dist
-front/src/guess-word-app/typings
 back/logger/logs
-back/config/configuration.json
 **/etc
 **/coverage
 **/*.log
-
+**/package-lock.json
+**/yarn.lock

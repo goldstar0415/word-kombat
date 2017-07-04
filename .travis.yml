@@ -42,5 +42,5 @@ jobs:
     #   script: npm run test --prefix back
     # - stage: test-e2e
     #   script: npm run test:e2e --prefix front
-    # - stage: build
-    #   script: npm run build:prod --prefix back
+    - stage: build
+      script: npm run build:prod --prefix back

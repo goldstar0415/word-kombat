@@ -8,7 +8,11 @@
     "type": "git",
     "url": "git+https://gitlab.com/Saka7/Word-Kombat.git"
   },
-  "keywords": ["words", "interactive learning", "real-time"],
+  "keywords": [
+    "words",
+    "interactive learning",
+    "real-time"
+  ],
   "author": "Ihor Sakaylyuk",
   "license": "BSD-3 License",
   "bugs": {
