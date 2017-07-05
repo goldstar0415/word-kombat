@@ -36,11 +36,11 @@ cache:
 
 jobs:
   include:
-    - stage: test-ui
+    - stage: TEST-UI
       script: npm run test:ci --prefix front
-    # - stage: test-service
-    #   script: npm run test --prefix back
-    # - stage: test-e2e
-    #   script: npm run test:e2e --prefix front
-    - stage: build
+    - stage: TEST-SERVICE
+      script: npm run test --prefix back
+    - stage: TEST-E2E
+      script: npm run test:e2e --prefix front
+    - stage: BUILD
       script: npm run build:prod --prefix back

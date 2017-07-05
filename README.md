@@ -16,7 +16,7 @@ Platform for English words learning.
 
 1. Clone repository `git clone https://gitlab.com/Saka7/Word-Kombat.git`
 2. Navigate to the project parent folder `cd Word-Kombat`
-3. Create environment varibales: `CLOUDINARY_API_KEY` and `CLOUDINARY_API_SECRET` with your cloudinary api-key and api-secret
+3. Create environment variables: `CLOUDINARY_API_KEY` and `CLOUDINARY_API_SECRET` with your cloudinary api-key and api-secret
 4. To build project run `./build_and_run` script
 5. You can run project using `npm start --prefix back` or using executable `build/word-kombat-lin`
 
@@ -24,7 +24,7 @@ Platform for English words learning.
 
 1. Install front-end dependencies `npm install --prefix front`
 2. Install back-end dependencies `npm install --prefix back`
-3. Create environment varibales: `CLOUDINARY_API_KEY` and `CLOUDINARY_API_SECRET` with your cloudinary api-key and api-secret
+3. Create environment variables: `CLOUDINARY_API_KEY` and `CLOUDINARY_API_SECRET` with your cloudinary api-key and api-secret
 4. Build front-end `npm run build:prod-sw --prefix front`
 5. Build documentation `npm run doc --prefix back`
 6. Build back-end `npm run build:prod-win --prefix back`
@@ -45,7 +45,7 @@ Platform for English words learning.
 ## Chat (Words Learning)
 ![chat](http://i.imgur.com/1In3reU.png)
 
-## The End Of The Match
+## The end of a match
 ![match-end](http://i.imgur.com/ZXVKzLJ.png)
 
 ## Account
@@ -54,13 +54,13 @@ Platform for English words learning.
 ## Leaderboards
 ![leaderboards](http://i.imgur.com/ygrpOK9.png)
 
-## On Mobile Screens
+## On mobile screens
 ![mobile](http://i.imgur.com/LOA20zM.png)
 
-## Chat Offline
+## Chat offline
 ![chat-offline](http://i.imgur.com/w5XILSw.png)
 
-## Account Offline
+## Account offline
 ![account-offline](http://i.imgur.com/bDDYqAS.png)
 
 
