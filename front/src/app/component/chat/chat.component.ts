@@ -85,7 +85,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.letters = this.word.letters.slice();
 
     for(let letter of word.toLowerCase().split('')) {
-      let index = this.letters.indexOf(letter);
+      const index = this.letters.indexOf(letter);
       if(index !== -1) {
         this.letters.splice(index, 1);
       }

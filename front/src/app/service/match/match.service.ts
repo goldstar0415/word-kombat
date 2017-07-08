@@ -25,7 +25,7 @@ export class MatchService {
   }
 
   isMatchOver(): Observable<Array<Score>> {
-    let observable = new Observable(observer => {
+    const observable = new Observable(observer => {
       this.socket.on('end-of-match', res => {
         this.winners = res;
         observer.next(res);
@@ -35,7 +35,7 @@ export class MatchService {
   }
 
   getScores(): Observable<Array<Score>> {
-    let observable = new Observable(observer => {
+    const observable = new Observable(observer => {
       this.socket.on('scores', scores => {
         this.scores = scores.sort((score1, score2) => {
           return score2.score - score1.score;

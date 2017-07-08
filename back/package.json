@@ -1,6 +1,6 @@
 {
   "name": "word-kombat",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "English words learning platform",
   "main": "app.js",
   "homepage": "https://gitlab.com/Saka7/Word-Kombat#README",
@@ -23,7 +23,7 @@
     "test": "jasmine",
     "build:linux": "pkg -c package.json -t node7-linux --output ../builds/word-kombat-lin app.js ",
     "build:mac": "pkg -c package.json -t node7-macos --output ../builds/word-kombat-mac app.js",
-    "build:win": "pkg -c package.json -t node7-win --output ../builds/word-kombat-win.exe app.js",
+    "build:win": "pkg -c package.json -t node7-win --output ../builds/word-kombat-win.exe ./app.js",
     "build:prod": "npm run doc && npm run build:linux",
     "doc": "apidoc -i ./controllers -o ../front/dist/apidocs",
     "loc": "cloc ./ --exclude-dir=node_modules"

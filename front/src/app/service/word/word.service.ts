@@ -22,7 +22,7 @@ export class WordService {
   }
 
   getWords(): Observable<{word: Word, index: number}> {
-    let observable = new Observable(observer => {
+    const observable = new Observable(observer => {
       this.socket.on('word', res => {
         window.localStorage.setItem("currentWord", JSON.stringify(res.word));
         window.localStorage.setItem("currentWordIndex", res.index);
@@ -33,7 +33,7 @@ export class WordService {
   }
 
   getCurrentWord() {
-    let word = window.localStorage.getItem("currentWord");
+    const word = window.localStorage.getItem("currentWord");
     if(word) {
       return JSON.parse(word);
     } else {
@@ -42,9 +42,9 @@ export class WordService {
   }
 
   getCurrentWordIndex() {
-    let index = window.localStorage.getItem("currentWordIndex");
+    const index = window.localStorage.getItem("currentWordIndex");
     if(index) {
-      return +index;
+      return Number(index);
     } else {
       return 0;
     }

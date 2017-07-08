@@ -30,15 +30,18 @@ export class NavigationComponent implements OnInit {
     this.matchService.getScores()
       .subscribe(scores => {
         this.scores = scores;
+      }, error => {
+        console.error(error);
       });
 
-    this.authService.subscribe(userId => {
-      if(userId) {
-        this.userService.getById(userId).subscribe(user => {
-          this.user = user;
-        });
-      }
-    });
+    this.authService
+      .filter(userId => Boolean(userId))
+      .mergeMap(userId => this.userService.getById(userId))
+      .subscribe(user => {
+        this.user = user;
+      }, error => {
+        console.error(error);
+      });
   }
 
   isAuthorized() {

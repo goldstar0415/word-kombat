@@ -24,19 +24,17 @@ export class AccountComponent implements OnInit {
   }
   
   ngOnInit() {
-    let id = this.authService.getUserId();
+    const id = this.authService.getUserId();
     if(id) {
       this.userService.getById(id)
-        .subscribe(user => {
+        .mergeMap((user: User) => {
           this.currentUser = user;
-          this.userService.getNextRank(this.currentUser.score)
-            .subscribe(rank => {
-              this.nextRank = rank;
-            }, error => {
-              console.error(error);
-            })
+          return this.userService.getNextRank(this.currentUser.score);
+        })
+        .subscribe((rank: Rank) => {
+          this.nextRank = rank;
         }, error => {
-          console.error(error);
+          console.log(error);
         });
     }
   }
