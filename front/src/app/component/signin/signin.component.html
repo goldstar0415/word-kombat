@@ -6,21 +6,21 @@
   </div>
 
   <div class="input-field">
-    <i class="material-icons prefix">email</i>
+    <i class="material-icons prefix">account_box</i>
     <input
-      class="email validate"
-      type="email"
-      pattern="^\S+@\S+$"
+      class="username validate"
+      type="text"
+      pattern="(\w|_|-|\.){4,20}"
+      name="username"
       required="required"
-      name="email"
-      #emailInput="ngModel"
-      [ngClass]="emailValidity"
-      [(ngModel)]="signInRequest.email" />
+      #usernameInput="ngModel"
+      [ngClass]="usernameValidity"
+      [(ngModel)]="signInRequest.username" />
     <label
-      class="email"
-      for="email"
-      [attr.data-error]="emailErrorMessage">
-        Your email
+      class="username"
+      for="username"
+      [attr.data-error]="usernameErrorMessage">
+        Your username
     </label>
   </div>
 

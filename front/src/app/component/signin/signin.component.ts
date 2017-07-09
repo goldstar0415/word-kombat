@@ -11,10 +11,10 @@ import { AuthService } from '../../service/auth/auth.service';
 })
 export class SigninComponent {
 
-  emailErrorMessage: string;
+  usernameErrorMessage: string;
   passwordErrorMessage: string;
   signInRequest: SignInRequest;
-  emailValidity: string;
+  usernameValidity: string;
   passwordValidity: string;
 
   constructor(
@@ -22,7 +22,7 @@ export class SigninComponent {
     private authService: AuthService
   ) {
     this.signInRequest = new SignInRequest();
-    this.emailErrorMessage = "Email format is invalid";
+    this.usernameErrorMessage = "Username format is invalid";
     this.passwordErrorMessage = "Password format is invalid";
   }
 
@@ -37,9 +37,9 @@ export class SigninComponent {
   }
 
   private setValidationError(error) {
-    if(error.target === 'email') {
-      this.emailErrorMessage = error.message;
-      this.emailValidity = "invalid";
+    if(error.target === 'username') {
+      this.usernameErrorMessage = error.message;
+      this.usernameValidity = "invalid";
     } else if(error.target === 'password') {
       this.passwordErrorMessage = error.message;
       this.passwordValidity = "invalid";

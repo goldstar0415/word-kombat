@@ -22,26 +22,26 @@ const UserDetailsValidator = require('../util/user-details.validator');
  * @apiError UserNotFound User with this email not found.
 */
 router.post('/signin', (req, res) => {
-  const email = req.body.email;
+  const username = req.body.username;
   const password = req.body.password;
 
-  const emailValidationResult = UserDetailsValidator.validateEmail(email);
+  const usernameValidationResult = UserDetailsValidator.validateUsername(username);
   const passwordValidationResult = UserDetailsValidator.validatePassword(password);
 
-  if(emailValidationResult) {
-    return res.status(400).json(emailValidationResult);
+  if(usernameValidationResult) {
+    return res.status(400).json(usernameValidationResult);
   }
 
   if(passwordValidationResult) {
     return res.status(400).json(passwordValidationResult);
   }
 
-  userRepository.findByEmail(email)
+  userRepository.findByName(username)
     .then(user => {
       if(!user) {
         res.status(404).json({
-          message: "User with this email not found",
-          target: "email"
+          message: "User with this username not found",
+          target: "username"
         });
       } else if(passwordHash.verify(password, user.password)) {
         sendToken(user, "Signed In successfuly", res);
