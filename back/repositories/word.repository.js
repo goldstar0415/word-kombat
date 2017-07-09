@@ -4,13 +4,11 @@ class WordRepository {
 
   add(word) {
     return db.transaction(t => {
-      
       return db.models.Word.create({
         value: word.value,
         image: word.image,
         hint: word.hint
       }, {transaction: t});
-    
     });
   }
 
@@ -41,11 +39,9 @@ class WordRepository {
 
   delete(id) {
     return db.transaction(t => {
-      
-      return db.models.Word.findById(1).then(word => {
+      return db.models.Word.findById(id).then(word => {
         return word.destroy({transaction: t});
       });
-
     });
   }
 

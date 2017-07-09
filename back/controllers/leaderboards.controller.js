@@ -18,7 +18,7 @@ router.get('/', (req, res, next) => {
   
   userRepository.findAll({limit: 100, order: 'score DESC'})
     .then(users => {
-      users.forEach((_, i) => users[i].password = undefined);
+      users.forEach(user => user.password = undefined);
       res.json(users);
     });
 

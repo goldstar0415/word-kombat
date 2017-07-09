@@ -22,31 +22,31 @@ const UserDetailsValidator = require('../util/user-details.validator');
  * @apiError UserNotFound User with this email not found.
 */
 router.post('/signin', (req, res) => {
-  let email = req.body.email;
-  let password = req.body.password;
+  const email = req.body.email;
+  const password = req.body.password;
 
-  let emailValidationResult = UserDetailsValidator.validateEmail(email);
-  let passwordValidationResult = UserDetailsValidator.validatePassword(password);
+  const emailValidationResult = UserDetailsValidator.validateEmail(email);
+  const passwordValidationResult = UserDetailsValidator.validatePassword(password);
 
   if(emailValidationResult) {
-    res.status(400).send(emailValidationResult);
+    return res.status(400).json(emailValidationResult);
   }
 
   if(passwordValidationResult) {
-    res.status(400).send(passwordValidationResult);
+    return res.status(400).json(passwordValidationResult);
   }
 
   userRepository.findByEmail(email)
     .then(user => {
       if(!user) {
-        return res.status(404).send({
+        res.status(404).json({
           message: "User with this email not found",
           target: "email"
         });
       } else if(passwordHash.verify(password, user.password)) {
         sendToken(user, "Signed In successfuly", res);
       } else {
-        return res.status(403).send({
+        res.status(403).json({
           message: "Invalid password",
           target: "password"
         });
@@ -75,86 +75,70 @@ router.post('/signin', (req, res) => {
  * @apiError InvalidPassword Password is invalid.
  * @apiError UserAlreadyExists User with this email already exists.
 */
-router.post('/signup', (req, res) => {
+router.post('/signup', (req, res, next) => {
 
-  let email = req.body.email;
-  let username = req.body.username;
-  let password = req.body.password;
+  const email = req.body.email;
+  const username = req.body.username;
+  const password = req.body.password;
 
-  let usernameValidationResult = UserDetailsValidator.validateUsername(username);
-  let emailValidationResult = UserDetailsValidator.validateEmail(email);
-  let passwordValidationResult = UserDetailsValidator.validatePassword(password);
+  const usernameValidationResult = UserDetailsValidator.validateUsername(username);
+  const emailValidationResult = UserDetailsValidator.validateEmail(email);
+  const passwordValidationResult = UserDetailsValidator.validatePassword(password);
 
   if(usernameValidationResult) {
-    res.status(400).send(usernameValidationResult);
+    return res.status(400).json(usernameValidationResult);
   }
 
   if(emailValidationResult) {
-    res.status(400).send(emailValidationResult);
+    return res.status(400).json(emailValidationResult);
   }
 
   if(passwordValidationResult) {
-    res.status(400).send(passwordValidationResult);
+    return res.status(400).json(passwordValidationResult);
   }
 
-  userRepository.findByEmail(email).then(user => {
-
-    if(!!user) {
-      return res.status(409).send({
-        message: "User with this email already exists",
-        target: "email"
-      });
-    }
-
-    userRepository.findByName(username).then(user => {
-      if(!!user) {
-        return res.status(409).send({
-          message: "User with this name already exists",
-          target: "username"
-        });
-      }
-
-      let newUser = {
+  userRepository.findByEmail(email)
+    .then(user => {
+      throwIfAlreadyExsits(user, 'email');
+      return userRepository.findByName(username);
+    })
+    .then(user => {
+      throwIfAlreadyExsits(user, 'username');
+      const newUser = {
         email: email,
         name: username,
         password: passwordHash.generate(password),
         icon: 'https://robohash.org/' + username,
         score: 0
       }
-
-      userRepository.add(newUser)
-        .then(_=> {
-          return userRepository.findByEmail(email);
-        })
-        .then(user => {
-          sendToken(user, "Signed Up successfuly", res);
-        })
-        .catch(error => {
-          log.error(error);
-          return res.json(error);
-        });
-    }).catch(error => {
-      log.error(error);
-      return res.json(error);
+      return userRepository.add(newUser);
+    })
+    .then(() => userRepository.findByEmail(email))
+    .then(user => sendToken(user, "Signed Up successfully", res))
+    .catch(error => {
+      log.warn(error);
+      if(error.status) {
+        const status = error.status;
+        error.status = undefined;
+        res.status(status).json(error);
+      } else {
+        res.json(error);
+      }
     });
-  }).catch(error => {
-    log.error(error);
-    return res.json(error);
-  });
 });
 
-/**
- * @api {post} api/auth/logout Logout 
- * @apiName Logout 
- * @apiGroup Auth
-*/
-router.post('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/');
-});
+function throwIfAlreadyExsits(user, target) {
+  if(user) {
+    throw {
+      status: 409,
+      message: `User with this ${target} already exists`,
+      target: target
+    };
+  }
+}
 
 function sendToken(user, message, res) {
-  let userData = {
+  const userData = {
     id: user.id,
     name: user.name
   };

@@ -84,7 +84,7 @@ router.get('/:id(\\d+)', (req, res) => {
 router.get('/:name(\\w+)', (req, res) => {
   userRepository.findByName(req.params.name)
    .then(user => {
-      if(!!user) {
+      if(Boolean(user)) {
         user.password = undefined;
       }
       res.json(user);
@@ -114,7 +114,7 @@ router.get('/:name(\\w+)', (req, res) => {
 router.get('/:email(.+\@.+\..+)', (req, res) => {
   userRepository.findByEmail(req.params.email)
    .then(user => {
-      if(!!user) {
+      if(Boolean(user)) {
         user.password = undefined;
       }
       res.json(user);

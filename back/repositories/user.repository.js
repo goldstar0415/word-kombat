@@ -2,31 +2,31 @@ const db = require('./index.js');
 const log = require('../logger');
 
 class UserRepository {
+
+  constructor() {
+    this.options = {
+      include: [{model: db.models.Rank, as: "rank"}]
+    };
+  }
   
   findById(id) {
-    return db.models.User.findById(id, {
-      include: [{model: db.models.Rank, as: "rank"}]
-    });
+    return db.models.User.findById(id, this.options);
   }
 
   findByEmail(email) {
     return db.models.User.findOne({
       where: {email: email}
-    }, {
-      include: [{model: db.models.Rank, as: "rank"}]
-    });
+    }, this.options);
   }
 
   findByName(username) {
     return db.models.User.findOne({
       where: {name: username}
-    }, {
-      include: [{model: db.models.Rank, as: "rank"}]
-    });
+    }, this.options);
   }
 
   findAll(params={}) {
-    params["include"] = [{model: db.models.Rank, as: "rank"}];
+    params["include"] = this.options.include;
     return db.models.User.findAll(params);
   }
 
