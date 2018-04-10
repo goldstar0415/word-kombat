@@ -17,7 +17,7 @@ export class MatchService {
   }
 
   setSocket(socket?: SocketIOClient.Socket) {
-    if(socket) {
+    if (socket) {
       this.socket = socket;
     } else {
       this.socket = this.socketService.socket;

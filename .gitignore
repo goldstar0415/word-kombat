@@ -1,5 +1,6 @@
 node_modules/
 builds/
+**/.idea/
 
 front/dist
 back/logger/logs

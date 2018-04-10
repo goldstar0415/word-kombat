@@ -4,7 +4,7 @@ div {
   background-color: $blue-grey-lighten-5;
   padding: 14px;
   margin: 10px;
-  
+
   h1 {
     text-transform: uppercase;
     text-align: center;
@@ -26,10 +26,8 @@ div {
     }
   }
 
-  canvas#progress {
+  #progress {
     margin: auto;
     padding: 20px;
-    max-height: 505px;
-    max-width: 505px;
   }
 }

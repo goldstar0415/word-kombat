@@ -1,22 +1,16 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-import {
-  Http,
-  RequestOptions,
-  Headers,
-  Response
-} from '@angular/http';
+import {Http, Response} from '@angular/http';
 
-import { Observable, ReplaySubject } from 'rxjs/Rx';
+import {ReplaySubject} from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
-import { handleError } from '../../util/error-handler';
-import { createRequestOptions } from '../../util/request-options';
-import { environment } from '../../../environments/environment';
-import { SignInRequest } from '../../model/signin-request.model';
-import { SignUpRequest } from '../../model/signup-request.model';
-import { User } from '../../model/user.model';
-import { UserService } from '../user/user.service';
+import {handleError} from '../../util/error-handler';
+import {createRequestOptions} from '../../util/request-options';
+import {environment} from '../../../environments/environment';
+import {SignInRequest} from '../../model/signin-request.model';
+import {SignUpRequest} from '../../model/signup-request.model';
+import {UserService} from '../user/user.service';
 
 @Injectable()
 export class AuthService extends ReplaySubject<number> {
@@ -24,8 +18,8 @@ export class AuthService extends ReplaySubject<number> {
   private token: string;
   private username: string;
   private userId: number;
-  private readonly SIGNIN_URL = environment.apiUrl + "api/auth/signin";
-  private readonly SIGNUP_URL = environment.apiUrl + "api/auth/signup";
+  private readonly SIGNIN_URL = environment.apiUrl + 'api/auth/signin';
+  private readonly SIGNUP_URL = environment.apiUrl + 'api/auth/signup';
 
   constructor(
     private http: Http,
@@ -36,9 +30,9 @@ export class AuthService extends ReplaySubject<number> {
   }
 
   public refresh() {
-    let userData = this.getUserDataFromStorage();
-    if(userData) {
-      let parsedUserData = this.parseUserData(userData);
+    const userData = this.getUserDataFromStorage();
+    if (userData) {
+      const parsedUserData = this.parseUserData(userData);
       this.token = parsedUserData.token;
       this.userId = +parsedUserData.id;
       this.username = parsedUserData.name;
@@ -93,9 +87,9 @@ export class AuthService extends ReplaySubject<number> {
   }
 
   private saveToken(res: Response): void {
-    let token = res.json() && res.json().token;
-    if(Boolean(token)) {
-      let claims = this.getTokenClaims(token);
+    const token = res.json() && res.json().token;
+    if (Boolean(token)) {
+      const claims = this.getTokenClaims(token);
       claims.token = token;
       window.sessionStorage.setItem('user', JSON.stringify(claims));
     } else {
@@ -114,9 +108,9 @@ export class AuthService extends ReplaySubject<number> {
   }
 
   private parseUserData(userData: string): { token: string,  id: number, name: string } {
-    let userDataObject = JSON.parse(userData);
-    if(userData) {
-      let claims = this.getTokenClaims(userData);
+    const userDataObject = JSON.parse(userData);
+    if (userData) {
+      const claims = this.getTokenClaims(userData);
       return {
         token: userDataObject.token || '',
         id: claims.id,
@@ -126,8 +120,8 @@ export class AuthService extends ReplaySubject<number> {
   }
 
   private getTokenClaims(token: string) {
-    let base64Url = token.split('.')[1];
-    let base64 = base64Url.replace('-', '+').replace('_', '/');
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace('-', '+').replace('_', '/');
     return JSON.parse(window.atob(base64));
   }
 

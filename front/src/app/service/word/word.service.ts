@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-import { Observable } from 'rxjs/Rx';
+import {Observable} from 'rxjs/Rx';
 
-import { SocketService } from '../socket/socket.service';
-import { Word } from '../../model/word.model';
+import {SocketService} from '../socket/socket.service';
+import {Word} from '../../model/word.model';
 
 @Injectable()
 export class WordService {
@@ -14,18 +14,18 @@ export class WordService {
   }
 
   setSocket(socket?: SocketIOClient.Socket) {
-    if(socket) {
+    if (socket) {
       this.socket = socket;
     } else {
       this.socket = this.socketService.socket;
     }
   }
 
-  getWords(): Observable<{word: Word, index: number}> {
+  getWords(): Observable<{ word: Word, index: number }> {
     const observable = new Observable(observer => {
       this.socket.on('word', res => {
-        window.localStorage.setItem("currentWord", JSON.stringify(res.word));
-        window.localStorage.setItem("currentWordIndex", res.index);
+        window.localStorage.setItem('currentWord', JSON.stringify(res.word));
+        window.localStorage.setItem('currentWordIndex', res.index);
         observer.next(res);
       });
     });
@@ -33,8 +33,8 @@ export class WordService {
   }
 
   getCurrentWord() {
-    const word = window.localStorage.getItem("currentWord");
-    if(word) {
+    const word = window.localStorage.getItem('currentWord');
+    if (word) {
       return JSON.parse(word);
     } else {
       return new Word();
@@ -42,8 +42,8 @@ export class WordService {
   }
 
   getCurrentWordIndex() {
-    const index = window.localStorage.getItem("currentWordIndex");
-    if(index) {
+    const index = window.localStorage.getItem('currentWordIndex');
+    if (index) {
       return Number(index);
     } else {
       return 0;

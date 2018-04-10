@@ -1,20 +1,15 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-import {
-  Http,
-  Headers,
-  RequestOptions,
-  Response
-} from '@angular/http';
+import {Http} from '@angular/http';
 
-import { Observable, ReplaySubject } from 'rxjs/Rx';
+import {Observable, ReplaySubject} from 'rxjs/Rx';
 
-import { handleError } from '../../util/error-handler';
-import { createRequestOptions } from '../../util/request-options';
-import { environment } from '../../../environments/environment';
-import { SocketService } from '../socket/socket.service';
-import { User } from '../../model/user.model';
-import { Rank } from '../../model/rank.model';
+import {handleError} from '../../util/error-handler';
+import {createRequestOptions} from '../../util/request-options';
+import {environment} from '../../../environments/environment';
+import {SocketService} from '../socket/socket.service';
+import {User} from '../../model/user.model';
+import {Rank} from '../../model/rank.model';
 
 @Injectable()
 export class UserService extends ReplaySubject<Array<User>> {

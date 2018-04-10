@@ -1,5 +1,5 @@
 const express = require('express');
-const passwordHash = require('password-hash');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 const router = express.Router();
@@ -43,7 +43,7 @@ router.post('/signin', (req, res) => {
           message: "User with this username not found",
           target: "username"
         });
-      } else if(passwordHash.verify(password, user.password)) {
+      } else if(bcrypt.compareSync(password, user.password)) {
         sendToken(user, "Signed In successfuly", res);
       } else {
         res.status(403).json({
@@ -107,7 +107,7 @@ router.post('/signup', (req, res, next) => {
       const newUser = {
         email: email,
         name: username,
-        password: passwordHash.generate(password),
+        password: bcrypt.hashSync(password, 8),
         icon: 'https://robohash.org/' + username,
         score: 0
       }

@@ -1,16 +1,9 @@
-import {
-  Component,
-  OnInit,
-  OnChanges,
-  Input,
-  SimpleChange
-} from '@angular/core';
+import {Component, ElementRef, Input, OnChanges, OnInit, SimpleChange, ViewChild} from '@angular/core';
 
-import { Chart } from 'chart.js';
-import * as $ from 'jquery';
+import {Chart} from 'chart.js';
 
-import { User } from '../../../model/user.model';
-import { Rank } from '../../../model/rank.model';
+import {User} from '../../../model/user.model';
+import {Rank} from '../../../model/rank.model';
 
 @Component({
   selector: 'wk-user-info',
@@ -21,15 +14,16 @@ export class UserInfoComponent implements OnInit, OnChanges {
 
   @Input() user: User;
   @Input() rank: Rank;
+  @ViewChild('progress') progress: ElementRef;
 
   chartData: Array<Number>;
 
-  ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-    if(changes['user']) {
+  ngOnChanges(changes: { [propKey: string]: SimpleChange }) {
+    if (changes['user']) {
       this.user = changes['user'].currentValue;
     }
 
-    if(changes['rank']) {
+    if (changes['rank']) {
       this.rank = changes['rank'].currentValue;
     }
 
@@ -39,19 +33,18 @@ export class UserInfoComponent implements OnInit, OnChanges {
     this.chartData = [achived, 100 - achived];
 
     const data = {
-      labels: ["Actual", "Remains"],
+      labels: ['Actual', 'Remains'],
       datasets: [{
         data: this.chartData,
-        backgroundColor: ["#00695C", "#757575"],
-        hoverBackgroundColor: ["#00897B", "#9E9E9E"]
+        backgroundColor: ['#00695C', '#757575'],
+        hoverBackgroundColor: ['#00897B', '#9E9E9E']
       }]
     };
 
-    const ctx = $("#progress");
-    let userProgressChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: data,
-        options: {}
+    const userProgressChart = new Chart(this.progress.nativeElement, {
+      type: 'doughnut',
+      data: data,
+      options: {}
     });
 
   }

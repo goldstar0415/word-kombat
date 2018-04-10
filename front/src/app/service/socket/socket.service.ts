@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import * as io from 'socket.io-client';
-import { environment } from '../../../environments/environment';
+import {environment} from '../../../environments/environment';
 
 @Injectable()
 export class SocketService {
-  
+
   private token: string;
   public socket: SocketIOClient.Socket;
 
@@ -13,12 +13,12 @@ export class SocketService {
   }
 
   connect(token?): Promise<SocketIOClient.Socket> {
-    if(this.socket) {
+    if (this.socket) {
       this.socket.disconnect();
     }
-    if(!token) {
+    if (!token) {
       const tokenFromStorage = window.sessionStorage.getItem('user');
-      if(tokenFromStorage) {
+      if (tokenFromStorage) {
         this.token = JSON.parse(tokenFromStorage).token;
       }
     } else {

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
 
 import { handleError } from '../../util/error-handler';
 import { createRequestOptions } from '../../util/request-options';
@@ -12,7 +12,7 @@ import { User } from '../../model/user.model';
 @Injectable()
 export class LeaderboardsService {
 
-  private readonly LEADERBOARDS_URL = environment.apiUrl + "api/leaderboards";
+  private readonly LEADERBOARDS_URL = environment.apiUrl + 'api/leaderboards';
 
   constructor(private http: Http) {}
 
@@ -27,13 +27,13 @@ export class LeaderboardsService {
   private getFromService(): Observable<Array<User> | any> {
     return this.http.get(this.LEADERBOARDS_URL, createRequestOptions())
       .map(res => res.json())
-      .do(res => window.localStorage.setItem("leaderboards", JSON.stringify(res)))
+      .do(res => window.localStorage.setItem('leaderboards', JSON.stringify(res)))
       .catch(handleError);
   }
 
   private getFromStorage(): Observable<Array<User> | any> {
-    let leaderboards = window.localStorage.getItem('leaderboards');
-    if(leaderboards) {
+    const leaderboards = window.localStorage.getItem('leaderboards');
+    if (leaderboards) {
       return Observable.from([JSON.parse(leaderboards)]);
     } else {
       return Observable.from([[]]);

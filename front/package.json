@@ -1,6 +1,6 @@
 {
   "name": "word-kombat",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "license": "BSD3",
   "scripts": {
     "ng": "ng",
@@ -19,17 +19,17 @@
     "loc": "cloc ./ --exclude-dir=dist,node_modules,coverage"
   },
   "dependencies": {
-    "@angular/common": ">=4.0.0 <5.0.0",
-    "@angular/compiler": ">=4.0.0 <5.0.0",
-    "@angular/core": ">=4.0.0 <5.0.0",
-    "@angular/forms": ">=4.0.0 <5.0.0",
-    "@angular/http": ">=4.0.0 <5.0.0",
-    "@angular/platform-browser": ">=4.0.0 <5.0.0",
-    "@angular/platform-browser-dynamic": ">=4.0.0 <5.0.0",
-    "@angular/router": ">=4.0.0 <5.0.0",
+    "@angular/common": ">=6.0.0-rc.3 <7.0.0",
+    "@angular/compiler": ">=6.0.0-rc.3 <7.0.0",
+    "@angular/core": ">=6.0.0-rc.3 <7.0.0",
+    "@angular/forms": ">=6.0.0-rc.3 <7.0.0",
+    "@angular/http": ">=6.0.0-rc.3 <7.0.0",
+    "@angular/platform-browser": ">=6.0.0-rc.3 <7.0.0",
+    "@angular/platform-browser-dynamic": ">=6.0.0-rc.3 <7.0.0",
+    "@angular/router": ">=6.0.0-rc.3 <7.0.0",
     "chart.js": "^2.5.0",
     "core-js": "^2.4.1",
-    "materialize-css": "^0.98.2",
+    "materialize-css": "^1.0.0-beta",
     "ng-network-status": "^0.2.3",
     "rxjs": "^5.1.0",
     "socket.io-client": "^1.7.3",
@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "@angular/cli": ">=1.0.0",
-    "@angular/compiler-cli": ">=4.0.0 <5.0.0",
+    "@angular/compiler-cli": ">=6.0.0-rc.3 <7.0.0",
     "@types/chart.js": "^2.4.1",
     "@types/jasmine": "2.5.38",
     "@types/jquery": "^2.0.41",

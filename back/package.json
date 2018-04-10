@@ -1,6 +1,6 @@
 {
   "name": "word-kombat",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "English words learning platform",
   "main": "app.js",
   "homepage": "https://gitlab.com/Saka7/Word-Kombat#README",
@@ -32,10 +32,9 @@
     "assets": "{views/**/*,../front/dist/**/*}"
   },
   "dependencies": {
-    "bcrypt-nodejs": "0.0.3",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.15.2",
     "cloudinary": "^1.5.0",
-    "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
     "express-jwt": "^5.1.0",
     "express-session": "^1.14.0",
@@ -59,10 +58,11 @@
     "@types/core-js": "^0.9.34",
     "@types/hammerjs": "^2.0.33",
     "@types/jasmine": "^2.2.34",
+    "apidoc": "^0.17.5",
     "babel-preset-es2015": "^6.9.0",
     "jasmine": "^2.5.3",
-    "supertest": "^3.0.0",
-    "apidoc": "^0.17.5"
+    "nodemon": "^1.17.3",
+    "supertest": "^3.0.0"
   },
   "engines": {
     "node": ">= 6.3.0",

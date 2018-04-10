@@ -7,7 +7,6 @@ const passport = require('passport');
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
 const http = require('http').Server(app);
 
 const io = require('./sockets');
@@ -26,7 +25,6 @@ app.use(passport.initialize());
 app.use(httpLogger('dev'));
 app.use(bodyParser.json({limit: '5mb'}));
 app.use(bodyParser.urlencoded({ extended: false, limit: '5mb' }));
-app.use(cookieParser());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.set('port', config.get('port'));
