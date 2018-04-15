@@ -5,8 +5,8 @@ import {
   ElementRef
 } from '@angular/core';
 
-import { User } from '../../../model/user.model';
-import { UserService } from '../../../service/user/user.service';
+import {User} from '../../../model/user.model';
+import {UserService} from '../../../service/user/user.service';
 
 @Component({
   selector: 'wk-user-details',
@@ -30,43 +30,41 @@ export class UserDetailsComponent {
   constructor(private userService: UserService) {
     this.user = new User();
     this.file = null;
-    this.usernameErrorMessage = "Username format is invalid";
-    this.emailErrorMessage = "Email format is invalid";
-    this.passwordErrorMessage = "Password format is invalid";
-    this.submitButtonText = "SAVE";
+    this.usernameErrorMessage = 'Username format is invalid';
+    this.emailErrorMessage = 'Email format is invalid';
+    this.passwordErrorMessage = 'Password format is invalid';
+    this.submitButtonText = 'SAVE';
   }
 
   onUserDetailsSubmit(): void {
     this.userService.update(this.user.id, this.user)
       .subscribe(user => {
-        this.submitButtonText = "UPDATED";
+        this.submitButtonText = 'UPDATED';
         window.setTimeout(() => {
-          this.submitButtonText = "SAVE";
+          this.submitButtonText = 'SAVE';
         }, 3000);
       }, error => {
-        console.error(error)
+        console.error(error);
       });
   }
 
   onImageUploadSubmit(): void {
-    if(this.file) {
+    if (this.file) {
       this.userService.uploadImage(this.user.id, this.user.icon)
         .subscribe(res => {
           this.close.nativeElement.click();
         }, error => {
           console.error(error);
-        })
+        });
     }
   }
 
   onFileChange(event): void {
-    let fileList = event.target.files;
-    if(fileList.length > 0) {
+    const fileList = event.target.files;
+    if (fileList.length > 0) {
       this.file = fileList[0];
-      let reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.user.icon = e.target.result;
-      };
+      const reader = new FileReader();
+      reader.onload = (e: any) => this.user.icon = e.target.result;
       reader.readAsDataURL(fileList[0]);
     }
   }

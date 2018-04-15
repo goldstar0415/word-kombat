@@ -1,16 +1,9 @@
-import { 
-  Component,
-  Input,
-  OnInit,
-  OnDestroy,
-  ElementRef,
-  ViewChild
-} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 
-import { Subscription } from 'rxjs/Rx';
+import {Subscription} from 'rxjs/Rx';
 
-import { Message } from '../../../model/message.model';
-import { MessageService } from '../../../service/message/message.service';
+import {Message} from '../../../model/message.model';
+import {MessageService} from '../../../service/message/message.service';
 
 @Component({
   selector: 'wk-chat-area',
@@ -25,15 +18,16 @@ export class ChatAreaComponent implements OnInit, OnDestroy {
   private message: Message;
   private messagesSubscription: Subscription;
 
-  constructor(private messageService: MessageService) {}
+  constructor(private messageService: MessageService) {
+  }
 
   ngOnInit() {
     this.messages = [];
-    
+
     this.messagesSubscription = this.messageService.getMessages()
       .subscribe(message => {
         // Max 500 messages in chat
-        if(this.messages.length >= 500) {
+        if (this.messages.length >= 500) {
           this.messages.shift();
         }
         this.messages.push(message);
@@ -48,13 +42,13 @@ export class ChatAreaComponent implements OnInit, OnDestroy {
   }
 
   private scrollBottom() {
-   try {
+    try {
       let chat;
-      if(this.chatContainer) {
+      if (this.chatContainer) {
         chat = this.chatContainer.nativeElement;
         chat.scrollTop = chat.scrollHeight;
       }
-    } catch(err) {
+    } catch (err) {
       console.error(err);
     }
   }

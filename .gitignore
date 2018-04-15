@@ -7,5 +7,3 @@ back/logger/logs
 **/etc
 **/coverage
 **/*.log
-**/package-lock.json
-**/yarn.lock

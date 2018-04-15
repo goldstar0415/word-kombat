@@ -1,18 +1,12 @@
-import {
-  async,
-  ComponentFixture,
-  ComponentFixtureAutoDetect,
-  TestBed
-} from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { By } from '@angular/platform-browser';
+import {async, ComponentFixture, ComponentFixtureAutoDetect, TestBed} from '@angular/core/testing';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
+import {Observable} from 'rxjs/Observable';
 
-import { Message } from '../../../model/message.model';
-import { SocketService } from '../../../service/socket/socket.service';
-import { MessageService } from '../../../service/message/message.service';
-import { ChatAreaComponent } from './chat-area.component';
+import {Message} from '../../../model/message.model';
+import {SocketService} from '../../../service/socket/socket.service';
+import {MessageService} from '../../../service/message/message.service';
+import {ChatAreaComponent} from './chat-area.component';
 
 describe('ChatAreaComponent', () => {
   let chatAreaComponent: ChatAreaComponent;
@@ -23,14 +17,14 @@ describe('ChatAreaComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers: [
-        { provide: ComponentFixtureAutoDetect, useValue: true },
-        { provide: SocketService, useValue: {socket: {on: new Function()}} },
+        {provide: ComponentFixtureAutoDetect, useValue: true},
+        {provide: SocketService, useValue: {socket: {on: new Function()}}},
         MessageService
       ],
-      declarations: [ ChatAreaComponent ],
+      declarations: [ChatAreaComponent],
       schemas: [NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

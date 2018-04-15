@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs/Rx';
 
-import { SocketService } from '../socket/socket.service';
-import { Score } from '../../model/score.model';
+import {SocketService} from '../socket/socket.service';
+import {Score} from '../../model/score.model';
 
 @Injectable()
 export class MatchService {
@@ -25,17 +25,16 @@ export class MatchService {
   }
 
   isMatchOver(): Observable<Array<Score>> {
-    const observable = new Observable(observer => {
+    return new Observable(observer => {
       this.socket.on('end-of-match', res => {
         this.winners = res;
         observer.next(res);
       });
     });
-    return observable;
   }
 
   getScores(): Observable<Array<Score>> {
-    const observable = new Observable(observer => {
+    return new Observable(observer => {
       this.socket.on('scores', scores => {
         this.scores = scores.sort((score1, score2) => {
           return score2.score - score1.score;
@@ -43,7 +42,6 @@ export class MatchService {
         observer.next(this.scores);
       });
     });
-    return observable;
   }
 
   getAllScores(): Array<Score> {

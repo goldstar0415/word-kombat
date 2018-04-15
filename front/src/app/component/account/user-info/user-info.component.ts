@@ -44,8 +44,7 @@ export class UserInfoComponent implements OnInit, OnChanges {
     const userProgressChart = new Chart(this.progress.nativeElement, {
       type: 'doughnut',
       data: data,
-      options: {}
-    });
+    } as any);
 
   }
 

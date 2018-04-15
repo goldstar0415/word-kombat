@@ -22,14 +22,13 @@ export class WordService {
   }
 
   getWords(): Observable<{ word: Word, index: number }> {
-    const observable = new Observable(observer => {
+    return new Observable(observer => {
       this.socket.on('word', res => {
         window.localStorage.setItem('currentWord', JSON.stringify(res.word));
         window.localStorage.setItem('currentWordIndex', res.index);
         observer.next(res);
       });
     });
-    return observable;
   }
 
   getCurrentWord() {

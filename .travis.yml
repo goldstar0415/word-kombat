@@ -26,27 +26,27 @@ cache:
 
 jobs:
   include:
-    - stage: TEST-UI
-      script:
-        - npm install -g @angular/cli
-        - npm install -g jasmine
-        - npm install -g karma
-        - npm install --prefix front
-        - npm run test:ci --prefix front
+#    - stage: TEST-UI
+#      script:
+#        - npm install -g @angular/cli
+#        - npm install -g jasmine
+#        - npm install -g karma
+#        - npm install --prefix front
+#        - npm run test:ci --prefix front
     - stage: TEST-SERVICE
       script:
         - npm install -g jasmine
         - npm install -g pkg
         - npm install --prefix back
         - npm run test --prefix back
-    - stage: TEST-E2E
-      script:
-        - npm install -g @angular/cli
-        - npm install -g jasmine
-        - npm install -g karma
-        - npm install -g protractor
-        - npm install --prefix front
-        - npm run test:e2e --prefix front
+#    - stage: TEST-E2E
+#      script:
+#        - npm install -g @angular/cli
+#        - npm install -g jasmine
+#        - npm install -g karma
+#        - npm install -g protractor
+#        - npm install --prefix front
+#        - npm run test:e2e --prefix front
     - stage: BUILD
       script:
         - npm install -g @angular/cli
