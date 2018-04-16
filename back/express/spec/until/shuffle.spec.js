@@ -1,4 +1,4 @@
-const shuffle = require("../../util/shuffle");
+const shuffle = require("../../../word-kombat-api/src/util/shuffle.util");
 
 describe("Shuffle function", () => {
 

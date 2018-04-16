@@ -12,7 +12,7 @@ const User = require('../models/user.model');
 const Word = require('../models/word.model');
 const Rank = require('../models/rank.model');
 
-const shuffle = require('../util/shuffle');
+const shuffle = require('../../word-kombat-api/src/util/shuffle.util');
 
 
 module.exports.listen = app => {
