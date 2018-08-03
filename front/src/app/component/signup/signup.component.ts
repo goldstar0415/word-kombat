@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 
-import { SignUpRequest } from '../../model/signup-request.model';
-import { AuthService } from '../../service/auth/auth.service';
+import {SignUpRequest} from '../../model/signup-request.model';
+import {AuthService} from '../../service/auth/auth.service';
 
 @Component({
   selector: 'wk-signup',
@@ -11,13 +11,13 @@ import { AuthService } from '../../service/auth/auth.service';
 })
 export class SignupComponent {
 
-  usernameErrorMessage: string;
-  emailErrorMessage: string;
-  passwordErrorMessage: string;
-  signUpRequest: SignUpRequest;
-  usernameValidity: string;
-  emailValidity: string;
-  passwordValidity: string;
+  public usernameErrorMessage: string;
+  public emailErrorMessage: string;
+  public passwordErrorMessage: string;
+  public signUpRequest: SignUpRequest;
+  public usernameValidity: string;
+  public emailValidity: string;
+  public passwordValidity: string;
 
   constructor(
     private router: Router,
@@ -29,7 +29,7 @@ export class SignupComponent {
     this.passwordErrorMessage = "Password format is invalid";
   }
 
-  onSubmit() {
+  public onSubmit() {
     this.authService.signUp(this.signUpRequest)
       .subscribe(res => {
         this.router.navigate(['/chat']);
@@ -39,16 +39,13 @@ export class SignupComponent {
       });
   }
 
-  private setValidationError(error) {
-    if(error.target === 'username') {
-      this.usernameErrorMessage = error.message;
-      this.usernameValidity = "invalid";
-    } else if(error.target === 'email') {
-      this.emailErrorMessage = error.message;
+  private setValidationError(value) {
+    if (Number(value.error.statusCode) === 409) {
+      this.emailErrorMessage = 'User with this username or email already exists';
       this.emailValidity = "invalid";
-    } else if(error.target === 'password') {
-      this.passwordErrorMessage = error.message;
-      this.passwordValidity = "invalid";
+
+      this.usernameErrorMessage = 'User with this username or email already exists';
+      this.usernameValidity = "invalid";
     }
   }
 

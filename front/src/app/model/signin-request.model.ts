@@ -1,7 +1,7 @@
 export class SignInRequest {
 
   constructor(
-    public username: string="",
+    public name: string="",
     public password: string=""
   ) {}
 

@@ -3,7 +3,9 @@ builds/
 **/.idea/
 
 front/dist
+back/dist
 back/logger/logs
 **/etc
 **/coverage
 **/*.log
+

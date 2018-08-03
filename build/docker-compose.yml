@@ -1,0 +1,69 @@
+version: '3.1'
+
+services:
+
+  # PostgreSQL
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /data/postgres
+    volumes:
+       - /data/postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    hostname: '0.0.0.0'
+    networks:
+      - wk-net
+    restart: always
+
+  # Redis
+  redis:
+    image: 'redis:latest'
+    ports:
+      - '6379:6379'
+    networks:
+      - wk-net
+    volumes:
+      - /data/redis:/bitnami
+
+  # Backend App
+  backend:
+    build:
+        context: ../back
+        dockerfile: Dockerfile
+    image: wk-backend
+    container_name: wk-backend
+    restart: always
+    ports:
+      - 3000:3000
+    links:
+        - postgres
+        - redis
+    depends_on:
+        - redis
+        - postgres
+    networks:
+      - wk-net
+
+  # Frontend App
+  frontend:
+    build:
+        context: ../front
+        dockerfile: Dockerfile
+    image: wk-frontend
+    container_name: wk-frontend
+    restart: always
+    ports:
+        - 4200:80
+    links:
+        - backend
+    depends_on:
+        - backend
+    networks:
+      - wk-net
+
+networks:
+  wk-net:
+    driver: bridge

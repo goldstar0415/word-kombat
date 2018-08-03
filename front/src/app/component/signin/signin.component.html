@@ -8,19 +8,19 @@
   <div class="input-field">
     <i class="material-icons prefix">account_box</i>
     <input
-      class="username validate"
+      class="name validate"
       type="text"
-      pattern="(\w|_|-|\.){4,20}"
+      pattern=".{4,50}"
       name="username"
       required="required"
       #usernameInput="ngModel"
-      [ngClass]="usernameValidity"
-      [(ngModel)]="signInRequest.username" />
+      [ngClass]="nameValidity"
+      [(ngModel)]="signInRequest.name" />
     <label
-      class="username"
-      for="username"
-      [attr.data-error]="usernameErrorMessage">
-        Your username
+      class="name"
+      for="name"
+      [attr.data-error]="nameErrorMessage">
+        Your email or username
     </label>
   </div>
 
