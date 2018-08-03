@@ -1,0 +1,184 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%
+}
+body {
+    background: url("images/background.png")
+}
+.message {
+    max-width: 420px;
+}
+.message .content {
+    text-align: center;
+    color: #f5f5f5;
+    text-shadow: 2px 1px 3px #000;
+}
+.message .content h1 {
+    font-size: 36px;
+    line-height: 1.2
+}
+.message .content a {
+    margin-left: 5px;
+    font-size: 16px
+}
+.message .content p {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    color: #f5f5f5;
+    padding: 5px
+}
+.message .content .btn {
+    background-color: #424242;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.message .content .btn:hover {
+    background-color: #f5f5f5;
+    color: #424242;
+    text-shadow: none;
+    font-weight: bold;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    transition: all 0.3s
+}
+.box {
+    height: 100%;
+    width: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: box;
+    display: flex;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -o-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -o-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -o-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-box-lines: multiple;
+    -moz-box-lines: multiple;
+    -o-box-lines: multiple;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.box .message {
+    width: 60%;
+}
+.box .message span {
+    font-size: 32px
+}
+.box .error-img {
+    -webkit-perspective: 750px;
+    -moz-perspective: 750px;
+    -ms-perspective: 750px;
+    perspective: 750px;
+    margin: 25px;
+    width: 35%;
+}
+.box .error-img .front,
+.box .error-img .back {
+    background-color: #424242
+}
+.box .error-img .back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 300px;
+    width: 100%;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden
+}
+.box .error-img .front img {
+    max-height: 220px;
+    min-height: 150px
+}
+.box .error-img .front .status {
+    text-align: center;
+    color: #f5f5f5;
+    font-weight: bold;
+    text-shadow: 2px 1px 3px #000
+}
+.box .error-img .back {
+    -webkit-transform: rotateX(180deg);
+    -moz-transform: rotateX(180deg);
+    -o-transform: rotateX(180deg);
+    -ms-transform: rotateX(180deg);
+    transform: rotateX(180deg);
+    -webkit-transition: all 0.3 ease-in;
+    -moz-transition: all 0.3 ease-in;
+    -o-transition: all 0.3 ease-in;
+    -ms-transition: all 0.3 ease-in;
+    transition: all 0.3 ease-in;
+}
+.box .error-img .back span {
+    border-radius: 3px;
+    background-color: #f5f5f5;
+    color: #212121;
+    text-align: center;
+    font-weight: bold
+}
+.box .error-img .back p {
+    color: #f5f5f5;
+    text-align: justify;
+    padding: 5px 10px;
+    background-color: #424242
+}
+.box .error-img .card {
+    height: 300px;
+    margin-top: 0;
+    -webkit-transition: all 0.7s ease-in-out;
+    -moz-transition: all 0.7s ease-in-out;
+    -o-transition: all 0.7s ease-in-out;
+    -ms-transition: all 0.7s ease-in-out;
+    transition: all 0.7s ease-in-out;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+.box .error-img .card:active {
+    -webkit-transform: rotateX(180deg);
+    -moz-transform: rotateX(180deg);
+    -o-transform: rotateX(180deg);
+    -ms-transform: rotateX(180deg);
+    transform: rotateX(180deg)
+}
+.box .error-img .card span {
+    font-size: 27px;
+    display: inherit;
+    text-align: center
+}
+@media all and (max-width: 800px) {
+    .box .message {
+        width: 90%
+    }
+    .box .error-img {
+        width: 70%
+    }
+}

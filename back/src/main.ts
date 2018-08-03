@@ -4,6 +4,7 @@ import { ApplicationModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as path from 'path';
 import * as bodyParser from 'body-parser';
+import * as express from 'express';
 import { sequelize } from './config/database';
 import { DtoPipe } from 'nestjs-extensions';
 
@@ -14,6 +15,7 @@ async function bootstrap() {
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(cors());
+  app.use(express.static(path.join(__dirname, 'assets', 'public')));
 
   app.set('views', path.join(__dirname, 'assets', 'template'));
   app.set('view engine', 'pug');

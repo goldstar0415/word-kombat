@@ -10,10 +10,9 @@ html(lang="en")
     meta(name="keywords", content="words, english, learning, word, chat, game, interactive")
     meta(name="author", content="Saka7")
     link(rel="shortcut icon", href="./favicon.ico")
-    link(rel="shortcut icon", type="image/png", href="assets/images/favicon.png")
     link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
-    link(rel="stylesheet", href="styles.bundle.css")
-    link(rel="stylesheet", href="assets/styles/home.css")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css")
+    link(rel="stylesheet", href="styles/home.css")
 
   body
     
@@ -23,11 +22,6 @@ html(lang="en")
           a(href="/chat")
             i.material-icons.small chat
             span Try It
-
-        li#learn-more.btn.waves-effect.waves-dark
-          a(href="/apidocs")
-            i.material-icons.small subject
-            span API doc
 
         li#signup-trigger.btn.waves-effect.waves-dark
           a(data-target="signup")
@@ -157,37 +151,37 @@ html(lang="en")
           .blog-posts.row
             .post.col.s12.m4
               div User 1 Rank 5
-              img.hoverable(src="assets/images/posts/man.png")
+              img.hoverable(src="images/posts/man.png")
               p.z-depth-2 I couldn't even imagine that leaning words might be so simple and fun...
               button.btn.waves-effect.hoverable Read More
 
             .post.col.s12.m4
               div User 2 Rank 3
-              img.hoverable(src="assets/images/posts/man-2.jpg")
+              img.hoverable(src="images/posts/man-2.jpg")
               p.z-depth-2 In one hour of play I learn more words than in a day of work with the dictionary...
               button.btn.waves-effect.hoverable Read More
 
             .post.col.s12.m4
               div User 3 Rank 4
-              img.hoverable(src="assets/images/posts/girl.png")
+              img.hoverable(src="images/posts/girl.png")
               p.z-depth-2 It's simply awesome. Outstanding experience!
               button.btn.waves-effect.hoverable Read More
               
     footer
       .row.big-footer
         .col.s6
-          strong &copy; Copyrights 2017 Made by Saka7
+          strong &copy; Copyrights 2018 Made by Saka7
           hr
           strong FOLLOW ME ON:
           ul.social-links
             li: a(href="#")
-              img(src="assets/images/social-icons/facebook-icon.png")
+              img(src="images/social-icons/facebook-icon.png")
 
             li: a(href="https://github.com/Saka7")
-              img(src="assets/images/social-icons/github-icon.png")
+              img(src="images/social-icons/github-icon.png")
 
             li: a(href="http://codepen.io/saka7/")
-              img(src="assets/images/social-icons/codepen-icon.png")
+              img(src="images/social-icons/codepen-icon.png")
 
         .col.s6
           strong CONTACT ME
@@ -200,10 +194,10 @@ html(lang="en")
               input.btn(type="submit")
 
       .row.small-footer
-        span &copy; Copyrights 2017 Made by 
+        span &copy; Copyrights 2018 Made by
           a(href="https://github.com/Saka7") Saka7
 
-    script(src="inline.bundle.js")
-    script(src="polyfills.bundle.js")
-    script(src="scripts.bundle.js")
-    script(src="assets/scripts/home.js")
+
+    script(src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js")
+    script(src="scripts/home.js")
