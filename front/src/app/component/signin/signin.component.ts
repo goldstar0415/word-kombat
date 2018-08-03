@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 
-import { SignInRequest } from '../../model/signin-request.model';
-import { AuthService } from '../../service/auth/auth.service';
+import {SignInRequest} from '../../model/signin-request.model';
+import {AuthService} from '../../service/auth/auth.service';
 
 @Component({
   selector: 'wk-signin',
@@ -11,18 +11,18 @@ import { AuthService } from '../../service/auth/auth.service';
 })
 export class SigninComponent {
 
-  usernameErrorMessage: string;
+  nameErrorMessage: string;
+  nameValidity: string;
   passwordErrorMessage: string;
-  signInRequest: SignInRequest;
-  usernameValidity: string;
   passwordValidity: string;
+  signInRequest: SignInRequest;
 
   constructor(
     private router: Router,
     private authService: AuthService
   ) {
     this.signInRequest = new SignInRequest();
-    this.usernameErrorMessage = "Username format is invalid";
+    this.nameErrorMessage = "Email or Username format is invalid";
     this.passwordErrorMessage = "Password format is invalid";
   }
 
@@ -36,13 +36,27 @@ export class SigninComponent {
       });
   }
 
-  private setValidationError(error) {
-    if(error.target === 'username') {
-      this.usernameErrorMessage = error.message;
-      this.usernameValidity = "invalid";
-    } else if(error.target === 'password') {
-      this.passwordErrorMessage = error.message;
-      this.passwordValidity = "invalid";
+  private setValidationError(value) {
+    switch (Number(value.error.statusCode)) {
+      case 404: {
+        this.nameErrorMessage = 'User with this email or username not found';
+        this.nameValidity = "invalid";
+        break;
+      }
+      case 420: {
+        this.nameErrorMessage = 'Email or username format is invalid';
+        this.nameValidity = "invalid";
+        break;
+      }
+      case 403: {
+        this.passwordErrorMessage = 'Incorrect password';
+        this.passwordValidity = "invalid";
+        break;
+      }
+      default: {
+        this.nameErrorMessage = value.error.message;
+        this.nameValidity = "invalid";
+      }
     }
   }
 

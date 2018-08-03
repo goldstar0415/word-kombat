@@ -9,11 +9,11 @@ import {Word} from '../../model/word.model';
 export class WordService {
   private socket: SocketIOClient.Socket;
 
-  constructor(private socketService: SocketService) {
+  constructor(private readonly socketService: SocketService) {
     this.setSocket();
   }
 
-  setSocket(socket?: SocketIOClient.Socket) {
+  public setSocket(socket?: SocketIOClient.Socket) {
     if (socket) {
       this.socket = socket;
     } else {
@@ -21,7 +21,7 @@ export class WordService {
     }
   }
 
-  getWords(): Observable<{ word: Word, index: number }> {
+  public getWords(): Observable<{ word: Word, index: number }> {
     return new Observable(observer => {
       this.socket.on('word', res => {
         window.localStorage.setItem('currentWord', JSON.stringify(res.word));
@@ -31,7 +31,7 @@ export class WordService {
     });
   }
 
-  getCurrentWord() {
+  public getCurrentWord() {
     const word = window.localStorage.getItem('currentWord');
     if (word) {
       return JSON.parse(word);
@@ -40,7 +40,7 @@ export class WordService {
     }
   }
 
-  getCurrentWordIndex() {
+  public getCurrentWordIndex() {
     const index = window.localStorage.getItem('currentWordIndex');
     if (index) {
       return Number(index);

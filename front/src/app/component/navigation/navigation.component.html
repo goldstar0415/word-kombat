@@ -1,5 +1,5 @@
 <nav class="nav-wrapper hoverable">
-  
+
   <!-- Mobile Menu -->
   <ul class="side-nav" id="menu-mobile">
 
@@ -49,7 +49,7 @@
     <li *ngIf="isAuthorized()" (click)="onSignOut()">
       <a class="waves-effect waves-light" [routerLink]="['account']" >
         <span>Sign Out</span>
-        <i class="material-icons">arrow_upward</i>
+        <i class="material-icons">exit_to_app</i>
       </a>
     </li>
 
@@ -103,23 +103,23 @@
 
     <li class="waves-effect waves-light">
       <a class="tooltipped"
-        [routerLink]="['account']"
-        routerLinkActive="router-link-active"
-        data-position="bottom"
-        data-delay="50"
-        [attr.data-tooltip]=" isAuthorized() ? 'Edit account' : 'Authorize' ">
-          <i class="material-icons">account_box</i>
-      </a>
-    </li>
-
-    <li class="waves-effect waves-light">
-      <a class="tooltipped"
         [routerLink]="['leaderboards']"
         routerLinkActive="router-link-active"
         data-position="bottom"
         data-delay="50"
         data-tooltip="See leaderboards">
           <i class="material-icons">list</i>
+      </a>
+    </li>
+
+    <li class="waves-effect waves-light">
+      <a class="tooltipped"
+         [routerLink]="['account']"
+         routerLinkActive="router-link-active"
+         data-position="bottom"
+         data-delay="50"
+         [attr.data-tooltip]=" isAuthorized() ? 'Edit account' : 'Authorize' ">
+        <i class="material-icons">account_box</i>
       </a>
     </li>
 
@@ -132,7 +132,7 @@
           data-position="bottom"
           data-delay="50"
           data-tooltip="Sign Out">
-            <i class="material-icons">arrow_upward</i>
+            <i class="material-icons">exit_to_app</i>
         </a>
     </li>
 
@@ -147,5 +147,5 @@
     </li>
 
   </ul>
-  
+
 </nav>

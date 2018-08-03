@@ -1,14 +1,14 @@
-import {Component, ElementRef, Input, OnChanges, OnInit, SimpleChange, ViewChild} from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChange, ViewChild } from '@angular/core';
 
-import {Chart} from 'chart.js';
+import { Chart } from 'chart.js';
 
-import {User} from '../../../model/user.model';
-import {Rank} from '../../../model/rank.model';
+import { User } from '../../../model/user.model';
+import { Rank } from '../../../model/rank.model';
 
 @Component({
   selector: 'wk-user-info',
   templateUrl: './user-info.component.html',
-  styleUrls: ['./user-info.component.scss']
+  styleUrls: ['./user-info.component.scss'],
 })
 export class UserInfoComponent implements OnInit, OnChanges {
 
@@ -37,13 +37,13 @@ export class UserInfoComponent implements OnInit, OnChanges {
       datasets: [{
         data: this.chartData,
         backgroundColor: ['#00695C', '#757575'],
-        hoverBackgroundColor: ['#00897B', '#9E9E9E']
-      }]
+        hoverBackgroundColor: ['#00897B', '#9E9E9E'],
+      }],
     };
 
     const userProgressChart = new Chart(this.progress.nativeElement, {
+      data,
       type: 'doughnut',
-      data: data,
     } as any);
 
   }

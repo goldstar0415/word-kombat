@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs/Rx';
@@ -6,9 +6,7 @@ import { NetworkStatusService } from 'ng-network-status';
 
 import { WordService } from '../../service/word/word.service';
 import { MatchService } from '../../service/match/match.service';
-import { User } from '../../model/user.model';
 import { Word } from '../../model/word.model';
-import { Message } from '../../model/message.model';
 import { Score } from '../../model/score.model';
 
 @Component({
@@ -19,24 +17,24 @@ import { Score } from '../../model/score.model';
 })
 export class ChatComponent implements OnInit, OnDestroy {
 
-  scores: Array<Score>;
-  word: Word;
-  letters: Array<string>;
-  typedWord: string;
-  wordCounter = 0;
-  isOnline = true;
+  public scores: Array<Score>;
+  public word: Word;
+  public letters: Array<string> = [];
+  public typedWord: string;
+  public wordCounter = 0;
+  public isOnline = true;
 
   private wordsSubscription: Subscription;
   private matchSubscription: Subscription;
   private scoreSubscription: Subscription;
 
   constructor(
-    private router: Router,
-    private networkStatusService: NetworkStatusService,
-    private wordService: WordService,
-    private matchService: MatchService
+    private readonly router: Router,
+    private readonly networkStatusService: NetworkStatusService,
+    private readonly wordService: WordService,
+    private readonly matchService: MatchService
   ) {}
-  
+
   ngOnInit() {
     this.word = this.wordService.getCurrentWord();
     this.wordCounter = this.wordService.getCurrentWordIndex();
@@ -44,6 +42,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.letters = this.word.letters.slice();
 
     this.networkStatusService.healthCheck();
+
     this.networkStatusService.isOnline.subscribe(isOnline => {
       this.isOnline = isOnline;
     });
@@ -65,7 +64,7 @@ export class ChatComponent implements OnInit, OnDestroy {
       });
 
     this.matchSubscription = this.matchService.isMatchOver()
-      .subscribe(res => {
+      .subscribe(() => {
         this.router.navigate(['score']);
       });
   }
@@ -90,7 +89,6 @@ export class ChatComponent implements OnInit, OnDestroy {
         this.letters.splice(index, 1);
       }
     }
-
   }
 
 }
