@@ -1,7 +1,9 @@
 @import '../../../variables';
 
 .container {
-  min-height: 100vh;
+  height: calc(100% - 120px);
+  overflow-y: scroll;
+
   .image-box, .title, .match-scores, .end-match-choices {
     animation-name: grow;
     animation-duration: 0.6s;
@@ -55,7 +57,7 @@
         }
       }
     }
-    
+
     tbody {
 
       tr:nth-child(-n+3) {

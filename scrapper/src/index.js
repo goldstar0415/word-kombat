@@ -28,7 +28,13 @@ async function scrape() {
       const definition = await axios.get(definitionDictionary + value);
       const $ = cheerio.load(definition.data);
       const hint = $("p.definition-inner-item > span:first-child").text();
-      const result = { index, value, hint, image: image[0].thumb_url };
+
+      const result = {
+        index,
+        value,
+        hint,
+        image: image[0].thumb_url
+      };
 
       console.info("FETCHED WORD: %j", result);
 

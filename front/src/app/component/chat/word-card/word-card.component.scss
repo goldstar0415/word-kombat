@@ -1,11 +1,11 @@
 @import '../../../../variables';
 
 .word-card {
-   
+
   .card {
     background-color: $blue-grey-darken-4;
-    
-    // Wrod image
+
+    // Word image
     .card-image {
       height: 40vh;
     }
@@ -37,14 +37,14 @@
           cursor: auto;
         }
       }
-      
+
       button, span {
         margin: 1px;
         background-color: $grey-darken-4;
-        
+
         i, b {
           color: $grey-lighten-5;
-          font-style: none;
+          font-style: normal;
           font-size: 1.1rem;
         }
 
@@ -57,6 +57,12 @@
           }
         }
       }
+    }
+  }
+
+  @media all and (max-height: 768px){
+    .card > .card-action {
+      display: none;
     }
   }
 }
