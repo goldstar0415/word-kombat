@@ -19,83 +19,10 @@ html(lang="en")
     nav
       ul.nav-wrapper.right
         li#chat.guest.btn.waves-effect.waves-dark
-          a(href="/chat")
-            i.material-icons.small chat
-            span Try It
+          a(href="/app/chat") TRY NOW
 
-        li#signup-trigger.btn.waves-effect.waves-dark
-          a(data-target="signup")
-            i.material-icons.small group_add
-            span SignUp
-        
         li#signin-trigger.btn.waves-effect.waves-dark
-          a(data-target="signin")
-            i.material-icons.small account_circle
-            span SignIn
-
-        li#logout-trigger.btn.waves-effect.waves-dark
-          a(href="")
-            i.material-icons.small arrow_upward
-            span Logout
-
-    //- Sign up modal
-    #signup.modal
-      form(onsubmit="return false").modal-content
-
-        .center
-          i.material-icons.medium group_add
-          span SIGN UP
-
-        .input-field
-          i.material-icons.prefix email
-          input.email.validate(type="email" required)
-          label.email(for="email" data-error="Email is invalid") Enter your email
-
-        .input-field
-          i.material-icons.prefix account_box
-          input.username.validate(type="text" pattern="[a-zA-Z0-9]{4,30}" required)
-          label.username(for="username" data-error="Username is invalid") Enter your username
-
-        .input-field
-          i.material-icons.prefix vpn_key
-          input.password.validate(type="password" pattern=".{6,30}" required)
-          label.password(for="password" data-error="Password is invalid") Enter your password
-        
-        .modal-footer
-          button.cancel.btn-large.waves-effect.waves-dark.hide-on-med-and-down
-            i.material-icons.left cancel
-            span Cancel
-
-          button#signup-btn.btn-large.waves-effect.waves-dark
-            i.material-icons.left check_circle
-            span Sign Up
-
-    //- signin modal
-    #signin.modal
-      form(onsubmit="return false").modal-content
-
-        .center
-          i.material-icons.medium account_circle
-          span SIGN IN
-
-        .input-field
-          i.material-icons.prefix account_box
-          input.email.validate(type="email" required)
-          label.email(for="email" data-error="Email is invalid") Your email
-
-        .input-field
-          i.material-icons.prefix vpn_key
-          input.password.validate(type="password" pattern=".{6,30}" required)
-          label.password(for="password" data-error="Password is invalid") Your password
-
-        .modal-footer
-          button.cancel.btn-large.waves-effect.waves-dark.hide-on-med-and-down
-            i.material-icons.left cancel
-            span Cancel
-
-          button#signin-btn.btn-large.waves-effect.waves-dark
-            i.material-icons.left check_circle
-            span Sign In
+          a(href="/app/account") SIGN IN
 
     main.content
       header.box

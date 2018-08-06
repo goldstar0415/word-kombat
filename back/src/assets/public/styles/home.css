@@ -8,110 +8,6 @@ body {
     background-color: #000
 }
 
-#signin {
-    max-height: 62%
-}
-
-#signup {
-    max-height: 76%
-}
-
-#signin,
-#signup {
-    max-width: 600px;
-    background-color: #212121;
-    border-radius: 5px;
-    color: #fff;
-    -webkit-box-shadow: 0 0 10px 1px #fff;
-    box-shadow: 0 0 10px 1px #fff;
-}
-
-#signin .center,
-#signup .center {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: box;
-    display: flex;
-    -webkit-box-pack: center;
-    -moz-box-pack: center;
-    -o-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -moz-box-align: center;
-    -o-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
-    font-size: 2rem;
-}
-
-#signin .center i,
-#signup .center i {
-    margin-right: 6px
-}
-
-#signin img,
-#signup img {
-    max-width: 100%
-}
-
-#signin label,
-#signup label {
-    width: 90%
-}
-
-#signin .modal-footer,
-#signup .modal-footer {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: box;
-    display: flex;
-    -webkit-box-lines: multiple;
-    -moz-box-lines: multiple;
-    -o-box-lines: multiple;
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    -webkit-box-pack: center;
-    -moz-box-pack: center;
-    -o-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    background-color: #212121;
-}
-
-#signin .modal-footer #signin-btn,
-#signup .modal-footer #signin-btn,
-#signin .modal-footer #signup-btn,
-#signup .modal-footer #signup-btn,
-#signin .modal-footer .cancel,
-#signup .modal-footer .cancel {
-    margin-right: 6px;
-    min-width: 120px;
-    display: inline-block;
-    background-color: #424242;
-}
-
-#signin .modal-footer #signin-btn:hover,
-#signup .modal-footer #signin-btn:hover,
-#signin .modal-footer #signup-btn:hover,
-#signup .modal-footer #signup-btn:hover,
-#signin .modal-footer .cancel:hover,
-#signup .modal-footer .cancel:hover {
-    background-color: #fff;
-    color: #000;
-    font-weight: bold
-}
-
 nav {
     position: fixed;
     z-index: 3;
@@ -145,14 +41,6 @@ nav .btn:hover {
     background-color: #fff;
     color: #000;
     font-weight: bold
-}
-
-nav #logout-trigger {
-    display: none
-}
-
-nav i.material-icons {
-    display: none;
 }
 
 header.box {
@@ -272,7 +160,6 @@ main.content article:nth-child(2) {
     display: -moz-box;
     display: -webkit-flex;
     display: -ms-flexbox;
-    display: box;
     display: flex;
     -webkit-box-orient: horizontal;
     -moz-box-orient: horizontal;
@@ -751,16 +638,6 @@ footer ul.social-links li img:hover {
 
     nav span {
         display: none;
-    }
-
-    nav i.material-icons {
-        display: inline-block;
-        height: 36px;
-        line-height: 36px;
-    }
-
-    nav ul li.btn {
-        max-width: 48px;
     }
 
     nav ul li a {
