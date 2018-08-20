@@ -2,7 +2,7 @@
 
 ## Description
 
-rest-api-for-word-kombat
+REST API for Word-Kombat
 
 ## Installation
 

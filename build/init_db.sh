@@ -6,6 +6,7 @@ user_password=temp
 
 echo "Confirm user $user_name creation"
 psql -U postgres -c "CREATE USER \"$user_name\" WITH ENCRYPTED PASSWORD '$user_password';"
+
 echo "Confirm database $db_name creation"
 psql -U postgres -c "CREATE DATABASE \"$db_name\" OWNER \"$user_name\";"
 

@@ -17,20 +17,21 @@ async function bootstrap() {
   app.use(cors());
   app.use(express.static(path.join(__dirname, 'assets', 'public')));
 
-  app.set('views', path.join(__dirname, 'assets', 'template'));
+  app.set('views', path.join(__dirname, 'assets', 'public', 'views'));
   app.set('view engine', 'pug');
 
   app.useGlobalPipes(new DtoPipe(new Reflector()));
 
   const options = new DocumentBuilder()
     .setTitle('Word Kombat')
-    .setDescription('The word-kombat API description')
+    .addBearerAuth('Authorization', 'header', 'apiKey')
+    .setDescription('The Word-Kombat API description')
     .setVersion('0.5.0')
     .build();
 
   const document = SwaggerModule.createDocument(app, options);
 
-  SwaggerModule.setup('/docs', app, document);
+  SwaggerModule.setup('/swagger', app, document);
 
   await app.listen(process.env.NODE_PORT || 3000);
 }

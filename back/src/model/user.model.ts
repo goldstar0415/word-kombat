@@ -9,38 +9,49 @@ import {
 import { Dto } from 'nestjs-extensions';
 import { Exclude } from 'class-transformer';
 import { Rank } from '../entity/rank.entity';
+import { ApiModelProperty } from "@nestjs/swagger";
 
 @Dto()
 export class UserDto {
-  @IsOptional() public id: number;
 
+  @ApiModelProperty()
+  @IsOptional()
+  public id: number;
+
+  @ApiModelProperty()
   @IsDefined()
   @IsEmail()
   public email: string;
 
+  @ApiModelProperty()
   @IsDefined()
   @IsString()
   public name: string;
 
+  @ApiModelProperty()
   @IsDefined()
   @IsString()
   @Exclude()
   public password: string;
 
+  @ApiModelProperty()
   @IsOptional()
   @IsString()
   public icon: string;
 
+  @ApiModelProperty()
   @IsOptional()
   @IsInt()
   @Min(0)
   public score: number;
 
+  @ApiModelProperty()
   @IsOptional()
   @IsInt()
   @Min(1)
   public rankId: number;
 
+  @ApiModelProperty()
   public rank?: Rank;
 
   constructor(id: number, email: string, name: string, password: string, icon: string, score: number,

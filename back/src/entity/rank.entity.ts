@@ -10,12 +10,14 @@ import {
   UpdatedAt,
 } from 'sequelize-typescript';
 import { User } from './user.entity';
+import { ApiModelProperty } from "@nestjs/swagger";
 
 @Table({
   tableName: 'rank',
   timestamps: true,
 })
 export class Rank extends Model<Rank> {
+
   @PrimaryKey
   @AutoIncrement
   @Column
@@ -23,9 +25,7 @@ export class Rank extends Model<Rank> {
 
   @Column value: string;
 
-  @Column({
-    field: 'min_score',
-  })
+  @Column({ field: 'min_score' })
   minScore: number;
 
   @Column image: string;

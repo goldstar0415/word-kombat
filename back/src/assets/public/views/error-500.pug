@@ -6,11 +6,11 @@ head
 	meta(name="viewport", content="width=device-width, initial-scale=1")
 	meta(name="theme-color", content="#212121")
 	meta(name="mobile-web-app-capable", content="yes")
-	link(rel="shortcut icon", href="./favicon.ico")
-	link(rel="shortcut icon" type="image/png" href="images/favicon.png")
+	link(rel="shortcut icon", href="http://localhost:3000/favicon.ico")
+	link(rel="shortcut icon" type="image/png" href="http://localhost:3000/images/favicon.png")
 	link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
 	link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css")
-	link(rel="stylesheet", href="styles/error-500.css")
+	link(rel="stylesheet", href="http://localhost:3000/styles/error-500.css")
 body
 	.box
 		.message
@@ -18,13 +18,13 @@ body
 				span YIKES! There was a problem serving the requested page
 
 				p We've been notified of the problem and will do our best to make sure it doesn't happen again! You can try refreshing the page - the problem may be temporary
-				a.btn.btn-large.hoverable(href='/') Refresh
+				a.btn.btn-large.hoverable(href='/home') Refresh
 
 		.error-img
 			.card.hoverable
 				.front
 					.card-image
-						img(src='images/error-500.jpg')
+						img(src='http://localhost:3000/images/error-500.jpg')
 					.card-content
 						span.status 500 Internal Server Error
 				.back

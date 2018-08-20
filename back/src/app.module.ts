@@ -18,6 +18,7 @@ import { ErrorHandlerMiddleware } from '@nest-middlewares/errorhandler';
 import { AuthMiddleware } from './middleware/auth.middleware';
 import { WordChatSocket } from './socket/chat/word-chat.socket';
 import { ShuffleService } from './service/shuffle.service';
+import { LoggerMiddleware } from "./middleware/logger.middleware";
 
 @Module({
   imports: [],
@@ -43,6 +44,7 @@ export class ApplicationModule implements NestModule {
     consumer.apply(HelmetMiddleware);
     consumer.apply(CompressionMiddleware);
     consumer.apply(ErrorHandlerMiddleware);
+    consumer.apply(LoggerMiddleware);
 
     consumer
       .apply(AuthMiddleware)

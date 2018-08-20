@@ -12,21 +12,26 @@ import {
   Unique,
   UpdatedAt,
 } from 'sequelize-typescript';
+import { ApiModelProperty } from "@nestjs/swagger";
 
 @Table({
   tableName: 'account',
   timestamps: true,
 })
 export class User extends Model<User> {
+
+  @ApiModelProperty()
   @PrimaryKey
   @AutoIncrement
   @Column
   id: number;
 
+  @ApiModelProperty()
   @Unique
   @Column
   email: string;
 
+  @ApiModelProperty()
   @Unique
   @Column
   name: string;
@@ -36,15 +41,19 @@ export class User extends Model<User> {
   })
   password: string;
 
+  @ApiModelProperty()
   @Column icon: string;
 
+  @ApiModelProperty()
   @Column({ defaultValue: 0 })
   score: number;
 
+  @ApiModelProperty()
   @Column({ field: 'rank_id', defaultValue: 1 })
   @ForeignKey(() => Rank)
   rankId: number;
 
+  @ApiModelProperty({type: Rank})
   @BelongsTo(() => Rank)
   rank: Rank;
 
