@@ -1,22 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-
-import { handleError } from '../../util/error-handler';
-import { createRequestOptions } from '../../util/request-options';
 import { environment } from '../../../environments/environment';
 import { User } from '../../model/user.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class LeaderboardsService {
 
   private readonly LEADERBOARDS_URL = environment.apiUrl + 'api/leaderboards';
 
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
-  getAll(): Observable<Array<User> | any> {
+  public getAll(): Observable<Array<User> | any> {
     if(window.navigator.onLine) {
       return this.getFromService();
     } else {
@@ -25,10 +21,8 @@ export class LeaderboardsService {
   }
 
   private getFromService(): Observable<Array<User> | any> {
-    return this.http.get(this.LEADERBOARDS_URL, createRequestOptions())
-      .map(res => res.json())
-      .do(res => window.localStorage.setItem('leaderboards', JSON.stringify(res)))
-      .catch(handleError);
+    return this.http.get<Array<User>>(this.LEADERBOARDS_URL)
+      .do(res => window.localStorage.setItem('leaderboards', JSON.stringify(res)));
   }
 
   private getFromStorage(): Observable<Array<User> | any> {

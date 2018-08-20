@@ -5,10 +5,10 @@
 
   <ul class="collection">
     <li class="collection-item">
-      Current rank is: <b>{{ user.rank.name }}</b>
+      Current rank is: <b>{{ user.rank.value }}</b>
     </li>
     <li class="collection-item">
-      Next rank <b>{{ rank.name }}</b> achived by <b>{{ chartData[0] }}% </b>
+      Next rank <b>{{ rank.value }}</b> achieved by <b>{{ chartData[0] }}% </b>
     </li>
     <li class="collection-item">
       Points to the next rank: <b>{{ rank.minScore - user.score }} pts</b>

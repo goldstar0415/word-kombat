@@ -22,7 +22,7 @@ export class AccountComponent implements OnInit {
     this.currentUser = new User();
     this.nextRank = new Rank();
   }
-  
+
   ngOnInit() {
     const id = this.authService.getUserId();
     if(id) {
@@ -34,7 +34,7 @@ export class AccountComponent implements OnInit {
         .subscribe((rank: Rank) => {
           this.nextRank = rank;
         }, error => {
-          console.log(error);
+          console.error(error);
         });
     }
   }

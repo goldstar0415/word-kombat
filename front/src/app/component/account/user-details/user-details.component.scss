@@ -6,6 +6,14 @@
   display: flex;
   flex-direction: column;
 
+  input[disabled] {
+    color: $blue-grey-lighten-5;
+  }
+
+  label {
+    color: $grey-lighten-1;
+  }
+
   .user-data {
     .card-image {
       padding: 4px;
@@ -26,7 +34,6 @@
 
       .username {
         text-transform: uppercase;
-        margin-right: 5px;
         font-size: 1.2rem;
         font-weight: bold;
         margin-right: auto;
@@ -47,8 +54,8 @@
         height: 48px;
       }
     }
-  } 
-  
+  }
+
   form.card-action {
     display: flex;
     flex-direction: column;
@@ -74,7 +81,7 @@
   .card-reveal {
     color: $blue-grey-lighten-5;
     background-color: $blue-grey-darken-4;
-    
+
     form .file-field.input-field {
       display: flex;
       flex-direction: column;

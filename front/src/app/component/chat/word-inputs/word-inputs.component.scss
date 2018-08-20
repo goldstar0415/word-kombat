@@ -8,15 +8,16 @@
   justify-content: center;
   flex-wrap: wrap;
   flex-basis: 0;
-  
-  // Word input field 
+
+  // Word input field
   input#word {
     width: 50%;
+    max-width: 480px;
     margin-left: 8px;
     margin-right: 8px;
     color: white;
   }
-  
+
   // Send and backspace buttons
   button {
     margin: 2px;

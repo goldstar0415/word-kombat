@@ -1,5 +1,5 @@
 <nav class="nav-wrapper hoverable">
-  
+
   <!-- Mobile Menu -->
   <ul class="side-nav" id="menu-mobile">
 
@@ -49,12 +49,12 @@
     <li *ngIf="isAuthorized()" (click)="onSignOut()">
       <a class="waves-effect waves-light" [routerLink]="['account']" >
         <span>Sign Out</span>
-        <i class="material-icons">arrow_upward</i>
+        <i class="material-icons">exit_to_app</i>
       </a>
     </li>
 
     <li>
-      <a class="waves-effect waves-light" href="/" >
+      <a class="waves-effect waves-light" href="/home" >
         <span>Home</span>
         <i class="material-icons">home</i>
       </a>
@@ -81,7 +81,7 @@
     <a class="button-collapse waves-effect waves-light"
       href="#activities-mobile"
       data-activates="activities-mobile">
-        <i class="material-icons">more_horiz</i>
+        <i class="material-icons">forum</i>
     </a>
   </ul>
 
@@ -103,23 +103,23 @@
 
     <li class="waves-effect waves-light">
       <a class="tooltipped"
-        [routerLink]="['account']"
-        routerLinkActive="router-link-active"
-        data-position="bottom"
-        data-delay="50"
-        [attr.data-tooltip]=" isAuthorized() ? 'Edit account' : 'Authorize' ">
-          <i class="material-icons">account_box</i>
-      </a>
-    </li>
-
-    <li class="waves-effect waves-light">
-      <a class="tooltipped"
         [routerLink]="['leaderboards']"
         routerLinkActive="router-link-active"
         data-position="bottom"
         data-delay="50"
         data-tooltip="See leaderboards">
           <i class="material-icons">list</i>
+      </a>
+    </li>
+
+    <li class="waves-effect waves-light">
+      <a class="tooltipped"
+         [routerLink]="['account']"
+         routerLinkActive="router-link-active"
+         data-position="bottom"
+         data-delay="50"
+         [attr.data-tooltip]=" isAuthorized() ? 'Edit account' : 'Authorize' ">
+        <i class="material-icons">account_box</i>
       </a>
     </li>
 
@@ -132,13 +132,13 @@
           data-position="bottom"
           data-delay="50"
           data-tooltip="Sign Out">
-            <i class="material-icons">arrow_upward</i>
+            <i class="material-icons">exit_to_app</i>
         </a>
     </li>
 
     <li class="waves-effect waves-light">
       <a class="tooltipped"
-        href="/"
+        href="/home"
         data-position="bottom"
         data-delay="50"
         data-tooltip="Back to home page">
@@ -147,5 +147,5 @@
     </li>
 
   </ul>
-  
+
 </nav>

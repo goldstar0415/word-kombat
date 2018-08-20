@@ -17,17 +17,19 @@ export class SocketService {
       this.socket.disconnect();
     }
     if (!token) {
-      const tokenFromStorage = window.sessionStorage.getItem('user');
+      const tokenFromStorage = window.localStorage.getItem('user');
       if (tokenFromStorage) {
         this.token = JSON.parse(tokenFromStorage).token;
       }
     } else {
       this.token = token;
     }
+
     this.socket = io.connect(environment.apiUrl, {
       query: 'token=' + this.token
     });
-    return new Promise((resolve, reject) => resolve(this.socket));
+
+    return Promise.resolve(this.socket);
   }
 
 }

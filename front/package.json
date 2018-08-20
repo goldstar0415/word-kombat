@@ -1,6 +1,6 @@
 {
   "name": "word-kombat",
-  "version": "0.4.3",
+  "version": "0.5.0",
   "license": "BSD3",
   "scripts": {
     "ng": "ng",
@@ -27,6 +27,7 @@
     "@angular/platform-browser": ">=5.2.9 <6.0.0",
     "@angular/platform-browser-dynamic": ">=5.2.9 <6.0.0",
     "@angular/router": ">=5.2.9 <6.0.0",
+    "@auth0/angular-jwt": "^1.1.0",
     "chart.js": "^2.5.0",
     "core-js": "^2.4.1",
     "jquery": "^3.3.1",
@@ -38,7 +39,7 @@
     "zone.js": "^0.7.6"
   },
   "devDependencies": {
-    "@angular/cli": ">=1.0.0",
+    "@angular/cli": ">=1.0.0 <2.0.0",
     "@angular/compiler-cli": ">=5.2.9 <6.0.0",
     "@types/chart.js": "^2.4.1",
     "@types/jasmine": "2.5.38",

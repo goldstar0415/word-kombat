@@ -1,0 +1,132 @@
+doctype html
+html(lang="en")
+  head
+    title Word Kombat - Interactive words learning
+
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    meta(name="theme-color", content="#212121")
+    meta(name="mobile-web-app-capable", content="yes")
+    meta(name="description", content="English words learning platform")
+    meta(name="keywords", content="words, english, learning, word, chat, game, interactive")
+    meta(name="author", content="Saka7")
+
+    link(rel="shortcut icon", href="http://localhost:3000/favicon.ico")
+    link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css")
+    link(rel="stylesheet", href="http://localhost:3000/styles/home.css")
+
+  body
+    
+    nav
+      ul.nav-wrapper.right
+        li#chat.guest.btn.waves-effect.waves-dark
+          a(href="/chat") TRY NOW
+
+        li#signin-trigger.btn.waves-effect.waves-dark
+          a(href="/account") SIGN IN
+
+    main.content
+      header.box
+        .logo
+        button.scroll-button.btn.btn-floating.waves-effect.waves-dark
+          i.material-icons keyboard_arrow_down
+      section.articles
+        article
+        
+          h1 <b>Learn</b> all commonly used <b>words</b> in <b>simple</b> and <b>fun</b> way
+          hr
+          p.z-depth-3
+            |How many words do you need to know in English? This is a very common question and it varies depending on your goal.
+            |Studies have shown - a person with a vocabulary size of <b>3000 passive</b> word-families and <b>2000 active</b> word-families can speak a language fluently.
+            |Our application contains <b>3000</b> commonly used English words which helps you become <b>fluent speaker</b>.
+
+          hr
+
+          .pics
+            each word in words
+              figure.hoverable.waves-effect
+                img(src=word.image)
+                figcaption #{word.value}
+        
+        article
+        
+          h1 <b>No</b> more <b>boring</b> memorization
+          hr
+          p.z-depth-3
+            |Your brain always searching, scanning, waiting for something unusual. It was built that way, and it helps you stay alive. So what does your brain do with all the routine, ordinary, normal things you encounter? It doesn’t bother saving the boring things; they never make it past the “this is obviously not important” filter. If you really want to learn, and you want to learn more quickly and more deeply, pay attention to how you pay attention. Think about how you think. Learn how you learn.
+          
+          hr
+
+          .periscope
+            .content
+              .promo-text
+                span Create an account
+                italic it's
+                strong FREE
+                a.modal-trigger.btn(href='/account') Join Now
+        
+        article
+        
+          h1 <b>Chat</b> and <b>Compete</b> with friends
+          hr
+          p.z-depth-3
+            | The study of words arranged in a fun chat game.
+            | So, learning new words will be as fun and easy as chatting with friends or playing browser games.
+            | And a spirit of competition will help you better remember the words to prove that you are the best player.
+          
+          hr
+
+          .blog-posts.row
+            .post.col.s12.m4
+              div User 1 Rank 5
+              img.hoverable(src="http://localhost:3000/images/posts/man.png")
+              p.z-depth-2 I couldn't even imagine that leaning words might be so simple and fun...
+              button.btn.waves-effect.hoverable Read More
+
+            .post.col.s12.m4
+              div User 2 Rank 3
+              img.hoverable(src="http://localhost:3000/images/posts/man-2.jpg")
+              p.z-depth-2 In one hour of play I learn more words than in a day of work with the dictionary...
+              button.btn.waves-effect.hoverable Read More
+
+            .post.col.s12.m4
+              div User 3 Rank 4
+              img.hoverable(src="http://localhost:3000/images/posts/girl.png")
+              p.z-depth-2 It's simply awesome. Outstanding experience!
+              button.btn.waves-effect.hoverable Read More
+              
+    footer
+      .row.big-footer
+        .col.s6
+          strong &copy; Copyrights 2018 Made by Saka7
+          hr
+          strong FOLLOW ME ON:
+          ul.social-links
+            li: a(href="#")
+              img(src="http://localhost:3000/images/social-icons/facebook-icon.png")
+
+            li: a(href="https://github.com/Saka7")
+              img(src="http://localhost:3000/images/social-icons/github-icon.png")
+
+            li: a(href="http://codepen.io/saka7/")
+              img(src="http://localhost:3000/images/social-icons/codepen-icon.png")
+
+        .col.s6
+          strong CONTACT ME
+          hr
+          p If you have any questions or comments feel free to leave them here
+          form
+            #message.col.s8
+              input(type="text" placeholder="Your message")
+            .col.s4
+              input.btn(type="submit")
+
+      .row.small-footer
+        span &copy; Copyrights 2018 Made by
+          a(href="https://github.com/Saka7") Saka7
+
+
+    script(src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js")
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js")
+    script(src="http://localhost:3000/scripts/home.js")

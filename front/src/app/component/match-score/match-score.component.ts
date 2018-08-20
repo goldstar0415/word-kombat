@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
-import { Rank } from '../../model/rank.model';
 import { User } from '../../model/user.model';
 import { Score } from '../../model/score.model';
 import { MatchService } from '../../service/match/match.service';
@@ -8,13 +6,14 @@ import { MatchService } from '../../service/match/match.service';
 @Component({
   selector: 'wk-match-score',
   templateUrl: './match-score.component.html',
-  styleUrls: ['./match-score.component.scss']
+  styleUrls: ['./match-score.component.scss'],
 })
 export class MatchScoreComponent implements OnInit {
 
   scores: Array<Score>;
 
-  constructor(private matchService: MatchService) {}
+  constructor(private readonly matchService: MatchService) {
+  }
 
   ngOnInit() {
     this.scores = this.matchService.getWinners();

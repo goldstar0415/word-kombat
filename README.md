@@ -1,36 +1,31 @@
 # Word Kombat
-![build-status](https://api.travis-ci.org/Saka7/word-kombat.svg?branch=master)
 
 ![word-kombat](https://github.com/Saka7/word-kombat/blob/master/front/src/assets/images/icons/icon-152x152.png)
 
 Platform for English words learning.
-> Because learning never was so fun!
 
 ------
 
 # Build and Run
 
-> To run this app you need [Node.js 6+](https://nodejs.org/en/) and [npm 3+](https://www.npmjs.com/) and [PostgreSQL](https://www.postgresql.org/download/) database
+> To run this app you need [Node.js 8+](https://nodejs.org/en/) and [npm 4+](https://www.npmjs.com/) and [PostgreSQL](https://www.postgresql.org/download/) database
 
-## On Unix-based OS
+1. Create environment variables: `CLOUDINARY_API_KEY` and `CLOUDINARY_API_SECRET` with your cloudinary api-key and api-secret
+2. To build and start the project run `docker-compose -f build/docker-compose.yml up --build -d` script
 
-1. Clone repository `git clone https://gitlab.com/Saka7/Word-Kombat.git`
-2. Navigate to the project parent folder `cd Word-Kombat`
-3. Create environment variables: `CLOUDINARY_API_KEY` and `CLOUDINARY_API_SECRET` with your cloudinary api-key and api-secret
-4. To build project run `./build_and_run` script
-5. You can run project using `npm start --prefix back` or using executable `build/word-kombat-lin`
 
-## On Windows OS
+## Words scrapping
+You can populate database with your own words set or use word scrapper.
 
-1. Install front-end dependencies `npm install --prefix front`
-2. Install back-end dependencies `npm install --prefix back`
-3. Create environment variables: `CLOUDINARY_API_KEY` and `CLOUDINARY_API_SECRET` with your cloudinary api-key and api-secret
-4. Build front-end `npm run build:prod-sw --prefix front`
-5. Build documentation `npm run doc --prefix back`
-6. Build back-end `npm run build:prod-win --prefix back`
-7. And, finally, start it `npm start --prefix back` or `/builds/word-kombat-win.exe`
+To user word scrapper:
+1. enable the onion routing proxy - [TOR proxy](https://askubuntu.com/questions/834017/configure-a-tor-proxy-on-ubuntu-16-04) (needed to prevent rate limiting)
+2. run `npm start --prefix scrapper`
+3. it will save all fetched words in `scrapper/data/words.json`.
+4. Then you should write sequelize-seeder to insert result into the database
+5. add seeder file into `back/database/seeders`
+6. and run `npm run db:seed:all` - to apply changes
 
-> By default app will be running on port 8080
+> For 20k words it will took approximately 120 minutes
 
 # Main features
 - words learning is based on an **association with images**

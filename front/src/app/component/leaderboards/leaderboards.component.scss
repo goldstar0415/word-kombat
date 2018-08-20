@@ -1,20 +1,21 @@
 @import '../../../variables';
 
 .container {
-  min-height: 100vh;
-  
+  height: calc(100% - 120px);
+  overflow-y: scroll;
+
   table {
     margin: 24px auto;
     padding: 10px;
     background-color: $blue-grey-darken-3;
     color: $blue-grey-lighten-5;
-    
+
     caption {
       font-size: 3rem;
       font-weight: bold;
       text-shadow: 1px 1px 6px black;
     }
-    
+
     thead {
       background-color: $grey-darken-4;
       font-size: 1.3rem;
@@ -32,7 +33,7 @@
       tr {
         padding: 5px;
         font-size: 1.2rem;
-        
+
         td.position {
           font-weight: bold;
           padding-left: 10px;

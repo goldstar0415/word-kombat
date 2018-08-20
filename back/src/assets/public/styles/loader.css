@@ -1,0 +1,67 @@
+html, body {
+  width: 100%;
+  height: auto;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
+}
+
+body {
+  background-image: url('../images/background.png');
+  font-family: "Roboto", "Helvetiva", sans-serif, serif;
+}
+
+.preloader {
+  width: 225px;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: helvetica, arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 16px;
+  color: #F5F5F5;
+  letter-spacing: 0.2em;
+}
+
+.preloader::before, .preloader::after {
+  content: "";
+  display: block;
+  width: 15px;
+  height: 15px;
+  background: #F5F5F5;
+  position: absolute;
+  border-radius: 6px;
+  animation: loading 0.8s infinite alternate ease-in-out;
+}
+
+.preloader::before {
+  top: 0;
+}
+
+.preloader::after {
+  bottom: 0;
+}
+
+@keyframes loading {
+  0% {
+    left: 0;
+    height: 27px;
+    width: 13px;
+  }
+
+  50% {
+    height: 7px;
+    width: 36px;
+  }
+  
+  100% {
+    left: 211px;
+    height: 27px;
+    width: 13px;
+  }
+}
