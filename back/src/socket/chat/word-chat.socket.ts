@@ -4,23 +4,23 @@ import {
   OnGatewayInit,
   SubscribeMessage,
   WebSocketGateway,
-  WebSocketServer,
-} from '@nestjs/websockets';
+  WebSocketServer
+} from "@nestjs/websockets";
 
-import { UserRepository } from '../../repository/user/user.repository';
-import { WordRepository } from '../../repository/word/word.repository';
-import { Word } from '../../model/word.model';
-import * as socketJWT from 'socketio-jwt';
-import { UserDto } from '../../model/user.model';
-import { Logger } from '@nestjs/common';
-import { ShuffleService } from '../../service/shuffle.service';
+import { UserRepository } from "../../repository/user/user.repository";
+import { WordRepository } from "../../repository/word/word.repository";
+import { Word } from "../../model/word.model";
+import * as socketJWT from "socketio-jwt";
+import { UserDto } from "../../model/user.model";
+import { Logger } from "@nestjs/common";
+import { ShuffleService } from "../../service/shuffle.service";
 
 @WebSocketGateway()
 export class WordChatSocket implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
 
   @WebSocketServer() private server;
 
-  private readonly logger = new Logger('socket');
+  private readonly logger = new Logger("socket");
 
   private readonly AMOUNT_OF_WORDS_IN_MATCH = 10;
   private amountOfGuests = 0;
@@ -31,7 +31,7 @@ export class WordChatSocket implements OnGatewayInit, OnGatewayConnection, OnGat
   constructor(
     private readonly userRepository: UserRepository,
     private readonly wordRepository: WordRepository,
-    private readonly shuffleService: ShuffleService,
+    private readonly shuffleService: ShuffleService
   ) {
   }
 
@@ -50,8 +50,8 @@ export class WordChatSocket implements OnGatewayInit, OnGatewayConnection, OnGat
           } else {
             return accept(null, false);
           }
-        },
-      }),
+        }
+      })
     );
   }
 
@@ -66,17 +66,17 @@ export class WordChatSocket implements OnGatewayInit, OnGatewayConnection, OnGat
 
     this.users.push(user);
     this.scores.push({ user, points: 0, words: 0 });
-    this.server.emit('user-connected', this.users);
-    this.server.emit('scores', this.scores);
+    this.server.emit("user-connected", this.users);
+    this.server.emit("scores", this.scores);
     client.handshake.user = user;
 
     if (this.words.length < 1) {
       this.words = await this.getWords(this.AMOUNT_OF_WORDS_IN_MATCH);
     }
 
-    client.emit('word', {
+    client.emit("word", {
       word: this.words[0],
-      index: this.AMOUNT_OF_WORDS_IN_MATCH + 1 - this.words.length,
+      index: this.AMOUNT_OF_WORDS_IN_MATCH + 1 - this.words.length
     });
   }
 
@@ -84,15 +84,15 @@ export class WordChatSocket implements OnGatewayInit, OnGatewayConnection, OnGat
     if (Boolean(client.handshake.user)) {
 
       this.users = this.users.filter(
-        user => user.name !== client.handshake.user.name,
+        user => user.name !== client.handshake.user.name
       );
 
       this.scores = this.scores.filter(
-        score => score.user.name !== client.handshake.user.name,
+        score => score.user.name !== client.handshake.user.name
       );
 
-      this.server.emit('user-connected', this.users);
-      this.server.emit('scores', this.scores);
+      this.server.emit("user-connected", this.users);
+      this.server.emit("scores", this.scores);
     }
 
     if (this.users.length <= 0) {
@@ -101,7 +101,7 @@ export class WordChatSocket implements OnGatewayInit, OnGatewayConnection, OnGat
     }
   }
 
-  @SubscribeMessage('message')
+  @SubscribeMessage("message")
   async onMessage(client, data) {
     const user = client.handshake.user;
 
@@ -109,34 +109,37 @@ export class WordChatSocket implements OnGatewayInit, OnGatewayConnection, OnGat
       return;
     }
 
-    if (this.words.length > 0) {
-      if (data.text.toLowerCase() === this.words[0].value.toLowerCase()) {
-        data.points = this.calculateScore(this.words[0]);
-        this.words.shift();
-        this.scores.forEach(score => {
-          if (score.user.name === user.name) {
-            score.points += data.points;
-            score.words++;
-          }
-        });
-        if (this.words.length > 0) {
-          this.server.emit('word', {
-            word: this.words[0],
-            index: this.AMOUNT_OF_WORDS_IN_MATCH + 1 - this.words.length,
-          });
-        } else {
-          this.server.emit('end-of-match', this.scores);
-
-          this.scores.forEach(score => {
-            score.words = 0;
-            score.points = 0;
-          });
-
-          this.words = await this.getWords(this.AMOUNT_OF_WORDS_IN_MATCH);
-        }
-      }
-    } else {
+    if (this.words.length <= 0) {
       this.words = await this.getWords(this.AMOUNT_OF_WORDS_IN_MATCH);
+    }
+
+    if (data.text.toLowerCase() === this.words[0].value.toLowerCase()) {
+      data.points = this.calculateScore(this.words[0]);
+
+      this.words.shift();
+
+      this.scores.forEach(score => {
+        if (score.user.name === user.name) {
+          score.points = Math.round((score.points + data.points) * 10) / 10;
+          score.words++;
+        }
+      });
+
+      if (this.words.length <= 0) {
+        this.server.emit("end-of-match", this.scores);
+
+        this.scores.forEach(score => {
+          score.words = 0;
+          score.points = 0;
+        });
+
+        this.words = await this.getWords(this.AMOUNT_OF_WORDS_IN_MATCH);
+      }
+
+      this.server.emit("word", {
+        word: this.words[0],
+        index: this.AMOUNT_OF_WORDS_IN_MATCH + 1 - this.words.length
+      });
     }
 
     user.score += data.points;
@@ -149,9 +152,9 @@ export class WordChatSocket implements OnGatewayInit, OnGatewayConnection, OnGat
 
     data.user = user;
 
-    this.server.emit('user-connected', this.users);
-    this.server.emit('scores', this.scores);
-    this.server.emit('message', data);
+    this.server.emit("user-connected", this.users);
+    this.server.emit("scores", this.scores);
+    this.server.emit("message", data);
 
     if (user.id) {
       await this.userRepository.update(user.id, user);
@@ -169,15 +172,21 @@ export class WordChatSocket implements OnGatewayInit, OnGatewayConnection, OnGat
       1,
       {
         id: 1,
-        value: '1',
+        value: "1",
         minScore: 0,
-        image: 'assets/images/ranks/1.png'
+        image: "assets/images/ranks/1.png"
       }
     );
   }
 
   private calculateScore(word: Partial<Word & { letters: string[] }>) {
-    return word.value.length;
+    let matchDifficulty = 1;
+
+    if (this.users.length > 1) {
+      matchDifficulty = 1 + this.users.reduce((acc, next) => acc + next.rankId, 0) / 10;
+    }
+
+    return Math.round(word.value.length * matchDifficulty * 10) / 10;
   }
 
   private async getWords(amount: number): Promise<Partial<Word> & { letters: string[] } []> {
@@ -186,7 +195,7 @@ export class WordChatSocket implements OnGatewayInit, OnGatewayConnection, OnGat
       .then(words => {
         return words.map(word => {
           return Object.assign(word.dataValues, {
-            letters: this.shuffleService.shuffle(word.value),
+            letters: this.shuffleService.shuffle(word.value)
           });
         });
       });

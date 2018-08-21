@@ -27,41 +27,41 @@ services:
     volumes:
       - /data/redis:/bitnami
 
-  # Backend App
-  backend:
-    build:
-        context: ../back
-        dockerfile: Dockerfile
-    image: wk-backend
-    container_name: wk-backend
-    restart: always
-    ports:
-      - 3000:3000
-    links:
-        - postgres
-        - redis
-    depends_on:
-        - redis
-        - postgres
-    networks:
-      - wk-net
-
-  # Frontend App
-  frontend:
-    build:
-        context: ../front
-        dockerfile: Dockerfile
-    image: wk-frontend
-    container_name: wk-frontend
-    restart: always
-    ports:
-        - 4200:80
-    links:
-        - backend
-    depends_on:
-        - backend
-    networks:
-      - wk-net
+#  # Backend App
+#  backend:
+#    build:
+#        context: ../back
+#        dockerfile: Dockerfile
+#    image: wk-backend
+#    container_name: wk-backend
+#    restart: always
+#    ports:
+#      - 3000:3000
+#    links:
+#        - postgres
+#        - redis
+#    depends_on:
+#        - redis
+#        - postgres
+#    networks:
+#      - wk-net
+#
+#  # Frontend App
+#  frontend:
+#    build:
+#        context: ../front
+#        dockerfile: Dockerfile
+#    image: wk-frontend
+#    container_name: wk-frontend
+#    restart: always
+#    ports:
+#        - 4200:80
+#    links:
+#        - backend
+#    depends_on:
+#        - backend
+#    networks:
+#      - wk-net
 
 networks:
   wk-net:
