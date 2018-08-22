@@ -15,6 +15,9 @@
 
   .content {
     width: 100%;
+    height: 100%;
+    min-height: 180px;
+    margin: 8px 0;
     display: flex;
     flex-direction: row;
 
@@ -30,12 +33,16 @@
       flex-grow: 1.5;
     }
     wk-user-list {
-      margin-top: 12px;
-      height: 60vh;
+      margin-top: 8px;
+      margin-bottom: 0;
+      padding-top: 4px;
       flex-grow: 0.75;
     }
-    wk-chat-area > .chat-area, .users > ul.collection {
-      height: 400px;
+
+    wk-chat-area {
+      .chat-area {
+        height: 100%;
+      }
     }
 
     @media only screen and (max-width : 768px) {

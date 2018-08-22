@@ -1,21 +1,20 @@
-import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 
-import {Subscription} from 'rxjs/Rx';
+import { Subscription } from "rxjs/Rx";
 
-import {Message} from '../../../model/message.model';
-import {MessageService} from '../../../service/message/message.service';
+import { Message } from "../../../model/message.model";
+import { MessageService } from "../../../service/message/message.service";
 
 @Component({
-  selector: 'wk-chat-area',
-  templateUrl: './chat-area.component.html',
-  styleUrls: ['./chat-area.component.scss']
+  selector: "wk-chat-area",
+  templateUrl: "./chat-area.component.html",
+  styleUrls: ["./chat-area.component.scss"]
 })
 export class ChatAreaComponent implements OnInit, OnDestroy {
 
-  @ViewChild('chat') private chatContainer: ElementRef;
+  @ViewChild("chat") private chatContainer: ElementRef;
 
   messages: Array<Message>;
-  private message: Message;
   private messagesSubscription: Subscription;
 
   constructor(private messageService: MessageService) {
@@ -26,8 +25,8 @@ export class ChatAreaComponent implements OnInit, OnDestroy {
 
     this.messagesSubscription = this.messageService.getMessages()
       .subscribe(message => {
-        // Max 500 messages in chat
-        if (this.messages.length >= 500) {
+        // Max 1000 messages in chat
+        if (this.messages.length >= 1000) {
           this.messages.shift();
         }
         this.messages.push(message);
@@ -42,14 +41,13 @@ export class ChatAreaComponent implements OnInit, OnDestroy {
   }
 
   private scrollBottom() {
-    try {
-      let chat;
-      if (this.chatContainer) {
-        chat = this.chatContainer.nativeElement;
-        chat.scrollTop = chat.scrollHeight;
+    if (this.chatContainer) {
+      const chat = this.chatContainer.nativeElement;
+      if (chat.lastElementChild) {
+        setTimeout(() => {
+          chat.lastElementChild.scrollIntoView();
+        }, 10);
       }
-    } catch (err) {
-      console.error(err);
     }
   }
 
