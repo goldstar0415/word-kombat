@@ -17,8 +17,10 @@ import { CompressionMiddleware } from '@nest-middlewares/compression';
 import { ErrorHandlerMiddleware } from '@nest-middlewares/errorhandler';
 import { AuthMiddleware } from './middleware/auth.middleware';
 import { WordChatSocket } from './socket/chat/word-chat.socket';
-import { ShuffleService } from './service/shuffle.service';
+import { ShuffleService } from './service/nlp/shuffle.service';
 import { LoggerMiddleware } from "./middleware/logger.middleware";
+import { NlpService } from "./service/nlp/nlp.service";
+import { WordChatBot } from "./socket/chat/word-chat.bot";
 
 @Module({
   imports: [],
@@ -33,7 +35,11 @@ import { LoggerMiddleware } from "./middleware/logger.middleware";
     UserRepository,
     RankRepository,
     WordRepository,
+
     ShuffleService,
+    NlpService,
+
+    WordChatBot,
     WordChatSocket,
   ],
 })

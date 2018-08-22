@@ -1,4 +1,4 @@
-import { Component } from '@nestjs/common';
+import { Component } from "@nestjs/common";
 
 @Component()
 export class ShuffleService {
@@ -6,7 +6,7 @@ export class ShuffleService {
   public shuffle(word: string): string[] {
     if (!word) return [];
 
-    const letters = word.split('');
+    const letters = word.split("");
     let currentIndex = letters.length;
     let temporaryValue;
     let randomIndex;
@@ -23,7 +23,11 @@ export class ShuffleService {
       letters[randomIndex] = temporaryValue;
     }
 
-    return letters;
+    if (word !== letters.join("")) {
+      return letters;
+    } else {
+      return this.shuffle(word);
+    }
   }
 
 }

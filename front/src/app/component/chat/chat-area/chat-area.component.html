@@ -1,11 +1,11 @@
 <div class="chat-area hoverable">
   <ul class="collection" #chat>
     <li *ngFor="let message of messages" class="collection-item avatar">
-      
+
         <img class="circle"
           [src]="message.user.icon"
           [alt]="message.user.name" />
-          
+
         <span class="title">{{ message.user.name }}</span>
 
       <p>{{ message.text }}</p>
