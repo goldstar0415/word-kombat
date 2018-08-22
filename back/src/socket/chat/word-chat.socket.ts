@@ -22,7 +22,6 @@ export class WordChatSocket implements OnGatewayInit, OnGatewayConnection, OnGat
   @WebSocketServer() private server;
 
   private readonly logger = new Logger("socket");
-
   private readonly AMOUNT_OF_WORDS_IN_MATCH = 10;
 
   private amountOfGuests = 0;
@@ -30,32 +29,28 @@ export class WordChatSocket implements OnGatewayInit, OnGatewayConnection, OnGat
   private words: Partial<Word & { letters: string[] }>[] = [];
   private scores: any[] = [];
 
-  constructor(
-    private readonly userRepository: UserRepository,
-    private readonly wordRepository: WordRepository,
-    private readonly shuffleService: ShuffleService,
-    private readonly bot: WordChatBot
-  ) {
+  constructor(private readonly userRepository: UserRepository,
+              private readonly wordRepository: WordRepository,
+              private readonly shuffleService: ShuffleService,
+              private readonly bot: WordChatBot) {
   }
 
   afterInit() {
-    this.server.use(
-      socketJWT.authorize({
-        secret: String(process.env.JWT_SECRET),
-        handshake: true,
-        fail: (error, data, accept) => {
-          if (error) {
-            this.logger.error(JSON.stringify(error));
-          }
-
-          if (data.request) {
-            return accept(null);
-          } else {
-            return accept(null, false);
-          }
+    this.server.use(socketJWT.authorize({
+      secret: String(process.env.JWT_SECRET),
+      handshake: true,
+      fail: (error, data, accept) => {
+        if (error) {
+          this.logger.warn(JSON.stringify(error));
         }
-      })
-    );
+
+        if (data.request) {
+          return accept(null);
+        } else {
+          return accept(null, false);
+        }
+      }
+    }));
   }
 
   async handleConnection(client: any) {
@@ -96,7 +91,6 @@ export class WordChatSocket implements OnGatewayInit, OnGatewayConnection, OnGat
       this.scores = this.scores.filter(score => score.user.name !== user.name);
       this.server.emit("user-connected", this.users);
       this.server.emit("scores", this.scores);
-
     }
 
     if (this.users.length <= 0) {
@@ -183,7 +177,7 @@ export class WordChatSocket implements OnGatewayInit, OnGatewayConnection, OnGat
     return new UserDto(
       null,
       null,
-      `guest${(index + 1)}`,
+      `guest-${(index + 1)}`,
       null,
       `http://www.robohash.org/${index}`,
       0,
