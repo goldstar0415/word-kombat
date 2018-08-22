@@ -11,7 +11,7 @@ Platform for English words learning.
 > To run this app you need [Node.js 8+](https://nodejs.org/en/) and [npm 4+](https://www.npmjs.com/) and [PostgreSQL](https://www.postgresql.org/download/) database
 
 1. Create environment variables: `CLOUDINARY_API_KEY` and `CLOUDINARY_API_SECRET` with your cloudinary api-key and api-secret
-2. To build and start the project run `docker-compose -f build/docker-compose.yml up --build -d` script
+2. To build and start the project run `docker-compose up --build -d` script
 
 
 ## Words scrapping

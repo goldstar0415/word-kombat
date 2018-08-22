@@ -30,7 +30,7 @@ services:
   # Backend App
   backend:
     build:
-        context: ../back
+        context: ./back
         dockerfile: Dockerfile
     image: wk-backend
     container_name: wk-backend
@@ -49,7 +49,7 @@ services:
   # Frontend App
   frontend:
     build:
-        context: ../front
+        context: ./front
         dockerfile: Dockerfile
     image: wk-frontend
     container_name: wk-frontend
