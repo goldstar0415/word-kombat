@@ -54,7 +54,7 @@ export class WordChatBot {
   ];
 
   private readonly HINTS = [
-    "Ok, I'll give you a hint. It's \"{hint}\"",
+    "Ok, I'll give you a hint - \"{hint}\"",
     "Hmmm... \"{hint}\" will help you",
   ];
 

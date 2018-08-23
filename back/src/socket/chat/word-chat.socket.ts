@@ -7,10 +7,12 @@ import {
   WebSocketServer
 } from "@nestjs/websockets";
 
+import * as _ from "lodash";
+import * as socketJWT from "socketio-jwt";
+import * as Redis from "ioredis";
 import { UserRepository } from "../../repository/user/user.repository";
 import { WordRepository } from "../../repository/word/word.repository";
 import { Word } from "../../model/word.model";
-import * as socketJWT from "socketio-jwt";
 import { UserDto } from "../../model/user.model";
 import { Logger } from "@nestjs/common";
 import { ShuffleService } from "../../service/nlp/shuffle.service";
@@ -28,6 +30,7 @@ export class WordChatSocket implements OnGatewayInit, OnGatewayConnection, OnGat
   private users: UserDto[] = [];
   private words: Partial<Word & { letters: string[] }>[] = [];
   private scores: any[] = [];
+  private redis = new Redis('redis');
 
   constructor(private readonly userRepository: UserRepository,
               private readonly wordRepository: WordRepository,
@@ -43,7 +46,6 @@ export class WordChatSocket implements OnGatewayInit, OnGatewayConnection, OnGat
         if (error) {
           this.logger.warn(JSON.stringify(error));
         }
-
         if (data.request) {
           return accept(null);
         } else {
@@ -68,23 +70,30 @@ export class WordChatSocket implements OnGatewayInit, OnGatewayConnection, OnGat
     this.server.emit("scores", this.scores);
     client.handshake.user = user;
 
-    this.server.emit("message", this.bot.userConnectedMessage(user.name));
+    await this.sendMessage(this.bot.userConnectedMessage(user.name));
 
     if (this.words.length < 1) {
       this.words = await this.getWords(this.AMOUNT_OF_WORDS_IN_MATCH);
     }
 
     if (this.words.length === this.AMOUNT_OF_WORDS_IN_MATCH && this.users.length === 1) {
-      this.server.emit("message", this.bot.matchStartMessage());
+      await this.sendMessage(this.bot.matchStartMessage());
     }
 
-    this.server.emit("word", {
+    const messages = _.chain(await this.redis.lrange("messages", 0, -1))
+      .compact()
+      .map((message: any) => JSON.parse(message))
+      .value();
+
+    client.emit("message", messages);
+
+    client.emit("word", {
       word: this.words[0],
       index: this.AMOUNT_OF_WORDS_IN_MATCH + 1 - this.words.length
     });
   }
 
-  handleDisconnect(client) {
+  async handleDisconnect(client) {
     const user = client.handshake.user;
     if (user) {
       this.users = this.users.filter(user => user.name !== user.name);
@@ -96,9 +105,10 @@ export class WordChatSocket implements OnGatewayInit, OnGatewayConnection, OnGat
     if (this.users.length <= 0) {
       this.words = [];
       this.amountOfGuests = 0;
+      await this.redis.del("messages");
     }
 
-    this.server.emit("message", this.bot.userDisconnectedMessage(user.name));
+    await this.sendMessage(this.bot.userDisconnectedMessage(user.name));
   }
 
   @SubscribeMessage("message")
@@ -111,8 +121,7 @@ export class WordChatSocket implements OnGatewayInit, OnGatewayConnection, OnGat
 
     if (this.words.length <= 0) {
       this.words = await this.getWords(this.AMOUNT_OF_WORDS_IN_MATCH);
-
-      this.server.emit("message", this.bot.matchStartMessage());
+      await this.sendMessage(this.bot.matchStartMessage());
     }
 
     if (data.text.toLowerCase() === this.words[0].value.toLowerCase()) {
@@ -127,8 +136,6 @@ export class WordChatSocket implements OnGatewayInit, OnGatewayConnection, OnGat
         }
       });
 
-      this.server.emit("message", this.bot.correctAnswerMessage(user.name));
-
       if (this.words.length <= 0) {
         this.server.emit("end-of-match", this.scores);
 
@@ -137,8 +144,7 @@ export class WordChatSocket implements OnGatewayInit, OnGatewayConnection, OnGat
           score.points = 0;
         });
 
-        this.server.emit("message", this.bot.matchEndMessage());
-
+        await this.sendMessage(this.bot.matchEndMessage());
         this.words = await this.getWords(this.AMOUNT_OF_WORDS_IN_MATCH);
       }
 
@@ -160,7 +166,12 @@ export class WordChatSocket implements OnGatewayInit, OnGatewayConnection, OnGat
 
     this.server.emit("user-connected", this.users);
     this.server.emit("scores", this.scores);
-    this.server.emit("message", data);
+
+    await this.sendMessage(data);
+
+    if (data.points) {
+      await this.sendMessage(this.bot.correctAnswerMessage(user.name));
+    }
 
     if (user.id) {
       await this.userRepository.update(user.id, user);
@@ -169,8 +180,13 @@ export class WordChatSocket implements OnGatewayInit, OnGatewayConnection, OnGat
     const hint = this.bot.hintMessage(data.text, this.words[0]);
 
     if (hint) {
-      this.server.emit("message", hint);
+      await this.sendMessage(hint);
     }
+  }
+
+  private async sendMessage(message: any): Promise<any> {
+    this.server.emit("message", [message]);
+    return this.redis.rpush("messages", JSON.stringify(message));
   }
 
   private createGuest(index): UserDto {

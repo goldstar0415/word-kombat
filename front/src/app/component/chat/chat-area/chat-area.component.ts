@@ -13,40 +13,57 @@ import { MessageService } from "../../../service/message/message.service";
 export class ChatAreaComponent implements OnInit, OnDestroy {
 
   @ViewChild("chat") private chatContainer: ElementRef;
-
-  messages: Array<Message>;
   private messagesSubscription: Subscription;
 
-  constructor(private messageService: MessageService) {
+  messages: Message[];
+
+  constructor(private readonly messageService: MessageService) {
   }
 
   ngOnInit() {
-    this.messages = [];
+    this.getMessages();
 
     this.messagesSubscription = this.messageService.getMessages()
       .subscribe(message => {
+        const messages = [].concat.apply([], message);
+
         // Max 1000 messages in chat
         if (this.messages.length >= 1000) {
           this.messages.shift();
         }
-        this.messages.push(message);
+
+        this.setMessages(messages);
+        setTimeout(() => this.scrollBottom(), 100);
         this.scrollBottom();
       });
 
-    this.scrollBottom();
+    setTimeout(() => this.scrollBottom(), 100);
   }
 
   ngOnDestroy() {
     this.messagesSubscription.unsubscribe();
   }
 
+  private setMessages(messages: any[]) {
+    this.messages = this.messages.concat(messages);
+    localStorage.setItem("messages", JSON.stringify(this.messages));
+  }
+
+  private getMessages() {
+    const messages = localStorage.getItem("messages");
+
+    if (messages) {
+      this.messages = JSON.parse(messages);
+    } else {
+      this.messages = [];
+    }
+  }
+
   private scrollBottom() {
     if (this.chatContainer) {
       const chat = this.chatContainer.nativeElement;
       if (chat.lastElementChild) {
-        setTimeout(() => {
-          chat.lastElementChild.scrollIntoView();
-        }, 10);
+        chat.lastElementChild.scrollIntoView();
       }
     }
   }

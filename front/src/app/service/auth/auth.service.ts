@@ -51,6 +51,7 @@ export class AuthService extends ReplaySubject<number> {
     this.username = null;
     this.userId = null;
     localStorage.removeItem('user');
+    localStorage.removeItem('messages');
   }
 
   isAuthorized(): boolean {
