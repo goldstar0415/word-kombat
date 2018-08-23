@@ -17,7 +17,8 @@ export class WordChatBot {
 
   private readonly MATCH_START_MESSAGES = [
     "Match has been started",
-    "3, 2, 1... FIGHT!!!"
+    "3, 2, 1... FIGHT!!!",
+    "Let the battle begin"
   ];
 
   private readonly MATCH_END_MESSAGES = [
@@ -27,7 +28,8 @@ export class WordChatBot {
 
   private readonly USER_CONNECTED_MESSAGES = [
     "User {username} has joined the game",
-    "It's a plane, it's a bird?! No it's {username} has joined the game"
+    "It's a bird, it's a plane... Nope, it's {username} has joined the game",
+    "Greetings, {username}"
   ];
 
   private readonly USER_DISCONNECTED_MESSAGES = [
